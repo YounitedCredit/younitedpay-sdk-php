@@ -50,4 +50,4 @@ jobs:
               run: ./vendor/bin/php-cs-fixer fix src --dry-run --diff --using-cache=no
 
             - name: Static analysis of PHP code (PHPStan)
-              run: ./vendor/bin/phpstan analyse -l max src tests
+              run: ./vendor/bin/phpstan analyse -l max src
