@@ -12,17 +12,17 @@ jobs:
             - name: PHP syntax checker 5.6
               uses: prestashop/github-action-php-lint/5.6@master
               with:
-                folder-to-exclude: "! -path \"./vendor/*\""
+                folder-to-exclude: "! -path \"./.php_cs.dist.php" ! -path \"./vendor/*\""
 
             - name: PHP syntax checker 7.2
               uses: prestashop/github-action-php-lint/7.2@master
               with:
-                folder-to-exclude: "! -path \"./vendor/*\""
+                folder-to-exclude: "! -path \"./.php_cs.dist.php" ! -path \"./vendor/*\""
 
             - name: PHP syntax checker 7.3
               uses: prestashop/github-action-php-lint/7.3@master
               with:
-                folder-to-exclude: "! -path \"./vendor/*\""
+                folder-to-exclude: "! -path \"./.php_cs.dist.php" ! -path \"./vendor/*\""
 
     # Check the PHP code follow the coding standards
     php-cs-fixer-and-phpstan:
@@ -47,7 +47,7 @@ jobs:
               run: composer update --ignore-platform-reqs
 
             - name: Run PHP-CS-Fixer
-              run: ./vendor/bin/php-cs-fixer fix --dry-run --diff --using-cache=no --diff-format udiff
+              run: ./vendor/bin/php-cs-fixer fix src --dry-run --diff --using-cache=no
 
             - name: Static analysis of PHP code (PHPStan)
               run: ./vendor/bin/phpstan analyse -l max src tests
