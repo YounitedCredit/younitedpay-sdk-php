@@ -15,10 +15,9 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Response;
+namespace YounitedPaySDK\Response;
 
 use InvalidArgumentException;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Response Builder
@@ -30,16 +29,16 @@ class ResponseBuilder
     /**
      * PSR-7 Response
      *
-     * @var ResponseInterface
+     * @var AbstractResponse
      */
     protected $response;
 
     /**
      * Create a Response Builder
      *
-     * @param ResponseInterface  $response
+     * @param AbstractResponse  $response
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(AbstractResponse $response)
     {
         $this->response = $response;
     }
@@ -47,7 +46,7 @@ class ResponseBuilder
     /**
      * Return the response
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function getResponse()
     {
@@ -57,11 +56,11 @@ class ResponseBuilder
     /**
      * Set the response
      *
-     * @param ResponseInterface  $response  Response object
+     * @param AbstractResponse  $response  Response object
      *
      * @return void
      */
-    public function setResponse(ResponseInterface $response)
+    public function setResponse(AbstractResponse $response)
     {
         $this->response = $response;
     }

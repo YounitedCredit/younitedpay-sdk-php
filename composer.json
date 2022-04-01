@@ -10,9 +10,6 @@
       }
   ],
   "config": {
-      "platform": {
-          "php": "5.6"
-      },
       "vendor-dir": "vendor",
       "preferred-install": "dist",
       "classmap-authoritative": true,
@@ -25,18 +22,16 @@
     ]
   },
   "require": {
-    "php": ">=5.6.0",
     "psr/log": "^3.0",
     "psr/http-client": "^1.0"
   },
   "require-dev": {
-      "php": ">=5.6",
       "friendsofphp/php-cs-fixer": "^3.4",
       "phpunit/phpunit": "^9.0",
       "phpstan/phpstan": "^0.12.81"
   },
   "psr-4": {
-    "Tot\\YounitedPaySDK\\": "src"
+    "YounitedPaySDK\\": "src"
   },
   "autoload-dev": {
       "psr-4": {

@@ -13,11 +13,11 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Response;
+namespace YounitedPaySDK\Response;
 
 use InvalidArgumentException;
-use Tot\YounitedPaySDK\Model\ArrayCollection;
-use Tot\YounitedPaySDK\Model\OfferItem;
+use YounitedPaySDK\Model\ArrayCollection;
+use YounitedPaySDK\Model\OfferItem;
 
 /**
  * API client
@@ -30,7 +30,6 @@ class BestPriceResponse extends AbstractResponse
     public function getModel()
     {
         $content = (string) $this->stream;
-        echo $content;
         if (empty($content) === true) {
             return new ArrayCollection();
         }

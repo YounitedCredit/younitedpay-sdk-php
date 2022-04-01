@@ -13,16 +13,16 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK;
+namespace YounitedPaySDK;
 
 use RuntimeException;
 use InvalidArgumentException;
-use Tot\YounitedPaySDK\Request\AbstractRequest;
+use YounitedPaySDK\Request\AbstractRequest;
 use Psr\Http\Message\RequestInterface;
-use Tot\YounitedPaySDK\Response\ResponseBuilder;
-use Tot\YounitedPaySDK\Response\DefaultResponse;
-use Tot\YounitedPaySDK\Request\Stream;
-use Tot\YounitedPaySDK\Exception\RequestException;
+use YounitedPaySDK\Response\ResponseBuilder;
+use YounitedPaySDK\Response\DefaultResponse;
+use YounitedPaySDK\Request\Stream;
+use YounitedPaySDK\Exception\RequestException;
 
 /**
  * API client
@@ -38,11 +38,6 @@ class Client
      * @var string
      */
     private $clientSecret;
-
-    /**
-     * @var string
-     */
-    private $tenantId;
 
     /**
      * @var Stream
@@ -82,25 +77,24 @@ class Client
      *
      * @param string $clientId     api client key
      * @param string $clientSecret api client secret
-     * @param string $tenantId     api tenant key
      *
      * @return self
      */
-    public function setCredential($clientId, $clientSecret, $tenantId)
+    public function setCredential($clientId, $clientSecret)
     {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
-        $this->tenantId = $tenantId;
 
         return $this;
     }
 
     /**
      * Get Oauth token
+     * @param string $tenantId tenantId
      *
      * @return false|string
      */
-    private function getToken()
+    private function getToken($tenantId)
     {
         $data['grant_type'] = 'client_credentials';
         $data['client_id'] = $this->clientId;
@@ -110,7 +104,7 @@ class Client
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://login.microsoftonline.com/' . $this->tenantId . '/oauth2/v2.0/token');
+        curl_setopt($ch, CURLOPT_URL, 'https://login.microsoftonline.com/' . $tenantId . '/oauth2/v2.0/token');
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -143,9 +137,10 @@ class Client
      */
     public function sendRequest(AbstractRequest $request)
     {
-        $token = $this->getToken();
+        $tenantId = $request->getTenantId();
+        $token = $this->getToken($tenantId);
         if ($token === false) {
-            $errorResponse = new \Tot\YounitedPaySDK\Response\ErrorResponse(401);
+            $errorResponse = new \YounitedPaySDK\Response\ErrorResponse(401);
             return $errorResponse;
         }
 
@@ -210,7 +205,7 @@ class Client
         $responseObject = $request->getResponseObject();
         $message = DefaultResponse::getInstance($responseObject)
             ->withBody($body);
-        //$message = new \Tot\YounitedPaySDK\Response\BestPriceResponse(200, [], $body);
+        //$message = new \YounitedPaySDK\Response\BestPriceResponse(200, [], $body);
         return new ResponseBuilder(
             $message
         );
@@ -280,6 +275,7 @@ class Client
         $options[CURLOPT_FOLLOWLOCATION] = false;
         $options[CURLOPT_HEADER]         = false;
         $options[CURLOPT_RETURNTRANSFER] = false;
+        $options[CURLOPT_SSLVERSION]     = CURL_SSLVERSION_TLSv1_2;
 
         try {
             $options[CURLOPT_HTTP_VERSION] = $this->getProtocolVersion($request->getProtocolVersion());
@@ -311,8 +307,10 @@ class Client
         };
 
         $options[CURLOPT_WRITEFUNCTION] = function ($ch, $data) use ($response) {
-            echo "\r\n\r\n" . $data;
-            return $response->getResponse()->getBody()->write($data);
+            if (empty($response->getResponse()->getBody()) === false) {
+                return $response->getResponse()->getBody()->write($data);
+            }
+            return 0;
         };
 
         return $options;

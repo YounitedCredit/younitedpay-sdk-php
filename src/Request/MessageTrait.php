@@ -15,7 +15,7 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Request;
+namespace YounitedPaySDK\Request;
 
 use Psr\Http\Message\StreamInterface;
 

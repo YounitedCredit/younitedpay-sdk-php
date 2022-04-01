@@ -13,11 +13,12 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Request;
+namespace YounitedPaySDK\Request;
 
-use Tot\YounitedPaySDK\Model\BestPrice;
+use YounitedPaySDK\Model\BestPrice;
 use Psr\Http\Message\RequestInterface;
-use Tot\YounitedPaySDK\Response\BestPriceResponse;
+use YounitedPaySDK\Model\AbstractModel;
+use YounitedPaySDK\Response\BestPriceResponse;
 
 /**
  * Get Best Price
@@ -41,4 +42,18 @@ class BestPriceRequest extends AbstractRequest implements RequestInterface
 
     /** @var string */
     protected $response = BestPriceResponse::class;
+
+    /**
+     * @inherit
+     */
+    public function setModel(AbstractModel $body)
+    {
+        if ($body instanceof BestPrice) {
+            return parent::setModel($body);
+        }
+
+        throw new \InvalidArgumentException(
+            'Body must be an instance of ' .  BestPrice::class . ' ' . get_class($body) . ' given.'
+        );
+    }
 }

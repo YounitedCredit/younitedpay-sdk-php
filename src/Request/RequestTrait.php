@@ -15,12 +15,12 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Request;
+namespace YounitedPaySDK\Request;
 
 use Psr\Http\Message\UriInterface;
 
 /**
- * @internal should not be used outside of Tot\YounitedPaySDK as it does not fall under our BC promise
+ * @internal should not be used outside of YounitedPaySDK as it does not fall under our BC promise
  */
 trait RequestTrait
 {

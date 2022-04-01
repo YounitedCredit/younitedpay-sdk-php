@@ -13,12 +13,12 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Request;
+namespace YounitedPaySDK\Request;
 
-use Tot\YounitedPaySDK\Model\AbstractModel;
 use Psr\Http\Message\RequestInterface;
-use Tot\YounitedPaySDK\Uri\ProductionUri;
-use Tot\YounitedPaySDK\Uri\SandboxUri;
+use YounitedPaySDK\Model\AbstractModel;
+use YounitedPaySDK\Uri\ProductionUri;
+use YounitedPaySDK\Uri\SandboxUri;
 
 /**
  * API client
@@ -37,6 +37,9 @@ abstract class AbstractRequest implements RequestInterface
      * @var string
      */
     protected $response;
+
+    /** @var string Uri fragment. */
+    protected $tenantId = '5fe44fa6-b50a-42d9-a006-199bedeb5bb9';
 
     /**
      * @var bool
@@ -75,9 +78,20 @@ abstract class AbstractRequest implements RequestInterface
         $new->isSandbox = true;
         $new->uri = new SandboxUri();
         $new->uri = $new->uri->withPath('/api/1.0' . $this->requestTarget);
+        $new->tenantId = 'c9536195-ef3b-4703-9c13-924db8e24486';
         $new->updateHostFromUri();
 
         return $new;
+    }
+
+    /**
+     * Get Scheme
+     *
+     * @return string
+     */
+    public function getTenantId()
+    {
+        return $this->tenantId;
     }
 
     /**

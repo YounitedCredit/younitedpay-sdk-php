@@ -13,7 +13,7 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Uri;
+namespace YounitedPaySDK\Uri;
 
 use Psr\Http\Message\UriInterface;
 

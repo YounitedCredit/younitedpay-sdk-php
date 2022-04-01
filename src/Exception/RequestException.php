@@ -15,7 +15,7 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Exception;
+namespace YounitedPaySDK\Exception;
 
 use RuntimeException;
 use Exception;

@@ -13,14 +13,14 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Response;
+namespace YounitedPaySDK\Response;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use Tot\YounitedPaySDK\Model\AbstractModel;
-use Tot\YounitedPaySDK\Request\MessageTrait;
-use Tot\YounitedPaySDK\Request\Stream;
-use Tot\YounitedPaySDK\Model\ArrayCollection;
+use YounitedPaySDK\Model\AbstractModel;
+use YounitedPaySDK\Request\MessageTrait;
+use YounitedPaySDK\Request\Stream;
+use YounitedPaySDK\Model\ArrayCollection;
 
 /**
  * API client

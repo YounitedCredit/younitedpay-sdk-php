@@ -13,13 +13,20 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace YounitedPaySDK\Model;
+namespace Tests\Model;
 
-use JsonSerializable;
+use PHPUnit\Framework\TestCase;
+use YounitedPaySDK\Model\BestPrice;
 
-/**
- * Best Price Model
- */
-class Error extends AbstractModel implements JsonSerializable
+class BestPriceTest extends TestCase
 {
+    public function testGetter(): void
+    {
+        $bestPrice = new BestPrice();
+        $bestPrice->setBorrowedAmount(149.99);
+
+        $this->assertEquals(149.99, $bestPrice->getBorrowedAmount());
+
+        $this->assertEquals(['borrowedAmount' => 149.99], $bestPrice->jsonSerialize());
+    }
 }

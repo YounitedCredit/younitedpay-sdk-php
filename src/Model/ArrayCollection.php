@@ -13,7 +13,7 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Model;
+namespace YounitedPaySDK\Model;
 
 use ArrayObject;
 

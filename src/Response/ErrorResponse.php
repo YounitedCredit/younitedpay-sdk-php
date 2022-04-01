@@ -13,9 +13,9 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace Tot\YounitedPaySDK\Response;
+namespace YounitedPaySDK\Response;
 
-use Tot\YounitedPaySDK\Model\Error;
+use YounitedPaySDK\Model\Error;
 
 /**
  * API client
