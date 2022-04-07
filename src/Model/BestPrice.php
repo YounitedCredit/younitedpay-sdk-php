@@ -28,7 +28,7 @@ class BestPrice extends AbstractModel implements JsonSerializable
     private $borrowedAmount;
 
     /**
-     * Set a borrow amount
+     * Get a borrow amount
      *
      * @return float borrowed amount
      */
