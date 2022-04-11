@@ -17,37 +17,36 @@ namespace YounitedPaySDK\Model;
 
 use JsonSerializable;
 
-/**
- * Best Price Model
- */
-class BestPrice extends AbstractModel implements JsonSerializable
+class ActivateContract extends AbstractModel implements JsonSerializable
 {
-    /**
-     * @var float
-     */
-    private $borrowedAmount;
+    // PROPERTIES
 
     /**
-     * Get a borrow amount
-     *
-     * @return float borrowed amount
+     * @var string
      */
-    public function getBorrowedAmount()
+    private $contractReference;
+
+    // GETTERS & SETTERS
+
+    /**
+     * Get Contract Reference
+     *
+     * @return string
+     */
+    public function getContractReference()
     {
-        return $this->borrowedAmount;
+        return $this->contractReference;
     }
 
     /**
-     * Set a borrow amount
+     * Set Contract Reference
      *
-     * @param float $borrowedAmount
+     * @param string $contractReference
      *
-     * @return self
+     * @return void
      */
-    public function setBorrowedAmount($borrowedAmount)
+    public function setContractReference($contractReference)
     {
-        $this->borrowedAmount = $borrowedAmount;
-
-        return $this;
+        $this->contractReference = $contractReference;
     }
 }
