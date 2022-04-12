@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
 
 /**
@@ -51,11 +52,18 @@ class Basket extends AbstractModel implements JsonSerializable
      *
      * @param float $basketAmount
      *
-     * @return void
+     * @return self
      */
     public function setBasketAmount($basketAmount)
     {
-        $this->basketAmount = $basketAmount;
+        if (is_float($basketAmount)) {
+            $this->basketAmount = $basketAmount;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Basket Amount must be a float but ' . gettype($basketAmount) . ' is given.'
+        );
     }
 
     /**
@@ -73,10 +81,25 @@ class Basket extends AbstractModel implements JsonSerializable
      *
      * @param BasketItem[] $items
      *
-     * @return void
+     * @return self
      */
     public function setItems($items)
     {
+        if (!is_array($items)) {
+            throw new InvalidArgumentException(
+                'Items must be an array but ' . gettype($items) . ' is given.'
+            );
+        }
+
+        foreach ($items as $item) {
+            if (!$item instanceof BasketItem) {
+                throw new InvalidArgumentException(
+                    'Element of Items must be an instance of ' . BasketItem::class . ' but ' . get_class($item) . ' is given.'
+                );
+            }
+        }
+
         $this->items = $items;
+        return $this;
     }
 }

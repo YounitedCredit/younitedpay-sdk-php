@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
 
 class ConfirmContract extends AbstractModel implements JsonSerializable
@@ -48,11 +49,18 @@ class ConfirmContract extends AbstractModel implements JsonSerializable
      *
      * @param string $contractReference
      *
-     * @return void
+     * @return self
      */
     public function setContractReference($contractReference)
     {
-        $this->contractReference = $contractReference;
+        if (is_string($contractReference)) {
+            $this->contractReference = $contractReference;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Contract Reference must be a string but ' . gettype($contractReference) . ' is given.'
+        );
     }
 
     /**
@@ -70,10 +78,17 @@ class ConfirmContract extends AbstractModel implements JsonSerializable
      *
      * @param string|null $merchantOrderId
      *
-     * @return void
+     * @return self
      */
     public function setMerchantOrderId($merchantOrderId)
     {
-        $this->merchantOrderId = $merchantOrderId;
+        if (is_null($merchantOrderId) || is_string($merchantOrderId)) {
+            $this->merchantOrderId = $merchantOrderId;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Merchant Order Id must be a string or null but ' . gettype($merchantOrderId) . ' is given.'
+        );
     }
 }

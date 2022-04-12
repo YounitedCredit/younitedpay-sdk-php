@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
 
 /**
@@ -56,11 +57,18 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
      *
      * @param string $channel
      *
-     * @return void
+     * @return self
      */
     public function setChannel($channel)
     {
-        $this->channel = $channel;
+        if (is_string($channel)) {
+            $this->channel = $channel;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Channel must be a string but ' . gettype($channel) . ' is given.'
+        );
     }
 
     /**
@@ -78,11 +86,18 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
      *
      * @param string $agentEmailAddress
      *
-     * @return void
+     * @return self
      */
     public function setAgentEmailAddress($agentEmailAddress)
     {
-        $this->agentEmailAddress = $agentEmailAddress;
+        if (is_string($agentEmailAddress)) {
+            $this->agentEmailAddress = $agentEmailAddress;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Agent Email Address must be a string but ' . gettype($agentEmailAddress) . ' is given.'
+        );
     }
 
     /**
@@ -100,10 +115,17 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
      *
      * @param string $merchantReference
      *
-     * @return void
+     * @return self
      */
     public function setMerchantReference($merchantReference)
     {
-        $this->merchantReference = $merchantReference;
+        if (is_string($merchantReference)) {
+            $this->merchantReference = $merchantReference;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Merchant Reference must be a string but ' . gettype($merchantReference) . ' is given.'
+        );
     }
 }

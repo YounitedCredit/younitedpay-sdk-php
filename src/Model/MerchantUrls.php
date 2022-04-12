@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
 
 /**
@@ -61,11 +62,18 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      *
      * @param string $onCanceledWebhookUrl
      *
-     * @return void
+     * @return self
      */
     public function setOnCanceledWebhookUrl($onCanceledWebhookUrl)
     {
-        $this->onCanceledWebhookUrl = $onCanceledWebhookUrl;
+        if (is_string($onCanceledWebhookUrl)) {
+            $this->onCanceledWebhookUrl = $onCanceledWebhookUrl;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'On Canceled Webhook Url must be a string but ' . gettype($onCanceledWebhookUrl) . ' is given.'
+        );
     }
 
     /**
@@ -83,11 +91,18 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      *
      * @param string $onWithdrawnWebhookUrl
      *
-     * @return void
+     * @return self
      */
     public function setOnWithdrawnWebhookUrl($onWithdrawnWebhookUrl)
     {
-        $this->onWithdrawnWebhookUrl = $onWithdrawnWebhookUrl;
+        if (is_string($onWithdrawnWebhookUrl)) {
+            $this->onWithdrawnWebhookUrl = $onWithdrawnWebhookUrl;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'On Withdrawn Webhook Url must be a string but ' . gettype($onWithdrawnWebhookUrl) . ' is given.'
+        );
     }
 
     /**
@@ -105,11 +120,18 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      *
      * @param string $onApplicationSucceededRedirectUrl
      *
-     * @return void
+     * @return self
      */
     public function setOnApplicationSucceededRedirectUrl($onApplicationSucceededRedirectUrl)
     {
-        $this->onApplicationSucceededRedirectUrl = $onApplicationSucceededRedirectUrl;
+        if (is_string($onApplicationSucceededRedirectUrl)) {
+            $this->onApplicationSucceededRedirectUrl = $onApplicationSucceededRedirectUrl;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'On Application Succeeded Redirect Url must be a string but ' . gettype($onApplicationSucceededRedirectUrl) . ' is given.'
+        );
     }
 
     /**
@@ -127,10 +149,17 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      *
      * @param string $onApplicationFailedRedirectUrl
      *
-     * @return void
+     * @return self
      */
     public function setOnApplicationFailedRedirectUrl($onApplicationFailedRedirectUrl)
     {
-        $this->onApplicationFailedRedirectUrl = $onApplicationFailedRedirectUrl;
+        if (is_string($onApplicationFailedRedirectUrl)) {
+            $this->onApplicationFailedRedirectUrl = $onApplicationFailedRedirectUrl;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'On Application Failed Redirect Url must be a string but ' . gettype($onApplicationFailedRedirectUrl) . ' is given.'
+        );
     }
 }

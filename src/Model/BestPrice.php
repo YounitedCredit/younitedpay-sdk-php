@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
 
 /**
@@ -46,8 +47,13 @@ class BestPrice extends AbstractModel implements JsonSerializable
      */
     public function setBorrowedAmount($borrowedAmount)
     {
-        $this->borrowedAmount = $borrowedAmount;
+        if (is_float($borrowedAmount)) {
+            $this->borrowedAmount = $borrowedAmount;
+            return $this;
+        }
 
-        return $this;
+        throw new InvalidArgumentException(
+            'Borrowed Amount must be a float but ' . gettype($borrowedAmount) . ' is given.'
+        );
     }
 }

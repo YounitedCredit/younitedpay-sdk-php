@@ -16,6 +16,7 @@
 namespace YounitedPaySDK\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JsonSerializable;
 
 /**
@@ -77,11 +78,18 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      *
      * @param string $firstName
      *
-     * @return void
+     * @return self
      */
     public function setFirstName($firstName)
     {
-        $this->firstName = $firstName;
+        if (is_string($firstName)) {
+            $this->firstName = $firstName;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'First Name must be a string but ' . gettype($firstName) . ' is given.'
+        );
     }
 
     /**
@@ -99,11 +107,18 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      *
      * @param string $lastName
      *
-     * @return void
+     * @return self
      */
     public function setLastName($lastName)
     {
-        $this->lastName = $lastName;
+        if (is_string($lastName)) {
+            $this->lastName = $lastName;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Last Name must be a string but ' . gettype($lastName) . ' is given.'
+        );
     }
 
     /**
@@ -121,11 +136,18 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      *
      * @param string $genderCode
      *
-     * @return void
+     * @return self
      */
     public function setGenderCode($genderCode)
     {
-        $this->genderCode = $genderCode;
+        if (is_string($genderCode)) {
+            $this->genderCode = $genderCode;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Gender Code must be a string but ' . gettype($genderCode) . ' is given.'
+        );
     }
 
     /**
@@ -143,11 +165,18 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      *
      * @param string $emailAddress
      *
-     * @return void
+     * @return self
      */
     public function setEmailAddress($emailAddress)
     {
-        $this->emailAddress = $emailAddress;
+        if (is_string($emailAddress)) {
+            $this->emailAddress = $emailAddress;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Email Address must be a string but ' . gettype($emailAddress) . ' is given.'
+        );
     }
 
     /**
@@ -165,11 +194,18 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      *
      * @param string $cellPhoneNumber
      *
-     * @return void
+     * @return self
      */
     public function setCellPhoneNumber($cellPhoneNumber)
     {
-        $this->cellPhoneNumber = $cellPhoneNumber;
+        if (is_string($cellPhoneNumber)) {
+            $this->cellPhoneNumber = $cellPhoneNumber;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Cell Phone Number must be a string but ' . gettype($cellPhoneNumber) . ' is given.'
+        );
     }
 
     /**
@@ -187,11 +223,18 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      *
      * @param DateTime $birthDate
      *
-     * @return void
+     * @return self
      */
     public function setBirthDate($birthDate)
     {
-        $this->birthDate = $birthDate->format('Y-m-d\TH:i:s');
+        if ($birthDate instanceof DateTime) {
+            $this->birthDate = $birthDate->format('Y-m-d\TH:i:s');
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Birth Date must be an instance of ' .  DateTime::class . ' but ' . get_class($birthDate) . ' is given.'
+        );
     }
 
     /**
@@ -209,10 +252,17 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      *
      * @param Address $address
      *
-     * @return void
+     * @return self
      */
     public function setAddress($address)
     {
-        $this->address = $address;
+        if ($address instanceof Address) {
+            $this->address = $address;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Address must be an instance of ' .  Address::class . ' but ' . get_class($address) . ' is given.'
+        );
     }
 }

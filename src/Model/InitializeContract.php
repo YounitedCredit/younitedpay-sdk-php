@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
 
 /**
@@ -66,11 +67,19 @@ class InitializeContract extends AbstractModel implements JsonSerializable
      *
      * @param int $requestedMaturity
      *
-     * @return void
+     * @return self
      */
     public function setRequestedMaturity($requestedMaturity)
     {
-        $this->requestedMaturity = $requestedMaturity;
+        if (is_int($requestedMaturity)) {
+            $this->requestedMaturity = $requestedMaturity;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Requested Maturity must be an int but ' . gettype($requestedMaturity) . ' is given.'
+        );
     }
 
     /**
@@ -88,11 +97,18 @@ class InitializeContract extends AbstractModel implements JsonSerializable
      *
      * @param PersonalInformation $personalInformation
      *
-     * @return void
+     * @return self
      */
     public function setPersonalInformation($personalInformation)
     {
-        $this->personalInformation = $personalInformation;
+        if ($personalInformation instanceof PersonalInformation) {
+            $this->personalInformation = $personalInformation;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Personal Information must be an instance of ' . PersonalInformation::class . ' but ' . get_class($personalInformation) . ' is given.'
+        );
     }
 
     /**
@@ -110,11 +126,18 @@ class InitializeContract extends AbstractModel implements JsonSerializable
      *
      * @param Basket $basket
      *
-     * @return void
+     * @return self
      */
     public function setBasket($basket)
     {
-        $this->basket = $basket;
+        if ($basket instanceof Basket) {
+            $this->basket = $basket;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Basket must be an instance of ' . Basket::class . ' but ' . get_class($basket) . ' is given.'
+        );
     }
 
     /**
@@ -132,11 +155,18 @@ class InitializeContract extends AbstractModel implements JsonSerializable
      *
      * @param MerchantUrls $merchantUrls
      *
-     * @return void
+     * @return self
      */
     public function setMerchantUrls($merchantUrls)
     {
-        $this->merchantUrls = $merchantUrls;
+        if ($merchantUrls instanceof MerchantUrls) {
+            $this->merchantUrls = $merchantUrls;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Merchant Urls must be an instance of ' . MerchantUrls::class . ' but ' . get_class($merchantUrls) . ' is given.'
+        );
     }
 
     /**
@@ -154,10 +184,17 @@ class InitializeContract extends AbstractModel implements JsonSerializable
      *
      * @param MerchantOrderContext $merchantOrderContext
      *
-     * @return void
+     * @return self
      */
     public function setMerchantOrderContext($merchantOrderContext)
     {
-        $this->merchantOrderContext = $merchantOrderContext;
+        if ($merchantOrderContext instanceof MerchantOrderContext) {
+            $this->merchantOrderContext = $merchantOrderContext;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Merchant Order Context must be an instance of ' . MerchantOrderContext::class . ' but ' . get_class($merchantOrderContext) . ' is given.'
+        );
     }
 }

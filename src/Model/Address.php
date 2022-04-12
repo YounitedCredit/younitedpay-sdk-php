@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
 
 /**
@@ -71,11 +72,18 @@ class Address extends AbstractModel implements JsonSerializable
      *
      * @param string $streetNumber
      *
-     * @return void
+     * @return self
      */
     public function setStreetNumber($streetNumber)
     {
-        $this->streetNumber = $streetNumber;
+        if (is_string($streetNumber)) {
+            $this->streetNumber = $streetNumber;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Street Number must be a string but ' . gettype($streetNumber) . ' is given.'
+        );
     }
 
     /**
@@ -93,17 +101,24 @@ class Address extends AbstractModel implements JsonSerializable
      *
      * @param string $streetName
      *
-     * @return void
+     * @return self
      */
     public function setStreetName($streetName)
     {
-        $this->streetName = $streetName;
+        if (is_string($streetName)) {
+            $this->streetName = $streetName;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Street Name must be a string but ' . gettype($streetName) . ' is given.'
+        );
     }
 
     /**
      * Get Additional Address
      *
-     * @return string
+     * @return string|null
      */
     public function getAdditionalAddress()
     {
@@ -113,13 +128,20 @@ class Address extends AbstractModel implements JsonSerializable
     /**
      * Set Additional Address
      *
-     * @param string $additionalAddress
+     * @param string|null $additionalAddress
      *
-     * @return void
+     * @return self
      */
     public function setAdditionalAddress($additionalAddress)
     {
-        $this->additionalAddress = $additionalAddress;
+        if (is_null($additionalAddress) || is_string($additionalAddress)) {
+            $this->additionalAddress = $additionalAddress;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Additional Address must be a string or null but ' . gettype($additionalAddress) . ' is given.'
+        );
     }
 
     /**
@@ -137,11 +159,18 @@ class Address extends AbstractModel implements JsonSerializable
      *
      * @param string $city
      *
-     * @return void
+     * @return self
      */
     public function setCity($city)
     {
-        $this->city = $city;
+        if (is_string($city)) {
+            $this->city = $city;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'City must be a string but ' . gettype($city) . ' is given.'
+        );
     }
 
     /**
@@ -159,11 +188,18 @@ class Address extends AbstractModel implements JsonSerializable
      *
      * @param string $postalCode
      *
-     * @return void
+     * @return self
      */
     public function setPostalCode($postalCode)
     {
-        $this->postalCode = $postalCode;
+        if (is_string($postalCode)) {
+            $this->postalCode = $postalCode;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Postal Code must be a string but ' . gettype($postalCode) . ' is given.'
+        );
     }
 
     /**
@@ -181,10 +217,17 @@ class Address extends AbstractModel implements JsonSerializable
      *
      * @param string $countryCode
      *
-     * @return void
+     * @return self
      */
     public function setCountryCode($countryCode)
     {
-        $this->countryCode = $countryCode;
+        if (is_string($countryCode)) {
+            $this->countryCode = $countryCode;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Country Code must be a string but ' . gettype($countryCode) . ' is given.'
+        );
     }
 }

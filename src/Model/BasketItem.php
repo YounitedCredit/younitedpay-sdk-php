@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
 
 /**
@@ -56,11 +57,18 @@ class BasketItem extends AbstractModel implements JsonSerializable
      *
      * @param string $itemName
      *
-     * @return void
+     * @return self
      */
     public function setItemName($itemName)
     {
-        $this->itemName = $itemName;
+        if (is_string($itemName)) {
+            $this->itemName = $itemName;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Item Name must be a string but ' . gettype($itemName) . ' is given.'
+        );
     }
 
     /**
@@ -78,11 +86,18 @@ class BasketItem extends AbstractModel implements JsonSerializable
      *
      * @param int $quantity
      *
-     * @return void
+     * @return self
      */
     public function setQuantity($quantity)
     {
-        $this->quantity = $quantity;
+        if (is_int($quantity)) {
+            $this->quantity = $quantity;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Quantity must be an int but ' . gettype($quantity) . ' is given.'
+        );
     }
 
     /**
@@ -100,10 +115,17 @@ class BasketItem extends AbstractModel implements JsonSerializable
      *
      * @param float $unitPrice
      *
-     * @return void
+     * @return self
      */
     public function setUnitPrice($unitPrice)
     {
-        $this->unitPrice = $unitPrice;
+        if (is_float($unitPrice)) {
+            $this->unitPrice = $unitPrice;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Unit Price must be a float but ' . gettype($unitPrice) . ' is given.'
+        );
     }
 }

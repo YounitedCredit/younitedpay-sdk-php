@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
 
 /**
@@ -51,11 +52,18 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
      *
      * @param string $contractReference
      *
-     * @return void
+     * @return self
      */
     public function setContractReference($contractReference)
     {
-        $this->contractReference = $contractReference;
+        if (is_string($contractReference)) {
+            $this->contractReference = $contractReference;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Contract Reference must be a string but ' . gettype($contractReference) . ' is given.'
+        );
     }
 
     /**
@@ -73,10 +81,17 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
      *
      * @param double|null $amount
      *
-     * @return void
+     * @return self
      */
     public function setAmount($amount)
     {
-        $this->amount = $amount;
+        if (is_null($amount) || is_double($amount)) {
+            $this->amount = $amount;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Amount must be a double or null but ' . gettype($amount) . ' is given.'
+        );
     }
 }

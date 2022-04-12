@@ -15,7 +15,9 @@
 
 namespace YounitedPaySDK\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
+use PhpParser\Node\Scalar\String_;
 
 /**
  * Activate Contract Model Class
@@ -46,10 +48,17 @@ class ActivateContract extends AbstractModel implements JsonSerializable
      *
      * @param string $contractReference
      *
-     * @return void
+     * @return self
      */
     public function setContractReference($contractReference)
     {
-        $this->contractReference = $contractReference;
+        if (is_string($contractReference)) {
+            $this->contractReference = $contractReference;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Contract Reference must be a string but ' . gettype($contractReference) . ' is given.'
+        );
     }
 }
