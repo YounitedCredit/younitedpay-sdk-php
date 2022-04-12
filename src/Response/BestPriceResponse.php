@@ -20,7 +20,7 @@ use YounitedPaySDK\Model\ArrayCollection;
 use YounitedPaySDK\Model\OfferItem;
 
 /**
- * API client
+ * Best Price Response Class
  */
 class BestPriceResponse extends AbstractResponse
 {

@@ -20,6 +20,9 @@ use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Model\ActivateContract;
 use YounitedPaySDK\Response\ActivateContractResponse;
 
+/**
+ * Activate Contract Request Class
+ */
 class ActivateContractRequest extends AbstractRequest
 {
     /**

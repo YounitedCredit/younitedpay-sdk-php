@@ -18,6 +18,9 @@ namespace YounitedPaySDK\Response;
 use InvalidArgumentException;
 use YounitedPaySDK\Model\ArrayCollection;
 
+/**
+ * Activate Contract Response Class
+ */
 class ActivateContractResponse extends AbstractResponse
 {
     /**

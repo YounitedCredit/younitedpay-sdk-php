@@ -18,6 +18,9 @@ namespace YounitedPaySDK\Response;
 use InvalidArgumentException;
 use YounitedPaySDK\Model\ArrayCollection;
 
+/**
+ * Confirm Contract Response Class
+ */
 class ConfirmContractResponse extends AbstractResponse
 {
     /**

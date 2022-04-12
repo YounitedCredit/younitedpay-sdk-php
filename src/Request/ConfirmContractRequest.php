@@ -20,7 +20,10 @@ use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Model\ConfirmContract;
 use YounitedPaySDK\Response\ConfirmContractResponse;
 
-class ConfirmContractRequest extends AbstractRequest implements RequestInterface
+/**
+ * Confirm Contract Request Class
+ */
+class ConfirmContractRequest extends AbstractRequest
 {
     /**
      * @var string

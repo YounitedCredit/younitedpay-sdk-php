@@ -16,14 +16,13 @@
 namespace YounitedPaySDK\Request;
 
 use YounitedPaySDK\Model\BestPrice;
-use Psr\Http\Message\RequestInterface;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Response\BestPriceResponse;
 
 /**
  * Get Best Price
  */
-class BestPriceRequest extends AbstractRequest implements RequestInterface
+class BestPriceRequest extends AbstractRequest
 {
     /**
      * @var BestPrice

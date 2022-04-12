@@ -17,6 +17,9 @@ namespace YounitedPaySDK\Model;
 
 use JsonSerializable;
 
+/**
+ * Activate Contract Model Class
+ */
 class ActivateContract extends AbstractModel implements JsonSerializable
 {
     // PROPERTIES

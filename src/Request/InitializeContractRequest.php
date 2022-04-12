@@ -20,9 +20,9 @@ use YounitedPaySDK\Model\InitializeContract;
 use YounitedPaySDK\Response\InitializeContractResponse;
 
 /**
- * Initialize Contract Request
+ * Initialize Contract Request Class
  */
-class InitializeContractRequest extends AbstractRequest implements RequestInterface
+class InitializeContractRequest extends AbstractRequest
 {
     /**
      * @var string

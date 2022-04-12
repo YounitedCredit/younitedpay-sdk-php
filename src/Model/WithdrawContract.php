@@ -22,7 +22,7 @@ use JsonSerializable;
  */
 class WithdrawContract extends AbstractModel implements JsonSerializable
 {
-// PROPERTIES
+    // PROPERTIES
 
     /**
      * @var string

@@ -35,7 +35,7 @@ class Address extends AbstractModel implements JsonSerializable
     private $streetName;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $additionalAddress;
 
