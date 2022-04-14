@@ -241,7 +241,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      *
      * @return int maturityInMonths
      */
-    public function maturityInMonthsmaturityInMonths()
+    public function getMaturityInMonths()
     {
         return $this->maturityInMonths;
     }
