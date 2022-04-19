@@ -56,7 +56,7 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
      */
     public function setContractReference($contractReference)
     {
-        if (is_string($contractReference)) {
+        if (is_string($contractReference) === true) {
             $this->contractReference = $contractReference;
             return $this;
         }
@@ -85,7 +85,7 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
      */
     public function setAmount($amount)
     {
-        if (is_null($amount) || is_double($amount)) {
+        if (is_null($amount) === true || is_double($amount) === true) {
             $this->amount = $amount;
             return $this;
         }

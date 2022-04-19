@@ -66,7 +66,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      */
     public function setOnCanceledWebhookUrl($onCanceledWebhookUrl)
     {
-        if (is_string($onCanceledWebhookUrl)) {
+        if (is_string($onCanceledWebhookUrl) === true) {
             $this->onCanceledWebhookUrl = $onCanceledWebhookUrl;
             return $this;
         }
@@ -95,7 +95,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      */
     public function setOnWithdrawnWebhookUrl($onWithdrawnWebhookUrl)
     {
-        if (is_string($onWithdrawnWebhookUrl)) {
+        if (is_string($onWithdrawnWebhookUrl) === true) {
             $this->onWithdrawnWebhookUrl = $onWithdrawnWebhookUrl;
             return $this;
         }
@@ -124,7 +124,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      */
     public function setOnApplicationSucceededRedirectUrl($onApplicationSucceededRedirectUrl)
     {
-        if (is_string($onApplicationSucceededRedirectUrl)) {
+        if (is_string($onApplicationSucceededRedirectUrl) === true) {
             $this->onApplicationSucceededRedirectUrl = $onApplicationSucceededRedirectUrl;
             return $this;
         }
@@ -153,7 +153,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      */
     public function setOnApplicationFailedRedirectUrl($onApplicationFailedRedirectUrl)
     {
-        if (is_string($onApplicationFailedRedirectUrl)) {
+        if (is_string($onApplicationFailedRedirectUrl) === true) {
             $this->onApplicationFailedRedirectUrl = $onApplicationFailedRedirectUrl;
             return $this;
         }

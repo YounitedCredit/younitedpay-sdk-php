@@ -53,7 +53,7 @@ class ConfirmContract extends AbstractModel implements JsonSerializable
      */
     public function setContractReference($contractReference)
     {
-        if (is_string($contractReference)) {
+        if (is_string($contractReference) === true) {
             $this->contractReference = $contractReference;
             return $this;
         }
@@ -82,7 +82,7 @@ class ConfirmContract extends AbstractModel implements JsonSerializable
      */
     public function setMerchantOrderId($merchantOrderId)
     {
-        if (is_null($merchantOrderId) || is_string($merchantOrderId)) {
+        if (is_null($merchantOrderId) === true || is_string($merchantOrderId) === true) {
             $this->merchantOrderId = $merchantOrderId;
             return $this;
         }

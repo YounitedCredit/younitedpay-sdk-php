@@ -61,7 +61,7 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
      */
     public function setChannel($channel)
     {
-        if (is_string($channel)) {
+        if (is_string($channel) === true) {
             $this->channel = $channel;
             return $this;
         }
@@ -90,7 +90,7 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
      */
     public function setAgentEmailAddress($agentEmailAddress)
     {
-        if (is_string($agentEmailAddress)) {
+        if (is_string($agentEmailAddress) === true) {
             $this->agentEmailAddress = $agentEmailAddress;
             return $this;
         }
@@ -119,7 +119,7 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
      */
     public function setMerchantReference($merchantReference)
     {
-        if (is_string($merchantReference)) {
+        if (is_string($merchantReference) === true) {
             $this->merchantReference = $merchantReference;
             return $this;
         }

@@ -47,7 +47,7 @@ class BestPrice extends AbstractModel implements JsonSerializable
      */
     public function setBorrowedAmount($borrowedAmount)
     {
-        if (is_float($borrowedAmount)) {
+        if (is_float($borrowedAmount) === true) {
             $this->borrowedAmount = $borrowedAmount;
             return $this;
         }

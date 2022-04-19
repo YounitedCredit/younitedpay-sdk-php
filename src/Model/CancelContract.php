@@ -53,7 +53,7 @@ class CancelContract extends AbstractModel implements JsonSerializable
      */
     public function setContractReference($contractReference)
     {
-        if (is_string($contractReference)) {
+        if (is_string($contractReference) === true) {
             $this->contractReference = $contractReference;
             return $this;
         }

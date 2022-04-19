@@ -82,7 +82,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      */
     public function setFirstName($firstName)
     {
-        if (is_string($firstName)) {
+        if (is_string($firstName) === true) {
             $this->firstName = $firstName;
             return $this;
         }
@@ -111,7 +111,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      */
     public function setLastName($lastName)
     {
-        if (is_string($lastName)) {
+        if (is_string($lastName) === true) {
             $this->lastName = $lastName;
             return $this;
         }
@@ -140,7 +140,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      */
     public function setGenderCode($genderCode)
     {
-        if (is_string($genderCode)) {
+        if (is_string($genderCode) === true) {
             $this->genderCode = $genderCode;
             return $this;
         }
@@ -169,7 +169,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      */
     public function setEmailAddress($emailAddress)
     {
-        if (is_string($emailAddress)) {
+        if (is_string($emailAddress) === true) {
             $this->emailAddress = $emailAddress;
             return $this;
         }
@@ -198,7 +198,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      */
     public function setCellPhoneNumber($cellPhoneNumber)
     {
-        if (is_string($cellPhoneNumber)) {
+        if (is_string($cellPhoneNumber) === true) {
             $this->cellPhoneNumber = $cellPhoneNumber;
             return $this;
         }

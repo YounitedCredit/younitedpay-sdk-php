@@ -71,7 +71,7 @@ class InitializeContract extends AbstractModel implements JsonSerializable
      */
     public function setRequestedMaturity($requestedMaturity)
     {
-        if (is_int($requestedMaturity)) {
+        if (is_int($requestedMaturity) === true) {
             $this->requestedMaturity = $requestedMaturity;
 
             return $this;

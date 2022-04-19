@@ -61,7 +61,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
      */
     public function setItemName($itemName)
     {
-        if (is_string($itemName)) {
+        if (is_string($itemName) === true) {
             $this->itemName = $itemName;
             return $this;
         }
@@ -90,7 +90,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
      */
     public function setQuantity($quantity)
     {
-        if (is_int($quantity)) {
+        if (is_int($quantity) === true) {
             $this->quantity = $quantity;
             return $this;
         }
@@ -119,7 +119,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
      */
     public function setUnitPrice($unitPrice)
     {
-        if (is_float($unitPrice)) {
+        if (is_float($unitPrice) === true) {
             $this->unitPrice = $unitPrice;
             return $this;
         }

@@ -76,7 +76,7 @@ class Address extends AbstractModel implements JsonSerializable
      */
     public function setStreetNumber($streetNumber)
     {
-        if (is_string($streetNumber)) {
+        if (is_string($streetNumber) === true) {
             $this->streetNumber = $streetNumber;
             return $this;
         }
@@ -105,7 +105,7 @@ class Address extends AbstractModel implements JsonSerializable
      */
     public function setStreetName($streetName)
     {
-        if (is_string($streetName)) {
+        if (is_string($streetName) === true) {
             $this->streetName = $streetName;
             return $this;
         }
@@ -134,7 +134,7 @@ class Address extends AbstractModel implements JsonSerializable
      */
     public function setAdditionalAddress($additionalAddress)
     {
-        if (is_null($additionalAddress) || is_string($additionalAddress)) {
+        if (is_null($additionalAddress) === true || is_string($additionalAddress) === true) {
             $this->additionalAddress = $additionalAddress;
             return $this;
         }
@@ -163,7 +163,7 @@ class Address extends AbstractModel implements JsonSerializable
      */
     public function setCity($city)
     {
-        if (is_string($city)) {
+        if (is_string($city) === true) {
             $this->city = $city;
             return $this;
         }
@@ -192,7 +192,7 @@ class Address extends AbstractModel implements JsonSerializable
      */
     public function setPostalCode($postalCode)
     {
-        if (is_string($postalCode)) {
+        if (is_string($postalCode) === true) {
             $this->postalCode = $postalCode;
             return $this;
         }
@@ -221,7 +221,7 @@ class Address extends AbstractModel implements JsonSerializable
      */
     public function setCountryCode($countryCode)
     {
-        if (is_string($countryCode)) {
+        if (is_string($countryCode) === true) {
             $this->countryCode = $countryCode;
             return $this;
         }

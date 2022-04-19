@@ -82,7 +82,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setRequestedAmount($requestedAmount)
     {
-        if (is_float($requestedAmount)) {
+        if (is_float($requestedAmount) === true) {
             $this->requestedAmount = $requestedAmount;
             return $this;
         }
@@ -111,7 +111,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setAnnualDebitRate($annualDebitRate)
     {
-        if (is_float($annualDebitRate)) {
+        if (is_float($annualDebitRate) === true) {
             $this->annualDebitRate = $annualDebitRate;
             return $this;
         }
@@ -139,7 +139,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setAnnualPercentageRate($annualPercentageRate)
     {
-        if (is_float($annualPercentageRate)) {
+        if (is_float($annualPercentageRate) === true) {
             $this->annualPercentageRate = $annualPercentageRate;
             return $this;
         }
@@ -168,7 +168,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setCreditAmountToFund($creditAmountToFund)
     {
-        if (is_float($creditAmountToFund)) {
+        if (is_float($creditAmountToFund) === true) {
             $this->creditAmountToFund = $creditAmountToFund;
             return $this;
         }
@@ -197,7 +197,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setMonthlyInstallmentAmount($monthlyInstallmentAmount)
     {
-        if (is_float($monthlyInstallmentAmount)) {
+        if (is_float($monthlyInstallmentAmount) === true) {
             $this->monthlyInstallmentAmount = $monthlyInstallmentAmount;
             return $this;
         }
@@ -226,7 +226,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setCreditTotalAmount($creditTotalAmount)
     {
-        if (is_float($creditTotalAmount)) {
+        if (is_float($creditTotalAmount) === true) {
             $this->creditTotalAmount = $creditTotalAmount;
             return $this;
         }
@@ -255,7 +255,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setMaturityInMonths($maturityInMonths)
     {
-        if (is_int($maturityInMonths)) {
+        if (is_int($maturityInMonths) === true) {
             $this->maturityInMonths = $maturityInMonths;
             return $this;
         }
@@ -284,7 +284,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setInterestsTotalAmount($interestsTotalAmount)
     {
-        if (is_float($interestsTotalAmount)) {
+        if (is_float($interestsTotalAmount) === true) {
             $this->interestsTotalAmount = $interestsTotalAmount;
             return $this;
         }
