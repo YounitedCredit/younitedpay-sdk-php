@@ -51,7 +51,7 @@ class Error extends AbstractModel implements JsonSerializable
     private $instance;
 
     /**
-     * @var array|null
+     * @var array<mixed>|null
      */
     private $errors;
 
@@ -205,7 +205,7 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Get Errors
      *
-     * @return array|null
+     * @return array<mixed>|null
      */
     public function getErrors()
     {
@@ -215,7 +215,7 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Set Errors
      *
-     * @param array|null $errors
+     * @param array<mixed>|null $errors
      *
      * @return self
      */
