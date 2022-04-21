@@ -49,7 +49,7 @@ class Client
     /**
      * cURL handler
      *
-     * @var resource
+     * @var resource|\CurlHandle
      */
     protected $ch;
 
