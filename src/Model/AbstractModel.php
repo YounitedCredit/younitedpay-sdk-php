@@ -50,6 +50,9 @@ abstract class AbstractModel implements JsonSerializable
             if (substr($value, 0, 3) === 'set') {
                 $key = lcfirst(substr($value, 3, strlen($value)));
                 $this->$value($content[$key]);
+                if (isset($content[$key])) {
+                    $this->$value($content[$key]);
+                }
             }
         }
 

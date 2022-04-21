@@ -26,32 +26,32 @@ class Error extends AbstractModel implements JsonSerializable
     // PROPERTIES
 
     /**
-     * @var string
+     * @var string|null
      */
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $title;
 
     /**
-     * @var string
+     * @var int|null
      */
     private $status;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $detail;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $instance;
 
     /**
-     * @var array
+     * @var array|null
      */
     private $errors;
 
@@ -60,7 +60,7 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Get Type
      *
-     * @return string
+     * @return string|null
      */
     public function getType()
     {
@@ -70,24 +70,24 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Set Type
      *
-     * @param string $type
+     * @param string|null $type
      */
     public function setType($type)
     {
-        if (is_string($type) === true) {
+        if (is_string($type) === true || is_null($type) === true) {
             $this->type = $type;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Type must be a string but ' . gettype($type) . ' is given.'
+            'Type must be a string or null but ' . gettype($type) . ' is given.'
         );
     }
 
     /**
      * Get Title
      *
-     * @return string
+     * @return string|null
      */
     public function getTitle()
     {
@@ -97,24 +97,24 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Set Title
      *
-     * @param string $title
+     * @param string|null $title
      */
     public function setTitle($title)
     {
-        if (is_string($title) === true) {
+        if (is_string($title) === true || is_null($title) === true) {
             $this->title = $title;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Title must be a string but ' . gettype($title) . ' is given.'
+            'Title must be a string or null but ' . gettype($title) . ' is given.'
         );
     }
 
     /**
      * Get Status
      *
-     * @return string
+     * @return int|null
      */
     public function getStatus()
     {
@@ -124,24 +124,24 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Set Status
      *
-     * @param string $status
+     * @param int|null $status
      */
     public function setStatus($status)
     {
-        if (is_string($status) === true) {
+        if (is_int($status) === true || is_null($status) === true) {
             $this->status = $status;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Status must be a string but ' . gettype($status) . ' is given.'
+            'Status must be an integer or null but ' . gettype($status) . ' is given.'
         );
     }
 
     /**
      * Get Detail
      *
-     * @return string
+     * @return string|null
      */
     public function getDetail()
     {
@@ -151,24 +151,24 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Set Detail
      *
-     * @param string $detail
+     * @param string|null $detail
      */
     public function setDetail($detail)
     {
-        if (is_string($detail) === true) {
+        if (is_string($detail) === true || is_null($detail) === true) {
             $this->detail = $detail;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Detail must be a string but ' . gettype($detail) . ' is given.'
+            'Detail must be a string or null but ' . gettype($detail) . ' is given.'
         );
     }
 
     /**
      * Get Instance
      *
-     * @return string
+     * @return string|null
      */
     public function getInstance()
     {
@@ -178,24 +178,24 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Set Instance
      *
-     * @param string $instance
+     * @param string|null $instance
      */
     public function setInstance($instance)
     {
-        if (is_string($instance) === true) {
+        if (is_string($instance) === true || is_null($instance) === true) {
             $this->instance = $instance;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Instance must be a string but ' . gettype($instance) . ' is given.'
+            'Instance must be a string or null but ' . gettype($instance) . ' is given.'
         );
     }
 
     /**
      * Get Errors
      *
-     * @return array
+     * @return array|null
      */
     public function getErrors()
     {
@@ -205,17 +205,17 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Set Errors
      *
-     * @param array $errors
+     * @param array|null $errors
      */
     public function setErrors($errors)
     {
-        if (is_array($errors) === true) {
+        if (is_array($errors) === true || is_null($errors) === true) {
             $this->errors = $errors;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Errors must be an array but ' . gettype($errors) . ' is given.'
+            'Errors must be an array or null but ' . gettype($errors) . ' is given.'
         );
     }
 }
