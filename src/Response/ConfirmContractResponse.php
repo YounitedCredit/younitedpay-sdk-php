@@ -43,7 +43,7 @@ class ConfirmContractResponse extends AbstractResponse
             return new ArrayCollection();
         }
 
-        if ($this->getStatusCode() >= 200 && $this->getStatusCode() <= 299) {
+        if ($this->getStatusCode() < 200 || $this->getStatusCode() > 299) {
             return (new Error())->hydrate($output);
         }
 
