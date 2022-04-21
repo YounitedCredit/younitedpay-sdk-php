@@ -16,8 +16,10 @@
 namespace Tests\Response;
 
 use PHPUnit\Framework\TestCase;
+use YounitedPaySDK\Model\ArrayCollection;
+use YounitedPaySDK\Model\OfferItem;
 use YounitedPaySDK\Request\BestPriceRequest;
-use YounitedPaySDK\Request\Stream;
+use YounitedPaySDK\Stream;
 use YounitedPaySDK\Model\BestPrice;
 use YounitedPaySDK\Response\ResponseBuilder;
 use YounitedPaySDK\Response\DefaultResponse;
@@ -30,7 +32,7 @@ class BestPriceResponseTest extends TestCase
      *
      * @return void
      */
-    public function testSuccess(): void
+    public function testSuccess()
     {
         $bodyRequest = new BestPrice();
         $bodyRequest->setBorrowedAmount(149.90);
@@ -52,8 +54,8 @@ class BestPriceResponseTest extends TestCase
 
         $offers = $response->getModel();
 
-        $this->assertInstanceOf(\YounitedPaySDK\Model\ArrayCollection::class, $offers);
-        $this->assertInstanceOf(\YounitedPaySDK\Model\OfferItem::class, $offers[0]);
+        $this->assertInstanceOf(ArrayCollection::class, $offers);
+        $this->assertInstanceOf(OfferItem::class, $offers[0]);
         $this->assertEquals(36, count($offers));
     }
 }

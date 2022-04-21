@@ -18,8 +18,8 @@ class InitializeContractTest extends TestCase
      */
     public function testInstance()
     {
-        $initializeContract = new InitializeContract();
-        $this->assertInstanceOf(InitializeContract::class, $initializeContract);
+        $initializeContract = new \YounitedPaySDK\Model\InitializeContract();
+        $this->assertInstanceOf(\YounitedPaySDK\Model\InitializeContract::class, $initializeContract);
 
         return $initializeContract;
     }
@@ -73,15 +73,15 @@ class InitializeContractTest extends TestCase
         $basketItem1 = new BasketItem();
         $basketItem1->setItemName('Item basket 1');
         $basketItem1->setQuantity(2);
-        $basketItem1->setUnitPrice(45);
+        $basketItem1->setUnitPrice(45.0);
 
         $basketItem2 = new BasketItem();
         $basketItem2->setItemName('Item basket 2');
         $basketItem2->setQuantity(1);
-        $basketItem2->setUnitPrice(33);
+        $basketItem2->setUnitPrice(33.0);
 
         $basket = new Basket();
-        $basket->setBasketAmount(123);
+        $basket->setBasketAmount(123.0);
         $basket->setItems([$basketItem1, $basketItem2]);
 
         $initializeContract->setBasket($basket);

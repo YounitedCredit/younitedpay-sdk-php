@@ -20,7 +20,10 @@ use YounitedPaySDK\Model\BestPrice;
 
 class BestPriceTest extends TestCase
 {
-    public function testGetter(): void
+    /**
+     * @return void
+     */
+    public function testGetter()
     {
         $bestPrice = new BestPrice();
         $bestPrice->setBorrowedAmount(149.99);

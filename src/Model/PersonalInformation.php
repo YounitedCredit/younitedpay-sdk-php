@@ -123,7 +123,6 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
 
     /**
      * Get Gender Code
-     * If not null, possible values are : 'MALE' / 'FEMALE'
      *
      * @return string|null
      */
@@ -134,6 +133,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
 
     /**
      * Set Gender Code
+     * If not null, possible values are : 'MALE' / 'FEMALE'
      *
      * @param string|null $genderCode
      *

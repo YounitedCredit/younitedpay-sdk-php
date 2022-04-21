@@ -16,12 +16,11 @@
 namespace YounitedPaySDK\Model;
 
 use InvalidArgumentException;
-use JsonSerializable;
 
 /**
  * Best Price Model
  */
-class BestPrice extends AbstractModel implements JsonSerializable
+class BestPrice extends AbstractModel
 {
     /**
      * @var double
