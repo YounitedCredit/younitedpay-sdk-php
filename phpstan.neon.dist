@@ -21,6 +21,7 @@ parameters:
     # https://phpstan.org/config-reference#vague-typehints
     checkMissingIterableValueType: true
     checkGenericClassInNonGenericObjectType: false # this parameter is activated at level 6
+    treatPhpDocTypesAsCertain: false
 
     # It's a special "dev" project, I have to ignore the following warnings because
     # the use of this functions is intended.
