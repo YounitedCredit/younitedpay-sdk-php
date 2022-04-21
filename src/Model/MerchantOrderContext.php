@@ -33,6 +33,11 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     /**
      * @var string
      */
+    private $shopCode;
+
+    /**
+     * @var string
+     */
     private $agentEmailAddress;
 
     /**
@@ -68,6 +73,35 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
 
         throw new InvalidArgumentException(
             'Channel must be a string but ' . gettype($channel) . ' is given.'
+        );
+    }
+
+    /**
+     * Get Shop Code
+     *
+     * @return string
+     */
+    public function getShopCode()
+    {
+        return $this->shopCode;
+    }
+
+    /**
+     * Set Shop Code
+     *
+     * @param string $shopCode
+     *
+     * @return self
+     */
+    public function setShopCode($shopCode)
+    {
+        if (is_string($shopCode) === true) {
+            $this->shopCode = $shopCode;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Shop Code must be a string but ' . gettype($shopCode) . ' is given.'
         );
     }
 
