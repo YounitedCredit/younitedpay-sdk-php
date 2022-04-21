@@ -26,7 +26,7 @@ class Address extends AbstractModel implements JsonSerializable
     // PROPERTIES
 
     /**
-     * @var string
+     * @var string|null
      */
     private $streetNumber;
 
@@ -60,7 +60,7 @@ class Address extends AbstractModel implements JsonSerializable
     /**
      * Get Street Number
      *
-     * @return string
+     * @return string|null
      */
     public function getStreetNumber()
     {
@@ -70,19 +70,19 @@ class Address extends AbstractModel implements JsonSerializable
     /**
      * Set Street Number
      *
-     * @param string $streetNumber
+     * @param string|null $streetNumber
      *
      * @return self
      */
     public function setStreetNumber($streetNumber)
     {
-        if (is_string($streetNumber) === true) {
+        if (is_string($streetNumber) === true || is_null($streetNumber) === true) {
             $this->streetNumber = $streetNumber;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Street Number must be a string but ' . gettype($streetNumber) . ' is given.'
+            'Street Number must be a string or null but ' . gettype($streetNumber) . ' is given.'
         );
     }
 
@@ -98,6 +98,7 @@ class Address extends AbstractModel implements JsonSerializable
 
     /**
      * Set Street Name
+     * Character number must be less than or equal to 38
      *
      * @param string $streetName
      *

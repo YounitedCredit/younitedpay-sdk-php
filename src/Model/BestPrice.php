@@ -24,14 +24,14 @@ use JsonSerializable;
 class BestPrice extends AbstractModel implements JsonSerializable
 {
     /**
-     * @var float
+     * @var double
      */
     private $borrowedAmount;
 
     /**
      * Get a borrow amount
      *
-     * @return float borrowed amount
+     * @return double borrowed amount
      */
     public function getBorrowedAmount()
     {
@@ -40,20 +40,21 @@ class BestPrice extends AbstractModel implements JsonSerializable
 
     /**
      * Set a borrow amount
+     * Value must be greater than or equal to 1
      *
-     * @param float $borrowedAmount
+     * @param double $borrowedAmount
      *
      * @return self
      */
     public function setBorrowedAmount($borrowedAmount)
     {
-        if (is_float($borrowedAmount) === true) {
+        if (is_double($borrowedAmount) === true) {
             $this->borrowedAmount = $borrowedAmount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Borrowed Amount must be a float but ' . gettype($borrowedAmount) . ' is given.'
+            'Borrowed Amount must be a double but ' . gettype($borrowedAmount) . ' is given.'
         );
     }
 }

@@ -100,6 +100,7 @@ class Contract extends AbstractModel implements JsonSerializable
 
     /**
      * Set Status
+     * Possible values are : INITIALIZED / GRANTED / CONFIRMED / FINANCED / WITHDRAWN / CANCELED / REJECTED
      *
      * @param string $status
      *
@@ -120,7 +121,7 @@ class Contract extends AbstractModel implements JsonSerializable
     /**
      * Get Application Succeeded
      *
-     * @return string
+     * @return bool
      */
     public function getApplicationSucceeded()
     {
@@ -130,7 +131,7 @@ class Contract extends AbstractModel implements JsonSerializable
     /**
      * Set Application Succeeded
      *
-     * @param string $applicationSucceeded
+     * @param bool $applicationSucceeded
      *
      * @return self
      */

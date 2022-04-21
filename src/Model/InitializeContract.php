@@ -64,6 +64,7 @@ class InitializeContract extends AbstractModel implements JsonSerializable
 
     /**
      * Set Requested Maturity
+     * Value must be greater than or equal to 1
      *
      * @param int $requestedMaturity
      *

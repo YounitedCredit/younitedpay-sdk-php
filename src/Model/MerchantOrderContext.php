@@ -31,17 +31,17 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     private $channel;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $shopCode;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $agentEmailAddress;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $merchantReference;
 
@@ -59,6 +59,7 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
 
     /**
      * Set Channel
+     * Possible values are : ONLINE / PHYSICAL.
      *
      * @param string $channel
      *
@@ -79,7 +80,7 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     /**
      * Get Shop Code
      *
-     * @return string
+     * @return string|null
      */
     public function getShopCode()
     {
@@ -89,26 +90,26 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     /**
      * Set Shop Code
      *
-     * @param string $shopCode
+     * @param string|null $shopCode
      *
      * @return self
      */
     public function setShopCode($shopCode)
     {
-        if (is_string($shopCode) === true) {
+        if (is_string($shopCode) === true || is_null($shopCode) === true) {
             $this->shopCode = $shopCode;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Shop Code must be a string but ' . gettype($shopCode) . ' is given.'
+            'Shop Code must be a string or null but ' . gettype($shopCode) . ' is given.'
         );
     }
 
     /**
      * Get Agent Email Address
      *
-     * @return string
+     * @return string|null
      */
     public function getAgentEmailAddress()
     {
@@ -118,26 +119,26 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     /**
      * Set Agent Email Address
      *
-     * @param string $agentEmailAddress
+     * @param string|null $agentEmailAddress
      *
      * @return self
      */
     public function setAgentEmailAddress($agentEmailAddress)
     {
-        if (is_string($agentEmailAddress) === true) {
+        if (is_string($agentEmailAddress) === true || is_null($agentEmailAddress) === true) {
             $this->agentEmailAddress = $agentEmailAddress;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Agent Email Address must be a string but ' . gettype($agentEmailAddress) . ' is given.'
+            'Agent Email Address must be a string or null but ' . gettype($agentEmailAddress) . ' is given.'
         );
     }
 
     /**
      * Get Merchant Reference
      *
-     * @return string
+     * @return string|null
      */
     public function getMerchantReference()
     {
@@ -147,19 +148,19 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     /**
      * Set Merchant Reference
      *
-     * @param string $merchantReference
+     * @param string|null $merchantReference
      *
      * @return self
      */
     public function setMerchantReference($merchantReference)
     {
-        if (is_string($merchantReference) === true) {
+        if (is_string($merchantReference) === true || is_null($merchantReference) === true) {
             $this->merchantReference = $merchantReference;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Merchant Reference must be a string but ' . gettype($merchantReference) . ' is given.'
+            'Merchant Reference must be a string or null but ' . gettype($merchantReference) . ' is given.'
         );
     }
 }

@@ -24,32 +24,32 @@ use JsonSerializable;
 class OfferItem extends AbstractModel implements JsonSerializable
 {
     /**
-     * @var float
+     * @var double
      */
     private $requestedAmount;
 
     /**
-     * @var float
+     * @var double
      */
     private $annualPercentageRate;
 
     /**
-     * @var float
+     * @var double
      */
     private $annualDebitRate;
 
     /**
-     * @var float
+     * @var double
      */
     private $monthlyInstallmentAmount;
 
     /**
-     * @var float
+     * @var double
      */
     private $creditTotalAmount;
 
     /**
-     * @var float
+     * @var double
      */
     private $creditAmountToFund;
 
@@ -59,14 +59,14 @@ class OfferItem extends AbstractModel implements JsonSerializable
     private $maturityInMonths;
 
     /**
-     * @var float
+     * @var double
      */
     private $interestsTotalAmount;
 
     /**
      * Get requestedAmount
      *
-     * @return float requestedAmount
+     * @return double requestedAmount
      */
     public function getRequestedAmount()
     {
@@ -76,26 +76,26 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Set requestedAmount
      *
-     * @param float $requestedAmount
+     * @param double $requestedAmount
      *
      * @return self
      */
     public function setRequestedAmount($requestedAmount)
     {
-        if (is_float($requestedAmount) === true) {
+        if (is_double($requestedAmount) === true) {
             $this->requestedAmount = $requestedAmount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Requested Amount must be a float but ' . gettype($requestedAmount) . ' is given.'
+            'Requested Amount must be a double but ' . gettype($requestedAmount) . ' is given.'
         );
     }
 
     /**
      * Get annualDebitRate
      *
-     * @return float annualDebitRate
+     * @return double annualDebitRate
      */
     public function getAnnualDebitRate()
     {
@@ -105,25 +105,25 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Set annualDebitRate
      *
-     * @param float $annualDebitRate
+     * @param double $annualDebitRate
      *
      * @return self
      */
     public function setAnnualDebitRate($annualDebitRate)
     {
-        if (is_float($annualDebitRate) === true) {
+        if (is_double($annualDebitRate) === true) {
             $this->annualDebitRate = $annualDebitRate;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Annual Debit Rate must be a float but ' . gettype($annualDebitRate) . ' is given.'
+            'Annual Debit Rate must be a double but ' . gettype($annualDebitRate) . ' is given.'
         );
     }
     /**
      * get AnnualPercentageRate
      *
-     * @return float
+     * @return double
      */
     public function getAnnualPercentageRate()
     {
@@ -133,26 +133,26 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Set annualPercentageRate
      *
-     * @param float $annualPercentageRate
+     * @param double $annualPercentageRate
      *
      * @return self
      */
     public function setAnnualPercentageRate($annualPercentageRate)
     {
-        if (is_float($annualPercentageRate) === true) {
+        if (is_double($annualPercentageRate) === true) {
             $this->annualPercentageRate = $annualPercentageRate;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Annual Percentage Rate must be a float but ' . gettype($annualPercentageRate) . ' is given.'
+            'Annual Percentage Rate must be a double but ' . gettype($annualPercentageRate) . ' is given.'
         );
     }
 
     /**
      * Get creditAmountToFund
      *
-     * @return float creditAmountToFund
+     * @return double creditAmountToFund
      */
     public function getCreditAmountToFund()
     {
@@ -162,26 +162,26 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Set creditAmountToFund
      *
-     * @param float $creditAmountToFund
+     * @param double $creditAmountToFund
      *
      * @return self
      */
     public function setCreditAmountToFund($creditAmountToFund)
     {
-        if (is_float($creditAmountToFund) === true) {
+        if (is_double($creditAmountToFund) === true) {
             $this->creditAmountToFund = $creditAmountToFund;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Credit Amount To Fund must be a float but ' . gettype($creditAmountToFund) . ' is given.'
+            'Credit Amount To Fund must be a double but ' . gettype($creditAmountToFund) . ' is given.'
         );
     }
 
     /**
      * Get monthlyInstallmentAmount
      *
-     * @return float monthlyInstallmentAmount
+     * @return double monthlyInstallmentAmount
      */
     public function getMonthlyInstallmentAmount()
     {
@@ -191,26 +191,26 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Set monthlyInstallmentAmount
      *
-     * @param float $monthlyInstallmentAmount
+     * @param double $monthlyInstallmentAmount
      *
      * @return self
      */
     public function setMonthlyInstallmentAmount($monthlyInstallmentAmount)
     {
-        if (is_float($monthlyInstallmentAmount) === true) {
+        if (is_double($monthlyInstallmentAmount) === true) {
             $this->monthlyInstallmentAmount = $monthlyInstallmentAmount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Monthly Installment Amount must be a float but ' . gettype($monthlyInstallmentAmount) . ' is given.'
+            'Monthly Installment Amount must be a double but ' . gettype($monthlyInstallmentAmount) . ' is given.'
         );
     }
 
     /**
      * Get creditTotalAmount
      *
-     * @return float creditTotalAmount
+     * @return double creditTotalAmount
      */
     public function getCreditTotalAmount()
     {
@@ -220,19 +220,19 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Set creditTotalAmount
      *
-     * @param float $creditTotalAmount
+     * @param double $creditTotalAmount
      *
      * @return self
      */
     public function setCreditTotalAmount($creditTotalAmount)
     {
-        if (is_float($creditTotalAmount) === true) {
+        if (is_double($creditTotalAmount) === true) {
             $this->creditTotalAmount = $creditTotalAmount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Credit Total Amount must be a float but ' . gettype($creditTotalAmount) . ' is given.'
+            'Credit Total Amount must be a double but ' . gettype($creditTotalAmount) . ' is given.'
         );
     }
 
@@ -268,7 +268,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Get interestsTotalAmount
      *
-     * @return float interestsTotalAmount
+     * @return double interestsTotalAmount
      */
     public function getInterestsTotalAmount()
     {
@@ -278,19 +278,19 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Set interestsTotalAmount
      *
-     * @param float $interestsTotalAmount
+     * @param double $interestsTotalAmount
      *
      * @return self
      */
     public function setInterestsTotalAmount($interestsTotalAmount)
     {
-        if (is_float($interestsTotalAmount) === true) {
+        if (is_double($interestsTotalAmount) === true) {
             $this->interestsTotalAmount = $interestsTotalAmount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Interests Total Amount must be a float but ' . gettype($interestsTotalAmount) . ' is given.'
+            'Interests Total Amount must be a double but ' . gettype($interestsTotalAmount) . ' is given.'
         );
     }
 }

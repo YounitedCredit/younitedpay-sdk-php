@@ -36,7 +36,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
     private $quantity;
 
     /**
-     * @var float
+     * @var double
      */
     private $unitPrice;
 
@@ -83,6 +83,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
 
     /**
      * Set Quantity
+     * Value must be greater than or equal to 1
      *
      * @param int $quantity
      *
@@ -103,7 +104,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
     /**
      * Get Unit Price
      *
-     * @return float
+     * @return double
      */
     public function getUnitPrice()
     {
@@ -112,20 +113,21 @@ class BasketItem extends AbstractModel implements JsonSerializable
 
     /**
      * Set Unit Price
+     * Value must be greater than or equal to 0
      *
-     * @param float $unitPrice
+     * @param double $unitPrice
      *
      * @return self
      */
     public function setUnitPrice($unitPrice)
     {
-        if (is_float($unitPrice) === true) {
+        if (is_double($unitPrice) === true) {
             $this->unitPrice = $unitPrice;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Unit Price must be a float but ' . gettype($unitPrice) . ' is given.'
+            'Unit Price must be a double but ' . gettype($unitPrice) . ' is given.'
         );
     }
 }

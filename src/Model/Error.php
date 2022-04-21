@@ -71,6 +71,8 @@ class Error extends AbstractModel implements JsonSerializable
      * Set Type
      *
      * @param string|null $type
+     *
+     * @return self
      */
     public function setType($type)
     {
@@ -98,6 +100,8 @@ class Error extends AbstractModel implements JsonSerializable
      * Set Title
      *
      * @param string|null $title
+     *
+     * @return self
      */
     public function setTitle($title)
     {
@@ -125,6 +129,8 @@ class Error extends AbstractModel implements JsonSerializable
      * Set Status
      *
      * @param int|null $status
+     *
+     * @return self
      */
     public function setStatus($status)
     {
@@ -152,6 +158,8 @@ class Error extends AbstractModel implements JsonSerializable
      * Set Detail
      *
      * @param string|null $detail
+     *
+     * @return self
      */
     public function setDetail($detail)
     {
@@ -179,6 +187,8 @@ class Error extends AbstractModel implements JsonSerializable
      * Set Instance
      *
      * @param string|null $instance
+     *
+     * @return self
      */
     public function setInstance($instance)
     {
@@ -206,6 +216,8 @@ class Error extends AbstractModel implements JsonSerializable
      * Set Errors
      *
      * @param array|null $errors
+     *
+     * @return self
      */
     public function setErrors($errors)
     {

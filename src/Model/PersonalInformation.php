@@ -37,7 +37,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     private $lastName;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $genderCode;
 
@@ -52,7 +52,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     private $cellPhoneNumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $birthDate;
 
@@ -123,8 +123,9 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
 
     /**
      * Get Gender Code
+     * If not null, possible values are : 'MALE' / 'FEMALE'
      *
-     * @return string
+     * @return string|null
      */
     public function getGenderCode()
     {
@@ -134,19 +135,19 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     /**
      * Set Gender Code
      *
-     * @param string $genderCode
+     * @param string|null $genderCode
      *
      * @return self
      */
     public function setGenderCode($genderCode)
     {
-        if (is_string($genderCode) === true) {
+        if (is_string($genderCode) === true || is_null($genderCode) === true) {
             $this->genderCode = $genderCode;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Gender Code must be a string but ' . gettype($genderCode) . ' is given.'
+            'Gender Code must be a string or null but ' . gettype($genderCode) . ' is given.'
         );
     }
 
@@ -211,7 +212,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     /**
      * Get Birth Date
      *
-     * @return string
+     * @return string|null
      */
     public function getBirthDate()
     {
@@ -221,7 +222,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     /**
      * Set Birth Date
      *
-     * @param DateTime $birthDate
+     * @param DateTime|null $birthDate
      *
      * @return self
      */
@@ -232,8 +233,13 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
             return $this;
         }
 
+        if (is_null($birthDate) === true) {
+            $this->birthDate = $birthDate;
+            return $this;
+        }
+
         throw new InvalidArgumentException(
-            'Birth Date must be an instance of ' .  DateTime::class . ' but ' . get_class($birthDate) . ' is given.'
+            'Birth Date must be an instance of ' .  DateTime::class . ' or null but ' . get_class($birthDate) . ' is given.'
         );
     }
 
