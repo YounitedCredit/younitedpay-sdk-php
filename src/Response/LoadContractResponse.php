@@ -19,6 +19,7 @@ namespace YounitedPaySDK\Response;
 
 use InvalidArgumentException;
 use YounitedPaySDK\Model\ArrayCollection;
+use YounitedPaySDK\Model\Contract;
 
 /**
  * Load Contract Response Class
@@ -44,6 +45,6 @@ class LoadContractResponse extends AbstractResponse
             return new ArrayCollection();
         }
 
-        return new ArrayCollection($output);
+        return (new Contract())->hydrate($output);
     }
 }
