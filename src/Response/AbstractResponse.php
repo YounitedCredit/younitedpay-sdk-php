@@ -19,8 +19,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Request\MessageTrait;
-use YounitedPaySDK\Request\Stream;
 use YounitedPaySDK\Model\ArrayCollection;
+use YounitedPaySDK\Stream;
 
 /**
  * API client

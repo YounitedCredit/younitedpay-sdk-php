@@ -15,13 +15,15 @@
 
 namespace YounitedPaySDK;
 
+use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use InvalidArgumentException;
+use UnexpectedValueException;
 use YounitedPaySDK\Request\AbstractRequest;
 use Psr\Http\Message\RequestInterface;
+use YounitedPaySDK\Response\ErrorResponse;
 use YounitedPaySDK\Response\ResponseBuilder;
 use YounitedPaySDK\Response\DefaultResponse;
-use YounitedPaySDK\Request\Stream;
 use YounitedPaySDK\Exception\RequestException;
 
 /**
@@ -47,7 +49,7 @@ class Client
     /**
      * cURL handler
      *
-     * @var \CurlHandle
+     * @var resource
      */
     protected $ch;
 
@@ -129,19 +131,18 @@ class Client
      * Send a PSR-7 Request
      *
      * @param AbstractRequest  $request
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      *
      * @throws RequestException  Invalid request
-     * @throws \InvalidArgumentException  Invalid header names and/or values
-     * @throws \RuntimeException  Failure to create stream
+     * @throws InvalidArgumentException  Invalid header names and/or values
+     * @throws RuntimeException  Failure to create stream
      */
     public function sendRequest(AbstractRequest $request)
     {
         $tenantId = $request->getTenantId();
         $token = $this->getToken($tenantId);
         if ($token === false) {
-            $errorResponse = new \YounitedPaySDK\Response\ErrorResponse(401);
-            return $errorResponse;
+            return new ErrorResponse(401);
         }
 
         $headers = [
@@ -187,7 +188,7 @@ class Client
      *
      * @return ResponseBuilder
      *
-     * @throws \RuntimeException  Failure to create stream
+     * @throws RuntimeException  Failure to create stream
      */
     protected function createResponse($request)
     {
@@ -257,14 +258,14 @@ class Client
     /**
      * Create cURL request options
      *
-     * @param \Psr\Http\Message\RequestInterface  $request
+     * @param RequestInterface $request
      * @param ResponseBuilder  $response
      *
      * @return array<mixed>  cURL options
      *
      * @throws RequestException  Invalid request
-     * @throws \InvalidArgumentException  Invalid header names and/or values
-     * @throws \RuntimeException  Unable to read request body
+     * @throws InvalidArgumentException  Invalid header names and/or values
+     * @throws RuntimeException  Unable to read request body
      */
     protected function createOptions(RequestInterface $request, ResponseBuilder $response)
     {
@@ -279,7 +280,7 @@ class Client
 
         try {
             $options[CURLOPT_HTTP_VERSION] = $this->getProtocolVersion($request->getProtocolVersion());
-        } catch (\UnexpectedValueException $e) {
+        } catch (UnexpectedValueException $e) {
             throw new RequestException($e->getMessage(), $request);
         }
         $options[CURLOPT_URL] = (string) $request->getUri();
@@ -377,7 +378,7 @@ class Client
      * @param string $requestProtocolVersion  Request http protocol version
      * @return int   cURL constant for request http protocol version
      *
-     * @throws \UnexpectedValueException  Unsupported cURL http protocol version
+     * @throws UnexpectedValueException  Unsupported cURL http protocol version
      */
     protected function getProtocolVersion($requestProtocolVersion)
     {
@@ -391,7 +392,7 @@ class Client
                     return CURL_HTTP_VERSION_2_0;
                 }
 
-                throw new \UnexpectedValueException('libcurl 7.33 required for HTTP 2.0');
+                throw new UnexpectedValueException('libcurl 7.33 required for HTTP 2.0');
         }
 
         return CURL_HTTP_VERSION_NONE;

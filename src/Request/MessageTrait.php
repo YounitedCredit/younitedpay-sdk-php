@@ -18,6 +18,7 @@
 namespace YounitedPaySDK\Request;
 
 use Psr\Http\Message\StreamInterface;
+use YounitedPaySDK\Stream;
 
 /**
  * Trait implementing functionality common to requests and responses.

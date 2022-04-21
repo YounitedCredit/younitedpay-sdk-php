@@ -17,6 +17,7 @@ namespace YounitedPaySDK\Request;
 
 use Psr\Http\Message\RequestInterface;
 use YounitedPaySDK\Model\AbstractModel;
+use YounitedPaySDK\Stream;
 use YounitedPaySDK\Uri\ProductionUri;
 use YounitedPaySDK\Uri\SandboxUri;
 
