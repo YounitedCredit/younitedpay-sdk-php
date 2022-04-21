@@ -17,6 +17,7 @@ namespace YounitedPaySDK\Response;
 
 use InvalidArgumentException;
 use YounitedPaySDK\Model\ArrayCollection;
+use YounitedPaySDK\Model\Error;
 
 /**
  * Confirm Contract Response Class
@@ -40,6 +41,10 @@ class ConfirmContractResponse extends AbstractResponse
         }
         if (empty($output) === true) {
             return new ArrayCollection();
+        }
+
+        if ($this->getStatusCode() > 200) {
+            return (new Error())->hydrate($output);
         }
 
         return new ArrayCollection($output);

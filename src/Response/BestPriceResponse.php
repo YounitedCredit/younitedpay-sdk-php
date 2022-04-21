@@ -17,6 +17,7 @@ namespace YounitedPaySDK\Response;
 
 use InvalidArgumentException;
 use YounitedPaySDK\Model\ArrayCollection;
+use YounitedPaySDK\Model\Error;
 use YounitedPaySDK\Model\OfferItem;
 
 /**
@@ -41,6 +42,10 @@ class BestPriceResponse extends AbstractResponse
         }
         if (empty($output['offers']) === true) {
             return new ArrayCollection();
+        }
+
+        if ($this->getStatusCode() > 200) {
+            return (new Error())->hydrate($output);
         }
 
         $collection = new ArrayCollection($output['offers']);

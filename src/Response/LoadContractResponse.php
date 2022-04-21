@@ -20,6 +20,7 @@ namespace YounitedPaySDK\Response;
 use InvalidArgumentException;
 use YounitedPaySDK\Model\ArrayCollection;
 use YounitedPaySDK\Model\Contract;
+use YounitedPaySDK\Model\Error;
 
 /**
  * Load Contract Response Class
@@ -43,6 +44,10 @@ class LoadContractResponse extends AbstractResponse
         }
         if (empty($output) === true) {
             return new ArrayCollection();
+        }
+
+        if ($this->getStatusCode() > 200) {
+            return (new Error())->hydrate($output);
         }
 
         return (new Contract())->hydrate($output);
