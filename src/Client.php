@@ -19,6 +19,8 @@ use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use InvalidArgumentException;
 use UnexpectedValueException;
+use YounitedPaySDK\Cache\PoolCache;
+use YounitedPaySDK\Cache\CacheItem;
 use YounitedPaySDK\Request\AbstractRequest;
 use Psr\Http\Message\RequestInterface;
 use YounitedPaySDK\Response\ErrorResponse;
@@ -98,6 +100,15 @@ class Client
      */
     private function getToken($tenantId)
     {
+        $cache = PoolCache::getInstance();
+        if ($cache->hasItem('token')) {
+            /** @var CacheItem */
+            $tokenCache = $cache->getItem('token');
+            if ($tokenCache->isExpired()) {
+                return $tokenCache->get();
+            }
+        }
+
         $data['grant_type'] = 'client_credentials';
         $data['client_id'] = $this->clientId;
         $data['client_secret'] = $this->clientSecret;
@@ -124,7 +135,25 @@ class Client
             return false;
         }
 
+        $this->setTokenCache($output['access_token'], $output['expires_in']);
+
         return $output['access_token'];
+    }
+
+    /**
+     * @param string $token
+     * @param string $expiration
+     *
+     * @return void
+     */
+    private function setTokenCache($token, $expiration)
+    {
+        $expiration = (new \DateTime())->setTimestamp((int) $expiration);
+        $cache = PoolCache::getInstance();
+        $cache
+            ->getItem('token')
+            ->set($token)
+            ->expiresAt($expiration);
     }
 
     /**
