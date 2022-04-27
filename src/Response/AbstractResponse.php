@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Response;
 
+use JsonSerializable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use YounitedPaySDK\Model\AbstractModel;
@@ -25,7 +26,7 @@ use YounitedPaySDK\Stream;
 /**
  * API client
  */
-abstract class AbstractResponse implements ResponseInterface
+abstract class AbstractResponse implements ResponseInterface, JsonSerializable
 {
     use MessageTrait;
 
@@ -140,5 +141,13 @@ abstract class AbstractResponse implements ResponseInterface
         $new->reasonPhrase = $reasonPhrase;
 
         return $new;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
     }
 }

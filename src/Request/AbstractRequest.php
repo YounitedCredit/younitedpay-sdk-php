@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Request;
 
+use JsonSerializable;
 use Psr\Http\Message\RequestInterface;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Stream;
@@ -24,7 +25,7 @@ use YounitedPaySDK\Uri\SandboxUri;
 /**
  * API client
  */
-abstract class AbstractRequest implements RequestInterface
+abstract class AbstractRequest implements RequestInterface, JsonSerializable
 {
     use MessageTrait;
     use RequestTrait;
@@ -73,7 +74,7 @@ abstract class AbstractRequest implements RequestInterface
      *
      * @return self
      */
-    public function enableSanbox()
+    public function enableSandbox()
     {
         $new = clone $this;
         $new->isSandbox = true;
@@ -123,5 +124,13 @@ abstract class AbstractRequest implements RequestInterface
     public function getResponseObject()
     {
         return $this->response;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
     }
 }
