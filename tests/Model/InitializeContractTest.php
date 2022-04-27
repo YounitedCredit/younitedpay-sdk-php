@@ -31,9 +31,25 @@ class InitializeContractTest extends TestCase
      *
      * @return InitializeContract
      */
+    public function testRequestMaturity($initializeContract)
+    {
+        $initializeContract->setRequestedMaturity(10);
+
+        $this->assertEquals(10, $initializeContract->getRequestedMaturity());
+
+        return $initializeContract;
+    }
+
+    /**
+     * @depends testRequestMaturity
+     *
+     * @param InitializeContract $initializeContract
+     *
+     * @return InitializeContract
+     */
     public function testPersonalInformation($initializeContract)
     {
-        $datetime = new \DateTime('NOW');
+        $datetime = new \DateTime('1970-01-01T00:00:00');
 
         $address = new Address();
         $address->setStreetNumber('123');
@@ -46,7 +62,7 @@ class InitializeContractTest extends TestCase
         $personalInformation = new PersonalInformation();
         $personalInformation->setFirstName('FirstName');
         $personalInformation->setLastName('LastName');
-        $personalInformation->setGenderCode('TEST');
+        $personalInformation->setGenderCode('MALE');
         $personalInformation->setEmailAddress('firstname.lastname@mail.com');
         $personalInformation->setCellPhoneNumber('33611223344');
         $personalInformation->setBirthDate($datetime);
@@ -124,6 +140,7 @@ class InitializeContractTest extends TestCase
     {
         $merchantOrderContext = new MerchantOrderContext();
         $merchantOrderContext->setChannel('test');
+        $merchantOrderContext->setShopCode('TEST');
         $merchantOrderContext->setMerchantReference('MerchantReference');
         $merchantOrderContext->setAgentEmailAddress('merchant@mail.com');
 
