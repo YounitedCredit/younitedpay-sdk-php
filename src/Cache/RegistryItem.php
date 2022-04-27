@@ -17,32 +17,32 @@ namespace YounitedPaySDK\Cache;
 
 use Psr\Cache\CacheItemInterface;
 
-class CacheItem implements CacheItemInterface
+class RegistryItem implements CacheItemInterface
 {
     /**
      * @var string
      */
-    private $key;
+    protected $key;
 
     /**
-     * @var string
+     * @var mixed
      */
-    private $value;
+    protected $value;
 
     /**
      * @var \DateTimeInterface|null
      */
-    private $expiration;
+    protected $expiration;
 
     /**
      * @var int|\DateInterval|null
      */
-    private $time;
+    protected $time;
 
     /**
      * @var \DateTimeInterface
      */
-    private $creation;
+    protected $creation;
 
     /**
      * @param string $key

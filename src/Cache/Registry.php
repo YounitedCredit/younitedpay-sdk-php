@@ -19,10 +19,10 @@ use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use YounitedPaySDK\Model\ArrayCollection;
 
-class PoolCache implements CacheItemPoolInterface
+class Registry implements CacheItemPoolInterface
 {
     /**
-     * @var PoolCache Instance of this class
+     * @var Registry Instance of this class
      */
     private static $_instance = null;
 
@@ -34,12 +34,12 @@ class PoolCache implements CacheItemPoolInterface
     /**
      * Get instance of this class
      *
-     * @return PoolCache
+     * @return Registry
      */
     public static function getInstance()
     {
         if (self::$_instance === null) {
-            self::$_instance = new PoolCache();
+            self::$_instance = new Registry();
         }
 
         return self::$_instance;
@@ -51,7 +51,7 @@ class PoolCache implements CacheItemPoolInterface
     public function getItem($key)
     {
         if ($this->hasItem($key) === false) {
-            $this->keys[$key] = new CacheItem($key);
+            $this->keys[$key] = new RegistryItem($key);
         }
         return $this->keys[$key];
     }

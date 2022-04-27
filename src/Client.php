@@ -19,8 +19,8 @@ use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use InvalidArgumentException;
 use UnexpectedValueException;
-use YounitedPaySDK\Cache\PoolCache;
-use YounitedPaySDK\Cache\CacheItem;
+use YounitedPaySDK\Cache\Registry;
+use YounitedPaySDK\Cache\RegistryItem;
 use YounitedPaySDK\Request\AbstractRequest;
 use Psr\Http\Message\RequestInterface;
 use YounitedPaySDK\Response\ErrorResponse;
@@ -100,9 +100,9 @@ class Client
      */
     private function getToken($tenantId)
     {
-        $cache = PoolCache::getInstance();
+        $cache = Registry::getInstance();
         if ($cache->hasItem('token')) {
-            /** @var CacheItem */
+            /** @var RegistryItem */
             $tokenCache = $cache->getItem('token');
             if ($tokenCache->isExpired()) {
                 return $tokenCache->get();
@@ -146,10 +146,10 @@ class Client
      *
      * @return void
      */
-    private function setTokenCache($token, $expiration)
+    public function setTokenCache($token, $expiration)
     {
         $expiration = (new \DateTime())->setTimestamp((int) $expiration);
-        $cache = PoolCache::getInstance();
+        $cache = Registry::getInstance();
         $cache
             ->getItem('token')
             ->set($token)
