@@ -125,13 +125,14 @@ $merchantOrderContext = (new MerchantOrderContext())
     ->setAgentEmailAddress('merchant@mail.com');
     
 $body = (new InitializeContract())
+    ->setRequestedMaturity(10)
     ->setPersonalInformation($personalInformation)
     ->setBasket($basket)
     ->setMerchantUrls($merchantUrls)
     ->setMerchantOrderContext($merchantOrderContext);
 
 $request = (new InitializeContractRequest())
-    ->enableSanbox()
+    ->enableSandbox()
     ->setModel($body);
 
 $client = new Client();
@@ -166,7 +167,7 @@ $body = (new ConfirmContract())
     ->setMerchantOrderId('order-id');
 
 $request = (new ConfirmContractRequest())
-    ->enableSanbox()
+    ->enableSandbox()
     ->setModel($body);
 
 $client = new Client();
@@ -199,7 +200,7 @@ $body = (new CancelContract())
     ->setContractReference('contract-ref');
 
 $request = (new CancelContractRequest())
-    ->enableSanbox()
+    ->enableSandbox()
     ->setModel($body);
 
 $client = new Client();
@@ -232,7 +233,7 @@ $body = (new ActivateContract())
     ->setContractReference('contract-ref');
 
 $request = (new ActivateContractRequest())
-    ->enableSanbox()
+    ->enableSandbox()
     ->setModel($body);
 
 $client = new Client();
@@ -266,7 +267,7 @@ $body = (new WithdrawContract())
     ->setAmount(149.0);
 
 $request = (new WithdrawContractRequest())
-    ->enableSanbox()
+    ->enableSandbox()
     ->setModel($body);
 
 $client = new Client();
