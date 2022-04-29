@@ -49,7 +49,6 @@ abstract class AbstractModel implements JsonSerializable
         foreach ($setterName as $value) {
             if (substr($value, 0, 3) === 'set') {
                 $key = lcfirst(substr($value, 3, strlen($value)));
-                $this->$value($content[$key]);
                 if (isset($content[$key])) {
                     $this->$value($content[$key]);
                 }
