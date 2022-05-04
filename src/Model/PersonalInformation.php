@@ -192,6 +192,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
 
     /**
      * Set Cell Phone Number
+     * Need to be in international format : for example +33601020304
      *
      * @param string $cellPhoneNumber
      *
