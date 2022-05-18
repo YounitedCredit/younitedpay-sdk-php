@@ -35,7 +35,7 @@ class CancelContractRequest extends AbstractRequest
     /**
      * @var string
      */
-    protected $method = 'DEL';
+    protected $method = 'DELETE';
 
     /** @var string */
     protected $response = CancelContractResponse::class;
