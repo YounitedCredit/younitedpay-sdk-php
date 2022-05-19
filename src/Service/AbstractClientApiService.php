@@ -15,6 +15,7 @@
 
 namespace YounitedPaySDK\Service;
 
+use Psr\Http\Message\ResponseInterface;
 use YounitedPaySDK\Client;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Request\AbstractRequest;
@@ -37,8 +38,11 @@ abstract class AbstractClientApiService
      */
     public function enableTest()
     {
-        $this->enableTest = true;
-        return $this;
+        $new = clone $this;
+
+        $new->enableTest = true;
+
+        return $new;
     }
 
     /**
@@ -50,15 +54,17 @@ abstract class AbstractClientApiService
     }
 
     /**
-     * @param AbstractModel $body
+     * @param AbstractModel|null $body
      * @param AbstractRequest $request
      *
-     * @return \Psr\Http\Message\ResponseInterface|ErrorResponse
+     * @return ResponseInterface
      */
-    protected function call(AbstractModel $body, AbstractRequest $request)
+    protected function call($body, AbstractRequest $request)
     {
         try {
-            $request = $request->setModel($body);
+            if (empty($body) === false) {
+                $request = $request->setModel($body);
+            }
             if ($this->enableTest) {
                 $request = $request->enableSandbox();
             }
