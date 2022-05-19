@@ -52,7 +52,7 @@ class BestPriceRequestTest extends TestCase
         $request = $request->setModel($body);
         $this->assertEquals('https://api.younited-pay.com/api/1.0/BestPrice', (string) $request->getUri());
 
-        $request = $request->enableSanbox();
+        $request = $request->enableSandbox();
         $this->assertEquals('https://api.sandbox-younited-pay.com/api/1.0/BestPrice', (string) $request->getUri());
     }
 }
