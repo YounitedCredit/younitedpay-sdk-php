@@ -26,6 +26,7 @@ use YounitedPaySDK\Model\MerchantOrderContext;
 use YounitedPaySDK\Model\MerchantUrls;
 use YounitedPaySDK\Model\PersonalInformation;
 use YounitedPaySDK\Model\WithdrawContract;
+use YounitedPaySDK\Request\AvailableMaturitiesRequest;
 use YounitedPaySDK\Request\BestPriceRequest;
 use YounitedPaySDK\Request\CancelContractRequest;
 use YounitedPaySDK\Request\ConfirmContractRequest;
@@ -142,14 +143,14 @@ class ClientApiService extends AbstractClientApiService
         return $this->call($model, $request);
     }
 
-    /**     *
+    /**
      * @return ResponseInterface
      */
     public function getAvailableMaturities()
     {
         $model = null;
 
-        $request = new LoadContractRequest();
+        $request = new AvailableMaturitiesRequest();
 
         return $this->call($model, $request);
     }

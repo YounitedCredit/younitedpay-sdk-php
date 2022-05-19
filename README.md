@@ -49,7 +49,7 @@ $body = (new BestPrice())
     ->setBorrowedAmount(149.0);
 
 $request = (new BestPriceRequest())
-    ->enableSanbox()
+    ->enableSandbox()
     ->setModel($body);
 
 $client = new Client();
