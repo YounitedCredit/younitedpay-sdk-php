@@ -1,4 +1,19 @@
 <?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * PHP version 5.6+
+ *
+ * @category  YounitedpaySDK
+ * @package   Ecommerceyounitedpaysdk
+ * @author    202-ecommerce <tech@202-ecommerce.com>
+ * @copyright 2022 (c) 202-ecommerce
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ * @link      https://api.sandbox-younited-pay.com/
+ */
+
+namespace YounitedPaySDK\Service;
 
 use YounitedPaySDK\Client;
 use YounitedPaySDK\Model\AbstractModel;
@@ -18,22 +33,20 @@ abstract class AbstractClientApiService
     protected $enableTest = false;
 
     /**
-     * @param Client $client
-     * @return $this
-     */
-    public function setClient(Client $client)
-    {
-        $this->client = $client;
-        return $this;
-    }
-
-    /**
      * @return $this
      */
     public function enableTest()
     {
         $this->enableTest = true;
         return $this;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
     }
 
     /**
