@@ -58,6 +58,8 @@ class Registry implements CacheItemPoolInterface
 
     /**
      * @inherit
+     *
+     * @return ArrayCollection<mixed>
      */
     public function getItems(array $keys = array())
     {

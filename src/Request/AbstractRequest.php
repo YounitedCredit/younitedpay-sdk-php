@@ -129,6 +129,7 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return get_object_vars($this);
