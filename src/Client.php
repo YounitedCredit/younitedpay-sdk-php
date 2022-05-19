@@ -21,8 +21,10 @@ use InvalidArgumentException;
 use UnexpectedValueException;
 use YounitedPaySDK\Cache\Registry;
 use YounitedPaySDK\Cache\RegistryItem;
+use YounitedPaySDK\Model\Error;
 use YounitedPaySDK\Request\AbstractRequest;
 use Psr\Http\Message\RequestInterface;
+use YounitedPaySDK\Response\CallbackResponse;
 use YounitedPaySDK\Response\ErrorResponse;
 use YounitedPaySDK\Response\ResponseBuilder;
 use YounitedPaySDK\Response\DefaultResponse;
@@ -235,7 +237,7 @@ class Client
         $responseObject = $request->getResponseObject();
         $message = DefaultResponse::getInstance($responseObject)
             ->withBody($body);
-        //$message = new \YounitedPaySDK\Response\BestPriceResponse(200, [], $body);
+
         return new ResponseBuilder(
             $message
         );
@@ -425,5 +427,59 @@ class Client
         }
 
         return CURL_HTTP_VERSION_NONE;
+    }
+
+    /**
+     * Retrieve a callback request from API
+     *
+     * @return ResponseInterface
+     *
+     * @throws RuntimeException  Failure to create stream
+     */
+    public function retrieveCallbackResponse()
+    {
+        try {
+            $this->stream = new Stream();
+            $content = fopen('php://temp', 'w+b');
+            if ($content === false) {
+                $body = $this->stream->create();
+            } else {
+                $body = $this->stream->create($content);
+            }
+        } catch (InvalidArgumentException $e) {
+            throw new RuntimeException('Unable to create stream "php://temp"');
+        }
+
+        $message = DefaultResponse::getInstance(CallbackResponse::class)->withBody($body);
+
+        $response = (new ResponseBuilder($message))->getResponse();
+
+        if ($response->hasHeader('X-YC-Signature-256') === false || $response->hasHeader('X-YC-DateTime') === false) {
+            $response->withStatus(401);
+        }
+
+        $headerSignatureRequest = $response->getHeader('X-YC-Signature-256');
+        $headerDatetimeRequest = $response->getHeader('X-YC-DateTime');
+
+        if (empty($headerSignatureRequest) === true || empty($headerDatetimeRequest) === true) {
+            $response->withStatus(401);
+        }
+
+        $currentWebhookUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $payload = file_get_contents('php://input');
+
+        $hashData = implode('|', [
+            $currentWebhookUrl,
+            $payload,
+            $headerDatetimeRequest
+        ]);
+
+        $expectedSignature = hash_hmac('sha256', $hashData, $this->clientSecret);
+
+        if ($headerSignatureRequest !== $expectedSignature) {
+            $response->withStatus(401);
+        }
+
+        return $response;
     }
 }

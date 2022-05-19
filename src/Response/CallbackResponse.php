@@ -15,7 +15,10 @@
 
 namespace YounitedPaySDK\Response;
 
+use InvalidArgumentException;
+use YounitedPaySDK\Model\ArrayCollection;
 use YounitedPaySDK\Model\Callback;
+use YounitedPaySDK\Model\Error;
 
 class CallbackResponse extends AbstractResponse
 {
@@ -24,8 +27,39 @@ class CallbackResponse extends AbstractResponse
      */
     public function getModel()
     {
-        $model = new Callback();
+        $content = (string) $this->stream;
+        if (empty($content) === true) {
+            return new ArrayCollection();
+        }
+        $output = json_decode($content, true);
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new InvalidArgumentException(
+                'json_decode error: ' . json_last_error_msg()
+            );
+        }
+        if (empty($output) === true) {
+            return new ArrayCollection();
+        }
 
-        return $model;
+        if ($this->getStatusCode() < 200 || $this->getStatusCode() > 299) {
+            $errorDetail = null;
+
+            if ($this->getStatusCode() === 401) {
+                $errorDetail = 'Callback processing could not be execute because he does not come from YounitedPay API';
+            } elseif ($this->getStatusCode() === 408) {
+                $errorDetail = 'Callback processing could not complete in a timely manner, callback will be retried later';
+            } elseif ($this->getStatusCode() >= 400 && $this->getStatusCode() <= 499) {
+                $errorDetail = 'Callback processing failed due to a non transient error, callback will not be retried.';
+            } elseif ($this->getStatusCode() >= 500 && $this->getStatusCode() <= 599) {
+                $errorDetail = 'Callback processing failed due to a transient error, callback will be retried later.';
+            }
+
+            return (new Error())
+                ->setTitle($this->getReasonPhrase())
+                ->setStatus($this->getStatusCode())
+                ->setDetail($errorDetail);
+        }
+
+        return (new Callback())->hydrate($output);
     }
 }
