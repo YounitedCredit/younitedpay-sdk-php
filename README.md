@@ -85,6 +85,114 @@ $response = (new ClientApiService($client))
     ->getBestPrice($borrowedAmount);
 ```
 
+### Get Available Maturities
+
+[Get available maturities documentation][maturities-doc]
+
+You can easily get available maturities by creating a request
+
+```php
+require 'vendor/autoload.php';
+
+use YounitedPaySDK\Client;
+use YounitedPaySDK\Request\LoadContractRequest;
+use YounitedPaySDK\Model\LoadContract;
+
+$clientId = 'your-client-id';
+$clientSecret = 'your-secret-idtoken';
+
+$request = (new LoadContractRequest())
+    ->enableSandbox()
+
+$client = new Client();
+try {
+    $response = $client->setCredential($clientId, $clientSecret)
+        ->sendRequest($request);
+    echo '<pre>';
+    var_dump($response->getModel());
+    echo '</pre>';
+} catch (Exception $e) {
+    echo ($e->getMessage() . $e->getFile() . ':' . $e->getLine(). $e->getTraceAsString());
+}
+```
+
+You can also use the client api service to get available maturities
+
+```php
+require 'vendor/autoload.php';
+
+use YounitedPaySDK\Client;
+use YounitedPaySDK\Service\ClientApiService;
+
+$clientId = 'your-client-id';
+$clientSecret = 'your-secret-idtoken';
+
+$contractReference = 'contract-reference';
+    
+$client = (new Client())
+    ->setCredential($clientId, $clientSecret);
+    
+$response = (new ClientApiService($client))
+    ->enableTest()
+    ->getAvailableMaturities();
+```
+
+### Load Contract
+
+[Load a contract documentation][contract-doc]
+
+You can easily load a contract by creating a request
+
+```php
+require 'vendor/autoload.php';
+
+use YounitedPaySDK\Client;
+use YounitedPaySDK\Request\LoadContractRequest;
+use YounitedPaySDK\Model\LoadContract;
+
+$clientId = 'your-client-id';
+$clientSecret = 'your-secret-idtoken';
+
+$body = (new LoadContract())
+    ->setContractReference('contract-ref');
+
+$request = (new LoadContractRequest())
+    ->enableSandbox()
+    ->setModel($body);
+
+$client = new Client();
+try {
+    $response = $client->setCredential($clientId, $clientSecret)
+        ->sendRequest($request);
+    echo '<pre>';
+    var_dump($response->getModel());
+    echo '</pre>';
+} catch (Exception $e) {
+    echo ($e->getMessage() . $e->getFile() . ':' . $e->getLine(). $e->getTraceAsString());
+}
+```
+
+You can also use the client api service to load a contract
+
+```php
+require 'vendor/autoload.php';
+
+use YounitedPaySDK\Client;
+use YounitedPaySDK\Service\ClientApiService;
+
+$clientId = 'your-client-id';
+$clientSecret = 'your-secret-idtoken';
+
+$contractReference = 'contract-reference';
+    
+$client = (new Client())
+    ->setCredential($clientId, $clientSecret);
+    
+$response = (new ClientApiService($client))
+    ->enableTest()
+    ->loadContract($contractReference);
+```
+
 ### Initialize a contract
 
 [Initialize a contract documentation][initialize-doc] 
@@ -305,62 +413,6 @@ $response = (new ClientApiService($client))
     ->confirmContract($contractReference, $merchantOrderId = null);
 ```
 
-### Cancel Contract
-
-[Cancel a contract documentation][cancel-doc]
-
-You can easily cancel a contract by creating a request
-
-```php
-require 'vendor/autoload.php';
-
-use YounitedPaySDK\Client;
-use YounitedPaySDK\Request\CancelContractRequest;
-use YounitedPaySDK\Model\CancelContract;
-
-$clientId = 'your-client-id';
-$clientSecret = 'your-secret-idtoken';
-
-$body = (new CancelContract())
-    ->setContractReference('contract-ref');
-
-$request = (new CancelContractRequest())
-    ->enableSandbox()
-    ->setModel($body);
-
-$client = new Client();
-try {
-    $response = $client->setCredential($clientId, $clientSecret)
-        ->sendRequest($request);
-    echo '<pre>';
-    var_dump($response->getModel());
-    echo '</pre>';
-} catch (Exception $e) {
-    echo ($e->getMessage() . $e->getFile() . ':' . $e->getLine(). $e->getTraceAsString());
-}
-```
-
-You can also use the client api service to cancel a contract
-
-```php
-require 'vendor/autoload.php';
-
-use YounitedPaySDK\Client;
-use YounitedPaySDK\Service\ClientApiService;
-
-$clientId = 'your-client-id';
-$clientSecret = 'your-secret-idtoken';
-
-$contractReference = 'contract-reference';
-    
-$client = (new Client())
-    ->setCredential($clientId, $clientSecret);
-    
-$response = (new ClientApiService($client))
-    ->enableTest()
-    ->cancelContract($contractReference);
-```
-
 ### Activate Contract
 
 [Activate a contract documentation][activate-doc]
@@ -414,7 +466,7 @@ $client = (new Client())
     
 $response = (new ClientApiService($client))
     ->enableTest()
-    ->cancelContract($contractReference);
+    ->activateContract($contractReference);
 ```
 
 ### Withdraw Contract
@@ -475,26 +527,26 @@ $response = (new ClientApiService($client))
     ->withdrawContract($contractReference, $amount);
 ```
 
-### Load Contract
+### Cancel Contract
 
-[Load a contract documentation][withdraw-doc]
+[Cancel a contract documentation][cancel-doc]
 
-You can easily load a contract by creating a request
+You can easily cancel a contract by creating a request
 
 ```php
 require 'vendor/autoload.php';
 
 use YounitedPaySDK\Client;
-use YounitedPaySDK\Request\LoadContractRequest;
-use YounitedPaySDK\Model\LoadContract;
+use YounitedPaySDK\Request\CancelContractRequest;
+use YounitedPaySDK\Model\CancelContract;
 
 $clientId = 'your-client-id';
 $clientSecret = 'your-secret-idtoken';
 
-$body = (new LoadContract())
+$body = (new CancelContract())
     ->setContractReference('contract-ref');
 
-$request = (new LoadContractRequest())
+$request = (new CancelContractRequest())
     ->enableSandbox()
     ->setModel($body);
 
@@ -510,7 +562,7 @@ try {
 }
 ```
 
-You can also use the client api service to load a contract
+You can also use the client api service to cancel a contract
 
 ```php
 require 'vendor/autoload.php';
@@ -528,12 +580,12 @@ $client = (new Client())
     
 $response = (new ClientApiService($client))
     ->enableTest()
-    ->loadContract($contractReference);
+    ->cancelContract($contractReference);
 ```
 
-### Get Available Maturities
+### Get Callback Response to configure Webhook
 
-[Load a contract documentation][withdraw-doc]
+[Get callback response documentation][callback-doc]
 
 You can easily get available maturities by creating a request
 
@@ -541,50 +593,19 @@ You can easily get available maturities by creating a request
 require 'vendor/autoload.php';
 
 use YounitedPaySDK\Client;
-use YounitedPaySDK\Request\LoadContractRequest;
-use YounitedPaySDK\Model\LoadContract;
-
-$clientId = 'your-client-id';
-$clientSecret = 'your-secret-idtoken';
-
-$request = (new LoadContractRequest())
-    ->enableSandbox()
-
-$client = new Client();
-try {
-    $response = $client->setCredential($clientId, $clientSecret)
-        ->sendRequest($request);
-    echo '<pre>';
-    var_dump($response->getModel());
-    echo '</pre>';
-} catch (Exception $e) {
-    echo ($e->getMessage() . $e->getFile() . ':' . $e->getLine(). $e->getTraceAsString());
-}
-```
-
-You can also use the client api service to get available maturities
-
-```php
-require 'vendor/autoload.php';
-
-use YounitedPaySDK\Client;
 use YounitedPaySDK\Service\ClientApiService;
-
-$clientId = 'your-client-id';
-$clientSecret = 'your-secret-idtoken';
-
-$contractReference = 'contract-reference';
     
-$client = (new Client())
-    ->setCredential($clientId, $clientSecret);
-    
-$response = (new ClientApiService($client))
-    ->enableTest()
-    ->getAvailableMaturities();
+$response = (new Client())->retrieveCallbackResponse();
+
+// Do webhook process
 ```
-
-## Quality 
-
 
 [bestprice-doc]: https://api.younited-pay.com/#tag/BestPrice/paths/~1api~11.0~1BestPrice/post
+[maturities-doc]: https://api.younited-pay.com/#tag/Maturities/paths/~1api~11.0~1Maturities/get
+[contract-doc]: https://api.younited-pay.com/#tag/Contract/paths/~1api~11.0~1Contract~1{contractReference}/get
 [initialize-doc]: https://api.younited-pay.com/#tag/Contract/paths/~1api~11.0~1Contract/post
+[confirm-doc]: https://api.younited-pay.com/#tag/Contract/paths/~1api~11.0~1Contract~1{contractReference}~1confirm/patch
+[activate-doc]: https://api.younited-pay.com/#tag/Contract/paths/~1api~11.0~1Contract~1{contractReference}~1activate/patch
+[withdraw-doc]: https://api.younited-pay.com/#tag/Contract/paths/~1api~11.0~1Contract~1{contractReference}~1withdraw/patch
+[cancel-doc]: https://api.younited-pay.com/#tag/Contract/paths/~1api~11.0~1Contract~1{contractReference}/delete
+[callback-doc]: https://api.younited-pay.com/#tag/Contract/paths/~1api~11.0~1Contract/post
