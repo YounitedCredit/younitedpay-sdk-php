@@ -74,7 +74,7 @@ class RegistryItem implements CacheItemInterface
      */
     public function isHit()
     {
-        return empty($this->value);
+        return empty($this->value) === false;
     }
 
     /**
