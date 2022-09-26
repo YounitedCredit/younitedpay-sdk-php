@@ -38,6 +38,11 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     /**
      * @var string
      */
+    private $onGrantedWebhookUrl;
+
+    /**
+     * @var string
+     */
     private $onApplicationSucceededRedirectUrl;
 
     /**
@@ -46,6 +51,30 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     private $onApplicationFailedRedirectUrl;
 
     // GETTERS & SETTERS
+
+    /**
+     * Get the value of onGrantedWebhookUrl
+     *
+     * @return  string
+     */
+    public function getOnGrantedWebhookUrl()
+    {
+        return $this->onGrantedWebhookUrl;
+    }
+
+    /**
+     * Set the value of onGrantedWebhookUrl
+     *
+     * @param   string  $onGrantedWebhookUrl  
+     *
+     * @return  self
+     */
+    public function setOnGrantedWebhookUrl(string $onGrantedWebhookUrl)
+    {
+        $this->onGrantedWebhookUrl = $onGrantedWebhookUrl;
+
+        return $this;
+    }
 
     /**
      * Get webhook url on canceled contract
