@@ -147,11 +147,11 @@ class Client
 
     /**
      * @param string $token
-     * @param string $expiration
+     * @param int $expiration
      *
      * @return void
      */
-    public function setTokenCache($token, $expiration)
+    public function setTokenCache($token, int $expiration)
     {
         $expiration = (new \DateTime())->setTimestamp((int) $expiration);
         $cache = Registry::getInstance();
