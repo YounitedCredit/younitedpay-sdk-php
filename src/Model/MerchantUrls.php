@@ -65,7 +65,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     /**
      * Set the value of onGrantedWebhookUrl
      *
-     * @param   string  $onGrantedWebhookUrl  
+     * @param   string  $onGrantedWebhookUrl
      *
      * @return  self
      */
