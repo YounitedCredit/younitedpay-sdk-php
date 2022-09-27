@@ -1,7 +1,7 @@
 # Younited Pay SDK for PHP
 
 
-[![Coding Standart](https://github.com/YounitedCredit/younitedpay-sdk-php/actions/workflows/master.yml/badge.svg)](https://github.com/YounitedCredit/younitedpay-sdk-php/actions/workflows/master.yml) [![Unit test](https://github.com/YounitedCredit/younitedpay-sdk-php/actions/workflows/master.yml/badge.svg)](https://github.com/YounitedCredit/younitedpay-sdk-php/actions/workflows/phpunit.yml)
+[![Coding Standart](https://github.com/YounitedCredit/younitedpay-sdk-php/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/YounitedCredit/younitedpay-sdk-php/actions/workflows/main.yml) [![Unit test](https://github.com/YounitedCredit/younitedpay-sdk-php/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/YounitedCredit/younitedpay-sdk-php/actions/workflows/phpunit.yml)
 
 This package is a Younited Pay PHP SDK. It let you mange exchange between your shop and Younited Pay.
 

@@ -106,7 +106,7 @@ class Client
         if ($cache->hasItem('token')) {
             /** @var RegistryItem */
             $tokenCache = $cache->getItem('token');
-            if ($tokenCache->isExpired()) {
+            if ($tokenCache->isExpired() === false) {
                 return $tokenCache->get();
             }
         }
@@ -137,14 +137,17 @@ class Client
             return false;
         }
 
-        $this->setTokenCache($output['access_token'], $output['expires_in']);
+        $this->setTokenCache(
+            $output['access_token'],
+            (int) $output['expires_in'] + (new \DateTime())->getTimestamp()
+        );
 
         return $output['access_token'];
     }
 
     /**
      * @param string $token
-     * @param string $expiration
+     * @param int $expiration
      *
      * @return void
      */

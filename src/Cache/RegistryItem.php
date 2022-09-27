@@ -74,7 +74,7 @@ class RegistryItem implements CacheItemInterface
      */
     public function isHit()
     {
-        return empty($this->value);
+        return empty($this->value) === false;
     }
 
     /**
@@ -127,5 +127,29 @@ class RegistryItem implements CacheItemInterface
         }
 
         return false;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getExpiredDate()
+    {
+        return $this->expiration;
+    }
+
+    /**
+     * @return \DateInterval|int|null
+     */
+    public function getExpiredTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @return \DateTime|\DateTimeInterface
+     */
+    public function getCreationDate()
+    {
+        return $this->creation;
     }
 }
