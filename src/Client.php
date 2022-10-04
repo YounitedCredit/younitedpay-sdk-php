@@ -15,19 +15,18 @@
 
 namespace YounitedPaySDK;
 
-use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use InvalidArgumentException;
 use UnexpectedValueException;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use YounitedPaySDK\Cache\Registry;
 use YounitedPaySDK\Cache\RegistryItem;
-use YounitedPaySDK\Model\Error;
-use YounitedPaySDK\Request\AbstractRequest;
-use Psr\Http\Message\RequestInterface;
-use YounitedPaySDK\Response\CallbackResponse;
 use YounitedPaySDK\Response\ErrorResponse;
-use YounitedPaySDK\Response\ResponseBuilder;
+use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Response\DefaultResponse;
+use YounitedPaySDK\Response\ResponseBuilder;
+use YounitedPaySDK\Response\CallbackResponse;
 use YounitedPaySDK\Exception\RequestException;
 
 /**
@@ -456,16 +455,17 @@ class Client
         $message = DefaultResponse::getInstance(CallbackResponse::class)->withBody($body);
 
         $response = (new ResponseBuilder($message))->getResponse();
+        $headers = $this->get_apache_nginx_headers();
 
-        if ($response->hasHeader('X-YC-Signature-256') === false || $response->hasHeader('X-YC-DateTime') === false) {
-            $response->withStatus(401);
+        if (isset($headers['X-YC-SIGNATURE-256']) === false || isset($headers['X-YC-DATETIME']) === false) {
+            return $response->withStatus(401, 'No Signature or Datetime header');
         }
 
-        $headerSignatureRequest = $response->getHeader('X-YC-Signature-256');
-        $headerDatetimeRequest = $response->getHeader('X-YC-DateTime');
+        $headerSignatureRequest = $headers['X-YC-SIGNATURE-256'];
+        $headerDatetimeRequest = $headers['X-YC-DATETIME'];
 
         if (empty($headerSignatureRequest) === true || empty($headerDatetimeRequest) === true) {
-            $response->withStatus(401);
+            return $response->withStatus(401, 'Signature or Datetime header empty');
         }
 
         $currentWebhookUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -480,9 +480,36 @@ class Client
         $expectedSignature = hash_hmac('sha256', $hashData, $this->clientSecret);
 
         if ($headerSignatureRequest !== $expectedSignature) {
-            $response->withStatus(401);
+            return $response->withStatus(401, 'Hash not accepted.');
         }
 
-        return $response;
+        return $response->setBody($payload !== false ? $payload : '');
+    }
+
+    /**
+     * Function to get apache / ngynx headers
+     *
+     * @return string[] $headers
+     */
+    private function get_apache_nginx_headers()
+    {
+        $headers=[];
+
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5)=='HTTP_') {
+                $name=substr($name, 5);
+                $name=str_replace('_', ' ', $name);
+                $name=ucwords($name);
+                $name=str_replace(' ', '-', $name);
+                $name=strtoupper($name);
+                $headers[$name] = $value;
+            } elseif (strpos($name, 'X-YC-') !== false) {
+                $name=strtoupper($name);
+                $headers[$name] = $value;
+            }
+        }
+
+
+        return $headers;
     }
 }
