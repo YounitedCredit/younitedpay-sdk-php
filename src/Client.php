@@ -15,19 +15,18 @@
 
 namespace YounitedPaySDK;
 
-use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use InvalidArgumentException;
 use UnexpectedValueException;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use YounitedPaySDK\Cache\Registry;
 use YounitedPaySDK\Cache\RegistryItem;
-use YounitedPaySDK\Model\Error;
-use YounitedPaySDK\Request\AbstractRequest;
-use Psr\Http\Message\RequestInterface;
-use YounitedPaySDK\Response\CallbackResponse;
 use YounitedPaySDK\Response\ErrorResponse;
-use YounitedPaySDK\Response\ResponseBuilder;
+use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Response\DefaultResponse;
+use YounitedPaySDK\Response\ResponseBuilder;
+use YounitedPaySDK\Response\CallbackResponse;
 use YounitedPaySDK\Exception\RequestException;
 
 /**
@@ -53,7 +52,7 @@ class Client
     /**
      * cURL handler
      *
-     * @var resource|\CurlHandle
+     * @var resource|CurlHandle
      */
     protected $ch;
 
@@ -456,13 +455,14 @@ class Client
         $message = DefaultResponse::getInstance(CallbackResponse::class)->withBody($body);
 
         $response = (new ResponseBuilder($message))->getResponse();
+        $headers = $this->get_apache_nginx_headers();
 
-        if ($response->hasHeader('X-YC-Signature-256') === false || $response->hasHeader('X-YC-DateTime') === false) {
+        if (isset($headers['X-YC-SIGNATURE-256']) === false || isset($headers['X-YC-DATETIME']) === false) {
             return $response->withStatus(401, 'No Signature or Datetime header');
         }
 
-        $headerSignatureRequest = $response->getHeader('X-YC-Signature-256');
-        $headerDatetimeRequest = $response->getHeader('X-YC-DateTime');
+        $headerSignatureRequest = $headers['X-YC-SIGNATURE-256'];
+        $headerDatetimeRequest = $headers['X-YC-DATETIME'];
 
         if (empty($headerSignatureRequest) === true || empty($headerDatetimeRequest) === true) {
             return $response->withStatus(401, 'Signature or Datetime header empty');
@@ -474,7 +474,7 @@ class Client
         $hashData = implode('|', [
             $currentWebhookUrl,
             $payload,
-            is_array($headerDatetimeRequest) === true ? '' : $headerDatetimeRequest
+            $headerDatetimeRequest
         ]);
 
         $expectedSignature = hash_hmac('sha256', $hashData, $this->clientSecret);
@@ -483,15 +483,13 @@ class Client
             return $response->withStatus(401, 'Hash not accepted.');
         }
 
-        $response->setBody($payload);
-
-        return $response;
+        return $response->setBody($payload !== false ? $payload : '');
     }
 
     /**
      * Function to get apache / ngynx headers
      *
-     * @return array $headers
+     * @return string[] $headers
      */
     private function get_apache_nginx_headers()
     {
