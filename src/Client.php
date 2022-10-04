@@ -458,14 +458,14 @@ class Client
         $response = (new ResponseBuilder($message))->getResponse();
 
         if ($response->hasHeader('X-YC-Signature-256') === false || $response->hasHeader('X-YC-DateTime') === false) {
-            $response->withStatus(401);
+            return $response->withStatus(401, 'No Signature or Datetime header');
         }
 
         $headerSignatureRequest = $response->getHeader('X-YC-Signature-256');
         $headerDatetimeRequest = $response->getHeader('X-YC-DateTime');
 
         if (empty($headerSignatureRequest) === true || empty($headerDatetimeRequest) === true) {
-            $response->withStatus(401);
+            return $response->withStatus(401, 'Signature or Datetime header empty');
         }
 
         $currentWebhookUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -474,15 +474,44 @@ class Client
         $hashData = implode('|', [
             $currentWebhookUrl,
             $payload,
-            $headerDatetimeRequest
+            is_array($headerDatetimeRequest) === true ? '' : $headerDatetimeRequest
         ]);
 
         $expectedSignature = hash_hmac('sha256', $hashData, $this->clientSecret);
 
         if ($headerSignatureRequest !== $expectedSignature) {
-            $response->withStatus(401);
+            return $response->withStatus(401, 'Hash not accepted.');
         }
 
+        $response->setBody($payload);
+
         return $response;
+    }
+
+    /**
+     * Function to get apache / ngynx headers
+     *
+     * @return array $headers
+     */
+    private function get_apache_nginx_headers()
+    {
+        $headers=[];
+
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5)=='HTTP_') {
+                $name=substr($name, 5);
+                $name=str_replace('_', ' ', $name);
+                $name=ucwords($name);
+                $name=str_replace(' ', '-', $name);
+                $name=strtoupper($name);
+                $headers[$name] = $value;
+            } elseif (strpos($name, 'X-YC-') !== false) {
+                $name=strtoupper($name);
+                $headers[$name] = $value;
+            }
+        }
+
+
+        return $headers;
     }
 }
