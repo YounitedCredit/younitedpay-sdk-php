@@ -50,6 +50,6 @@ class LoadContractResponse extends AbstractResponse
             return (new Error())->hydrate($output);
         }
 
-        return (new Contract())->hydrate($output);
+        return new ArrayCollection($output);
     }
 }
