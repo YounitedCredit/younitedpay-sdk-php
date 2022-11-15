@@ -18,7 +18,6 @@ namespace YounitedPaySDK\Cache;
 use DateInterval;
 use DateTime;
 use DateTimeInterface;
-use JetBrains\PhpStorm\Pure;
 use Psr\Cache\CacheItemInterface;
 
 class RegistryItem implements CacheItemInterface
@@ -68,7 +67,7 @@ class RegistryItem implements CacheItemInterface
     /**
      * @inherit
      */
-    #[Pure] public function get(): mixed
+    public function get(): mixed
     {
         return $this->isHit() ? $this->value : null;
     }
