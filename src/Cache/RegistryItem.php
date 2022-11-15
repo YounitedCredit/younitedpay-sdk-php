@@ -15,6 +15,10 @@
 
 namespace YounitedPaySDK\Cache;
 
+use DateInterval;
+use DateTime;
+use DateTimeInterface;
+use JetBrains\PhpStorm\Pure;
 use Psr\Cache\CacheItemInterface;
 
 class RegistryItem implements CacheItemInterface
@@ -22,41 +26,41 @@ class RegistryItem implements CacheItemInterface
     /**
      * @var string
      */
-    protected $key;
+    protected string $key;
 
     /**
      * @var mixed
      */
-    protected $value;
+    protected mixed $value;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
-    protected $expiration;
+    protected ?DateTimeInterface $expiration;
 
     /**
-     * @var int|\DateInterval|null
+     * @var int|DateInterval|null
      */
-    protected $time;
+    protected int|null|DateInterval $time;
 
     /**
-     * @var \DateTimeInterface
+     * @var DateTimeInterface
      */
-    protected $creation;
+    protected DateTimeInterface $creation;
 
     /**
      * @param string $key
      */
-    public function __construct($key)
+    public function __construct(string $key)
     {
         $this->key = $key;
-        $this->creation = new \DateTime();
+        $this->creation = new DateTime();
     }
 
     /**
      * @inherit
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -64,7 +68,7 @@ class RegistryItem implements CacheItemInterface
     /**
      * @inherit
      */
-    public function get()
+    #[Pure] public function get(): mixed
     {
         return $this->isHit() ? $this->value : null;
     }
@@ -72,7 +76,7 @@ class RegistryItem implements CacheItemInterface
     /**
      * @inherit
      */
-    public function isHit()
+    public function isHit(): bool
     {
         return empty($this->value) === false;
     }
@@ -80,7 +84,7 @@ class RegistryItem implements CacheItemInterface
     /**
      * @inherit
      */
-    public function set($value)
+    public function set($value): static
     {
         $this->value = $value;
         return $this;
@@ -89,7 +93,7 @@ class RegistryItem implements CacheItemInterface
     /**
      * @inherit
      */
-    public function expiresAt($expiration)
+    public function expiresAt($expiration): static
     {
         $this->expiration = $expiration;
         return $this;
@@ -98,7 +102,7 @@ class RegistryItem implements CacheItemInterface
     /**
      * @inherit
      */
-    public function expiresAfter($time)
+    public function expiresAfter($time): static
     {
         $this->time = $time;
         return $this;
@@ -107,9 +111,9 @@ class RegistryItem implements CacheItemInterface
     /**
      * @return bool
      */
-    public function isExpired()
+    public function isExpired(): bool
     {
-        $datetime = new \DateTime();
+        $datetime = new DateTime();
 
         if (is_null($this->expiration) === false) {
             if ($this->expiration->getTimestamp() < $datetime->getTimestamp()) {
@@ -130,25 +134,25 @@ class RegistryItem implements CacheItemInterface
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getExpiredDate()
+    public function getExpiredDate(): ?DateTimeInterface
     {
         return $this->expiration;
     }
 
     /**
-     * @return \DateInterval|int|null
+     * @return DateInterval|int|null
      */
-    public function getExpiredTime()
+    public function getExpiredTime(): DateInterval|int|null
     {
         return $this->time;
     }
 
     /**
-     * @return \DateTime|\DateTimeInterface
+     * @return DateTime|DateTimeInterface
      */
-    public function getCreationDate()
+    public function getCreationDate(): DateTime|DateTimeInterface
     {
         return $this->creation;
     }

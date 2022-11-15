@@ -22,21 +22,21 @@ use YounitedPaySDK\Model\ArrayCollection;
 class Registry implements CacheItemPoolInterface
 {
     /**
-     * @var Registry Instance of this class
+     * @var ?Registry Instance of this class
      */
-    private static $_instance = null;
+    private static ?Registry $_instance = null;
 
     /**
      * @var array<CacheItemInterface>
      */
-    private $keys;
+    private array $keys;
 
     /**
      * Get instance of this class
      *
      * @return Registry
      */
-    public static function getInstance()
+    public static function getInstance(): Registry
     {
         if (self::$_instance === null) {
             self::$_instance = new Registry();
@@ -48,7 +48,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function getItem($key)
+    public function getItem($key): CacheItemInterface
     {
         if ($this->hasItem($key) === false) {
             $this->keys[$key] = new RegistryItem($key);
@@ -61,7 +61,7 @@ class Registry implements CacheItemPoolInterface
      *
      * @return ArrayCollection<mixed>
      */
-    public function getItems(array $keys = array())
+    public function getItems(array $keys = array()): iterable
     {
         $items = new ArrayCollection();
 
@@ -79,7 +79,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function hasItem($key)
+    public function hasItem($key): bool
     {
         if (false === isset($this->keys)) {
             return false;
@@ -91,7 +91,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function clear()
+    public function clear(): bool
     {
         unset($this->keys);
         $this->keys = [];
@@ -101,7 +101,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function deleteItem($key)
+    public function deleteItem($key): bool
     {
         if ($this->hasItem($key) === true) {
             unset($this->keys[$key]);
@@ -112,7 +112,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function deleteItems(array $keys)
+    public function deleteItems(array $keys): bool
     {
         if (empty($keys) === true) {
             return true;
@@ -130,7 +130,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function save(CacheItemInterface $item)
+    public function save(CacheItemInterface $item): bool
     {
         // TODO: Implement save() method.
         return false;
@@ -139,7 +139,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function saveDeferred(CacheItemInterface $item)
+    public function saveDeferred(CacheItemInterface $item): bool
     {
         // TODO: Implement saveDeferred() method.
         return false;
@@ -148,7 +148,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function commit()
+    public function commit(): bool
     {
         // TODO: Implement commit() method.
         return false;
