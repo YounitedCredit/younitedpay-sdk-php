@@ -10,7 +10,7 @@ This package is a dependancy of Younited Credit PrestaShop or Magento plugin.
 
 ## Versions scope
 
-This package is compatible with PHP 5.6+.
+This package is compatible with PHP 8.0+.
 
 ## How to install it ?
 
