@@ -11,6 +11,10 @@ This package is a dependancy of Younited Credit PrestaShop or Magento plugin.
 ## Versions scope
 
 This package is compatible with PHP 5.6+.
+| PHP Version | SDK Version |
+| :---------: | :---------: |
+| PHP 5.6 to PHP 8.0 (not included) | v1.X
+| PHP 8.0+ | v2.X 
 
 ## How to install it ?
 
@@ -49,14 +53,19 @@ $body = (new BestPrice())
     ->setBorrowedAmount(149.0);
 
 $request = (new BestPriceRequest())
-    ->enableSandbox()
-    ->setModel($body);
+    ->setModel($body)
+    ->enableSandbox();
 
 $client = new Client();
 try {
     $response = $client->setCredential($clientId, $clientSecret)
         ->sendRequest($request);
     echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
     var_dump($response->getModel());
     echo '</pre>';
 } catch (Exception $e) {
@@ -95,13 +104,12 @@ You can easily get available maturities by creating a request
 require 'vendor/autoload.php';
 
 use YounitedPaySDK\Client;
-use YounitedPaySDK\Request\LoadContractRequest;
-use YounitedPaySDK\Model\LoadContract;
+use YounitedPaySDK\Request\AvailableMaturitiesRequest;
 
 $clientId = 'your-client-id';
 $clientSecret = 'your-secret-idtoken';
 
-$request = (new LoadContractRequest())
+$request = (new AvailableMaturitiesRequest())
     ->enableSandbox()
 
 $client = new Client();
@@ -109,6 +117,11 @@ try {
     $response = $client->setCredential($clientId, $clientSecret)
         ->sendRequest($request);
     echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
     var_dump($response->getModel());
     echo '</pre>';
 } catch (Exception $e) {
@@ -157,14 +170,19 @@ $body = (new LoadContract())
     ->setContractReference('contract-ref');
 
 $request = (new LoadContractRequest())
-    ->enableSandbox()
-    ->setModel($body);
+    ->setModel($body)
+    ->enableSandbox();
 
 $client = new Client();
 try {
     $response = $client->setCredential($clientId, $clientSecret)
         ->sendRequest($request);
     echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
     var_dump($response->getModel());
     echo '</pre>';
 } catch (Exception $e) {
@@ -268,14 +286,19 @@ $body = (new InitializeContract())
     ->setMerchantOrderContext($merchantOrderContext);
 
 $request = (new InitializeContractRequest())
-    ->enableSandbox()
-    ->setModel($body);
+    ->setModel($body)
+    ->enableSandbox();
 
 $client = new Client();
 try {
     $response = $client->setCredential($clientId, $clientSecret)
         ->sendRequest($request);
     echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
     var_dump($response->getModel());
     echo '</pre>';
 } catch (Exception $e) {
@@ -376,14 +399,19 @@ $body = (new ConfirmContract())
     ->setMerchantOrderId('order-id');
 
 $request = (new ConfirmContractRequest())
-    ->enableSandbox()
-    ->setModel($body);
+    ->setModel($body)
+    ->enableSandbox();
 
 $client = new Client();
 try {
     $response = $client->setCredential($clientId, $clientSecret)
         ->sendRequest($request);
     echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
     var_dump($response->getModel());
     echo '</pre>';
 } catch (Exception $e) {
@@ -433,14 +461,19 @@ $body = (new ActivateContract())
     ->setContractReference('contract-ref');
 
 $request = (new ActivateContractRequest())
-    ->enableSandbox()
-    ->setModel($body);
+    ->setModel($body)
+    ->enableSandbox();
 
 $client = new Client();
 try {
     $response = $client->setCredential($clientId, $clientSecret)
         ->sendRequest($request);
     echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
     var_dump($response->getModel());
     echo '</pre>';
 } catch (Exception $e) {
@@ -490,14 +523,19 @@ $body = (new WithdrawContract())
     ->setAmount(149.0);
 
 $request = (new WithdrawContractRequest())
-    ->enableSandbox()
-    ->setModel($body);
+    ->setModel($body)
+    ->enableSandbox();
 
 $client = new Client();
 try {
     $response = $client->setCredential($clientId, $clientSecret)
         ->sendRequest($request);
     echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
     var_dump($response->getModel());
     echo '</pre>';
 } catch (Exception $e) {
@@ -547,14 +585,19 @@ $body = (new CancelContract())
     ->setContractReference('contract-ref');
 
 $request = (new CancelContractRequest())
-    ->enableSandbox()
-    ->setModel($body);
+    ->setModel($body)
+    ->enableSandbox();
 
 $client = new Client();
 try {
     $response = $client->setCredential($clientId, $clientSecret)
         ->sendRequest($request);
     echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
     var_dump($response->getModel());
     echo '</pre>';
 } catch (Exception $e) {
