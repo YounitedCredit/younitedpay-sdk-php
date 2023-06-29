@@ -54,7 +54,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function withProtocolVersion($version)
+    public function withProtocolVersion(string $version)
     {
         if ($this->protocol === $version) {
             return $this;
@@ -77,7 +77,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function hasHeader($header)
+    public function hasHeader(string $name)
     {
         return isset($this->headerNames[\strtr($header, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')]);
     }
@@ -85,7 +85,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function getHeader($header)
+    public function getHeader(string $name)
     {
         $header = \strtr($header, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
         if (!isset($this->headerNames[$header])) {
@@ -100,25 +100,25 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function getHeaderLine($header)
+    public function getHeaderLine(string $name)
     {
-        return \implode(', ', $this->getHeader($header));
+        return \implode(', ', $this->getHeader($name));
     }
 
     /**
      * @inherit
      */
-    public function withHeader($header, $value)
+    public function withHeader(string $name, $value)
     {
-        $value = $this->validateAndTrimHeader($header, $value);
-        $normalized = \strtr($header, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
+        $value = $this->validateAndTrimHeader($name, $value);
+        $normalized = \strtr($name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
 
         $new = clone $this;
         if (isset($new->headerNames[$normalized])) {
             unset($new->headers[$new->headerNames[$normalized]]);
         }
-        $new->headerNames[$normalized] = $header;
-        $new->headers[$header] = $value;
+        $new->headerNames[$normalized] = $name;
+        $new->headers[$name] = $value;
 
         return $new;
     }
@@ -126,7 +126,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function withAddedHeader($header, $value)
+    public function withAddedHeader(string $name, $value)
     {
         if (!\is_string($header) || '' === $header) {
             throw new \InvalidArgumentException('Header name must be an RFC 7230 compatible string.');
@@ -141,9 +141,9 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function withoutHeader($header)
+    public function withoutHeader(string $name)
     {
-        $normalized = \strtr($header, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
+        $normalized = \strtr($name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
         if (!isset($this->headerNames[$normalized])) {
             return $this;
         }

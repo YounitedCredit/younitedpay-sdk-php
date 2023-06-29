@@ -172,7 +172,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withScheme($scheme)
+    public function withScheme(string $scheme)
     {
         if (!\is_string($scheme)) {
             throw new \InvalidArgumentException('Scheme must be a string');
@@ -192,7 +192,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withUserInfo($user, $password = null)
+    public function withUserInfo(string $user, ?string $password = null)
     {
         $info = $user;
         if (null !== $password && '' !== $password) {
@@ -212,7 +212,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withHost($host)
+    public function withHost(string $host)
     {
         if (!\is_string($host)) {
             throw new \InvalidArgumentException('Host must be a string');

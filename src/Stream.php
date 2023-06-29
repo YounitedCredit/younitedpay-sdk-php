@@ -295,7 +295,7 @@ class Stream implements StreamInterface
      *
      * @throws RuntimeException
      */
-    public function write($string)
+    public function write(string $string)
     {
         if (!isset($this->stream)) {
             throw new RuntimeException('Stream is detached');
@@ -335,7 +335,7 @@ class Stream implements StreamInterface
      *
      * @throws RuntimeException
      */
-    public function read($length)
+    public function read(int $length)
     {
         if (!isset($this->stream)) {
             throw new RuntimeException('Stream is detached');
@@ -382,7 +382,7 @@ class Stream implements StreamInterface
      *
      * @return array|mixed|null
      */
-    public function getMetadata($key = null)
+    public function getMetadata(?string $key = null)
     {
         if (!isset($this->stream)) {
             return $key ? null : [];
