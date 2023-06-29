@@ -231,7 +231,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withPort($port)
+    public function withPort(?int $port)
     {
         if ($this->port === $port = $this->filterPort($port)) {
             return $this;
@@ -246,7 +246,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withPath($path)
+    public function withPath(string $path)
     {
         if ($this->path === $path = $this->filterPath($path)) {
             return $this;
@@ -261,7 +261,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withQuery($query)
+    public function withQuery(string $query)
     {
         if ($this->query === $query = $this->filterQueryAndFragment($query)) {
             return $this;
@@ -276,7 +276,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withFragment($fragment)
+    public function withFragment(string $fragment)
     {
         if ($this->fragment === $fragment = $this->filterQueryAndFragment($fragment)) {
             return $this;
