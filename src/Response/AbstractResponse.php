@@ -126,7 +126,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * @inherit
      */
-    public function withStatus($code, $reasonPhrase = '')
+    public function withStatus(int $code, string $reasonPhrase = '')
     {
         $code = (int) $code;
         if ($code < 100 || $code > 599) {

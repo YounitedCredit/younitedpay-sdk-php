@@ -49,7 +49,7 @@ trait RequestTrait
         return $target;
     }
 
-    public function withRequestTarget($requestTarget)
+    public function withRequestTarget(string $requestTarget)
     {
         if (\preg_match('#\s#', $requestTarget)) {
             throw new \InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
@@ -66,7 +66,7 @@ trait RequestTrait
         return $this->method;
     }
 
-    public function withMethod($method)
+    public function withMethod(string $method)
     {
         if (!\is_string($method)) {
             throw new \InvalidArgumentException('Method must be a string');
@@ -83,7 +83,7 @@ trait RequestTrait
         return $this->uri;
     }
 
-    public function withUri(UriInterface $uri, $preserveHost = false)
+    public function withUri(UriInterface $uri, bool $preserveHost = false);
     {
         if ($uri === $this->uri) {
             return $this;

@@ -232,6 +232,11 @@ class Client
                 $body = $this->stream->create();
             } else {
                 $body = $this->stream->create($content);
+
+                $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+                /** @var \Psr\Log\LoggerInterface $logger */
+                $logger = $objectManager->get('\Psr\Log\LoggerInterface');
+                $logger->info('[younited pay] response : ' . $content);
             }
         } catch (InvalidArgumentException $e) {
             throw new RuntimeException('Unable to create stream "php://temp"');
