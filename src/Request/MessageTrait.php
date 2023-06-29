@@ -79,7 +79,7 @@ trait MessageTrait
      */
     public function hasHeader(string $name)
     {
-        return isset($this->headerNames[\strtr($header, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')]);
+        return isset($this->headerNames[\strtr($name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')]);
     }
 
     /**
@@ -87,7 +87,7 @@ trait MessageTrait
      */
     public function getHeader(string $name)
     {
-        $header = \strtr($header, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
+        $header = \strtr($name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
         if (!isset($this->headerNames[$header])) {
             return [];
         }
@@ -128,12 +128,12 @@ trait MessageTrait
      */
     public function withAddedHeader(string $name, $value)
     {
-        if (!\is_string($header) || '' === $header) {
+        if (!\is_string($name) || '' === $name) {
             throw new \InvalidArgumentException('Header name must be an RFC 7230 compatible string.');
         }
 
         $new = clone $this;
-        $new->setHeaders([$header => $value]);
+        $new->setHeaders([$name => $value]);
 
         return $new;
     }

@@ -83,7 +83,7 @@ trait RequestTrait
         return $this->uri;
     }
 
-    public function withUri(UriInterface $uri, bool $preserveHost = false);
+    public function withUri(UriInterface $uri, bool $preserveHost = false)
     {
         if ($uri === $this->uri) {
             return $this;
