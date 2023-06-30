@@ -17,8 +17,9 @@
 
 namespace YounitedPaySDK\Request;
 
-use Psr\Http\Message\StreamInterface;
 use YounitedPaySDK\Stream;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\MessageInterface;
 
 /**
  * Trait implementing functionality common to requests and responses.
@@ -46,7 +47,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function getProtocolVersion()
+    public function getProtocolVersion(): string
     {
         return $this->protocol;
     }
@@ -54,7 +55,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function withProtocolVersion(string $version)
+    public function withProtocolVersion(string $version): MessageInterface
     {
         if ($this->protocol === $version) {
             return $this;
@@ -69,7 +70,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
@@ -77,7 +78,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function hasHeader(string $name)
+    public function hasHeader(string $name): bool
     {
         return isset($this->headerNames[\strtr($name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')]);
     }
@@ -85,7 +86,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function getHeader(string $name)
+    public function getHeader(string $name): array
     {
         $header = \strtr($name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
         if (!isset($this->headerNames[$header])) {
@@ -100,7 +101,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function getHeaderLine(string $name)
+    public function getHeaderLine(string $name): string
     {
         return \implode(', ', $this->getHeader($name));
     }
@@ -108,7 +109,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function withHeader(string $name, $value)
+    public function withHeader(string $name, $value): MessageInterface
     {
         $value = $this->validateAndTrimHeader($name, $value);
         $normalized = \strtr($name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
@@ -126,7 +127,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function withAddedHeader(string $name, $value)
+    public function withAddedHeader(string $name, $value): MessageInterface
     {
         if (!\is_string($name) || '' === $name) {
             throw new \InvalidArgumentException('Header name must be an RFC 7230 compatible string.');
@@ -141,7 +142,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function withoutHeader(string $name)
+    public function withoutHeader(string $name): MessageInterface
     {
         $normalized = \strtr($name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
         if (!isset($this->headerNames[$normalized])) {
@@ -158,7 +159,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function getBody()
+    public function getBody(): StreamInterface
     {
         if (null === $this->stream) {
             $this->stream = Stream::create('');
@@ -170,7 +171,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body): MessageInterface
     {
         if ($body === $this->stream) {
             return $this;

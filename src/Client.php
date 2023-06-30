@@ -28,6 +28,7 @@ use YounitedPaySDK\Response\DefaultResponse;
 use YounitedPaySDK\Response\ResponseBuilder;
 use YounitedPaySDK\Response\CallbackResponse;
 use YounitedPaySDK\Exception\RequestException;
+use YounitedPaySDK\Response\AbstractResponse;
 
 /**
  * API client
@@ -170,7 +171,7 @@ class Client
      * @throws InvalidArgumentException  Invalid header names and/or values
      * @throws RuntimeException  Failure to create stream
      */
-    public function sendRequest(AbstractRequest $request)
+    public function sendRequest(AbstractRequest $request): AbstractResponse
     {
         $tenantId = $request->getTenantId();
         $token = $this->getToken($tenantId);

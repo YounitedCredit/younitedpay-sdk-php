@@ -47,7 +47,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
      *
      * @return StreamInterface|null Returns the body as a stream.
      */
-    public function getBody()
+    public function getBody(): StreamInterface
     {
         return $this->stream;
     }
@@ -110,7 +110,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * @inherit
      */
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }
@@ -118,7 +118,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * @inherit
      */
-    public function getReasonPhrase()
+    public function getReasonPhrase(): string
     {
         return $this->reasonPhrase;
     }
@@ -126,7 +126,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * @inherit
      */
-    public function withStatus(int $code, string $reasonPhrase = '')
+    public function withStatus(int $code, string $reasonPhrase = ''): ResponseInterface
     {
         $code = (int) $code;
         if ($code < 100 || $code > 599) {

@@ -18,6 +18,7 @@
 namespace YounitedPaySDK\Request;
 
 use Psr\Http\Message\UriInterface;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * @internal should not be used outside of YounitedPaySDK as it does not fall under our BC promise
@@ -33,7 +34,7 @@ trait RequestTrait
     /** @var UriInterface */
     protected $uri;
 
-    public function getRequestTarget()
+    public function getRequestTarget(): string
     {
         if (null !== $this->requestTarget) {
             return $this->requestTarget;
@@ -49,7 +50,7 @@ trait RequestTrait
         return $target;
     }
 
-    public function withRequestTarget(string $requestTarget)
+    public function withRequestTarget(string $requestTarget): RequestInterface
     {
         if (\preg_match('#\s#', $requestTarget)) {
             throw new \InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
@@ -61,12 +62,12 @@ trait RequestTrait
         return $new;
     }
 
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
 
-    public function withMethod(string $method)
+    public function withMethod(string $method): RequestInterface
     {
         if (!\is_string($method)) {
             throw new \InvalidArgumentException('Method must be a string');
@@ -78,12 +79,12 @@ trait RequestTrait
         return $new;
     }
 
-    public function getUri()
+    public function getUri(): UriInterface
     {
         return $this->uri;
     }
 
-    public function withUri(UriInterface $uri, bool $preserveHost = false)
+    public function withUri(UriInterface $uri, bool $preserveHost = false): RequestInterface
     {
         if ($uri === $this->uri) {
             return $this;
