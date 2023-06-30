@@ -85,7 +85,7 @@ abstract class AbstractUri implements UriInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return self::createUriString($this->scheme, $this->getAuthority(), $this->path, $this->query, $this->fragment);
     }
@@ -95,7 +95,7 @@ abstract class AbstractUri implements UriInterface
      *
      * @return string
      */
-    public function getScheme()
+    public function getScheme(): string
     {
         return $this->scheme;
     }
@@ -103,7 +103,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function getAuthority()
+    public function getAuthority(): string
     {
         if ('' === $this->host) {
             return '';
@@ -124,7 +124,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function getUserInfo()
+    public function getUserInfo(): string
     {
         return $this->userInfo;
     }
@@ -132,7 +132,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->host;
     }
@@ -140,7 +140,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function getPort()
+    public function getPort(): ?int
     {
         return $this->port;
     }
@@ -148,7 +148,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -156,7 +156,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         return $this->query;
     }
@@ -164,7 +164,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function getFragment()
+    public function getFragment(): string
     {
         return $this->fragment;
     }
@@ -172,7 +172,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withScheme(string $scheme)
+    public function withScheme(string $scheme): UriInterface
     {
         if (!\is_string($scheme)) {
             throw new \InvalidArgumentException('Scheme must be a string');
@@ -192,7 +192,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withUserInfo(string $user, ?string $password = null)
+    public function withUserInfo(string $user, ?string $password = null): UriInterface
     {
         $info = $user;
         if (null !== $password && '' !== $password) {
@@ -212,7 +212,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withHost(string $host)
+    public function withHost(string $host): UriInterface
     {
         if (!\is_string($host)) {
             throw new \InvalidArgumentException('Host must be a string');
@@ -231,7 +231,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withPort(?int $port)
+    public function withPort(?int $port): UriInterface
     {
         if ($this->port === $port = $this->filterPort($port)) {
             return $this;
@@ -246,7 +246,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withPath(string $path)
+    public function withPath(string $path): UriInterface
     {
         if ($this->path === $path = $this->filterPath($path)) {
             return $this;
@@ -261,7 +261,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withQuery(string $query)
+    public function withQuery(string $query): UriInterface
     {
         if ($this->query === $query = $this->filterQueryAndFragment($query)) {
             return $this;
@@ -276,7 +276,7 @@ abstract class AbstractUri implements UriInterface
     /**
      * @inherit
      */
-    public function withFragment(string $fragment)
+    public function withFragment(string $fragment): UriInterface
     {
         if ($this->fragment === $fragment = $this->filterQueryAndFragment($fragment)) {
             return $this;

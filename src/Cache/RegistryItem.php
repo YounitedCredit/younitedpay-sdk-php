@@ -122,7 +122,7 @@ class RegistryItem implements CacheItemInterface
 
         $dateInterval = $datetime->diff($this->creation)->s;
 
-        if (is_null($this->time) === false) {
+        if (isset($this->time)) {
             $time = is_int($this->time) ? $this->time : $this->time->s;
             if ($time < $dateInterval) {
                 return true;
