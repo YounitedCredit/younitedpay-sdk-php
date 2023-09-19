@@ -2,6 +2,7 @@
   "name": "202ecommerce/younitedpay-sdk",
   "description": "younited pay API SDK",
   "homepage": "https://api.younited-pay.com/",
+  "version": "2.1",
   "license": "AFL-3.0",
   "authors": [
       {
