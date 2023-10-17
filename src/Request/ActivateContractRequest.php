@@ -44,7 +44,11 @@ class ActivateContractRequest extends AbstractRequest
     public function setModel(AbstractModel $body)
     {
         if ($body instanceof ActivateContract) {
-            $this->requestTarget = str_replace('{contractReference}', $body->getContractReference(), $this->requestTarget);
+            $this->requestTarget = str_replace(
+                '{contractReference}',
+                urlencode($body->getContractReference()),
+                $this->requestTarget
+            );
             return parent::setModel($body);
         }
 
