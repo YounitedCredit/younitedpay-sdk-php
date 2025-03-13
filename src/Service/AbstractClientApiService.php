@@ -15,10 +15,10 @@
 
 namespace YounitedPaySDK\Service;
 
-use Psr\Http\Message\ResponseInterface;
 use YounitedPaySDK\Client;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Request\AbstractRequest;
+use YounitedPaySDK\Response\AbstractResponse;
 use YounitedPaySDK\Response\ErrorResponse;
 
 abstract class AbstractClientApiService
@@ -57,7 +57,7 @@ abstract class AbstractClientApiService
      * @param AbstractModel|null $body
      * @param AbstractRequest $request
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     protected function call($body, AbstractRequest $request)
     {

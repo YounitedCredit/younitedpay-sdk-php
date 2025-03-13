@@ -15,11 +15,9 @@
 
 namespace YounitedPaySDK\Cache;
 
-use Psr\Cache\CacheItemInterface;
-use Psr\Cache\CacheItemPoolInterface;
 use YounitedPaySDK\Model\ArrayCollection;
 
-class Registry implements CacheItemPoolInterface
+class Registry
 {
     /**
      * @var Registry Instance of this class
@@ -27,7 +25,7 @@ class Registry implements CacheItemPoolInterface
     private static $_instance = null;
 
     /**
-     * @var array<CacheItemInterface>
+     * @var array<RegistryItem>
      */
     private $keys;
 
@@ -130,7 +128,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function save(CacheItemInterface $item)
+    public function save(RegistryItem $item)
     {
         // TODO: Implement save() method.
         return false;
@@ -139,7 +137,7 @@ class Registry implements CacheItemPoolInterface
     /**
      * @inherit
      */
-    public function saveDeferred(CacheItemInterface $item)
+    public function saveDeferred(RegistryItem $item)
     {
         // TODO: Implement saveDeferred() method.
         return false;

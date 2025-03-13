@@ -15,9 +15,7 @@
 
 namespace YounitedPaySDK\Cache;
 
-use Psr\Cache\CacheItemInterface;
-
-class RegistryItem implements CacheItemInterface
+class RegistryItem
 {
     /**
      * @var string

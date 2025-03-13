@@ -16,8 +16,6 @@
 namespace YounitedPaySDK\Response;
 
 use JsonSerializable;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Request\MessageTrait;
 use YounitedPaySDK\Model\ArrayCollection;
@@ -26,7 +24,7 @@ use YounitedPaySDK\Stream;
 /**
  * API client
  */
-abstract class AbstractResponse implements ResponseInterface, JsonSerializable
+abstract class AbstractResponse implements JsonSerializable
 {
     use MessageTrait;
 
@@ -45,7 +43,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * Gets the body of the message.
      *
-     * @return StreamInterface|null Returns the body as a stream.
+     * @return Stream|null Returns the body as a stream.
      */
     public function getBody()
     {
@@ -85,7 +83,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * @param int $status Status code
      * @param array<string> $headers Response headers
-     * @param string|resource|StreamInterface|null $body Response body
+     * @param string|resource|Stream|null $body Response body
      * @param string $version Protocol version
      * @param string|null $reason Reason phrase (when empty a default will be used based on the status code)
      */
@@ -146,7 +144,6 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * {@inheritdoc}
      */
-    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return get_object_vars($this);

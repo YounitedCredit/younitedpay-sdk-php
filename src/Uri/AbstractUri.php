@@ -7,8 +7,6 @@
  *
  * @category  YounitedpaySDK
  * @package   Ecommerceyounitedpaysdk
- * @author    Michael Dowling and contributors to guzzlehttp/psr7
- * @author    Tobias Nyholm  and contributors to Nyholm/psr7
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -17,12 +15,10 @@
 
 namespace YounitedPaySDK\Uri;
 
-use Psr\Http\Message\UriInterface;
-
 /**
  * Uri
  */
-abstract class AbstractUri implements UriInterface
+abstract class AbstractUri
 {
     /** @var array<string,int> SCHEMES. */
     private static $SCHEMES = ['http' => 80, 'https' => 443];

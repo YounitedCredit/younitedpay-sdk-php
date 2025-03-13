@@ -19,7 +19,7 @@ namespace YounitedPaySDK\Exception;
 
 use RuntimeException;
 use Exception;
-use Psr\Http\Message\RequestInterface;
+use YounitedPaySDK\Request\AbstractRequest;
 
 /**
  * Request Exception
@@ -31,7 +31,7 @@ class RequestException extends RuntimeException
     /**
      * Request object
      *
-     * @var RequestInterface
+     * @var AbstractRequest
      */
     private $request;
 
@@ -39,10 +39,10 @@ class RequestException extends RuntimeException
      * Create request exception object
      *
      * @param string  $message  Exception message
-     * @param RequestInterface  $request  Request object
+     * @param AbstractRequest  $request  Request object
      * @param \Exception|null  $last_exception  Previous exception object
      */
-    public function __construct($message, RequestInterface $request, Exception $last_exception = null)
+    public function __construct($message, AbstractRequest $request, Exception $last_exception = null)
     {
         $this->request = $request;
 
@@ -52,7 +52,7 @@ class RequestException extends RuntimeException
     /**
      * Get the request object
      *
-     * @return RequestInterface
+     * @return AbstractRequest
      */
     public function getRequest()
     {

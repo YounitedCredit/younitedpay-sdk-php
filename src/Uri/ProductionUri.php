@@ -15,12 +15,10 @@
 
 namespace YounitedPaySDK\Uri;
 
-use Psr\Http\Message\UriInterface;
-
 /**
  * Production Uri
  */
-class ProductionUri extends AbstractUri implements UriInterface
+class ProductionUri extends AbstractUri
 {
     /**
      * @var string $host

@@ -16,7 +16,6 @@
 namespace YounitedPaySDK\Request;
 
 use JsonSerializable;
-use Psr\Http\Message\RequestInterface;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Stream;
 use YounitedPaySDK\Uri\ProductionUri;
@@ -25,7 +24,7 @@ use YounitedPaySDK\Uri\SandboxUri;
 /**
  * API client
  */
-abstract class AbstractRequest implements RequestInterface, JsonSerializable
+abstract class AbstractRequest implements JsonSerializable
 {
     use MessageTrait;
     use RequestTrait;
@@ -131,7 +130,6 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     /**
      * {@inheritdoc}
      */
-    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return get_object_vars($this);

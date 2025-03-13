@@ -15,16 +15,15 @@
 
 namespace YounitedPaySDK\Service;
 
-use Psr\Http\Message\ResponseInterface;
-use YounitedPaySDK\Model\Basket;
+use YounitedPaySDK\Model\BasketDescription;
 use YounitedPaySDK\Model\BestPrice;
 use YounitedPaySDK\Model\CancelContract;
 use YounitedPaySDK\Model\ConfirmContract;
 use YounitedPaySDK\Model\InitializeContract;
 use YounitedPaySDK\Model\LoadContract;
-use YounitedPaySDK\Model\MerchantOrderContext;
+use YounitedPaySDK\Model\MerchantContext;
 use YounitedPaySDK\Model\MerchantUrls;
-use YounitedPaySDK\Model\PersonalInformation;
+use YounitedPaySDK\Model\CustomerInformation;
 use YounitedPaySDK\Model\WithdrawContract;
 use YounitedPaySDK\Request\AvailableMaturitiesRequest;
 use YounitedPaySDK\Request\BestPriceRequest;
@@ -33,6 +32,7 @@ use YounitedPaySDK\Request\ConfirmContractRequest;
 use YounitedPaySDK\Request\InitializeContractRequest;
 use YounitedPaySDK\Request\LoadContractRequest;
 use YounitedPaySDK\Request\WithdrawContractRequest;
+use YounitedPaySDK\Response\AbstractResponse;
 
 /**
  * Client Api Service Class
@@ -42,7 +42,7 @@ class ClientApiService extends AbstractClientApiService
     /**
      * @param float $borrowedAmount
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function getBestPrice($borrowedAmount)
     {
@@ -56,14 +56,14 @@ class ClientApiService extends AbstractClientApiService
 
     /**
      * @param int $requestMaturity
-     * @param PersonalInformation $personalInformation
-     * @param Basket $basket
+     * @param CustomerInformation $personalInformation
+     * @param BasketDescription $basket
      * @param MerchantUrls $merchantUrls
-     * @param MerchantOrderContext $merchantOrderContext
+     * @param MerchantContext $merchantOrderContext
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
-    public function initializeContract($requestMaturity, PersonalInformation $personalInformation, Basket $basket, MerchantUrls $merchantUrls, MerchantOrderContext $merchantOrderContext)
+    public function initializeContract($requestMaturity, CustomerInformation $personalInformation, BasketDescription $basket, MerchantUrls $merchantUrls, MerchantContext $merchantOrderContext)
     {
         $model = (new InitializeContract())
             ->setRequestedMaturity($requestMaturity)
@@ -81,7 +81,7 @@ class ClientApiService extends AbstractClientApiService
      * @param string $contractReference
      * @param string|null $merchantOrderId
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function confirmContract($contractReference, $merchantOrderId = null)
     {
@@ -97,7 +97,7 @@ class ClientApiService extends AbstractClientApiService
     /**
      * @param string $contractReference
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function cancelContract($contractReference)
     {
@@ -115,7 +115,7 @@ class ClientApiService extends AbstractClientApiService
      * @param string $contractReference
      * @param float|null $amount
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function withdrawContract($contractReference, $amount = null)
     {
@@ -131,7 +131,7 @@ class ClientApiService extends AbstractClientApiService
     /**
      * @param string $contractReference
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function loadContract($contractReference)
     {
@@ -144,7 +144,7 @@ class ClientApiService extends AbstractClientApiService
     }
 
     /**
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function getAvailableMaturities()
     {

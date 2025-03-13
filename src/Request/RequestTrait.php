@@ -7,8 +7,6 @@
  *
  * @category  YounitedpaySDK
  * @package   Ecommerceyounitedpaysdk
- * @author    Michael Dowling and contributors to guzzlehttp/psr7
- * @author    Tobias Nyholm  and contributors to Nyholm/psr7
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -16,8 +14,6 @@
  */
 
 namespace YounitedPaySDK\Request;
-
-use Psr\Http\Message\UriInterface;
 
 /**
  * @internal should not be used outside of YounitedPaySDK as it does not fall under our BC promise
@@ -30,7 +26,7 @@ trait RequestTrait
     /** @var string|null */
     protected $requestTarget;
 
-    /** @var UriInterface */
+    /** @var array|mixed|void|bool|null */
     protected $uri;
 
     public function getRequestTarget()
@@ -83,7 +79,7 @@ trait RequestTrait
         return $this->uri;
     }
 
-    public function withUri(UriInterface $uri, $preserveHost = false)
+    public function withUri($uri, $preserveHost = false)
     {
         if ($uri === $this->uri) {
             return $this;
