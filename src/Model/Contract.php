@@ -48,12 +48,12 @@ class Contract extends AbstractModel implements JsonSerializable
     private $offer;
 
     /**
-     * @var Basket
+     * @var BasketDescription
      */
     private $basket;
 
     /**
-     * @var MerchantOrderContext
+     * @var MerchantContext
      */
     private $merchantOrderContext;
 
@@ -179,7 +179,7 @@ class Contract extends AbstractModel implements JsonSerializable
     /**
      * Get Basket
      *
-     * @return Basket
+     * @return BasketDescription
      */
     public function getBasket()
     {
@@ -189,26 +189,26 @@ class Contract extends AbstractModel implements JsonSerializable
     /**
      * Set Basket
      *
-     * @param Basket $basket
+     * @param BasketDescription $basket
      *
      * @return self
      */
     public function setBasket($basket)
     {
-        if ($basket instanceof Basket) {
+        if ($basket instanceof BasketDescription) {
             $this->basket = $basket;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Basket must be an instance of ' . Basket::class . ' but ' . get_class($basket) . ' is given.'
+            'Basket must be an instance of ' . BasketDescription::class . ' but ' . get_class($basket) . ' is given.'
         );
     }
 
     /**
      * Get Merchant Order Context
      *
-     * @return MerchantOrderContext
+     * @return MerchantContext
      */
     public function getMerchantOrderContext()
     {
@@ -218,19 +218,19 @@ class Contract extends AbstractModel implements JsonSerializable
     /**
      * Set Merchant Order Context
      *
-     * @param MerchantOrderContext $merchantOrderContext
+     * @param MerchantContext $merchantOrderContext
      *
      * @return self
      */
     public function setMerchantOrderContext($merchantOrderContext)
     {
-        if ($merchantOrderContext instanceof MerchantOrderContext) {
+        if ($merchantOrderContext instanceof MerchantContext) {
             $this->merchantOrderContext = $merchantOrderContext;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Merchant Order Context must be an instance of ' . MerchantOrderContext::class . ' but ' . get_class($merchantOrderContext) . ' is given.'
+            'Merchant Order Context must be an instance of ' . MerchantContext::class . ' but ' . get_class($merchantOrderContext) . ' is given.'
         );
     }
 }

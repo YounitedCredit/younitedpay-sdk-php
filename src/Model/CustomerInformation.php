@@ -20,36 +20,31 @@ use InvalidArgumentException;
 use JsonSerializable;
 
 /**
- * Personnel Information Model Class
+ * Customer Information Model Class
  */
-class PersonalInformation extends AbstractModel implements JsonSerializable
+class CustomerInformation extends AbstractModel implements JsonSerializable
 {
     // PROPERTIES
 
     /**
-     * @var string
+     * @var string|null
      */
     private $firstName;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $lastName;
 
     /**
      * @var string|null
      */
-    private $genderCode;
-
-    /**
-     * @var string
-     */
     private $emailAddress;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $cellPhoneNumber;
+    private $mobilePhoneNumber;
 
     /**
      * @var string|null
@@ -57,16 +52,16 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     private $birthDate;
 
     /**
-     * @var Address
+     * @var PostalAddress|null
      */
-    private $address;
+    private $postalAddress;
 
     // GETTERS & SETTERS
 
     /**
      * Get First Name
      *
-     * @return string
+     * @return string|null
      */
     public function getFirstName()
     {
@@ -76,26 +71,26 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     /**
      * Set First Name
      *
-     * @param string $firstName
+     * @param string|null $firstName
      *
      * @return self
      */
     public function setFirstName($firstName)
     {
-        if (is_string($firstName) === true) {
+        if (is_string($firstName) === true || is_null($firstName) === true) {
             $this->firstName = $firstName;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'First Name must be a string but ' . gettype($firstName) . ' is given.'
+            'First Name must be a string or null but ' . gettype($firstName) . ' is given.'
         );
     }
 
     /**
      * Get Last Name
      *
-     * @return string
+     * @return string|null
      */
     public function getLastName()
     {
@@ -105,56 +100,26 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     /**
      * Set Last Name
      *
-     * @param string $lastName
+     * @param string|null $lastName
      *
      * @return self
      */
     public function setLastName($lastName)
     {
-        if (is_string($lastName) === true) {
+        if (is_string($lastName) === true || is_null($lastName) === true) {
             $this->lastName = $lastName;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Last Name must be a string but ' . gettype($lastName) . ' is given.'
-        );
-    }
-
-    /**
-     * Get Gender Code
-     *
-     * @return string|null
-     */
-    public function getGenderCode()
-    {
-        return $this->genderCode;
-    }
-
-    /**
-     * Set Gender Code
-     * If not null, possible values are : 'MALE' / 'FEMALE'
-     *
-     * @param string|null $genderCode
-     *
-     * @return self
-     */
-    public function setGenderCode($genderCode)
-    {
-        if (is_string($genderCode) === true || is_null($genderCode) === true) {
-            $this->genderCode = $genderCode;
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Gender Code must be a string or null but ' . gettype($genderCode) . ' is given.'
+            'Last Name must be a string or null but ' . gettype($lastName) . ' is given.'
         );
     }
 
     /**
      * Get Email Address
      *
-     * @return string
+     * @return string|null
      */
     public function getEmailAddress()
     {
@@ -164,49 +129,49 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     /**
      * Set Email Address
      *
-     * @param string $emailAddress
+     * @param string|null $emailAddress
      *
      * @return self
      */
     public function setEmailAddress($emailAddress)
     {
-        if (is_string($emailAddress) === true) {
+        if (is_string($emailAddress) === true || is_null($emailAddress) === true) {
             $this->emailAddress = $emailAddress;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Email Address must be a string but ' . gettype($emailAddress) . ' is given.'
+            'Email Address must be a string or null but ' . gettype($emailAddress) . ' is given.'
         );
     }
 
     /**
-     * Get Cell Phone Number
+     * Get Mobile Phone Number
      *
-     * @return string
+     * @return string|null
      */
-    public function getCellPhoneNumber()
+    public function getMobilePhoneNumber()
     {
-        return $this->cellPhoneNumber;
+        return $this->mobilePhoneNumber;
     }
 
     /**
-     * Set Cell Phone Number
+     * Set Mobile Phone Number
      * Need to be in international format : for example +33601020304
      *
-     * @param string $cellPhoneNumber
+     * @param string|null $mobilePhoneNumber
      *
      * @return self
      */
-    public function setCellPhoneNumber($cellPhoneNumber)
+    public function setMobilePhoneNumber($mobilePhoneNumber)
     {
-        if (is_string($cellPhoneNumber) === true) {
-            $this->cellPhoneNumber = $cellPhoneNumber;
+        if (is_string($mobilePhoneNumber) === true || is_null($mobilePhoneNumber) === true) {
+            $this->mobilePhoneNumber = $mobilePhoneNumber;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Cell Phone Number must be a string but ' . gettype($cellPhoneNumber) . ' is given.'
+            'Mobile Phone Number must be a string or null but ' . gettype($mobilePhoneNumber) . ' is given.'
         );
     }
 
@@ -245,31 +210,31 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get Address
+     * Get Postal Address
      *
-     * @return Address
+     * @return PostalAddress
      */
-    public function getAddress()
+    public function getPostalAddress()
     {
-        return $this->address;
+        return $this->postalAddress;
     }
 
     /**
-     * Set Address
+     * Set Postal Address
      *
-     * @param Address $address
+     * @param PostalAddress $postalAddress
      *
      * @return self
      */
-    public function setAddress($address)
+    public function setPostalAddress($postalAddress)
     {
-        if ($address instanceof Address) {
-            $this->address = $address;
+        if ($postalAddress instanceof PostalAddress || is_null($postalAddress) === true) {
+            $this->postalAddress = $postalAddress;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Address must be an instance of ' .  Address::class . ' but ' . get_class($address) . ' is given.'
+            'Postal Address must be an instance of ' .  PostalAddress::class . ' or null but ' . get_class($postalAddress) . ' is given.'
         );
     }
 }

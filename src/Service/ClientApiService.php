@@ -19,11 +19,14 @@ use YounitedPaySDK\Model\BasketDescription;
 use YounitedPaySDK\Model\BestPrice;
 use YounitedPaySDK\Model\CancelContract;
 use YounitedPaySDK\Model\ConfirmContract;
+use YounitedPaySDK\Model\CustomExperience;
 use YounitedPaySDK\Model\InitializeContract;
 use YounitedPaySDK\Model\LoadContract;
+use YounitedPaySDK\Model\LoanRequest;
 use YounitedPaySDK\Model\MerchantContext;
-use YounitedPaySDK\Model\MerchantUrls;
 use YounitedPaySDK\Model\CustomerInformation;
+use YounitedPaySDK\Model\RiskInsights;
+use YounitedPaySDK\Model\TechnicalInformation;
 use YounitedPaySDK\Model\WithdrawContract;
 use YounitedPaySDK\Request\AvailableMaturitiesRequest;
 use YounitedPaySDK\Request\BestPriceRequest;
@@ -33,6 +36,7 @@ use YounitedPaySDK\Request\InitializeContractRequest;
 use YounitedPaySDK\Request\LoadContractRequest;
 use YounitedPaySDK\Request\WithdrawContractRequest;
 use YounitedPaySDK\Response\AbstractResponse;
+use YounitedPaySDK\Response\ErrorResponse;
 
 /**
  * Client Api Service Class
@@ -55,22 +59,26 @@ class ClientApiService extends AbstractClientApiService
     }
 
     /**
-     * @param int $requestMaturity
-     * @param CustomerInformation $personalInformation
-     * @param BasketDescription $basket
-     * @param MerchantUrls $merchantUrls
-     * @param MerchantContext $merchantOrderContext
+     * @param LoanRequest $loanRequest
+     * @param BasketDescription $basketDescription
+     * @param MerchantContext $merchantContext
+     * @param TechnicalInformation $technicalInformation
+     * @param CustomerInformation|null $customerInformation
+     * @param RiskInsights|null $riskInsights
+     * @param CustomExperience|null $customExperience
      *
-     * @return AbstractResponse
+     * @return AbstractResponse|ErrorResponse
      */
-    public function initializeContract($requestMaturity, CustomerInformation $personalInformation, BasketDescription $basket, MerchantUrls $merchantUrls, MerchantContext $merchantOrderContext)
+    public function initializeContract(LoanRequest $loanRequest, BasketDescription $basketDescription, MerchantContext $merchantContext, TechnicalInformation $technicalInformation, CustomerInformation $customerInformation = null, RiskInsights $riskInsights = null, CustomExperience $customExperience = null)
     {
         $model = (new InitializeContract())
-            ->setRequestedMaturity($requestMaturity)
-            ->setPersonalInformation($personalInformation)
-            ->setBasket($basket)
-            ->setMerchantUrls($merchantUrls)
-            ->setMerchantOrderContext($merchantOrderContext);
+            ->setLoanRequest($loanRequest)
+            ->setBasketDescription($basketDescription)
+            ->setMerchantContext($merchantContext)
+            ->setTechnicalInformation($technicalInformation)
+            ->setCustomerInformation($customerInformation)
+            ->setRiskInsights($riskInsights)
+            ->setCustomExperience($customExperience);
 
         $request = new InitializeContractRequest();
 

@@ -54,7 +54,7 @@ abstract class AbstractRequest implements JsonSerializable
     public function __construct(array $headers = [], $version = '1.1')
     {
         $this->uri = new ProductionUri();
-        $this->uri = $this->uri->withPath('/api/1.0' . $this->requestTarget);
+        $this->uri = $this->uri->withPath($this->requestTarget);
 
         $this->setHeaders($headers);
 

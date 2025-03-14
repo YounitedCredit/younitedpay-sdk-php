@@ -3,17 +3,22 @@
 namespace Tests\Model;
 
 use PHPUnit\Framework\TestCase;
-use YounitedPaySDK\Model\Address;
-use YounitedPaySDK\Model\Basket;
+use YounitedPaySDK\Model\CustomExperience;
+use YounitedPaySDK\Model\LoanRequest;
+use YounitedPaySDK\Model\PostalAddress;
+use YounitedPaySDK\Model\BasketDescription;
 use YounitedPaySDK\Model\BasketItem;
 use YounitedPaySDK\Model\InitializeContract;
-use YounitedPaySDK\Model\MerchantOrderContext;
-use YounitedPaySDK\Model\MerchantUrls;
-use YounitedPaySDK\Model\PersonalInformation;
+use YounitedPaySDK\Model\MerchantContext;
+use YounitedPaySDK\Model\CustomerInformation;
+use YounitedPaySDK\Model\RiskInsights;
+use YounitedPaySDK\Model\TechnicalInformation;
 
 class InitializeContractTest extends TestCase
 {
     /**
+     * @depends testInstance
+     *
      * @return InitializeContract
      */
     public function testInstance()
@@ -25,129 +30,168 @@ class InitializeContractTest extends TestCase
     }
 
     /**
-     * @depends testInstance
+     * @depends testLoanRequest
      *
      * @param InitializeContract $initializeContract
      *
      * @return InitializeContract
      */
-    public function testRequestMaturity($initializeContract)
+    public function testLoanRequest($initializeContract)
     {
-        $initializeContract->setRequestedMaturity(10);
+        $loanRequest = new LoanRequest();
+        $loanRequest->setRequestedAmount(123.0);
+        $loanRequest->setRequestedMaturityInMonths('10');
 
-        $this->assertEquals(10, $initializeContract->getRequestedMaturity());
+        $this->assertInstanceOf(CustomerInformation::class, $loanRequest);
+
+        $initializeContract->setLoanRequest($loanRequest);
+
+        $this->assertEquals($loanRequest, $initializeContract->getLoanRequest());
 
         return $initializeContract;
     }
 
     /**
-     * @depends testRequestMaturity
+     * @depends testBasketDescription
      *
      * @param InitializeContract $initializeContract
      *
      * @return InitializeContract
      */
-    public function testPersonalInformation($initializeContract)
-    {
-        $datetime = new \DateTime('1970-01-01T00:00:00');
-
-        $address = new Address();
-        $address->setStreetNumber('123');
-        $address->setStreetName('StreetName');
-        $address->setAdditionalAddress('');
-        $address->setCity('Country');
-        $address->setPostalCode('12345');
-        $address->setCountryCode('FR');
-
-        $personalInformation = new PersonalInformation();
-        $personalInformation->setFirstName('FirstName');
-        $personalInformation->setLastName('LastName');
-        $personalInformation->setGenderCode('MALE');
-        $personalInformation->setEmailAddress('firstname.lastname@mail.com');
-        $personalInformation->setCellPhoneNumber('33611223344');
-        $personalInformation->setBirthDate($datetime);
-        $personalInformation->setAddress($address);
-
-        $this->assertInstanceOf(PersonalInformation::class, $personalInformation);
-
-        $initializeContract->setPersonalInformation($personalInformation);
-
-        $this->assertEquals($personalInformation, $initializeContract->getPersonalInformation());
-
-        return $initializeContract;
-    }
-
-    /**
-     * @depends testPersonalInformation
-     *
-     * @param InitializeContract $initializeContract
-     *
-     * @return InitializeContract
-     */
-    public function testBasket($initializeContract)
+    public function testBasketDescription($initializeContract)
     {
         $basketItem1 = new BasketItem();
-        $basketItem1->setItemName('Item basket 1');
+        $basketItem1->setName('Item basket 1');
         $basketItem1->setQuantity(2);
         $basketItem1->setUnitPrice(45.0);
 
         $basketItem2 = new BasketItem();
-        $basketItem2->setItemName('Item basket 2');
+        $basketItem2->setName('Item basket 2');
         $basketItem2->setQuantity(1);
         $basketItem2->setUnitPrice(33.0);
 
-        $basket = new Basket();
-        $basket->setBasketAmount(123.0);
+        $basket = new BasketDescription();
         $basket->setItems([$basketItem1, $basketItem2]);
 
-        $initializeContract->setBasket($basket);
+        $initializeContract->setBasketDescription($basket);
 
-        $this->assertEquals($basket, $initializeContract->getBasket());
-
-        return $initializeContract;
-    }
-
-    /**
-     * @depends testBasket
-     *
-     * @param InitializeContract $initializeContract
-     *
-     * @return InitializeContract
-     */
-    public function testMerchantUrls($initializeContract)
-    {
-        $merchantUrls = new MerchantUrls();
-        $merchantUrls->setOnApplicationFailedRedirectUrl('on-application-failed-redirect-url.com');
-        $merchantUrls->setOnApplicationSucceededRedirectUrl('on-application-succeeded-redirect-url.com');
-        $merchantUrls->setOnCanceledWebhookUrl('on-canceled-webhook-url.com');
-        $merchantUrls->setOnWithdrawnWebhookUrl('on-withdrawn-webhook-url.com');
-
-        $initializeContract->setMerchantUrls($merchantUrls);
-
-        $this->assertEquals($merchantUrls, $initializeContract->getMerchantUrls());
+        $this->assertEquals($basket, $initializeContract->getBasketDescription());
 
         return $initializeContract;
     }
 
     /**
-     * @depends testMerchantUrls
+     * @depends testMerchantContext
      *
      * @param InitializeContract $initializeContract
      *
      * @return bool
      */
-    public function testMerchantOrderContext($initializeContract)
+    public function testMerchantContext($initializeContract)
     {
-        $merchantOrderContext = new MerchantOrderContext();
-        $merchantOrderContext->setChannel('test');
-        $merchantOrderContext->setShopCode('TEST');
-        $merchantOrderContext->setMerchantReference('MerchantReference');
-        $merchantOrderContext->setAgentEmailAddress('merchant@mail.com');
+        $merchantContext = new MerchantContext();
+        $merchantContext->setShopCode('TEST');
+        $merchantContext->setMerchantReference('MerchantReference');
+        $merchantContext->setSalesClerkContactEmailAddress('merchant@mail.com');
 
-        $initializeContract->setMerchantOrderContext($merchantOrderContext);
+        $initializeContract->setMerchantContext($merchantContext);
 
-        $this->assertEquals($merchantOrderContext, $initializeContract->getMerchantOrderContext());
+        $this->assertEquals($merchantContext, $initializeContract->getMerchantContext());
 
         return true;
+    }
+
+    /**
+     * @depends testTechnicalInformation
+     *
+     * @param InitializeContract $initializeContract
+     *
+     * @return InitializeContract
+     */
+    public function testTechnicalInformation($initializeContract)
+    {
+        $technicalInformation = new TechnicalInformation();
+        $technicalInformation->setWebhookNotificationUrl('webhook-notification-url.com');
+        $technicalInformation->setApiVersion('2025-01-01');
+
+        $initializeContract->setTechnicalInformation($technicalInformation);
+
+        $this->assertEquals($technicalInformation, $initializeContract->getTechnicalInformation());
+
+        return $initializeContract;
+    }
+
+    /**
+     * @depends testCustomerInformation
+     *
+     * @param InitializeContract $initializeContract
+     *
+     * @return InitializeContract
+     */
+    public function testCustomerInformation($initializeContract)
+    {
+        $datetime = new \DateTime('1970-01-01T00:00:00');
+
+        $postalAddress = new PostalAddress();
+        $postalAddress->setAddressLine1('123 StreetName');
+        $postalAddress->setAddressLine2('');
+        $postalAddress->setCity('Country');
+        $postalAddress->setPostalCode('12345');
+        $postalAddress->setCountryCode('FR');
+
+        $customerInformation = new CustomerInformation();
+        $customerInformation->setFirstName('FirstName');
+        $customerInformation->setLastName('LastName');
+        $customerInformation->setEmailAddress('firstname.lastname@mail.com');
+        $customerInformation->setMobilePhoneNumber('33611223344');
+        $customerInformation->setBirthDate($datetime);
+        $customerInformation->setPostalAddress($postalAddress);
+
+        $this->assertInstanceOf(CustomerInformation::class, $customerInformation);
+
+        $initializeContract->setCustomerInformation($customerInformation);
+
+        $this->assertEquals($customerInformation, $initializeContract->getCustomerInformation());
+
+        return $initializeContract;
+    }
+
+    /**
+     * @depends testRiskInsights
+     *
+     * @param InitializeContract $initializeContract
+     *
+     * @return InitializeContract
+     */
+    public function testRiskInsights($initializeContract)
+    {
+        $riskInsights = new RiskInsights();
+        $riskInsights->setCustomerSegmentationCode('Standard');
+        $riskInsights->setCustomerIpAddress('127.0.0.1');
+
+        $initializeContract->setRiskInsights($riskInsights);
+
+        $this->assertEquals($riskInsights, $initializeContract->getRiskInsights());
+
+        return $initializeContract;
+    }
+
+    /**
+     * @depends testCustomExperience
+     *
+     * @param InitializeContract $initializeContract
+     *
+     * @return InitializeContract
+     */
+    public function testCustomExperience($initializeContract)
+    {
+        $customExperience = new CustomExperience();
+        $customExperience->setCustomerRedirectUrl('customer-redirect-url.com');
+
+        $initializeContract->setCustomExperience($customExperience);
+
+        $this->assertEquals($customExperience, $initializeContract->getCustomExperience());
+
+        return $initializeContract;
     }
 }

@@ -19,26 +19,21 @@ use InvalidArgumentException;
 use JsonSerializable;
 
 /**
- * Address Model Class
+ * Postal Address Model Class
  */
-class Address extends AbstractModel implements JsonSerializable
+class PostalAddress extends AbstractModel implements JsonSerializable
 {
     // PROPERTIES
 
     /**
-     * @var string|null
-     */
-    private $streetNumber;
-
-    /**
      * @var string
      */
-    private $streetName;
+    private $addressLine1;
 
     /**
      * @var string|null
      */
-    private $additionalAddress;
+    private $addressLine2;
 
     /**
      * @var string
@@ -58,90 +53,68 @@ class Address extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Street Number
-     *
-     * @return string|null
-     */
-    public function getStreetNumber()
-    {
-        return $this->streetNumber;
-    }
-
-    /**
-     * Set Street Number
-     *
-     * @param string|null $streetNumber
-     *
-     * @return self
-     */
-    public function setStreetNumber($streetNumber)
-    {
-        if (is_string($streetNumber) === true || is_null($streetNumber) === true) {
-            $this->streetNumber = $streetNumber;
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Street Number must be a string or null but ' . gettype($streetNumber) . ' is given.'
-        );
-    }
-
-    /**
-     * Get Street Name
+     * Get Address Line 1
      *
      * @return string
      */
-    public function getStreetName()
+    public function getAddressLine1()
     {
-        return $this->streetName;
+        return $this->addressLine1;
     }
 
     /**
-     * Set Street Name
+     * Set Address Line 1
      * Character number must be less than or equal to 38
      *
-     * @param string $streetName
+     * @param string $addressLine1
      *
      * @return self
      */
-    public function setStreetName($streetName)
+    public function setAddressLine1($addressLine1)
     {
-        if (is_string($streetName) === true) {
-            $this->streetName = $streetName;
+        if (is_string($addressLine1) === true) {
+            if (strlen($addressLine1) > 38) {
+                throw new InvalidArgumentException(
+                    'Character number of Address Line 1 must be less than or equal to 38.'
+                );
+            }
+
+            $this->addressLine1 = $addressLine1;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Street Name must be a string but ' . gettype($streetName) . ' is given.'
+            'Address Line 1 must be a string but ' . gettype($addressLine1) . ' is given.'
         );
     }
 
     /**
-     * Get Additional Address
+     * Get Address Line 2
      *
      * @return string|null
      */
-    public function getAdditionalAddress()
+    public function getAddressLine2()
     {
-        return $this->additionalAddress;
+        return $this->addressLine2;
     }
 
     /**
-     * Set Additional Address
+     * Set Address Line 2
+     * Use only if AddressLine1 is greater than 38 characters.
      *
-     * @param string|null $additionalAddress
+     * @param string|null $addressLine2
      *
      * @return self
      */
-    public function setAdditionalAddress($additionalAddress)
+    public function setAddressLine2($addressLine2)
     {
-        if (is_null($additionalAddress) === true || is_string($additionalAddress) === true) {
-            $this->additionalAddress = $additionalAddress;
+        if (is_string($addressLine2) === true || is_null($addressLine2) === true) {
+            $this->addressLine2 = $addressLine2;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Additional Address must be a string or null but ' . gettype($additionalAddress) . ' is given.'
+            'Address Line 2 must be a string or null but ' . gettype($addressLine2) . ' is given.'
         );
     }
 

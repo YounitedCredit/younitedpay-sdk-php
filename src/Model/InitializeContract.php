@@ -26,176 +26,243 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     // PROPERTIES
 
     /**
-     * @var int
+     * @var LoanRequest
      */
-    private $requestedMaturity;
+    private $loanRequest;
 
     /**
-     * @var PersonalInformation
+     * @var BasketDescription
      */
-    private $personalInformation;
+    private $basketDescription;
 
     /**
-     * @var Basket
+     * @var MerchantContext
      */
-    private $basket;
+    private $merchantContext;
 
     /**
-     * @var MerchantUrls
+     * @var TechnicalInformation
      */
-    private $merchantUrls;
+    private $technicalInformation;
 
     /**
-     * @var MerchantOrderContext
+     * @var CustomerInformation|null
      */
-    private $merchantOrderContext;
+    private $customerInformation;
+
+    /**
+     * @var RiskInsights|null
+     */
+    private $riskInsights;
+
+    /**
+     * @var CustomExperience|null
+     */
+    private $customExperience;
 
     // GETTERS & SETTERS
 
     /**
-     * Get Requested Maturity
+     * Get Loan Request
      *
-     * @return int
+     * @return LoanRequest
      */
-    public function getRequestedMaturity()
+    public function getLoanRequest()
     {
-        return $this->requestedMaturity;
+        return $this->loanRequest;
     }
 
     /**
-     * Set Requested Maturity
-     * Value must be greater than or equal to 1
+     * Set Loan Request
      *
-     * @param int $requestedMaturity
+     * @param LoanRequest $loanRequest
      *
      * @return self
      */
-    public function setRequestedMaturity($requestedMaturity)
+    public function setLoanRequest($loanRequest)
     {
-        if (is_int($requestedMaturity) === true) {
-            $this->requestedMaturity = $requestedMaturity;
+        if ($loanRequest instanceof LoanRequest) {
+            $this->loanRequest = $loanRequest;
 
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Requested Maturity must be an int but ' . gettype($requestedMaturity) . ' is given.'
+            'Loan Request must be an instance of ' . LoanRequest::class . ' but ' . gettype($loanRequest) . ' is given.'
         );
     }
 
     /**
-     * Get Personal Information
+     * Get Basket Description
      *
-     * @return PersonalInformation
+     * @return BasketDescription
      */
-    public function getPersonalInformation()
+    public function getBasketDescription()
     {
-        return $this->personalInformation;
+        return $this->basketDescription;
     }
 
     /**
-     * Set Personal Information
+     * Set Basket Description
      *
-     * @param PersonalInformation $personalInformation
+     * @param BasketDescription $basketDescription
      *
      * @return self
      */
-    public function setPersonalInformation($personalInformation)
+    public function setBasketDescription($basketDescription)
     {
-        if ($personalInformation instanceof PersonalInformation) {
-            $this->personalInformation = $personalInformation;
+        if ($basketDescription instanceof BasketDescription) {
+            $this->basketDescription = $basketDescription;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Personal Information must be an instance of ' . PersonalInformation::class . ' but ' . get_class($personalInformation) . ' is given.'
+            'Basket Description must be an instance of ' . BasketDescription::class . ' but ' . get_class($basketDescription) . ' is given.'
         );
     }
 
     /**
-     * Get Basket
+     * Get Merchant Context
      *
-     * @return Basket
+     * @return MerchantContext
      */
-    public function getBasket()
+    public function getMerchantContext()
     {
-        return $this->basket;
+        return $this->merchantContext;
     }
 
     /**
-     * Set Basket
+     * Set Merchant Context
      *
-     * @param Basket $basket
+     * @param MerchantContext $merchantContext
      *
      * @return self
      */
-    public function setBasket($basket)
+    public function setMerchantContext($merchantContext)
     {
-        if ($basket instanceof Basket) {
-            $this->basket = $basket;
+        if ($merchantContext instanceof MerchantContext) {
+            $this->merchantContext = $merchantContext;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Basket must be an instance of ' . Basket::class . ' but ' . get_class($basket) . ' is given.'
+            'Merchant Context must be an instance of ' . MerchantContext::class . ' but ' . get_class($merchantContext) . ' is given.'
         );
     }
 
     /**
-     * Get Merchant Urls
+     * Get Technical Information
      *
-     * @return MerchantUrls
+     * @return TechnicalInformation
      */
-    public function getMerchantUrls()
+    public function getTechnicalInformation()
     {
-        return $this->merchantUrls;
+        return $this->technicalInformation;
     }
 
     /**
-     * Set Merchant Urls
+     * Set Technical Information
      *
-     * @param MerchantUrls $merchantUrls
+     * @param TechnicalInformation $technicalInformation
      *
      * @return self
      */
-    public function setMerchantUrls($merchantUrls)
+    public function setTechnicalInformation($technicalInformation)
     {
-        if ($merchantUrls instanceof MerchantUrls) {
-            $this->merchantUrls = $merchantUrls;
+        if ($technicalInformation instanceof TechnicalInformation) {
+            $this->technicalInformation = $technicalInformation;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Merchant Urls must be an instance of ' . MerchantUrls::class . ' but ' . get_class($merchantUrls) . ' is given.'
+            'Technical Information must be an instance of ' . TechnicalInformation::class . ' but ' . get_class($technicalInformation) . ' is given.'
         );
     }
 
     /**
-     * Get Merchant Order Context
+     * Get Customer Information
      *
-     * @return MerchantOrderContext
+     * @return CustomerInformation
      */
-    public function getMerchantOrderContext()
+    public function getCustomerInformation()
     {
-        return $this->merchantOrderContext;
+        return $this->customerInformation;
     }
 
     /**
-     * Set Merchant Order Context
+     * Set Customer Information
      *
-     * @param MerchantOrderContext $merchantOrderContext
+     * @param CustomerInformation $customerInformation
      *
      * @return self
      */
-    public function setMerchantOrderContext($merchantOrderContext)
+    public function setCustomerInformation($customerInformation)
     {
-        if ($merchantOrderContext instanceof MerchantOrderContext) {
-            $this->merchantOrderContext = $merchantOrderContext;
+        if ($customerInformation instanceof CustomerInformation) {
+            $this->customerInformation = $customerInformation;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Merchant Order Context must be an instance of ' . MerchantOrderContext::class . ' but ' . get_class($merchantOrderContext) . ' is given.'
+            'Customer Information must be an instance of ' . CustomerInformation::class . ' but ' . get_class($customerInformation) . ' is given.'
+        );
+    }
+
+    /**
+     * Get Risk Insights
+     *
+     * @return RiskInsights|null
+     */
+    public function getRiskInsights()
+    {
+        return $this->riskInsights;
+    }
+
+    /**
+     * Set Risk Insights
+     *
+     * @param RiskInsights $riskInsights
+     *
+     * @return self
+     */
+    public function setRiskInsights($riskInsights)
+    {
+        if ($riskInsights instanceof RiskInsights) {
+            $this->riskInsights = $riskInsights;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Risk Insights must be an instance of ' . RiskInsights::class . ' but ' . get_class($riskInsights) . ' is given.'
+        );
+    }
+
+    /**
+     * Get Custom Experience
+     *
+     * @return CustomExperience|null
+     */
+    public function getCustomExperience()
+    {
+        return $this->customExperience;
+    }
+
+    /**
+     * Set Custom Experience
+     *
+     * @param CustomExperience $customExperience
+     *
+     * @return self
+     */
+    public function setCustomExperience($customExperience)
+    {
+        if ($customExperience instanceof CustomExperience) {
+            $this->customExperience = $customExperience;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Custom Experience must be an instance of ' . CustomExperience::class . ' but ' . get_class($customExperience) . ' is given.'
         );
     }
 }

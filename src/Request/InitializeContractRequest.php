@@ -27,7 +27,7 @@ class InitializeContractRequest extends AbstractRequest
     /**
      * @var string
      */
-    protected $requestTarget = '/Contract';
+    protected $requestTarget = '/payments/personal-loan';
 
     /**
      * @var string

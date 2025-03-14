@@ -19,16 +19,11 @@ use InvalidArgumentException;
 use JsonSerializable;
 
 /**
- * Basket Model Class
+ * Basket Description Model Class
  */
-class Basket extends AbstractModel implements JsonSerializable
+class BasketDescription extends AbstractModel implements JsonSerializable
 {
     // PROPERTIES
-
-    /**
-     * @var double
-     */
-    private $basketAmount;
 
     /**
      * @var array<BasketItem|AbstractModel>
@@ -36,36 +31,6 @@ class Basket extends AbstractModel implements JsonSerializable
     private $items;
 
     // GETTERS & SETTERS
-
-    /**
-     * Get Basket Amount
-     *
-     * @return double
-     */
-    public function getBasketAmount()
-    {
-        return $this->basketAmount;
-    }
-
-    /**
-     * Set Basket Amount
-     * Value must be greater than or equal to 1
-     *
-     * @param double $basketAmount
-     *
-     * @return self
-     */
-    public function setBasketAmount($basketAmount)
-    {
-        if (is_double($basketAmount)) {
-            $this->basketAmount = $basketAmount;
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Basket Amount must be a double but ' . gettype($basketAmount) . ' is given.'
-        );
-    }
 
     /**
      * Get Items

@@ -28,7 +28,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
     /**
      * @var string
      */
-    private $itemName;
+    private $name;
 
     /**
      * @var int
@@ -43,31 +43,31 @@ class BasketItem extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Item Name
+     * Get Name
      *
      * @return string
      */
-    public function getItemName()
+    public function getName()
     {
-        return $this->itemName;
+        return $this->name;
     }
 
     /**
-     * Set Item Name
+     * Set Name
      *
-     * @param string $itemName
+     * @param string $name
      *
      * @return self
      */
-    public function setItemName($itemName)
+    public function setName($name)
     {
-        if (is_string($itemName) === true) {
-            $this->itemName = $itemName;
+        if (is_string($name) === true) {
+            $this->name = $name;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Item Name must be a string but ' . gettype($itemName) . ' is given.'
+            'Name must be a string but ' . gettype($name) . ' is given.'
         );
     }
 
