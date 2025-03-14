@@ -26,7 +26,7 @@ class Basket extends AbstractModel implements JsonSerializable
     // PROPERTIES
 
     /**
-     * @var double
+     * @var string|float
      */
     private $basketAmount;
 
@@ -40,7 +40,7 @@ class Basket extends AbstractModel implements JsonSerializable
     /**
      * Get Basket Amount
      *
-     * @return double
+     * @return string|float
      */
     public function getBasketAmount()
     {
@@ -51,13 +51,13 @@ class Basket extends AbstractModel implements JsonSerializable
      * Set Basket Amount
      * Value must be greater than or equal to 1
      *
-     * @param double $basketAmount
+     * @param string|float $basketAmount
      *
      * @return self
      */
     public function setBasketAmount($basketAmount)
     {
-        if (is_double($basketAmount)) {
+        if ((float) $basketAmount > 0) {
             $this->basketAmount = $basketAmount;
             return $this;
         }

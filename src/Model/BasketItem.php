@@ -36,7 +36,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
     private $quantity;
 
     /**
-     * @var double
+     * @var string|float
      */
     private $unitPrice;
 
@@ -104,7 +104,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
     /**
      * Get Unit Price
      *
-     * @return double
+     * @return mixed
      */
     public function getUnitPrice()
     {
@@ -115,13 +115,13 @@ class BasketItem extends AbstractModel implements JsonSerializable
      * Set Unit Price
      * Value must be greater than or equal to 0
      *
-     * @param double $unitPrice
+     * @param string|float $unitPrice
      *
      * @return self
      */
     public function setUnitPrice($unitPrice)
     {
-        if (is_double($unitPrice) === true) {
+        if ((float) $unitPrice > 0) {
             $this->unitPrice = $unitPrice;
             return $this;
         }

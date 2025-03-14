@@ -23,14 +23,14 @@ use InvalidArgumentException;
 class BestPrice extends AbstractModel
 {
     /**
-     * @var double
+     * @var string|float
      */
     private $borrowedAmount;
 
     /**
      * Get a borrow amount
      *
-     * @return double borrowed amount
+     * @return string|float borrowed amount
      */
     public function getBorrowedAmount()
     {
@@ -41,13 +41,13 @@ class BestPrice extends AbstractModel
      * Set a borrow amount
      * Value must be greater than or equal to 1
      *
-     * @param double $borrowedAmount
+     * @param string|float $borrowedAmount
      *
      * @return self
      */
     public function setBorrowedAmount($borrowedAmount)
     {
-        if (is_double($borrowedAmount) === true) {
+        if ((float) $borrowedAmount > 0) {
             $this->borrowedAmount = $borrowedAmount;
             return $this;
         }
