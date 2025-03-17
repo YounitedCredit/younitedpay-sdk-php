@@ -15,7 +15,9 @@
 
 namespace YounitedPaySDK\Response;
 
+use InvalidArgumentException;
 use YounitedPaySDK\Model\Error;
+use YounitedPaySDK\Model\ArrayCollection;
 
 /**
  * Default Response
@@ -38,8 +40,25 @@ class DefaultResponse extends AbstractResponse
      */
     public function getModel()
     {
-        $model = new Error();
+        $content = (string) $this->stream;
+        if (empty($content) === true) {
+            return new ArrayCollection();
+        }
 
-        return $model;
+        if ($this->getStatusCode() < 200 || $this->getStatusCode() > 299) {
+            return (new Error())->hydrate(['errors' => [$this->getReasonPhrase(), $content]]);
+        }
+        
+        $output = json_decode($content, true);
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new InvalidArgumentException(
+                'Response: ' . $content . ' -json_decode error: ' . json_last_error_msg()
+            );
+        }
+        if (empty($output) === true) {
+            return new ArrayCollection();
+        }
+
+        return new ArrayCollection($output);
     }
 }

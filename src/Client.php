@@ -118,7 +118,6 @@ class Client
         $data['scope'] = 'api://younited-pay/.default';
 
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
-        $headers[] = 'X-Api-Version: 2025-01-01';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://login.microsoftonline.com/' . $tenantId . '/oauth2/v2.0/token');
@@ -187,6 +186,7 @@ class Client
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token,
+            'X-Api-Version' => '2025-01-01'
         ];
         $request->setHeaders($headers);
 
