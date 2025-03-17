@@ -144,6 +144,7 @@ abstract class AbstractResponse implements JsonSerializable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return get_object_vars($this);
