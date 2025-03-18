@@ -19,9 +19,14 @@ use YounitedPaySDK\Model\Basket;
 use YounitedPaySDK\Model\BasketDescription;
 use YounitedPaySDK\Model\BestPrice;
 use YounitedPaySDK\Model\CancelContract;
+use YounitedPaySDK\Model\CancelPayment;
 use YounitedPaySDK\Model\ConfirmContract;
 use YounitedPaySDK\Model\CreatePayment;
 use YounitedPaySDK\Model\CustomExperience;
+use YounitedPaySDK\Model\ExecutePayment;
+use YounitedPaySDK\Model\GetPayment;
+use YounitedPaySDK\Model\GetPaymentLink;
+use YounitedPaySDK\Model\GetPaymentStatus;
 use YounitedPaySDK\Model\InitializeContract;
 use YounitedPaySDK\Model\LoadContract;
 use YounitedPaySDK\Model\LoanRequest;
@@ -36,8 +41,13 @@ use YounitedPaySDK\Model\WithdrawContract;
 use YounitedPaySDK\Request\AvailableMaturitiesRequest;
 use YounitedPaySDK\Request\BestPriceRequest;
 use YounitedPaySDK\Request\CancelContractRequest;
+use YounitedPaySDK\Request\CancelPaymentRequest;
 use YounitedPaySDK\Request\ConfirmContractRequest;
 use YounitedPaySDK\Request\CreatePaymentRequest;
+use YounitedPaySDK\Request\ExecutePaymentRequest;
+use YounitedPaySDK\Request\GetPaymentLinkRequest;
+use YounitedPaySDK\Request\GetPaymentRequest;
+use YounitedPaySDK\Request\GetPaymentStatusRequest;
 use YounitedPaySDK\Request\InitializeContractRequest;
 use YounitedPaySDK\Request\LoadContractRequest;
 use YounitedPaySDK\Request\WithdrawContractRequest;
@@ -87,6 +97,81 @@ class ClientApiService extends AbstractClientApiService
             ->setCustomExperience($customExperience);
 
         $request = new CreatePaymentRequest();
+
+        return $this->call($model, $request);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return AbstractResponse
+     */
+    public function cancelPayment($id)
+    {
+        $model = (new CancelPayment())
+            ->setId($id);
+
+        $request = new CancelPaymentRequest();
+
+        return $this->call($model, $request);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return AbstractResponse
+     */
+    public function executePayment($id)
+    {
+        $model = (new ExecutePayment())
+            ->setId($id);
+
+        $request = new ExecutePaymentRequest();
+
+        return $this->call($model, $request);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return AbstractResponse
+     */
+    public function getPayment($id)
+    {
+        $model = (new GetPayment())
+            ->setId($id);
+
+        $request = new GetPaymentRequest();
+
+        return $this->call($model, $request);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return AbstractResponse
+     */
+    public function getPaymentStatus($id)
+    {
+        $model = (new GetPaymentStatus())
+            ->setId($id);
+
+        $request = new GetPaymentStatusRequest();
+
+        return $this->call($model, $request);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return AbstractResponse
+     */
+    public function getPaymentLink($id)
+    {
+        $model = (new GetPaymentLink())
+            ->setId($id);
+
+        $request = new GetPaymentLinkRequest();
 
         return $this->call($model, $request);
     }
