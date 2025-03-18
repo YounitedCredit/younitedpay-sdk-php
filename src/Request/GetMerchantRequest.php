@@ -13,27 +13,19 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace YounitedPaySDK\Request\NewAPI;
+namespace YounitedPaySDK\Request;
 
-use YounitedPaySDK\Stream;
-use YounitedPaySDK\Model\AbstractModel;
-use YounitedPaySDK\Model\NewAPI\BestPrice;
 use YounitedPaySDK\Response\DefaultResponse;
 
 /**
- * Get Best Price
+ * Get Merchant Request Class
  */
-class ShopsRequest extends AbstractRequest
+class GetMerchantRequest extends AbstractRequest
 {
-    /**
-     * @var AbstractModel
-     */
-    protected $body = '';
-
     /**
      * @var string
      */
-    protected $requestTarget = '/shops';
+    protected $requestTarget = '/pay/merchants/me';
 
     /**
      * @var string

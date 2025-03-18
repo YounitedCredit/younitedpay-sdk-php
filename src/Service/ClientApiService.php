@@ -45,6 +45,8 @@ use YounitedPaySDK\Request\CancelPaymentRequest;
 use YounitedPaySDK\Request\ConfirmContractRequest;
 use YounitedPaySDK\Request\CreatePaymentRequest;
 use YounitedPaySDK\Request\ExecutePaymentRequest;
+use YounitedPaySDK\Request\GetMerchantRequest;
+use YounitedPaySDK\Request\GetMerchantShopsRequest;
 use YounitedPaySDK\Request\GetPaymentLinkRequest;
 use YounitedPaySDK\Request\GetPaymentRequest;
 use YounitedPaySDK\Request\GetPaymentStatusRequest;
@@ -275,5 +277,25 @@ class ClientApiService extends AbstractClientApiService
         $request = new AvailableMaturitiesRequest();
 
         return $this->call($model, $request);
+    }
+
+    /**
+     * @return AbstractResponse
+     */
+    public function getMerchant()
+    {
+        $request = new GetMerchantRequest();
+
+        return $this->call(null, $request);
+    }
+
+    /**
+     * @return AbstractResponse
+     */
+    public function getMerchantShops()
+    {
+        $request = new GetMerchantShopsRequest();
+
+        return $this->call(null, $request);
     }
 }
