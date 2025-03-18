@@ -37,6 +37,11 @@ abstract class AbstractRequest implements JsonSerializable
     /**
      * @var string
      */
+    public $query = '';
+
+    /**
+     * @var string
+     */
     protected $response;
 
     /** @var string Uri fragment. */

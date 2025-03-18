@@ -318,10 +318,14 @@ class Client
 
         $options[CURLOPT_HTTP_VERSION] = $this->getProtocolVersion($request->getProtocolVersion());
         $options[CURLOPT_URL] = (string) $request->getUri();
+        if (isset($request->query) && $request->query !== '') {
+            $options[CURLOPT_URL] .= '?' . $request->query;
+        }
 
         $options = $this->addRequestBodyOptions($request, $options);
 
         $options[CURLOPT_HTTPHEADER] = $this->createHeaders($request, $options);
+        unset($options[CURLOPT_HTTPHEADER][0]); // Remove Host headers
 
         if ($request->getUri()->getUserInfo()) {
             $options[CURLOPT_USERPWD] = $request->getUri()->getUserInfo();

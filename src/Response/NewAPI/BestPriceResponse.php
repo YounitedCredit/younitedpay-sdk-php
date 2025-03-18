@@ -51,14 +51,14 @@ class BestPriceResponse extends AbstractResponse
         $collection = [];
         foreach ($offers as $key => $value) {
             $collection[$key] = (new OfferItem)
-                ->setRequestedAmount($value['requestedAmount'])
-                ->setAnnualPercentageRate($value['annualPercentageRate'])
-                ->setAnnualDebitRate($value['characteristics']['interestRate'])
-                ->setMonthlyInstallmentAmount($value['details']['monthlyInstallmentAmount'])
-                ->setCreditTotalAmount($value['characteristics']['amount'])
-                ->setMaturityInMonths($value['characteristics']['maturityInMonths'])
-                ->setCreditAmountToFund($value['details']['totalDueAmount'])
-                ->setInterestsTotalAmount($value['details']['interestsAmount']);
+                ->setRequestedAmount((float) $value['requestedAmount'])
+                ->setAnnualPercentageRate((float) $value['details']['annualPercentageRate'])
+                ->setAnnualDebitRate((float) $value['characteristics']['interestRate'])
+                ->setMonthlyInstallmentAmount((float) $value['details']['monthlyInstallmentAmount'])
+                ->setCreditTotalAmount((float) $value['characteristics']['amount'])
+                ->setMaturityInMonths((int) $value['characteristics']['maturityInMonths'])
+                ->setCreditAmountToFund((float) $value['details']['totalDueAmount'])
+                ->setInterestsTotalAmount((float) $value['details']['interestsAmount']);
         }
 
         return new ArrayCollection($collection);

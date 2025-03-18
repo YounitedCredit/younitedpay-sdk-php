@@ -38,7 +38,7 @@ class BestPriceRequest extends AbstractRequest
     /**
      * @var string
      */
-    protected $query = 'amount={amount}&{maturity}&ShopCode={shopcode}';
+    public $query = 'amount={amount}&{maturity}&ShopCode={shopcode}';
 
     /**
      * @var string
@@ -69,18 +69,16 @@ class BestPriceRequest extends AbstractRequest
                 // $maturityQuery .= "&Maturity['Range']['Step']=" . ( isset($range['Step']) ? (int) $range['Step'] : 1 );
             }
             $this->query = str_replace(
-                '{amount}',
-                urlencode($body->getBorrowedAmount()),
-                $this->query
-            );
-            $this->query = str_replace(
-                '{maturity}',
-                $maturityQuery,
-                $this->query
-            );
-            $this->query = str_replace(
-                '{shopcode}',
-                urlencode($body->getShopCode()),
+                [
+                    '{amount}',
+                    '{maturity}',
+                    '{shopcode}',
+                ],
+                [
+                    urlencode($body->getBorrowedAmount()),
+                    $maturityQuery,
+                    urlencode($body->getShopCode()),
+                ],
                 $this->query
             );
 
