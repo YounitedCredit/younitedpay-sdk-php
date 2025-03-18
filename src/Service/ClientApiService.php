@@ -15,16 +15,21 @@
 
 namespace YounitedPaySDK\Service;
 
+use YounitedPaySDK\Model\Basket;
 use YounitedPaySDK\Model\BasketDescription;
 use YounitedPaySDK\Model\BestPrice;
 use YounitedPaySDK\Model\CancelContract;
 use YounitedPaySDK\Model\ConfirmContract;
+use YounitedPaySDK\Model\CreatePayment;
 use YounitedPaySDK\Model\CustomExperience;
 use YounitedPaySDK\Model\InitializeContract;
 use YounitedPaySDK\Model\LoadContract;
 use YounitedPaySDK\Model\LoanRequest;
 use YounitedPaySDK\Model\MerchantContext;
 use YounitedPaySDK\Model\CustomerInformation;
+use YounitedPaySDK\Model\MerchantOrderContext;
+use YounitedPaySDK\Model\MerchantUrls;
+use YounitedPaySDK\Model\PersonalInformation;
 use YounitedPaySDK\Model\RiskInsights;
 use YounitedPaySDK\Model\TechnicalInformation;
 use YounitedPaySDK\Model\WithdrawContract;
@@ -32,6 +37,7 @@ use YounitedPaySDK\Request\AvailableMaturitiesRequest;
 use YounitedPaySDK\Request\BestPriceRequest;
 use YounitedPaySDK\Request\CancelContractRequest;
 use YounitedPaySDK\Request\ConfirmContractRequest;
+use YounitedPaySDK\Request\CreatePaymentRequest;
 use YounitedPaySDK\Request\InitializeContractRequest;
 use YounitedPaySDK\Request\LoadContractRequest;
 use YounitedPaySDK\Request\WithdrawContractRequest;
@@ -69,9 +75,9 @@ class ClientApiService extends AbstractClientApiService
      *
      * @return AbstractResponse|ErrorResponse
      */
-    public function initializeContract(LoanRequest $loanRequest, BasketDescription $basketDescription, MerchantContext $merchantContext, TechnicalInformation $technicalInformation, CustomerInformation $customerInformation = null, RiskInsights $riskInsights = null, CustomExperience $customExperience = null)
+    public function createPayment(LoanRequest $loanRequest, BasketDescription $basketDescription, MerchantContext $merchantContext, TechnicalInformation $technicalInformation, CustomerInformation $customerInformation = null, RiskInsights $riskInsights = null, CustomExperience $customExperience = null)
     {
-        $model = (new InitializeContract())
+        $model = (new CreatePayment())
             ->setLoanRequest($loanRequest)
             ->setBasketDescription($basketDescription)
             ->setMerchantContext($merchantContext)
@@ -79,6 +85,29 @@ class ClientApiService extends AbstractClientApiService
             ->setCustomerInformation($customerInformation)
             ->setRiskInsights($riskInsights)
             ->setCustomExperience($customExperience);
+
+        $request = new CreatePaymentRequest();
+
+        return $this->call($model, $request);
+    }
+
+    /**
+     * @param int $requestMaturity
+     * @param PersonalInformation $personalInformation
+     * @param Basket $basket
+     * @param MerchantUrls $merchantUrls
+     * @param MerchantOrderContext $merchantOrderContext
+     *
+     * @return AbstractResponse|ErrorResponse
+     */
+    public function initializeContract($requestMaturity, PersonalInformation $personalInformation, Basket $basket, MerchantUrls $merchantUrls, MerchantOrderContext $merchantOrderContext)
+    {
+        $model = (new InitializeContract())
+            ->setRequestedMaturity($requestMaturity)
+            ->setPersonalInformation($personalInformation)
+            ->setBasket($basket)
+            ->setMerchantUrls($merchantUrls)
+            ->setMerchantOrderContext($merchantOrderContext);
 
         $request = new InitializeContractRequest();
 

@@ -17,17 +17,17 @@ namespace YounitedPaySDK\Request;
 
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Model\InitializeContract;
-use YounitedPaySDK\Response\InitializeContractResponse;
+use YounitedPaySDK\Response\CreatePaymentResponse;
 
 /**
- * Initialize Contract Request Class
+ * Create Payment Request Class
  */
-class InitializeContractRequest extends AbstractRequest
+class CreatePaymentRequest extends AbstractRequest
 {
     /**
      * @var string
      */
-    protected $requestTarget = '/Contract';
+    protected $requestTarget = '/payments/personal-loan';
 
     /**
      * @var string
@@ -35,7 +35,7 @@ class InitializeContractRequest extends AbstractRequest
     protected $method = 'POST';
 
     /** @var string */
-    protected $response = InitializeContractResponse::class;
+    protected $response = CreatePaymentResponse::class;
 
     /**
      * @inherit
