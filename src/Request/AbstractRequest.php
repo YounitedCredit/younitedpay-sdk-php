@@ -96,7 +96,10 @@ abstract class AbstractRequest implements JsonSerializable
             $new->uri = new SandboxUri();
         }
 
-        $new->uri = $new->uri->withPath($new->uri->getPath() . $this->requestTarget);
+        $new->uri = $new->uri
+            ->withPath($new->uri->getPath() . $this->requestTarget)
+            ->withQuery($this->uri->getQuery())
+            ->withFragment($this->uri->getFragment());
         $new->tenantId = 'c9536195-ef3b-4703-9c13-924db8e24486';
         $new->updateHostFromUri();
 
