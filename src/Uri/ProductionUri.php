@@ -24,4 +24,9 @@ class ProductionUri extends AbstractUri
      * @var string $host
      */
     protected $host = 'api.younited-pay.com';
+
+    /**
+     * @var string Uri host.
+     */
+    protected $path = '/api/1.0';
 }

@@ -28,6 +28,11 @@ class GetPaymentLinkRequest extends AbstractRequest
     /**
      * @var string
      */
+    protected $apiVersion = '2025-01-01';
+
+    /**
+     * @var string
+     */
     protected $requestTarget = '/payments/{id}/link';
 
     /**

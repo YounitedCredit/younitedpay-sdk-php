@@ -18,6 +18,8 @@ namespace YounitedPaySDK\Request;
 use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Stream;
+use YounitedPaySDK\Uri\NewProductionUri;
+use YounitedPaySDK\Uri\NewSandboxUri;
 use YounitedPaySDK\Uri\ProductionUri;
 use YounitedPaySDK\Uri\SandboxUri;
 
@@ -28,6 +30,11 @@ abstract class AbstractRequest implements JsonSerializable
 {
     use MessageTrait;
     use RequestTrait;
+
+    /**
+     * @var string|null
+     */
+    protected $apiVersion;
 
     /**
      * @var AbstractModel
@@ -53,8 +60,13 @@ abstract class AbstractRequest implements JsonSerializable
      */
     public function __construct(array $headers = [], $version = '1.1')
     {
-        $this->uri = new ProductionUri();
-        $this->uri = $this->uri->withPath($this->requestTarget);
+        if($this->getApiVersion() === '2025-01-01') {
+            $this->uri = new NewProductionUri();
+        } else {
+            $this->uri = new ProductionUri();
+        }
+
+        $this->uri = $this->uri->withPath($this->uri->getPath() . $this->requestTarget);
 
         $this->setHeaders($headers);
 
@@ -69,7 +81,7 @@ abstract class AbstractRequest implements JsonSerializable
     }
 
     /**
-     * Enbale Sandbox
+     * Enable Sandbox
      *
      * @return self
      */
@@ -77,8 +89,14 @@ abstract class AbstractRequest implements JsonSerializable
     {
         $new = clone $this;
         $new->isSandbox = true;
-        $new->uri = new SandboxUri();
-        $new->uri = $new->uri->withPath('/api/1.0' . $this->requestTarget);
+
+        if($this->getApiVersion() === '2025-01-01') {
+            $new->uri = new NewSandboxUri();
+        } else {
+            $new->uri = new SandboxUri();
+        }
+
+        $new->uri = $new->uri->withPath($new->uri->getPath() . $this->requestTarget);
         $new->tenantId = 'c9536195-ef3b-4703-9c13-924db8e24486';
         $new->updateHostFromUri();
 
@@ -86,7 +104,17 @@ abstract class AbstractRequest implements JsonSerializable
     }
 
     /**
-     * Get Scheme
+     * Get Api Version
+     *
+     * @return string
+     */
+    public function getApiVersion()
+    {
+        return $this->apiVersion;
+    }
+
+    /**
+     * Get Tenant Id
      *
      * @return string
      */

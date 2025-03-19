@@ -13,17 +13,20 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace YounitedPaySDK\Uri\NewAPI;
-
-use YounitedPaySDK\Uri\AbstractUri;
+namespace YounitedPaySDK\Uri;
 
 /**
- * Production Uri
+ * New Production Uri
  */
-class ProductionUri extends AbstractUri
+class NewProductionUri extends AbstractUri
 {
     /**
      * @var string $host
      */
-    protected $host = 'api.younited.com/pay';
+    protected $host = 'api.younited.com';
+
+    /**
+     * @var string Uri host.
+     */
+    protected $path = '/pay';
 }

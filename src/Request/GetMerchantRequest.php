@@ -25,7 +25,12 @@ class GetMerchantRequest extends AbstractRequest
     /**
      * @var string
      */
-    protected $requestTarget = '/pay/merchants/me';
+    protected $apiVersion = '2025-01-01';
+
+    /**
+     * @var string
+     */
+    protected $requestTarget = '/merchants/me';
 
     /**
      * @var string

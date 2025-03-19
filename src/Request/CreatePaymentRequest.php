@@ -27,6 +27,11 @@ class CreatePaymentRequest extends AbstractRequest
     /**
      * @var string
      */
+    protected $apiVersion = '2025-01-01';
+
+    /**
+     * @var string
+     */
     protected $requestTarget = '/payments/personal-loan';
 
     /**
