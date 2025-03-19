@@ -18,8 +18,8 @@ namespace YounitedPaySDK\Request;
 use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Stream;
-use YounitedPaySDK\Uri\NewProductionUri;
-use YounitedPaySDK\Uri\NewSandboxUri;
+use YounitedPaySDK\Uri\NewAPI\ProductionUri as NewProductionUri;
+use YounitedPaySDK\Uri\NewAPI\SandboxUri as NewSandboxUri;
 use YounitedPaySDK\Uri\ProductionUri;
 use YounitedPaySDK\Uri\SandboxUri;
 

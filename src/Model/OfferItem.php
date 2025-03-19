@@ -19,7 +19,7 @@ use InvalidArgumentException;
 use JsonSerializable;
 
 /**
- * Offer
+ * Offer Item Model Class
  */
 class OfferItem extends AbstractModel implements JsonSerializable
 {
