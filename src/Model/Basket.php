@@ -31,7 +31,7 @@ class Basket extends AbstractModel implements JsonSerializable
     private $basketAmount;
 
     /**
-     * @var array<BasketDescriptionItem|AbstractModel>
+     * @var array<BasketItem|AbstractModel>
      */
     private $items;
 
@@ -70,7 +70,7 @@ class Basket extends AbstractModel implements JsonSerializable
     /**
      * Get Items
      *
-     * @return array<BasketDescriptionItem|AbstractModel>
+     * @return array<BasketItem|AbstractModel>
      */
     public function getItems()
     {
@@ -80,16 +80,16 @@ class Basket extends AbstractModel implements JsonSerializable
     /**
      * Set Items
      *
-     * @param array<BasketDescriptionItem|AbstractModel> $items
+     * @param array<BasketItem|AbstractModel> $items
      *
      * @return self
      */
     public function setItems(array $items)
     {
         foreach ($items as $item) {
-            if (($item instanceof BasketDescriptionItem) === false) {
+            if (($item instanceof BasketItem) === false) {
                 throw new InvalidArgumentException(
-                    'Element of Items must be an instance of ' . BasketDescriptionItem::class . ' but ' . get_class($item) . ' is given.'
+                    'Element of Items must be an instance of ' . BasketItem::class . ' but ' . get_class($item) . ' is given.'
                 );
             }
         }

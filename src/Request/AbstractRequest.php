@@ -141,7 +141,10 @@ abstract class AbstractRequest implements JsonSerializable
             );
         }
         $new = clone $this;
-        $new->uri = $new->uri->withPath('/api/1.0' . $this->requestTarget);
+        $new->uri = $new->uri
+            ->withPath($new->uri->getPath() . $this->requestTarget)
+            ->withQuery($this->uri->getQuery())
+            ->withFragment($this->uri->getFragment());
         $new->updateHostFromUri();
         $new->stream = Stream::create((string) $json);
 
