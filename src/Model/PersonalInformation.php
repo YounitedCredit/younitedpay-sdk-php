@@ -223,7 +223,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     /**
      * Set Birth Date
      *
-     * @param DateTime|null $birthDate
+     * @param DateTime|string|null $birthDate
      *
      * @return self
      */
@@ -234,7 +234,13 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
             return $this;
         }
 
-        if (is_null($birthDate) === true) {
+        if (is_string($birthDate) === true && !preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/', $birthDate)) {
+            throw new InvalidArgumentException(
+                'Birth Date must be a string in the date format Y-m-d\TH:i:s'
+            );
+        }
+
+        if (is_string($birthDate) === true || is_null($birthDate) === true) {
             $this->birthDate = $birthDate;
             return $this;
         }
