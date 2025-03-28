@@ -24,7 +24,7 @@ use YounitedPaySDK\Model\AbstractModel;
 class GetOffers extends AbstractModel
 {
     /**
-     * @var double
+     * @var float|string
      */
     private $amount;
 
@@ -57,7 +57,7 @@ class GetOffers extends AbstractModel
     /**
      * Get Amount
      *
-     * @return double
+     * @return float|string
      */
     public function getAmount()
     {
@@ -68,19 +68,19 @@ class GetOffers extends AbstractModel
      * Set Amount
      * Value must be greater than or equal to 1
      *
-     * @param double $amount
+     * @param float|string $amount
      *
      * @return self
      */
     public function setAmount($amount)
     {
-        if (is_double($amount) === true) {
+        if ((float) $amount > 1) {
             $this->amount = $amount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Amount must be a double but ' . gettype($amount) . ' is given.'
+            'Amount must be a decimal value greater than or equal to 1.'
         );
     }
 

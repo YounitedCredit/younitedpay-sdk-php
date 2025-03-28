@@ -27,7 +27,7 @@ class LoanRequest extends AbstractModel implements JsonSerializable
     // PROPERTIES
 
     /**
-     * @var double|float
+     * @var float|string
      */
     private $requestedAmount;
 
@@ -41,7 +41,7 @@ class LoanRequest extends AbstractModel implements JsonSerializable
     /**
      * Get Requested Amount
      *
-     * @return double|float
+     * @return float|string
      */
     public function getRequestedAmount()
     {
@@ -52,19 +52,19 @@ class LoanRequest extends AbstractModel implements JsonSerializable
      * Set Requested Amount
      * Value must be greater than or equal to 1
      *
-     * @param double $requestedAmount
+     * @param float|string $requestedAmount
      *
      * @return self
      */
     public function setRequestedAmount($requestedAmount)
     {
-        if (is_double($requestedAmount) || is_float($requestedAmount)) {
+        if ((float) $requestedAmount > 1) {
             $this->requestedAmount = $requestedAmount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Requested Amount must be a double but ' . gettype($requestedAmount) . ' is given.'
+            'Requested Amount must be a decimal value greater than or equal to 1.'
         );
     }
 

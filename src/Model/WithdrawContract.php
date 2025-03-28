@@ -31,7 +31,7 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
     private $contractReference;
 
     /**
-     * @var double|null
+     * @var float|string|null
      */
     private $amount;
 
@@ -69,7 +69,7 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
     /**
      * Get Amount
      *
-     * @return double|null
+     * @return float|string|null
      */
     public function getAmount()
     {
@@ -79,19 +79,19 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
     /**
      * Set Amount
      *
-     * @param double|null $amount
+     * @param float|string|null $amount
      *
      * @return self
      */
     public function setAmount($amount)
     {
-        if (is_null($amount) === true || is_double($amount) === true) {
+        if (is_null($amount) === true || (float) $amount > 1) {
             $this->amount = $amount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Amount must be a double or null but ' . gettype($amount) . ' is given.'
+            'Amount must be a decimal value or null.'
         );
     }
 }
