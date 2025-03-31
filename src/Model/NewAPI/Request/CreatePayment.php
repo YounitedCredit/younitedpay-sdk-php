@@ -18,6 +18,13 @@ namespace YounitedPaySDK\Model\NewAPI\Request;
 use InvalidArgumentException;
 use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
+use YounitedPaySDK\Model\NewAPI\BasketDescription;
+use YounitedPaySDK\Model\NewAPI\CustomerInformation;
+use YounitedPaySDK\Model\NewAPI\CustomExperience;
+use YounitedPaySDK\Model\NewAPI\LoanRequest;
+use YounitedPaySDK\Model\NewAPI\MerchantContext;
+use YounitedPaySDK\Model\NewAPI\RiskInsights;
+use YounitedPaySDK\Model\NewAPI\TechnicalInformation;
 
 /**
  * Create Payment Model Class

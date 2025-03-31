@@ -72,7 +72,7 @@ class TechnicalInformation extends AbstractModel implements JsonSerializable
      *
      * @return string
      */
-    public function getApiVersion(): string
+    public function getApiVersion()
     {
         return $this->apiVersion;
     }
@@ -84,7 +84,7 @@ class TechnicalInformation extends AbstractModel implements JsonSerializable
      *
      * @return self
      */
-    public function setApiVersion(string $apiVersion): TechnicalInformation
+    public function setApiVersion($apiVersion)
     {
         if (is_string($apiVersion) === true) {
             $this->apiVersion = $apiVersion;

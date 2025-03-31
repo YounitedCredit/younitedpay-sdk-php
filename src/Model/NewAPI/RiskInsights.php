@@ -72,7 +72,7 @@ class RiskInsights extends AbstractModel implements JsonSerializable
      *
      * @return string|null
      */
-    public function getCustomerIpAddress(): string
+    public function getCustomerIpAddress()
     {
         return $this->customerIpAddress;
     }
@@ -84,7 +84,7 @@ class RiskInsights extends AbstractModel implements JsonSerializable
      *
      * @return self
      */
-    public function setCustomerIpAddress(string $customerIpAddress): TechnicalInformation
+    public function setCustomerIpAddress($customerIpAddress)
     {
         if (is_string($customerIpAddress) === true || is_null($customerIpAddress) === true) {
             $this->customerIpAddress = $customerIpAddress;
