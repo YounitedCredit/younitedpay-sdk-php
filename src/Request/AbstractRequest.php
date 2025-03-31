@@ -107,6 +107,16 @@ abstract class AbstractRequest implements JsonSerializable
     }
 
     /**
+     * Is Sandbox Enabled
+     *
+     * @return bool
+     */
+    public function isSandboxEnabled()
+    {
+        return $this->isSandbox;
+    }
+
+    /**
      * Get Api Version
      *
      * @return string
