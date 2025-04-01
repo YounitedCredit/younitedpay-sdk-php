@@ -18,6 +18,7 @@ namespace YounitedPaySDK\Response\NewAPI;
 use InvalidArgumentException;
 use YounitedPaySDK\Model\ArrayCollection;
 use YounitedPaySDK\Model\Error;
+use YounitedPaySDK\Model\OfferItem;
 use YounitedPaySDK\Response\AbstractResponse;
 
 /**
@@ -49,6 +50,20 @@ class GetOffersResponse extends AbstractResponse
             return (new Error())->hydrate($output);
         }
 
-        return new ArrayCollection($output);
+        $offers = new ArrayCollection($output);
+        $collection = [];
+        foreach ($offers as $key => $value) {
+            $collection[$key] = (new OfferItem)
+                ->setRequestedAmount((float) $value['requestedAmount'])
+                ->setAnnualPercentageRate((float) $value['details']['annualPercentageRate'] * 100)
+                ->setAnnualDebitRate((float) $value['characteristics']['interestRate'] * 100)
+                ->setMonthlyInstallmentAmount((float) $value['details']['monthlyInstallmentAmount'])
+                ->setCreditTotalAmount((float) $value['characteristics']['amount'])
+                ->setMaturityInMonths((int) $value['characteristics']['maturityInMonths'])
+                ->setCreditAmountToFund((float) $value['details']['totalDueAmount'])
+                ->setInterestsTotalAmount((float) $value['details']['interestsAmount']);
+        }
+
+        return new ArrayCollection($collection);
     }
 }
