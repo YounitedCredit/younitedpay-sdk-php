@@ -15,9 +15,8 @@
 
 namespace YounitedPaySDK\Request\NewAPI;
 
-use YounitedPaySDK\Stream;
 use YounitedPaySDK\Model\AbstractModel;
-use YounitedPaySDK\Model\NewAPI\BestPrice;
+use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Response\DefaultResponse;
 
 /**
@@ -25,6 +24,11 @@ use YounitedPaySDK\Response\DefaultResponse;
  */
 class ShopsRequest extends AbstractRequest
 {
+    /**
+     * @var string
+     */
+    protected $apiVersion = '2025-01-01';
+
     /**
      * @var AbstractModel
      */
