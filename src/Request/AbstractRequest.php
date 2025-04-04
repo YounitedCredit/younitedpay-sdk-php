@@ -34,7 +34,7 @@ abstract class AbstractRequest implements JsonSerializable
     /**
      * @var string|null
      */
-    protected $apiVersion;
+    protected $apiVersion = '2024-01-01';
 
     /**
      * @var AbstractModel
