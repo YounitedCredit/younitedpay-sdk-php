@@ -17,7 +17,7 @@ namespace YounitedPaySDK\Response\NewAPI;
 
 use InvalidArgumentException;
 use YounitedPaySDK\Model\ArrayCollection;
-use YounitedPaySDK\Model\Error;
+use YounitedPaySDK\Model\NewAPI\Error;
 use YounitedPaySDK\Model\OfferItem;
 use YounitedPaySDK\Response\AbstractResponse;
 

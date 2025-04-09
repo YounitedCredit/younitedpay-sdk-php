@@ -13,10 +13,11 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace YounitedPaySDK\Model;
+namespace YounitedPaySDK\Model\NewAPI;
 
 use InvalidArgumentException;
 use JsonSerializable;
+use YounitedPaySDK\Model\AbstractModel;
 
 /**
  * Error Model Class
@@ -36,9 +37,9 @@ class Error extends AbstractModel implements JsonSerializable
     private $title;
 
     /**
-     * @var int|null
+     * @var array<mixed>|null
      */
-    private $status;
+    private $errors;
 
     /**
      * @var string|null
@@ -46,14 +47,11 @@ class Error extends AbstractModel implements JsonSerializable
     private $detail;
 
     /**
-     * @var string|null
+     * Can be either InvalidRequestError, InvalidStateError, ApiError
+     *
+     * @var string
      */
-    private $instance;
-
-    /**
-     * @var array<mixed>|null
-     */
-    private $errors;
+    private $errorType;
 
     // GETTERS & SETTERS
 
@@ -116,31 +114,31 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get Status
+     * Get Errors
      *
-     * @return int|null
+     * @return array<mixed>|null
      */
-    public function getStatus()
+    public function getErrors()
     {
-        return $this->status;
+        return $this->errors;
     }
 
     /**
-     * Set Status
+     * Set Errors
      *
-     * @param int|null $status
+     * @param array<mixed>|null $errors
      *
      * @return self
      */
-    public function setStatus($status)
+    public function setErrors($errors)
     {
-        if (is_int($status) === true || is_null($status) === true) {
-            $this->status = $status;
+        if (is_array($errors) === true || is_null($errors) === true) {
+            $this->errors = $errors;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Status must be an integer or null but ' . gettype($status) . ' is given.'
+            'Errors must be an array or null but ' . gettype($errors) . ' is given.'
         );
     }
 
@@ -174,60 +172,31 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get Instance
+     * Get Type
      *
      * @return string|null
      */
-    public function getInstance()
+    public function getErrorType()
     {
-        return $this->instance;
+        return $this->errorType;
     }
 
     /**
-     * Set Instance
+     * Set Type
      *
-     * @param string|null $instance
+     * @param string|null $errorType
      *
      * @return self
      */
-    public function setInstance($instance)
+    public function setErrorType($errorType)
     {
-        if (is_string($instance) === true || is_null($instance) === true) {
-            $this->instance = $instance;
+        if (is_string($errorType) === true || is_null($errorType) === true) {
+            $this->errorType = $errorType;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Instance must be a string or null but ' . gettype($instance) . ' is given.'
-        );
-    }
-
-    /**
-     * Get Errors
-     *
-     * @return array<mixed>|null
-     */
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    /**
-     * Set Errors
-     *
-     * @param array<mixed>|null $errors
-     *
-     * @return self
-     */
-    public function setErrors($errors)
-    {
-        if (is_array($errors) === true || is_null($errors) === true) {
-            $this->errors = $errors;
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Errors must be an array or null but ' . gettype($errors) . ' is given.'
+            'Error Type must be a string or null but ' . gettype($errorType) . ' is given.'
         );
     }
 }
