@@ -52,7 +52,7 @@ class BestPriceRequest extends AbstractRequest
         }
 
         throw new \InvalidArgumentException(
-            'Body must be an instance of ' .  BestPrice::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of ' .  BestPrice::class . ' but ' . get_class($body) . ' is given.'
         );
     }
 }

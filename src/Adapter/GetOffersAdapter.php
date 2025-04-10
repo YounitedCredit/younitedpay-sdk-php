@@ -112,7 +112,7 @@ class GetOffersAdapter extends AbstractAdapter
     {
         if ($request instanceof GetOffersRequest === false) {
             throw new InvalidArgumentException(
-                'Request be an instance of ' .  GetOffersRequest::class . ' ' . get_class($request) . ' given.'
+                'Request be an instance of ' .  GetOffersRequest::class . ' but ' . get_class($request) . ' is given.'
             );
         }
 

@@ -53,7 +53,7 @@ class CancelContractRequest extends AbstractRequest
         }
 
         throw new InvalidArgumentException(
-            'Body must be an instance of ' .  CancelContract::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of ' .  CancelContract::class . ' but ' . get_class($body) . ' is given.'
         );
     }
 }

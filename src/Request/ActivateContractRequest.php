@@ -58,7 +58,7 @@ class ActivateContractRequest extends AbstractRequest
         }
 
         throw new InvalidArgumentException(
-            'Body must be an instance of ' .  ActivateContract::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of ' .  ActivateContract::class . ' but ' . get_class($body) . ' is given.'
         );
     }
 }

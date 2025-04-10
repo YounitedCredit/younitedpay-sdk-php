@@ -170,7 +170,7 @@ class CreatePaymentAdapter extends AbstractAdapter
     {
         if ($request instanceof InitializeContractRequest === false) {
             throw new InvalidArgumentException(
-                'Request be an instance of ' .  InitializeContractRequest::class . ' ' . get_class($request) . ' given.'
+                'Request be an instance of ' .  InitializeContractRequest::class . ' but ' . get_class($request) . ' is given.'
             );
         }
 

@@ -53,7 +53,7 @@ class CreatePaymentRequest extends AbstractRequest
         }
 
         throw new \InvalidArgumentException(
-            'Body must be an instance of ' .  CreatePayment::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of ' .  CreatePayment::class . ' but ' . get_class($body) . ' is given.'
         );
     }
 }
