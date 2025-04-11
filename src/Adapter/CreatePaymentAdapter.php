@@ -81,7 +81,7 @@ class CreatePaymentAdapter extends AbstractAdapter
                 'className' => 'MerchantContext',
                 'properties' => [
                     'merchantReference' => 'merchantOrderContext.merchantReference',
-                    'salesClerkContactEmailAddress' => 'merchantOrderContext.merchantReference',
+                    'salesClerkContactEmailAddress' => 'merchantOrderContext.agentEmailAddress',
                 ],
             ],
             'customerInformation' => [
