@@ -230,13 +230,13 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     public function setBirthDate($birthDate)
     {
         if ($birthDate instanceof DateTime) {
-            $this->birthDate = $birthDate->format('Y-m-d\TH:i:s');
+            $this->birthDate = $birthDate->format('Y-m-d');
             return $this;
         }
 
-        if (is_string($birthDate) === true && !preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/', $birthDate)) {
+        if (is_string($birthDate) === true && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthDate)) {
             throw new InvalidArgumentException(
-                'Birth Date must be a string in the date format Y-m-d\TH:i:s'
+                'Birth Date must be a string in the date format Y-m-d - ' . $birthDate
             );
         }
 
