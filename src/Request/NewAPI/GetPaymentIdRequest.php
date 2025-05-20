@@ -17,7 +17,7 @@ namespace YounitedPaySDK\Request\NewAPI;
 
 use InvalidArgumentException;
 use YounitedPaySDK\Model\AbstractModel;
-use YounitedPaySDK\Model\GetPaymentId;
+use YounitedPaySDK\Model\NewAPI\GetPaymentId;
 use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Response\DefaultResponse;
 

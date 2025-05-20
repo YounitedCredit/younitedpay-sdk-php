@@ -15,10 +15,11 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace YounitedPaySDK\Model;
+namespace YounitedPaySDK\Model\NewAPI;
 
 use InvalidArgumentException;
 use JsonSerializable;
+use YounitedPaySDK\Model\AbstractModel;
 
 /**
  * Cancel Contract Model Class
