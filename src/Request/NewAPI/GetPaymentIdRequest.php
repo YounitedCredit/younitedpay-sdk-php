@@ -13,11 +13,12 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace YounitedPaySDK\Request;
+namespace YounitedPaySDK\Request\NewAPI;
 
 use InvalidArgumentException;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Model\GetPaymentId;
+use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Response\DefaultResponse;
 
 /**
@@ -28,7 +29,7 @@ class GetPaymentIdRequest extends AbstractRequest
     /**
      * @var string
      */
-    protected $requestTarget = '/Contract/{contractReference}/payment-id';
+    protected $requestTarget = '/specific-use-cases/legacy-contracts/{contractReference}/payment-id';
 
     /**
      * @var string
