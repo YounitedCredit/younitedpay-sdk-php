@@ -151,6 +151,13 @@ abstract class AbstractRequest implements JsonSerializable
             );
         }
         $new = clone $this;
+
+        if($this->getApiVersion() === '2025-01-01') {
+            $new->uri = $new->isSandbox === false ? new NewProductionUri() : new NewSandboxUri();
+        } else {
+            $new->uri = $new->isSandbox === false ? new ProductionUri() : new SandboxUri();
+        }
+
         $new->uri = $new->uri
             ->withPath($new->uri->getPath() . $this->requestTarget)
             ->withQuery($this->uri->getQuery())
