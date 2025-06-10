@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -60,7 +61,7 @@ abstract class AbstractRequest implements JsonSerializable
      */
     public function __construct(array $headers = [], $version = '1.1')
     {
-        if($this->getApiVersion() === '2025-01-01') {
+        if ($this->getApiVersion() === '2025-01-01') {
             $this->uri = new NewProductionUri();
         } else {
             $this->uri = new ProductionUri();
@@ -90,7 +91,7 @@ abstract class AbstractRequest implements JsonSerializable
         $new = clone $this;
         $new->isSandbox = true;
 
-        if($this->getApiVersion() === '2025-01-01') {
+        if ($this->getApiVersion() === '2025-01-01') {
             $new->uri = new NewSandboxUri();
         } else {
             $new->uri = new SandboxUri();
@@ -119,7 +120,7 @@ abstract class AbstractRequest implements JsonSerializable
     /**
      * Get Api Version
      *
-     * @return string
+     * @return string|null
      */
     public function getApiVersion()
     {
@@ -152,7 +153,7 @@ abstract class AbstractRequest implements JsonSerializable
         }
         $new = clone $this;
 
-        if($this->getApiVersion() === '2025-01-01') {
+        if ($this->getApiVersion() === '2025-01-01') {
             $new->uri = $new->isSandbox === false ? new NewProductionUri() : new NewSandboxUri();
         } else {
             $new->uri = $new->isSandbox === false ? new ProductionUri() : new SandboxUri();

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -24,7 +25,7 @@ use YounitedPaySDK\Model\AbstractModel;
 class GetOffers extends AbstractModel
 {
     /**
-     * @var float|string
+     * @var string
      */
     private $amount;
 
@@ -57,7 +58,7 @@ class GetOffers extends AbstractModel
     /**
      * Get Amount
      *
-     * @return float|string
+     * @return string
      */
     public function getAmount()
     {
@@ -68,7 +69,7 @@ class GetOffers extends AbstractModel
      * Set Amount
      * Value must be greater than or equal to 1
      *
-     * @param float|string $amount
+     * @param string $amount
      *
      * @return self
      */

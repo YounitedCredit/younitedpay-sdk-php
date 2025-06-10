@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -16,27 +17,32 @@
 
 namespace YounitedPaySDK\Webhook;
 
-use InvalidArgumentException;
 use YounitedPaySDK\Client;
+use YounitedPaySDK\Model\AbstractModel;
+use YounitedPaySDK\Response\AbstractResponse;
+use YounitedPaySDK\Response\CallbackResponse;
 use YounitedPaySDK\Model\Webhook\EventNotification;
 use YounitedPaySDK\Model\Webhook\EventNotificationData;
-use YounitedPaySDK\Response\CallbackResponse;
 
 class Webhook
 {
     /**
-     * @var EventNotification|null
+     * @var AbstractModel|null
      */
     private $eventNotification;
 
     /**
-     * @var CallbackResponse|null
+     * @var AbstractResponse|false
      */
     private $errorResponse;
 
+    /**
+     * @param  string $clientSecret
+     * @return void
+     */
     public function __construct($clientSecret)
     {
-        $this->errorResponse = null;
+        $this->errorResponse = false;
 
         /** @var CallbackResponse $response */
         $response = (new Client())
@@ -45,7 +51,7 @@ class Webhook
 
         if ($response->getStatusCode() === 401) {
             $this->errorResponse = $response->withStatus(401, $response->getReasonPhrase());
-            return $this;
+            return;
         }
 
         if (false === empty($response->getBody())) {
@@ -53,7 +59,7 @@ class Webhook
 
             if (JSON_ERROR_NONE !== json_last_error()) {
                 $this->errorResponse = $response->withStatus(400, 'Unable to decode content');
-                return $this;
+                return;
             }
         }
 
@@ -72,6 +78,9 @@ class Webhook
         }
     }
 
+    /**
+     * @return AbstractModel|null
+     */
     public function getEventNotification()
     {
         return $this->eventNotification;
@@ -79,12 +88,12 @@ class Webhook
 
     /**
      * Return if error or false
-     * 
+     *
      * @return string|bool error or false
      */
     public function getErrorResponse()
     {
-        if ($this->errorResponse === null) {
+        if ($this->errorResponse === false) {
             return false;
         }
         return $this->errorResponse->getStatusCode() . ' - '. $this->errorResponse->getReasonPhrase();

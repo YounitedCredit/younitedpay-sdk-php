@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -52,7 +53,7 @@ class RegistryItem
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getKey()
     {
@@ -60,7 +61,7 @@ class RegistryItem
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function get()
     {
@@ -68,7 +69,7 @@ class RegistryItem
     }
 
     /**
-     * @inherit
+     * @return bool
      */
     public function isHit()
     {
@@ -76,7 +77,9 @@ class RegistryItem
     }
 
     /**
-     * @inherit
+     * @param string $value
+     *
+     * @return RegistryItem
      */
     public function set($value)
     {
@@ -85,7 +88,9 @@ class RegistryItem
     }
 
     /**
-     * @inherit
+     * @param \DateTimeInterface|null $expiration
+     *
+     * @return RegistryItem
      */
     public function expiresAt($expiration)
     {
@@ -94,7 +99,9 @@ class RegistryItem
     }
 
     /**
-     * @inherit
+     * @param int $time
+     *
+     * @return RegistryItem
      */
     public function expiresAfter($time)
     {

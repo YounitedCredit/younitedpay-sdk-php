@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -48,7 +49,7 @@ class DefaultResponse extends AbstractResponse
         if ($this->getStatusCode() < 200 || $this->getStatusCode() > 299) {
             return (new Error())->hydrate(['errors' => [$this->getReasonPhrase(), $content]]);
         }
-        
+
         $output = json_decode($content, true);
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new InvalidArgumentException(

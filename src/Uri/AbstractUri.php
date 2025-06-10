@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -97,7 +98,7 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getAuthority()
     {
@@ -118,7 +119,7 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getUserInfo()
     {
@@ -126,7 +127,7 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getHost()
     {
@@ -134,7 +135,7 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @return null|int
      */
     public function getPort()
     {
@@ -142,7 +143,7 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getPath()
     {
@@ -150,7 +151,7 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getQuery()
     {
@@ -158,7 +159,7 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getFragment()
     {
@@ -166,7 +167,8 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @param  mixed $scheme
+     * @return self
      */
     public function withScheme($scheme)
     {
@@ -186,7 +188,9 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @param  mixed $user
+     * @param  mixed $password
+     * @return self
      */
     public function withUserInfo($user, $password = null)
     {
@@ -206,7 +210,8 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @param  mixed $host
+     * @return self
      */
     public function withHost($host)
     {
@@ -225,7 +230,8 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @param  mixed $port
+     * @return self
      */
     public function withPort($port)
     {
@@ -240,7 +246,8 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @param  mixed $path
+     * @return self
      */
     public function withPath($path)
     {
@@ -255,7 +262,8 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @param  mixed $query
+     * @return self
      */
     public function withQuery($query)
     {
@@ -270,7 +278,8 @@ abstract class AbstractUri
     }
 
     /**
-     * @inherit
+     * @param  mixed $fragment
+     * @return self
      */
     public function withFragment($fragment)
     {

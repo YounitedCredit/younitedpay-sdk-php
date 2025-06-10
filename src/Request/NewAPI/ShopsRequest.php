@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -30,7 +31,7 @@ class ShopsRequest extends AbstractRequest
     protected $apiVersion = '2025-01-01';
 
     /**
-     * @var AbstractModel
+     * @var string
      */
     protected $body = '';
 

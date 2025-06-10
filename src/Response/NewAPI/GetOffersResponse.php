@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -53,7 +54,7 @@ class GetOffersResponse extends AbstractResponse
         $offers = new ArrayCollection($output);
         $collection = [];
         foreach ($offers as $key => $value) {
-            $collection[$key] = (new OfferItem)
+            $collection[$key] = (new OfferItem())
                 ->setRequestedAmount((float) $value['requestedAmount'])
                 ->setAnnualPercentageRate((float) $value['details']['annualPercentageRate'] * 100)
                 ->setAnnualDebitRate((float) $value['characteristics']['interestRate'] * 100)

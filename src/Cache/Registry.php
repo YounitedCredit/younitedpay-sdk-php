@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -44,7 +45,9 @@ class Registry
     }
 
     /**
-     * @inherit
+     * @param string $key
+     *
+     * @return mixed
      */
     public function getItem($key)
     {
@@ -55,11 +58,11 @@ class Registry
     }
 
     /**
-     * @inherit
+     * @param mixed $keys
      *
      * @return ArrayCollection<mixed>
      */
-    public function getItems(array $keys = array())
+    public function getItems($keys = [])
     {
         $items = new ArrayCollection();
 
@@ -75,7 +78,9 @@ class Registry
     }
 
     /**
-     * @inherit
+     * @param string $key
+     *
+     * @return bool
      */
     public function hasItem($key)
     {
@@ -87,7 +92,7 @@ class Registry
     }
 
     /**
-     * @inherit
+     * @return bool
      */
     public function clear()
     {
@@ -97,7 +102,9 @@ class Registry
     }
 
     /**
-     * @inherit
+     * @param string $key
+     *
+     * @return bool
      */
     public function deleteItem($key)
     {
@@ -108,9 +115,11 @@ class Registry
     }
 
     /**
-     * @inherit
+     * @param mixed $keys
+     *
+     * @return bool
      */
-    public function deleteItems(array $keys)
+    public function deleteItems($keys)
     {
         if (empty($keys) === true) {
             return true;
@@ -123,32 +132,5 @@ class Registry
         }
 
         return true;
-    }
-
-    /**
-     * @inherit
-     */
-    public function save(RegistryItem $item)
-    {
-        // TODO: Implement save() method.
-        return false;
-    }
-
-    /**
-     * @inherit
-     */
-    public function saveDeferred(RegistryItem $item)
-    {
-        // TODO: Implement saveDeferred() method.
-        return false;
-    }
-
-    /**
-     * @inherit
-     */
-    public function commit()
-    {
-        // TODO: Implement commit() method.
-        return false;
     }
 }

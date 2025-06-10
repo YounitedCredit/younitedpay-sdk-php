@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -17,11 +18,12 @@ namespace YounitedPaySDK\Adapter;
 
 use Exception;
 use InvalidArgumentException;
-use YounitedPaySDK\Model\NewAPI\CustomExperience;
-use YounitedPaySDK\Model\NewAPI\Request\CreatePayment;
+use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Model\NewAPI\RiskInsights;
+use YounitedPaySDK\Model\NewAPI\CustomExperience;
 use YounitedPaySDK\Model\NewAPI\TechnicalInformation;
 use YounitedPaySDK\Request\InitializeContractRequest;
+use YounitedPaySDK\Model\NewAPI\Request\CreatePayment;
 use YounitedPaySDK\Request\NewAPI\CreatePaymentRequest;
 
 /**
@@ -162,13 +164,13 @@ class CreatePaymentAdapter extends AbstractAdapter
     /**
      * @param InitializeContractRequest $request
      *
-     * @return CreatePaymentRequest
+     * @return AbstractRequest
      *
      * @throws Exception
      */
     public function convertInitializeContract($request)
     {
-        if ($request instanceof InitializeContractRequest === false) {
+        if (($request instanceof InitializeContractRequest) === false) {
             throw new InvalidArgumentException(
                 'Request be an instance of ' .  InitializeContractRequest::class . ' but ' . get_class($request) . ' is given.'
             );

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -41,23 +42,24 @@ abstract class AbstractAdapter
     protected $namespace;
 
     /**
-     * @param $model AbstractModel
+     * @param AbstractModel $model
      *
      * @return AbstractModel
      */
-    abstract protected function completeDataModel($model);
+    abstract protected function completeDataModel(AbstractModel $model);
 
     /**
-     * @return array
+     * @return mixed
      */
     abstract protected function getModelMapping();
 
     /**
-     * @param $request AbstractRequest
+     * @param AbstractRequest $request
      *
      * @throws Exception
+     * @return AbstractRequest $request
      */
-    protected function convertRequest($request)
+    protected function convertRequest(AbstractRequest $request)
     {
         $modelStream = $request->getBody();
 
@@ -74,11 +76,12 @@ abstract class AbstractAdapter
     }
 
     /**
-     * @param $modelStream null|Stream
+     * @param null|Stream $modelStream
      *
      * @throws Exception
+     * @return AbstractModel
      */
-    private function convertModel($modelStream)
+    private function convertModel(?Stream $modelStream)
     {
         $streamContent = json_decode((string) $modelStream, true);
 
@@ -88,11 +91,12 @@ abstract class AbstractAdapter
     }
 
     /**
-     * @param $oldModel array
+     * @param mixed $oldModel
      *
      * @throws Exception
+     * @return AbstractModel
      */
-    private function convertOldModelWithModelMapping($oldModel)
+    private function convertOldModelWithModelMapping(mixed $oldModel)
     {
         if (false === class_exists($this->model)) {
             throw new Exception(
@@ -118,7 +122,11 @@ abstract class AbstractAdapter
     }
 
     /**
+     * @param mixed $oldModel
+     * @param mixed $propertyValue
+     *
      * @throws Exception
+     * @return mixed
      */
     private function getPropertyValueFromOldModel($oldModel, $propertyValue)
     {
@@ -151,7 +159,7 @@ abstract class AbstractAdapter
             return $model;
         }
 
-        foreach($propertyValue as $propertyPath => $subPropertyValue) {
+        foreach ($propertyValue as $propertyPath => $subPropertyValue) {
             $oldModelValues = $this->getPropertyValueModelFromPath($oldModel, $propertyPath);
 
             if (empty($oldModelValues)) {
@@ -171,6 +179,13 @@ abstract class AbstractAdapter
         return null;
     }
 
+    /**
+     * @param mixed $model
+     * @param mixed $propertyPath
+     *
+     * @throws Exception
+     * @return mixed
+     */
     private function getPropertyValueModelFromPath($model, $propertyPath)
     {
         $propertyValueModel = null;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -17,8 +18,10 @@
 
 namespace YounitedPaySDK\Model;
 
-use InvalidArgumentException;
 use JsonSerializable;
+use InvalidArgumentException;
+use YounitedPaySDK\Model\NewAPI\MerchantContext;
+use YounitedPaySDK\Model\NewAPI\BasketDescription;
 
 /**
  * Contract Model Class

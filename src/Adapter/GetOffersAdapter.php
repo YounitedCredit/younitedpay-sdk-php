@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -18,6 +19,7 @@ namespace YounitedPaySDK\Adapter;
 use Exception;
 use InvalidArgumentException;
 use YounitedPaySDK\Model\NewAPI\GetOffers;
+use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Request\BestPriceRequest;
 use YounitedPaySDK\Request\NewAPI\GetOffersRequest;
 
@@ -63,7 +65,7 @@ class GetOffersAdapter extends AbstractAdapter
     private $maturityRangeMax;
 
     /**
-     * @return array
+     * @return mixed
      */
     protected function getModelMapping()
     {
@@ -104,7 +106,7 @@ class GetOffersAdapter extends AbstractAdapter
     /**
      * @param BestPriceRequest $request
      *
-     * @return GetOffersRequest
+     * @return AbstractRequest
      *
      * @throws Exception
      */

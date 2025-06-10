@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -106,7 +107,7 @@ abstract class AbstractResponse implements JsonSerializable
     }
 
     /**
-     * @inherit
+     * @return int
      */
     public function getStatusCode()
     {
@@ -114,7 +115,7 @@ abstract class AbstractResponse implements JsonSerializable
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getReasonPhrase()
     {
@@ -122,7 +123,10 @@ abstract class AbstractResponse implements JsonSerializable
     }
 
     /**
-     * @inherit
+     * @param int $code Status code
+     * @param string $reasonPhrase Reason
+     *
+     * @return self
      */
     public function withStatus($code, $reasonPhrase = '')
     {

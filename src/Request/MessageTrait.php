@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -38,7 +39,7 @@ trait MessageTrait
     protected $stream;
 
     /**
-     * @inherit
+     * @return string
      */
     public function getProtocolVersion()
     {
@@ -46,7 +47,9 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @param string $version
+     *
+     * @return self
      */
     public function withProtocolVersion($version)
     {
@@ -61,7 +64,7 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @return array<mixed>
      */
     public function getHeaders()
     {
@@ -69,7 +72,9 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @param string $header
+     *
+     * @return bool
      */
     public function hasHeader($header)
     {
@@ -77,7 +82,9 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @param string $header
+     *
+     * @return mixed
      */
     public function getHeader($header)
     {
@@ -92,7 +99,9 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @param string $header
+     *
+     * @return mixed
      */
     public function getHeaderLine($header)
     {
@@ -100,7 +109,10 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @param string $header
+     * @param string $value
+     *
+     * @return self
      */
     public function withHeader($header, $value)
     {
@@ -118,7 +130,10 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @param string $header
+     * @param string $value
+     *
+     * @return self
      */
     public function withAddedHeader($header, $value)
     {
@@ -133,7 +148,9 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @param string $header
+     *
+     * @return self
      */
     public function withoutHeader($header)
     {
@@ -150,7 +167,7 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @return Stream
      */
     public function getBody()
     {
@@ -162,7 +179,9 @@ trait MessageTrait
     }
 
     /**
-     * @inherit
+     * @param Stream $body
+     *
+     * @return self
      */
     public function withBody(Stream $body)
     {

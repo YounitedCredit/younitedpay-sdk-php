@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -219,7 +220,7 @@ class CustomerInformation extends AbstractModel implements JsonSerializable
     /**
      * Get Postal Address
      *
-     * @return PostalAddress
+     * @return PostalAddress|null
      */
     public function getPostalAddress()
     {

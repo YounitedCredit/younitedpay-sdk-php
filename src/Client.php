@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -52,7 +53,7 @@ class Client
     /**
      * cURL handler
      *
-     * @var resource|\CurlHandle
+     * @var resource
      */
     protected $ch;
 
@@ -436,6 +437,8 @@ class Client
 
     /**
      * Retrieve a callback request from API
+     *
+     * @param bool $isLegacy - Change behaviour depending old / new API
      *
      * @return AbstractResponse
      *

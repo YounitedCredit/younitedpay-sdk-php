@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -190,7 +191,7 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     /**
      * Get Customer Information
      *
-     * @return CustomerInformation
+     * @return CustomerInformation|null
      */
     public function getCustomerInformation()
     {

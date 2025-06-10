@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -42,7 +43,7 @@ class WebHookIntegration extends AbstractModel implements JsonSerializable
     /**
      * Set the value of webhookUrl
      *
-     * @param   string  $webhookUrl  
+     * @param   string  $webhookUrl
      *
      * @return  self
      */

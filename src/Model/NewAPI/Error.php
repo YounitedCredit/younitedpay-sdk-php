@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -49,7 +50,7 @@ class Error extends AbstractModel implements JsonSerializable
     /**
      * Can be either InvalidRequestError, InvalidStateError, ApiError
      *
-     * @var string
+     * @var string|null
      */
     private $errorType;
 

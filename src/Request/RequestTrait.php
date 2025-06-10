@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -29,6 +30,9 @@ trait RequestTrait
     /** @var array|mixed|void|bool|null */
     protected $uri;
 
+    /**
+     * @return string
+     */
     public function getRequestTarget()
     {
         if (null !== $this->requestTarget) {
@@ -45,6 +49,11 @@ trait RequestTrait
         return $target;
     }
 
+    /**
+     * @param string $requestTarget
+     *
+     * @return self
+     */
     public function withRequestTarget($requestTarget)
     {
         if (\preg_match('#\s#', $requestTarget)) {
@@ -57,11 +66,19 @@ trait RequestTrait
         return $new;
     }
 
+    /**
+     * @return string
+     */
     public function getMethod()
     {
         return $this->method;
     }
 
+    /**
+     * @param string $method
+     *
+     * @return self
+     */
     public function withMethod($method)
     {
         if (!\is_string($method)) {
@@ -74,11 +91,20 @@ trait RequestTrait
         return $new;
     }
 
+    /**
+     * @return array|mixed|void|bool|null
+     */
     public function getUri()
     {
         return $this->uri;
     }
 
+    /**
+     * @param array|mixed|void|bool|null $uri
+     * @param bool $preserveHost
+     *
+     * @return self
+     */
     public function withUri($uri, $preserveHost = false)
     {
         if ($uri === $this->uri) {
