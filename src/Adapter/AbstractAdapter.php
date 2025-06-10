@@ -81,7 +81,7 @@ abstract class AbstractAdapter
      * @throws Exception
      * @return AbstractModel
      */
-    private function convertModel(?Stream $modelStream)
+    private function convertModel($modelStream)
     {
         $streamContent = json_decode((string) $modelStream, true);
 
