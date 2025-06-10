@@ -41,10 +41,10 @@ class Webhook
         /** @var CallbackResponse $response */
         $response = (new Client())
             ->setCredential('', $clientSecret)
-            ->retrieveCallbackResponse();
+            ->retrieveCallbackResponse(false);
 
         if ($response->getStatusCode() === 401) {
-            $this->errorResponse = $response->withStatus(401, 'Signature or Datetime header empty');
+            $this->errorResponse = $response->withStatus(401, $response->getReasonPhrase());
             return $this;
         }
 

@@ -441,7 +441,7 @@ class Client
      *
      * @throws RuntimeException Failure to create stream
      */
-    public function retrieveCallbackResponse()
+    public function retrieveCallbackResponse($isLegacy = true)
     {
         try {
             $this->stream = new Stream();
@@ -460,12 +460,23 @@ class Client
         $response = (new ResponseBuilder($message))->getResponse();
         $headers = $this->get_apache_nginx_headers();
 
-        if (isset($headers['X-YC-SIGNATURE-256']) === false || isset($headers['X-YC-DATETIME']) === false) {
-            return $response->withStatus(401, 'No Signature or Datetime header');
-        }
+        $headerSignatureRequest = '';
+        $headerDatetimeRequest = '';
+        if ($isLegacy === true) {
+            if (isset($headers['X-YC-SIGNATURE-256']) === false || isset($headers['X-YC-DATETIME']) === false) {
+                return $response->withStatus(401, 'No Signature or Datetime header');
+            }
 
-        $headerSignatureRequest = $headers['X-YC-SIGNATURE-256'];
-        $headerDatetimeRequest = $headers['X-YC-DATETIME'];
+            $headerSignatureRequest = $headers['X-YC-SIGNATURE-256'];
+            $headerDatetimeRequest = $headers['X-YC-DATETIME'];
+        } else {
+            if (isset($headers['X-YOUNITED-HMACSHA256-SIGNATURE']) === false || isset($headers['X-YOUNITED-DATETIME']) === false) {
+                return $response->withStatus(401, 'No Signature or Datetime header');
+            }
+
+            $headerSignatureRequest = $headers['X-YOUNITED-HMACSHA256-SIGNATURE'];
+            $headerDatetimeRequest = $headers['X-YOUNITED-DATETIME'];
+        }
 
         if (empty($headerSignatureRequest) === true || empty($headerDatetimeRequest) === true) {
             return $response->withStatus(401, 'Signature or Datetime header empty');
