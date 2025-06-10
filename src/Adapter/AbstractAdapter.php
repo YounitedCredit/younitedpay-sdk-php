@@ -96,7 +96,7 @@ abstract class AbstractAdapter
      * @throws Exception
      * @return AbstractModel
      */
-    private function convertOldModelWithModelMapping(mixed $oldModel)
+    private function convertOldModelWithModelMapping($oldModel)
     {
         if (false === class_exists($this->model)) {
             throw new Exception(
