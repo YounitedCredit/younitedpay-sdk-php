@@ -53,7 +53,7 @@ class Client
     /**
      * cURL handler
      *
-     * @var resource
+     * @var mixed
      */
     protected $ch;
 
