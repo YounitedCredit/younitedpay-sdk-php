@@ -29,24 +29,31 @@ class Webhook
      */
     private $eventNotification;
 
+    /**
+     * @var CallbackResponse|null
+     */
+    private $errorResponse;
+
     public function __construct($clientSecret)
     {
+        $this->errorResponse = null;
+
         /** @var CallbackResponse $response */
         $response = (new Client())
             ->setCredential('', $clientSecret)
             ->retrieveCallbackResponse();
 
         if ($response->getStatusCode() === 401) {
-            exit('Sorry, we cannot process this request :' . $response->getReasonPhrase());
+            $this->errorResponse = $response->withStatus(401, 'Signature or Datetime header empty');
+            return $this;
         }
 
         if (false === empty($response->getBody())) {
             $content = json_decode((string) $response->getBody(), true);
 
             if (JSON_ERROR_NONE !== json_last_error()) {
-                throw new InvalidArgumentException(
-                    'json_decode error: ' . json_last_error_msg()
-                );
+                $this->errorResponse = $response->withStatus(400, 'Unable to decode content');
+                return $this;
             }
         }
 
@@ -68,5 +75,18 @@ class Webhook
     public function getEventNotification()
     {
         return $this->eventNotification;
+    }
+
+    /**
+     * Return if error or false
+     * 
+     * @return string|bool error or false
+     */
+    public function getErrorResponse()
+    {
+        if ($this->errorResponse === null) {
+            return false;
+        }
+        return $this->errorResponse->getStatusCode() . ' - '. $this->errorResponse->getReasonPhrase();
     }
 }
