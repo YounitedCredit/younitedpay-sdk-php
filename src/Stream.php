@@ -387,6 +387,6 @@ class Stream
             return $meta;
         }
 
-        return $meta[$key] ?? null;
+        return isset($meta[$key]) ? $meta[$key] : null;
     }
 }
