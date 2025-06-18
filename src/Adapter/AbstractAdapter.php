@@ -46,7 +46,7 @@ abstract class AbstractAdapter
      *
      * @return AbstractModel
      */
-    abstract protected function completeDataModel(AbstractModel $model);
+    abstract protected function completeDataModel($model);
 
     /**
      * @return mixed
