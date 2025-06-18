@@ -500,7 +500,9 @@ class Client
             return $response->withStatus(401, 'Hash not accepted.');
         }
 
-        return $response->setBody($payload !== false ? $payload : '');
+        $response->getBody()->write($payload !== false ? $payload : '');
+
+        return $response;
     }
 
     /**

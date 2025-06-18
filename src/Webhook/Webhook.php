@@ -65,6 +65,7 @@ class Webhook
 
         if (empty($content) === true) {
             $this->eventNotification = null;
+            $this->errorResponse = $response->withStatus(400, 'Webhook content is empty');
         } else {
             $eventNotificationData = new EventNotificationData();
             if (isset($content['data'])) {
