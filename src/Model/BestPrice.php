@@ -31,11 +31,11 @@ class BestPrice extends AbstractModel
     /**
      * Get a borrow amount
      *
-     * @return float|string borrowed amount
+     * @return string borrowed amount
      */
     public function getBorrowedAmount()
     {
-        return (float) (round((int) ($this->borrowedAmount * 100), 2) / 100);
+        return (string) (round((int) ($this->borrowedAmount * 100), 2) / 100);
     }
 
     /**

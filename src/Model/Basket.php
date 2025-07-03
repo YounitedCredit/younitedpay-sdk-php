@@ -41,11 +41,11 @@ class Basket extends AbstractModel implements JsonSerializable
     /**
      * Get Basket Amount
      *
-     * @return float|string
+     * @return string
      */
     public function getBasketAmount()
     {
-        return (float) (round((int) ($this->basketAmount * 100), 2) / 100);
+        return (string) (round((int) ($this->basketAmount * 100), 2) / 100);
     }
 
     /**
