@@ -59,7 +59,7 @@ class GetOffersResponse extends AbstractResponse
                 ->setAnnualPercentageRate((float) $value['details']['annualPercentageRate'] * 100)
                 ->setAnnualDebitRate((float) $value['characteristics']['interestRate'] * 100)
                 ->setMonthlyInstallmentAmount((float) $value['details']['monthlyInstallmentAmount'])
-                ->setCreditTotalAmount((float) $value['characteristics']['amount'])
+                ->setCreditTotalAmount((float) $value['details']['totalDueAmount'])
                 ->setMaturityInMonths((int) $value['characteristics']['maturityInMonths'])
                 ->setCreditAmountToFund((float) $value['details']['totalDueAmount'])
                 ->setInterestsTotalAmount((float) $value['details']['interestsAmount']);
