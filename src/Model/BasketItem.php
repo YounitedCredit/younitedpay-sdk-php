@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -36,7 +37,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
     private $quantity;
 
     /**
-     * @var double
+     * @var float|string
      */
     private $unitPrice;
 
@@ -104,7 +105,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
     /**
      * Get Unit Price
      *
-     * @return double
+     * @return float|string
      */
     public function getUnitPrice()
     {
@@ -115,19 +116,19 @@ class BasketItem extends AbstractModel implements JsonSerializable
      * Set Unit Price
      * Value must be greater than or equal to 0
      *
-     * @param double $unitPrice
+     * @param float|string $unitPrice
      *
      * @return self
      */
     public function setUnitPrice($unitPrice)
     {
-        if (is_double($unitPrice) === true) {
+        if ((float) $unitPrice > 0) {
             $this->unitPrice = $unitPrice;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Unit Price must be a double but ' . gettype($unitPrice) . ' is given.'
+            'Unit Price must be a decimal value greater than or equal to 0.'
         );
     }
 }

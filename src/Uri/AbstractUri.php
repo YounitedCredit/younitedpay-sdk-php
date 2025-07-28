@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -7,8 +8,6 @@
  *
  * @category  YounitedpaySDK
  * @package   Ecommerceyounitedpaysdk
- * @author    Michael Dowling and contributors to guzzlehttp/psr7
- * @author    Tobias Nyholm  and contributors to Nyholm/psr7
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -17,12 +16,10 @@
 
 namespace YounitedPaySDK\Uri;
 
-use Psr\Http\Message\UriInterface;
-
 /**
  * Uri
  */
-abstract class AbstractUri implements UriInterface
+abstract class AbstractUri
 {
     /** @var array<string,int> SCHEMES. */
     private static $SCHEMES = ['http' => 80, 'https' => 443];
@@ -101,7 +98,7 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getAuthority()
     {
@@ -122,7 +119,7 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getUserInfo()
     {
@@ -130,7 +127,7 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getHost()
     {
@@ -138,7 +135,7 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @return null|int
      */
     public function getPort()
     {
@@ -146,7 +143,7 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getPath()
     {
@@ -154,7 +151,7 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getQuery()
     {
@@ -162,7 +159,7 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getFragment()
     {
@@ -170,7 +167,8 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @param  mixed $scheme
+     * @return self
      */
     public function withScheme($scheme)
     {
@@ -190,7 +188,9 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @param  mixed $user
+     * @param  mixed $password
+     * @return self
      */
     public function withUserInfo($user, $password = null)
     {
@@ -210,7 +210,8 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @param  mixed $host
+     * @return self
      */
     public function withHost($host)
     {
@@ -229,7 +230,8 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @param  mixed $port
+     * @return self
      */
     public function withPort($port)
     {
@@ -244,7 +246,8 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @param  mixed $path
+     * @return self
      */
     public function withPath($path)
     {
@@ -259,7 +262,8 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @param  mixed $query
+     * @return self
      */
     public function withQuery($query)
     {
@@ -274,7 +278,8 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * @inherit
+     * @param  mixed $fragment
+     * @return self
      */
     public function withFragment($fragment)
     {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -15,9 +16,7 @@
 
 namespace YounitedPaySDK\Cache;
 
-use Psr\Cache\CacheItemInterface;
-
-class RegistryItem implements CacheItemInterface
+class RegistryItem
 {
     /**
      * @var string
@@ -54,7 +53,7 @@ class RegistryItem implements CacheItemInterface
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function getKey()
     {
@@ -62,7 +61,7 @@ class RegistryItem implements CacheItemInterface
     }
 
     /**
-     * @inherit
+     * @return string
      */
     public function get()
     {
@@ -70,7 +69,7 @@ class RegistryItem implements CacheItemInterface
     }
 
     /**
-     * @inherit
+     * @return bool
      */
     public function isHit()
     {
@@ -78,7 +77,9 @@ class RegistryItem implements CacheItemInterface
     }
 
     /**
-     * @inherit
+     * @param string $value
+     *
+     * @return RegistryItem
      */
     public function set($value)
     {
@@ -87,7 +88,9 @@ class RegistryItem implements CacheItemInterface
     }
 
     /**
-     * @inherit
+     * @param \DateTimeInterface|null $expiration
+     *
+     * @return RegistryItem
      */
     public function expiresAt($expiration)
     {
@@ -96,7 +99,9 @@ class RegistryItem implements CacheItemInterface
     }
 
     /**
-     * @inherit
+     * @param int $time
+     *
+     * @return RegistryItem
      */
     public function expiresAfter($time)
     {

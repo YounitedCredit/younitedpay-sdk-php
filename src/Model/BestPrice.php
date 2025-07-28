@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -23,37 +24,37 @@ use InvalidArgumentException;
 class BestPrice extends AbstractModel
 {
     /**
-     * @var double
+     * @var float|string
      */
     private $borrowedAmount;
 
     /**
      * Get a borrow amount
      *
-     * @return double borrowed amount
+     * @return string borrowed amount
      */
     public function getBorrowedAmount()
     {
-        return $this->borrowedAmount;
+        return (string) (round((int) ((float) $this->borrowedAmount * 100), 2) / 100);
     }
 
     /**
      * Set a borrow amount
      * Value must be greater than or equal to 1
      *
-     * @param double $borrowedAmount
+     * @param float|string $borrowedAmount
      *
      * @return self
      */
     public function setBorrowedAmount($borrowedAmount)
     {
-        if (is_double($borrowedAmount) === true) {
+        if ((float) $borrowedAmount > 1) {
             $this->borrowedAmount = $borrowedAmount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Borrowed Amount must be a double but ' . gettype($borrowedAmount) . ' is given.'
+            'Borrowed Amount must be a decimal value greater than or equal to 1.'
         );
     }
 }

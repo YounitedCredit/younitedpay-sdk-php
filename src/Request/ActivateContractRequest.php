@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -28,6 +29,11 @@ class ActivateContractRequest extends AbstractRequest
     /**
      * @var string
      */
+    protected $apiVersion = '2025-01-01';
+
+    /**
+     * @var string
+     */
     protected $requestTarget = '/Contract/{contractReference}/activate';
 
     /**
@@ -44,12 +50,16 @@ class ActivateContractRequest extends AbstractRequest
     public function setModel(AbstractModel $body)
     {
         if ($body instanceof ActivateContract) {
-            $this->requestTarget = str_replace('{contractReference}', $body->getContractReference(), $this->requestTarget);
+            $this->requestTarget = str_replace(
+                '{contractReference}',
+                urlencode($body->getContractReference()),
+                $this->requestTarget
+            );
             return parent::setModel($body);
         }
 
         throw new InvalidArgumentException(
-            'Body must be an instance of ' .  ActivateContract::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of ' .  ActivateContract::class . ' but ' . get_class($body) . ' is given.'
         );
     }
 }

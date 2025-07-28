@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -15,11 +16,9 @@
 
 namespace YounitedPaySDK\Cache;
 
-use Psr\Cache\CacheItemInterface;
-use Psr\Cache\CacheItemPoolInterface;
 use YounitedPaySDK\Model\ArrayCollection;
 
-class Registry implements CacheItemPoolInterface
+class Registry
 {
     /**
      * @var Registry Instance of this class
@@ -27,7 +26,7 @@ class Registry implements CacheItemPoolInterface
     private static $_instance = null;
 
     /**
-     * @var array<CacheItemInterface>
+     * @var array<RegistryItem>
      */
     private $keys;
 
@@ -46,7 +45,9 @@ class Registry implements CacheItemPoolInterface
     }
 
     /**
-     * @inherit
+     * @param string $key
+     *
+     * @return mixed
      */
     public function getItem($key)
     {
@@ -57,11 +58,11 @@ class Registry implements CacheItemPoolInterface
     }
 
     /**
-     * @inherit
+     * @param mixed $keys
      *
      * @return ArrayCollection<mixed>
      */
-    public function getItems(array $keys = array())
+    public function getItems($keys = [])
     {
         $items = new ArrayCollection();
 
@@ -77,7 +78,9 @@ class Registry implements CacheItemPoolInterface
     }
 
     /**
-     * @inherit
+     * @param string $key
+     *
+     * @return bool
      */
     public function hasItem($key)
     {
@@ -89,7 +92,7 @@ class Registry implements CacheItemPoolInterface
     }
 
     /**
-     * @inherit
+     * @return bool
      */
     public function clear()
     {
@@ -99,7 +102,9 @@ class Registry implements CacheItemPoolInterface
     }
 
     /**
-     * @inherit
+     * @param string $key
+     *
+     * @return bool
      */
     public function deleteItem($key)
     {
@@ -110,9 +115,11 @@ class Registry implements CacheItemPoolInterface
     }
 
     /**
-     * @inherit
+     * @param mixed $keys
+     *
+     * @return bool
      */
-    public function deleteItems(array $keys)
+    public function deleteItems($keys)
     {
         if (empty($keys) === true) {
             return true;
@@ -125,32 +132,5 @@ class Registry implements CacheItemPoolInterface
         }
 
         return true;
-    }
-
-    /**
-     * @inherit
-     */
-    public function save(CacheItemInterface $item)
-    {
-        // TODO: Implement save() method.
-        return false;
-    }
-
-    /**
-     * @inherit
-     */
-    public function saveDeferred(CacheItemInterface $item)
-    {
-        // TODO: Implement saveDeferred() method.
-        return false;
-    }
-
-    /**
-     * @inherit
-     */
-    public function commit()
-    {
-        // TODO: Implement commit() method.
-        return false;
     }
 }

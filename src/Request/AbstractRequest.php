@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -16,19 +17,25 @@
 namespace YounitedPaySDK\Request;
 
 use JsonSerializable;
-use Psr\Http\Message\RequestInterface;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Stream;
+use YounitedPaySDK\Uri\NewAPI\ProductionUri as NewProductionUri;
+use YounitedPaySDK\Uri\NewAPI\SandboxUri as NewSandboxUri;
 use YounitedPaySDK\Uri\ProductionUri;
 use YounitedPaySDK\Uri\SandboxUri;
 
 /**
  * API client
  */
-abstract class AbstractRequest implements RequestInterface, JsonSerializable
+abstract class AbstractRequest implements JsonSerializable
 {
     use MessageTrait;
     use RequestTrait;
+
+    /**
+     * @var string|null
+     */
+    protected $apiVersion = '2024-01-01';
 
     /**
      * @var AbstractModel
@@ -54,8 +61,13 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
      */
     public function __construct(array $headers = [], $version = '1.1')
     {
-        $this->uri = new ProductionUri();
-        $this->uri = $this->uri->withPath('/api/1.0' . $this->requestTarget);
+        if ($this->getApiVersion() === '2025-01-01') {
+            $this->uri = new NewProductionUri();
+        } else {
+            $this->uri = new ProductionUri();
+        }
+
+        $this->uri = $this->uri->withPath($this->uri->getPath() . $this->requestTarget);
 
         $this->setHeaders($headers);
 
@@ -70,7 +82,7 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     }
 
     /**
-     * Enbale Sandbox
+     * Enable Sandbox
      *
      * @return self
      */
@@ -78,8 +90,17 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     {
         $new = clone $this;
         $new->isSandbox = true;
-        $new->uri = new SandboxUri();
-        $new->uri = $new->uri->withPath('/api/1.0' . $this->requestTarget);
+
+        if ($this->getApiVersion() === '2025-01-01') {
+            $new->uri = new NewSandboxUri();
+        } else {
+            $new->uri = new SandboxUri();
+        }
+
+        $new->uri = $new->uri
+            ->withPath($new->uri->getPath() . $this->requestTarget)
+            ->withQuery($this->uri->getQuery())
+            ->withFragment($this->uri->getFragment());
         $new->tenantId = 'c9536195-ef3b-4703-9c13-924db8e24486';
         $new->updateHostFromUri();
 
@@ -87,7 +108,27 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     }
 
     /**
-     * Get Scheme
+     * Is Sandbox Enabled
+     *
+     * @return bool
+     */
+    public function isSandboxEnabled()
+    {
+        return $this->isSandbox;
+    }
+
+    /**
+     * Get Api Version
+     *
+     * @return string|null
+     */
+    public function getApiVersion()
+    {
+        return $this->apiVersion;
+    }
+
+    /**
+     * Get Tenant Id
      *
      * @return string
      */
@@ -111,7 +152,17 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
             );
         }
         $new = clone $this;
-        $new->uri = $new->uri->withPath('/api/1.0' . $this->requestTarget);
+
+        if ($this->getApiVersion() === '2025-01-01') {
+            $new->uri = $new->isSandbox === false ? new NewProductionUri() : new NewSandboxUri();
+        } else {
+            $new->uri = $new->isSandbox === false ? new ProductionUri() : new SandboxUri();
+        }
+
+        $new->uri = $new->uri
+            ->withPath($new->uri->getPath() . $this->requestTarget)
+            ->withQuery($this->uri->getQuery())
+            ->withFragment($this->uri->getFragment());
         $new->updateHostFromUri();
         $new->stream = Stream::create((string) $json);
 

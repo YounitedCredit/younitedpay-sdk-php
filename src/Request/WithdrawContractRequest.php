@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -44,12 +45,16 @@ class WithdrawContractRequest extends AbstractRequest
     public function setModel(AbstractModel $body)
     {
         if ($body instanceof WithdrawContract) {
-            $this->requestTarget = str_replace('{contractReference}', $body->getContractReference(), $this->requestTarget);
+            $this->requestTarget = str_replace(
+                '{contractReference}',
+                urlencode($body->getContractReference()),
+                $this->requestTarget
+            );
             return parent::setModel($body);
         }
 
         throw new InvalidArgumentException(
-            'Body must be an instance of ' .  WithdrawContract::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of ' .  WithdrawContract::class . ' but ' . get_class($body) . ' is given.'
         );
     }
 }
