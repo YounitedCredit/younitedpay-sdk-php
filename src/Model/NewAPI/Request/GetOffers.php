@@ -62,7 +62,7 @@ class GetOffers extends AbstractModel
      */
     public function getAmount()
     {
-        return (string) (round((int) ($this->amount * 100), 2) / 100);
+        return (string) (round((int) ((float) $this->amount * 100), 2) / 100);
     }
 
     /**

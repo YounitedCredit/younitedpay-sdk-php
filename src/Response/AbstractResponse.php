@@ -44,7 +44,7 @@ abstract class AbstractResponse implements JsonSerializable
     /**
      * Gets the body of the message.
      *
-     * @return Stream|null Returns the body as a stream.
+     * @return Stream Returns the body as a stream.
      */
     public function getBody()
     {
