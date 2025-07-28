@@ -171,7 +171,7 @@ trait MessageTrait
      */
     public function getBody()
     {
-        if (null !== $this->stream) {
+        if (null === $this->stream) {
             $this->stream = Stream::create('');
         }
 
@@ -183,7 +183,7 @@ trait MessageTrait
      *
      * @return self
      */
-    public function withBody(?Stream $body)
+    public function withBody($body)
     {
         if ($body === $this->stream) {
             return $this;
