@@ -35,7 +35,7 @@ trait MessageTrait
     /** @var string */
     protected $protocol = '1.1';
 
-    /** @var Stream */
+    /** @var Stream|null */
     protected $stream;
 
     /**
@@ -167,11 +167,11 @@ trait MessageTrait
     }
 
     /**
-     * @return Stream
+     * @return Stream|null
      */
     public function getBody()
     {
-        if (empty($this->stream->stream) === true) {
+        if (null !== $this->stream) {
             $this->stream = Stream::create('');
         }
 
@@ -179,11 +179,11 @@ trait MessageTrait
     }
 
     /**
-     * @param Stream $body
+     * @param Stream|null $body
      *
      * @return self
      */
-    public function withBody(Stream $body)
+    public function withBody(?Stream $body)
     {
         if ($body === $this->stream) {
             return $this;
