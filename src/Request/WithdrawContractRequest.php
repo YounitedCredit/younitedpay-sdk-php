@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -53,7 +54,7 @@ class WithdrawContractRequest extends AbstractRequest
         }
 
         throw new InvalidArgumentException(
-            'Body must be an instance of ' .  WithdrawContract::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of ' .  WithdrawContract::class . ' but ' . get_class($body) . ' is given.'
         );
     }
 }

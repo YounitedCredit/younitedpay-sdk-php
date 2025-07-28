@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -223,18 +224,24 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     /**
      * Set Birth Date
      *
-     * @param DateTime|null $birthDate
+     * @param DateTime|string|null $birthDate
      *
      * @return self
      */
     public function setBirthDate($birthDate)
     {
         if ($birthDate instanceof DateTime) {
-            $this->birthDate = $birthDate->format('Y-m-d\TH:i:s');
+            $this->birthDate = $birthDate->format('Y-m-d');
             return $this;
         }
 
-        if (is_null($birthDate) === true) {
+        if (is_string($birthDate) === true && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthDate)) {
+            throw new InvalidArgumentException(
+                'Birth Date must be a string in the date format Y-m-d - ' . $birthDate
+            );
+        }
+
+        if (is_string($birthDate) === true || is_null($birthDate) === true) {
             $this->birthDate = $birthDate;
             return $this;
         }

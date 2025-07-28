@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -7,8 +8,6 @@
  *
  * @category  YounitedpaySDK
  * @package   Ecommerceyounitedpaysdk
- * @author    Michael Dowling and contributors to guzzlehttp/psr7
- * @author    Tobias Nyholm  and contributors to Nyholm/psr7
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -19,8 +18,6 @@ namespace YounitedPaySDK;
 
 use Exception;
 use InvalidArgumentException;
-use Psr\Http\Message\StreamInterface;
-use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
 use function clearstatcache;
@@ -36,9 +33,9 @@ use const SEEK_CUR;
 use const SEEK_SET;
 
 /**
- * @final This class should never be extended. See https://github.com/Nyholm/psr7/blob/master/doc/final.md
+ * @final This class should never be extended
  */
-class Stream implements StreamInterface
+class Stream
 {
     /** @var resource|null A resource reference */
     private $stream;
@@ -75,17 +72,14 @@ class Stream implements StreamInterface
     ];
 
     /**
-     * Creates a new PSR-7 stream.
+     * Creates a new stream.
      *
-     * @param string|resource|StreamInterface $body
+     * @param string|resource $body
      *
-     * @return StreamInterface
+     * @return self
      */
     public static function create($body = '')
     {
-        if ($body instanceof StreamInterface) {
-            return $body;
-        }
         if (is_string($body)) {
             $resource = fopen('php://temp', 'rw+');
             if ($resource === false) {
@@ -169,7 +163,7 @@ class Stream implements StreamInterface
     /**
      * get Uri
      *
-     * @return UriInterface
+     * @return array|mixed|void|bool|null
      */
     private function getUri()
     {
@@ -394,6 +388,6 @@ class Stream implements StreamInterface
             return $meta;
         }
 
-        return $meta[$key] ? null : $meta[$key];
+        return isset($meta[$key]) ? $meta[$key] : null;
     }
 }

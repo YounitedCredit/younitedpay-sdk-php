@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -7,8 +8,6 @@
  *
  * @category  YounitedpaySDK
  * @package   Ecommerceyounitedpaysdk
- * @author    Michael Dowling and contributors to guzzlehttp/psr7
- * @author    Tobias Nyholm  and contributors to Nyholm/psr7
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -16,8 +15,6 @@
  */
 
 namespace YounitedPaySDK\Request;
-
-use Psr\Http\Message\UriInterface;
 
 /**
  * @internal should not be used outside of YounitedPaySDK as it does not fall under our BC promise
@@ -30,9 +27,12 @@ trait RequestTrait
     /** @var string|null */
     protected $requestTarget;
 
-    /** @var UriInterface */
+    /** @var array|mixed|void|bool|null */
     protected $uri;
 
+    /**
+     * @return string
+     */
     public function getRequestTarget()
     {
         if (null !== $this->requestTarget) {
@@ -49,6 +49,11 @@ trait RequestTrait
         return $target;
     }
 
+    /**
+     * @param string $requestTarget
+     *
+     * @return self
+     */
     public function withRequestTarget($requestTarget)
     {
         if (\preg_match('#\s#', $requestTarget)) {
@@ -61,11 +66,19 @@ trait RequestTrait
         return $new;
     }
 
+    /**
+     * @return string
+     */
     public function getMethod()
     {
         return $this->method;
     }
 
+    /**
+     * @param string $method
+     *
+     * @return self
+     */
     public function withMethod($method)
     {
         if (!\is_string($method)) {
@@ -78,12 +91,21 @@ trait RequestTrait
         return $new;
     }
 
+    /**
+     * @return array|mixed|void|bool|null
+     */
     public function getUri()
     {
         return $this->uri;
     }
 
-    public function withUri(UriInterface $uri, $preserveHost = false)
+    /**
+     * @param array|mixed|void|bool|null $uri
+     * @param bool $preserveHost
+     *
+     * @return self
+     */
+    public function withUri($uri, $preserveHost = false)
     {
         if ($uri === $this->uri) {
             return $this;

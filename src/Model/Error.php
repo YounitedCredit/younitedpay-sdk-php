@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -19,7 +20,7 @@ use InvalidArgumentException;
 use JsonSerializable;
 
 /**
- * Best Price Model Class
+ * Error Model Class
  */
 class Error extends AbstractModel implements JsonSerializable
 {

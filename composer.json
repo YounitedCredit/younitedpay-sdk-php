@@ -3,7 +3,6 @@
   "description": "younited pay API SDK",
   "homepage": "https://api.younited-pay.com/",
   "license": "AFL-3.0",
-  "version": "1.0.5",
   "authors": [
       {
           "name": "202 ecommerce",
@@ -23,9 +22,6 @@
     ]
   },
   "require": {
-    "psr/log": "^1.0",
-    "psr/http-client": "^1.0",
-    "psr/cache": "^1.0.0",
     "ext-json": "*",
     "ext-curl": "*"
   },

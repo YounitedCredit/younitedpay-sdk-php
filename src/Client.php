@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -6,28 +7,28 @@
  * PHP version 5.6+
  *
  * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
+ *
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *
+ * @see      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK;
 
-use RuntimeException;
 use InvalidArgumentException;
+use RuntimeException;
 use UnexpectedValueException;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use YounitedPaySDK\Cache\Registry;
 use YounitedPaySDK\Cache\RegistryItem;
+use YounitedPaySDK\Exception\RequestException;
+use YounitedPaySDK\Response\AbstractResponse;
 use YounitedPaySDK\Response\ErrorResponse;
 use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Response\DefaultResponse;
 use YounitedPaySDK\Response\ResponseBuilder;
 use YounitedPaySDK\Response\CallbackResponse;
-use YounitedPaySDK\Exception\RequestException;
 
 /**
  * API client
@@ -52,7 +53,7 @@ class Client
     /**
      * cURL handler
      *
-     * @var resource|\CurlHandle
+     * @var mixed
      */
     protected $ch;
 
@@ -71,16 +72,17 @@ class Client
     protected static $MAX_BODY_SIZE;
 
     /**
-    * Create new cURL http client object
-    */
+     * Create new cURL http client object
+     */
     public function __construct()
     {
         self::$MAX_BODY_SIZE = 1024 * 1024;
     }
+
     /**
      * Set credentials
      *
-     * @param string $clientId     api client key
+     * @param string $clientId api client key
      * @param string $clientSecret api client secret
      *
      * @return self
@@ -95,6 +97,7 @@ class Client
 
     /**
      * Get Oauth token
+     *
      * @param string $tenantId tenantId
      *
      * @return false|string
@@ -128,6 +131,7 @@ class Client
         $result = curl_exec($ch);
         if (curl_errno($ch) !== 0) {
             $info = curl_getinfo($ch);
+
             return false;
         }
         curl_close($ch);
@@ -161,14 +165,15 @@ class Client
     }
 
     /**
-     * Send a PSR-7 Request
+     * Send a Request
      *
-     * @param AbstractRequest  $request
-     * @return ResponseInterface
+     * @param AbstractRequest $request
      *
-     * @throws RequestException  Invalid request
-     * @throws InvalidArgumentException  Invalid header names and/or values
-     * @throws RuntimeException  Failure to create stream
+     * @return Response\AbstractResponse
+     *
+     * @throws RequestException Invalid request
+     * @throws InvalidArgumentException Invalid header names and/or values
+     * @throws RuntimeException Failure to create stream
      */
     public function sendRequest(AbstractRequest $request)
     {
@@ -179,14 +184,15 @@ class Client
         }
 
         $headers = [
-            'Content-Type'  => 'application/json',
-            'Accept'        => 'application/json',
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token,
+            'X-Api-Version' => '2025-01-01'
         ];
         $request->setHeaders($headers);
 
         $response = $this->createResponse($request);
-        $options  = $this->createOptions($request, $response);
+        $options = $this->createOptions($request, $response);
         $this->ch = curl_init();
 
         // Setup the cURL request
@@ -221,7 +227,7 @@ class Client
      *
      * @return ResponseBuilder
      *
-     * @throws RuntimeException  Failure to create stream
+     * @throws RuntimeException Failure to create stream
      */
     protected function createResponse($request)
     {
@@ -248,12 +254,12 @@ class Client
     /**
      * Create array of headers to pass to CURLOPT_HTTPHEADER
      *
-     * @param RequestInterface  $request  Request object
-     * @param array<mixed> $options  cURL options
+     * @param AbstractRequest $request Request object
+     * @param array<mixed> $options cURL options
      *
      * @return array<mixed> Array of http header lines
      */
-    protected function createHeaders(RequestInterface $request, array $options)
+    protected function createHeaders(AbstractRequest $request, array $options)
     {
         $headers = [];
         $request_headers = $request->getHeaders();
@@ -277,7 +283,7 @@ class Client
             }
 
             foreach ($values as $value) {
-                $headers[] = $name.': '.$value;
+                $headers[] = $name . ': ' . $value;
             }
         }
 
@@ -291,31 +297,27 @@ class Client
     /**
      * Create cURL request options
      *
-     * @param RequestInterface $request
-     * @param ResponseBuilder  $response
+     * @param AbstractRequest $request
+     * @param ResponseBuilder $response
      *
-     * @return array<mixed>  cURL options
+     * @return array<mixed> cURL options
      *
-     * @throws RequestException  Invalid request
-     * @throws InvalidArgumentException  Invalid header names and/or values
-     * @throws RuntimeException  Unable to read request body
+     * @throws RequestException Invalid request
+     * @throws InvalidArgumentException Invalid header names and/or values
+     * @throws RuntimeException Unable to read request body
      */
-    protected function createOptions(RequestInterface $request, ResponseBuilder $response)
+    protected function createOptions(AbstractRequest $request, ResponseBuilder $response)
     {
         $options = $this->options;
 
         // These options default to false and cannot be changed on set up.
         // The options should be provided with the request instead.
         $options[CURLOPT_FOLLOWLOCATION] = false;
-        $options[CURLOPT_HEADER]         = false;
+        $options[CURLOPT_HEADER] = false;
         $options[CURLOPT_RETURNTRANSFER] = false;
-        $options[CURLOPT_SSLVERSION]     = CURL_SSLVERSION_TLSv1_2;
+        $options[CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1_2;
 
-        try {
-            $options[CURLOPT_HTTP_VERSION] = $this->getProtocolVersion($request->getProtocolVersion());
-        } catch (UnexpectedValueException $e) {
-            throw new RequestException($e->getMessage(), $request);
-        }
+        $options[CURLOPT_HTTP_VERSION] = $this->getProtocolVersion($request->getProtocolVersion());
         $options[CURLOPT_URL] = (string) $request->getUri();
 
         $options = $this->addRequestBodyOptions($request, $options);
@@ -344,6 +346,7 @@ class Client
             if (empty($response->getResponse()->getBody()) === false) {
                 return $response->getResponse()->getBody()->write($data);
             }
+
             return 0;
         };
 
@@ -353,12 +356,12 @@ class Client
     /**
      * Add cURL options related to the request body
      *
-     * @param RequestInterface  $request  Request object
-     * @param array<mixed>  $options  cURL options
+     * @param AbstractRequest $request Request object
+     * @param array<mixed> $options cURL options
      *
      * @return mixed
      */
-    protected function addRequestBodyOptions(RequestInterface $request, array $options)
+    protected function addRequestBodyOptions(AbstractRequest $request, array $options)
     {
         /*
          * HTTP methods that cannot have payload:
@@ -374,7 +377,7 @@ class Client
             'TRACE',
         ];
         if (!in_array($request->getMethod(), $http_methods, true)) {
-            $body      = $request->getBody();
+            $body = $request->getBody();
             $body_size = $body->getSize();
             if ($body_size !== 0) {
                 if ($body->isSeekable()) {
@@ -408,10 +411,11 @@ class Client
     /**
      * Get cURL constant for request http protocol version
      *
-     * @param string $requestProtocolVersion  Request http protocol version
-     * @return int   cURL constant for request http protocol version
+     * @param string $requestProtocolVersion Request http protocol version
      *
-     * @throws UnexpectedValueException  Unsupported cURL http protocol version
+     * @return int cURL constant for request http protocol version
+     *
+     * @throws UnexpectedValueException Unsupported cURL http protocol version
      */
     protected function getProtocolVersion($requestProtocolVersion)
     {
@@ -434,11 +438,13 @@ class Client
     /**
      * Retrieve a callback request from API
      *
-     * @return ResponseInterface
+     * @param bool $isLegacy - Change behaviour depending old / new API
      *
-     * @throws RuntimeException  Failure to create stream
+     * @return AbstractResponse
+     *
+     * @throws RuntimeException Failure to create stream
      */
-    public function retrieveCallbackResponse()
+    public function retrieveCallbackResponse($isLegacy = true)
     {
         try {
             $this->stream = new Stream();
@@ -457,24 +463,35 @@ class Client
         $response = (new ResponseBuilder($message))->getResponse();
         $headers = $this->get_apache_nginx_headers();
 
-        if (isset($headers['X-YC-SIGNATURE-256']) === false || isset($headers['X-YC-DATETIME']) === false) {
-            return $response->withStatus(401, 'No Signature or Datetime header');
-        }
+        $headerSignatureRequest = '';
+        $headerDatetimeRequest = '';
+        if ($isLegacy === true) {
+            if (isset($headers['X-YC-SIGNATURE-256']) === false || isset($headers['X-YC-DATETIME']) === false) {
+                return $response->withStatus(401, 'No Signature or Datetime header');
+            }
 
-        $headerSignatureRequest = $headers['X-YC-SIGNATURE-256'];
-        $headerDatetimeRequest = $headers['X-YC-DATETIME'];
+            $headerSignatureRequest = $headers['X-YC-SIGNATURE-256'];
+            $headerDatetimeRequest = $headers['X-YC-DATETIME'];
+        } else {
+            if (isset($headers['X-YOUNITED-HMACSHA256-SIGNATURE']) === false || isset($headers['X-YOUNITED-DATETIME']) === false) {
+                return $response->withStatus(401, 'No Signature or Datetime header');
+            }
+
+            $headerSignatureRequest = $headers['X-YOUNITED-HMACSHA256-SIGNATURE'];
+            $headerDatetimeRequest = $headers['X-YOUNITED-DATETIME'];
+        }
 
         if (empty($headerSignatureRequest) === true || empty($headerDatetimeRequest) === true) {
             return $response->withStatus(401, 'Signature or Datetime header empty');
         }
 
-        $currentWebhookUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $currentWebhookUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $payload = file_get_contents('php://input');
 
         $hashData = implode('|', [
             $currentWebhookUrl,
             $payload,
-            $headerDatetimeRequest
+            $headerDatetimeRequest,
         ]);
 
         $expectedSignature = hash_hmac('sha256', $hashData, $this->clientSecret);
@@ -483,7 +500,9 @@ class Client
             return $response->withStatus(401, 'Hash not accepted.');
         }
 
-        return $response->setBody($payload !== false ? $payload : '');
+        $response->getBody()->write($payload !== false ? $payload : '');
+
+        return $response;
     }
 
     /**
@@ -493,22 +512,21 @@ class Client
      */
     private function get_apache_nginx_headers()
     {
-        $headers=[];
+        $headers = [];
 
         foreach ($_SERVER as $name => $value) {
-            if (substr($name, 0, 5)=='HTTP_') {
-                $name=substr($name, 5);
-                $name=str_replace('_', ' ', $name);
-                $name=ucwords($name);
-                $name=str_replace(' ', '-', $name);
-                $name=strtoupper($name);
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $name = substr($name, 5);
+                $name = str_replace('_', ' ', $name);
+                $name = ucwords($name);
+                $name = str_replace(' ', '-', $name);
+                $name = strtoupper($name);
                 $headers[$name] = $value;
             } elseif (strpos($name, 'X-YC-') !== false) {
-                $name=strtoupper($name);
+                $name = strtoupper($name);
                 $headers[$name] = $value;
             }
         }
-
 
         return $headers;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -15,13 +16,18 @@
 
 namespace YounitedPaySDK\Uri;
 
-use Psr\Http\Message\UriInterface;
-
 /**
  * Sandbox Uri
  */
-class SandboxUri extends AbstractUri implements UriInterface
+class SandboxUri extends AbstractUri
 {
-    /** @var string $host */
+    /**
+     * @var string $host
+     */
     protected $host = 'api.sandbox-younited-pay.com';
+
+    /**
+     * @var string Uri host.
+     */
+    protected $path = '/api/1.0';
 }

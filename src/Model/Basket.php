@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -26,7 +27,7 @@ class Basket extends AbstractModel implements JsonSerializable
     // PROPERTIES
 
     /**
-     * @var double
+     * @var float|string
      */
     private $basketAmount;
 
@@ -40,30 +41,30 @@ class Basket extends AbstractModel implements JsonSerializable
     /**
      * Get Basket Amount
      *
-     * @return double
+     * @return string
      */
     public function getBasketAmount()
     {
-        return $this->basketAmount;
+        return (string) (round((int) ($this->basketAmount * 100), 2) / 100);
     }
 
     /**
      * Set Basket Amount
      * Value must be greater than or equal to 1
      *
-     * @param double $basketAmount
+     * @param float|string $basketAmount
      *
      * @return self
      */
     public function setBasketAmount($basketAmount)
     {
-        if (is_double($basketAmount)) {
+        if ((float) $basketAmount > 1) {
             $this->basketAmount = $basketAmount;
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Basket Amount must be a double but ' . gettype($basketAmount) . ' is given.'
+            'Basket Amount must be a decimal value greater than or equal to 1.'
         );
     }
 
