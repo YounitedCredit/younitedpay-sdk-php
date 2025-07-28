@@ -171,7 +171,7 @@ trait MessageTrait
      */
     public function getBody()
     {
-        if ($this->stream instanceof Stream === false) {
+        if (empty($this->stream->stream) === true) {
             $this->stream = Stream::create('');
         }
 
