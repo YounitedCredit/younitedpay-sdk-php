@@ -376,7 +376,7 @@ class Client
             'HEAD',
             'TRACE',
         ];
-        if (!in_array($request->getMethod(), $http_methods, true)) {
+        if (!in_array($request->getMethod(), $http_methods, true) && null !== $request->getBody()) {
             $body = $request->getBody();
             $body_size = $body->getSize();
             if ($body_size !== 0) {
@@ -500,7 +500,9 @@ class Client
             return $response->withStatus(401, 'Hash not accepted.');
         }
 
-        $response->getBody()->write($payload !== false ? $payload : '');
+        if (null !== $response->getBody()) {
+            $response->getBody()->write($payload !== false ? $payload : '');
+        }
 
         return $response;
     }
