@@ -21,6 +21,27 @@ use JsonSerializable;
 abstract class AbstractModel implements JsonSerializable
 {
     /**
+     * @var array<string>
+     */
+    protected $ignoredProperties = [];
+
+    /**
+     * @param array<string>|string $ignoredProperties
+     *
+     * @return $this
+     */
+    public function setIgnoredProperties($ignoredProperties)
+    {
+        if (is_string($ignoredProperties)) {
+            $this->ignoredProperties[] = $ignoredProperties;
+        } else {
+            $this->ignoredProperties = $ignoredProperties;
+        }
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     #[\ReturnTypeWillChange]
@@ -29,7 +50,7 @@ abstract class AbstractModel implements JsonSerializable
         $getterName = get_class_methods(get_class($this));
         $gettableAttributes = [];
         foreach ($getterName as $value) {
-            if (substr($value, 0, 3) === 'get') {
+            if (false === in_array($value, $this->ignoredProperties) && substr($value, 0, 3) === 'get') {
                 $gettableAttributes[lcfirst(substr($value, 3, strlen($value)))] = $this->$value();
             }
         }
