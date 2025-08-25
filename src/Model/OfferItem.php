@@ -65,6 +65,11 @@ class OfferItem extends AbstractModel implements JsonSerializable
     private $interestsTotalAmount;
 
     /**
+     * @var int
+     */
+    private $downPaymentAmount;
+
+    /**
      * Get requestedAmount
      *
      * @return float|string requestedAmount
@@ -85,12 +90,11 @@ class OfferItem extends AbstractModel implements JsonSerializable
     {
         if ((float) $requestedAmount > 1) {
             $this->requestedAmount = $requestedAmount;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Requested Amount must be a decimal value greater than or equal to 1.'
-        );
+        throw new InvalidArgumentException('Requested Amount must be a decimal value greater than or equal to 1.');
     }
 
     /**
@@ -112,15 +116,11 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setAnnualDebitRate($annualDebitRate)
     {
-        if ((float) $annualDebitRate > 1) {
-            $this->annualDebitRate = $annualDebitRate;
-            return $this;
-        }
+        $this->annualDebitRate = $annualDebitRate;
 
-        throw new InvalidArgumentException(
-            'Annual Debit Rate must be a decimal value greater than or equal to 1.'
-        );
+        return $this;
     }
+
     /**
      * get AnnualPercentageRate
      *
@@ -140,14 +140,9 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setAnnualPercentageRate($annualPercentageRate)
     {
-        if ((float) $annualPercentageRate > 1) {
-            $this->annualPercentageRate = $annualPercentageRate;
-            return $this;
-        }
+        $this->annualPercentageRate = $annualPercentageRate;
 
-        throw new InvalidArgumentException(
-            'Annual Percentage Rate must be a decimal value greater than or equal to 1.'
-        );
+        return $this;
     }
 
     /**
@@ -171,12 +166,11 @@ class OfferItem extends AbstractModel implements JsonSerializable
     {
         if ((float) $creditAmountToFund > 1) {
             $this->creditAmountToFund = $creditAmountToFund;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Credit Amount To Fund must be a decimal value greater than or equal to 1.'
-        );
+        throw new InvalidArgumentException('Credit Amount To Fund must be a decimal value greater than or equal to 1.');
     }
 
     /**
@@ -200,12 +194,11 @@ class OfferItem extends AbstractModel implements JsonSerializable
     {
         if ((float) $monthlyInstallmentAmount > 1) {
             $this->monthlyInstallmentAmount = $monthlyInstallmentAmount;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Monthly Installment Amount must be a decimal value greater than or equal to 1.'
-        );
+        throw new InvalidArgumentException('Monthly Installment Amount must be a decimal value greater than or equal to 1.');
     }
 
     /**
@@ -229,12 +222,11 @@ class OfferItem extends AbstractModel implements JsonSerializable
     {
         if ((float) $creditTotalAmount > 1) {
             $this->creditTotalAmount = $creditTotalAmount;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Credit Total Amount must be a decimal value greater than or equal to 1.'
-        );
+        throw new InvalidArgumentException('Credit Total Amount must be a decimal value greater than or equal to 1.');
     }
 
     /**
@@ -258,12 +250,11 @@ class OfferItem extends AbstractModel implements JsonSerializable
     {
         if (is_int($maturityInMonths) === true) {
             $this->maturityInMonths = $maturityInMonths;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Maturity In Months must be an int but ' . gettype($maturityInMonths) . ' is given.'
-        );
+        throw new InvalidArgumentException('Maturity In Months must be an int but ' . gettype($maturityInMonths) . ' is given.');
     }
 
     /**
@@ -285,13 +276,32 @@ class OfferItem extends AbstractModel implements JsonSerializable
      */
     public function setInterestsTotalAmount($interestsTotalAmount)
     {
-        if ((float) $interestsTotalAmount > 1) {
-            $this->interestsTotalAmount = $interestsTotalAmount;
-            return $this;
-        }
+        $this->interestsTotalAmount = $interestsTotalAmount;
 
-        throw new InvalidArgumentException(
-            'Interests Total Amount must be a decimal value greater than or equal to 1.'
-        );
+        return $this;
+    }
+
+    /**
+     * Get the value of downPaymentAmount
+     *
+     * @return int
+     */
+    public function getDownPaymentAmount()
+    {
+        return $this->downPaymentAmount;
+    }
+
+    /**
+     * Set the value of downPaymentAmount
+     *
+     * @param int $downPaymentAmount
+     *
+     * @return self
+     */
+    public function setDownPaymentAmount(int $downPaymentAmount)
+    {
+        $this->downPaymentAmount = $downPaymentAmount;
+
+        return $this;
     }
 }

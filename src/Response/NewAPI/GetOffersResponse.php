@@ -39,9 +39,7 @@ class GetOffersResponse extends AbstractResponse
 
         $output = json_decode($content, true);
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new InvalidArgumentException(
-                'json_decode error: ' . json_last_error_msg()
-            );
+            throw new InvalidArgumentException('json_decode error: ' . json_last_error_msg());
         }
         if (empty($output) === true) {
             return new ArrayCollection();
@@ -58,6 +56,7 @@ class GetOffersResponse extends AbstractResponse
                 ->setRequestedAmount((float) $value['requestedAmount'])
                 ->setAnnualPercentageRate((float) $value['details']['annualPercentageRate'] * 100)
                 ->setAnnualDebitRate((float) $value['characteristics']['interestRate'] * 100)
+                ->setDownPaymentAmount((float) $value['characteristics']['downPaymentAmount'])
                 ->setMonthlyInstallmentAmount((float) $value['details']['monthlyInstallmentAmount'])
                 ->setCreditTotalAmount((float) $value['details']['totalDueAmount'])
                 ->setMaturityInMonths((int) $value['characteristics']['maturityInMonths'])

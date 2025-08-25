@@ -23,12 +23,12 @@ use UnexpectedValueException;
 use YounitedPaySDK\Cache\Registry;
 use YounitedPaySDK\Cache\RegistryItem;
 use YounitedPaySDK\Exception\RequestException;
-use YounitedPaySDK\Response\AbstractResponse;
-use YounitedPaySDK\Response\ErrorResponse;
 use YounitedPaySDK\Request\AbstractRequest;
-use YounitedPaySDK\Response\DefaultResponse;
-use YounitedPaySDK\Response\ResponseBuilder;
+use YounitedPaySDK\Response\AbstractResponse;
 use YounitedPaySDK\Response\CallbackResponse;
+use YounitedPaySDK\Response\DefaultResponse;
+use YounitedPaySDK\Response\ErrorResponse;
+use YounitedPaySDK\Response\ResponseBuilder;
 
 /**
  * API client
@@ -187,7 +187,7 @@ class Client
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token,
-            'X-Api-Version' => '2025-01-01'
+            'X-Api-Version' => '2025-01-01',
         ];
         $request->setHeaders($headers);
 
@@ -313,6 +313,8 @@ class Client
         // These options default to false and cannot be changed on set up.
         // The options should be provided with the request instead.
         $options[CURLOPT_FOLLOWLOCATION] = false;
+        $options[CURLOPT_TIMEOUT_MS] = 10000;
+        $options[CURLOPT_CONNECTTIMEOUT_MS] = 4000;
         $options[CURLOPT_HEADER] = false;
         $options[CURLOPT_RETURNTRANSFER] = false;
         $options[CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1_2;
