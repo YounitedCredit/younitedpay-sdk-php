@@ -65,7 +65,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
     private $interestsTotalAmount;
 
     /**
-     * @var int
+     * @var float
      */
     private $downPaymentAmount;
 
@@ -284,7 +284,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Get the value of downPaymentAmount
      *
-     * @return int
+     * @return float
      */
     public function getDownPaymentAmount()
     {
@@ -294,7 +294,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
     /**
      * Set the value of downPaymentAmount
      *
-     * @param int $downPaymentAmount
+     * @param float $downPaymentAmount
      *
      * @return self
      */
