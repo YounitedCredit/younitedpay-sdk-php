@@ -298,7 +298,7 @@ class OfferItem extends AbstractModel implements JsonSerializable
      *
      * @return self
      */
-    public function setDownPaymentAmount(int $downPaymentAmount)
+    public function setDownPaymentAmount($downPaymentAmount)
     {
         $this->downPaymentAmount = $downPaymentAmount;
 
