@@ -122,7 +122,7 @@ class BasketItem extends AbstractModel implements JsonSerializable
      */
     public function setUnitPrice($unitPrice)
     {
-        if ((float) $unitPrice > 0) {
+        if ((float) $unitPrice >= 0) {
             $this->unitPrice = $unitPrice;
             return $this;
         }
