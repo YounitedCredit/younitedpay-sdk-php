@@ -168,6 +168,7 @@ class Client
      * Send a Request
      *
      * @param AbstractRequest $request
+     * @param mixed $additionnalHeaders
      *
      * @return Response\AbstractResponse
      *
@@ -175,7 +176,7 @@ class Client
      * @throws InvalidArgumentException Invalid header names and/or values
      * @throws RuntimeException Failure to create stream
      */
-    public function sendRequest(AbstractRequest $request)
+    public function sendRequest(AbstractRequest $request, $additionnalHeaders = [])
     {
         $tenantId = $request->getTenantId();
         $token = $this->getToken($tenantId);
@@ -183,12 +184,12 @@ class Client
             return new ErrorResponse(401);
         }
 
-        $headers = [
+        $headers = array_merge($additionnalHeaders, [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token,
             'X-Api-Version' => '2025-01-01',
-        ];
+        ]);
         $request->setHeaders($headers);
 
         $response = $this->createResponse($request);
