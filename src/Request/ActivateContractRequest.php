@@ -29,11 +29,6 @@ class ActivateContractRequest extends AbstractRequest
     /**
      * @var string
      */
-    protected $apiVersion = '2025-01-01';
-
-    /**
-     * @var string
-     */
     protected $requestTarget = '/Contract/{contractReference}/activate';
 
     /**
