@@ -271,20 +271,23 @@ class EventNotificationData extends AbstractModel
     /**
      * Set Amount
      *
-     * @param float|null $amount
+     * @param float|null|int $amount
      *
      * @return self
      */
     public function setAmount($amount)
     {
-        if (is_float($amount) === true || is_null($amount) === true) {
-            $this->amount = $amount;
-
+        if ((float) $amount >= 0 || is_null($amount)) {
+            if (is_null($amount)) {
+                $this->amount = $amount;
+            } else {
+                $this->amount = (float) $amount;
+            }
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Amount must be a float or null but ' . gettype($amount) . ' is given.'
+        'Amount must be a float, integer or null but ' . gettype($amount) . ' is given.'
         );
     }
 
