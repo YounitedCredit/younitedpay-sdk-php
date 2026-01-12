@@ -35,7 +35,7 @@ class BestPrice extends AbstractModel
      */
     public function getBorrowedAmount()
     {
-        return (string) (round((int) ((float) $this->borrowedAmount * 100), 2) / 100);
+        return (string) number_format($this->borrowedAmount, 2, '.', '');
     }
 
     /**
