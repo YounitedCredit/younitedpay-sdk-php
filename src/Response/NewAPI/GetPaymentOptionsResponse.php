@@ -56,7 +56,7 @@ class GetPaymentOptionsResponse extends AbstractResponse
             $detailsSection = $value['type'] === 'SplitPayment' ? $value['splitPaymentDetails'] : $value['personalLoanDetails'];
             $item = (new PaymentOptionItem())
                 ->setType((string) $value['type'])
-                ->setDownPaymentAmount((float) ($detailsSection['downPaymentAmount'] ?? 0))
+                ->setDownPaymentAmount((float) (isset($detailsSection['downPaymentAmount']) ? $detailsSection['downPaymentAmount'] : 0))
                 ->setRequestedAmount((float) $value['purchaseAmount'])
                 ->setAnnualPercentageRate((float) ($detailsSection['loanDetails']['annualPercentageRate'] * 100))
                 ->setAnnualDebitRate((float) ($detailsSection['loanTerms']['interestRate'] * 100))

@@ -49,18 +49,18 @@ class Installment extends AbstractModel implements JsonSerializable
      */
     private $totalAmount;
 
-    public function getInstallmentNumber(): int
+    public function getInstallmentNumber()
     {
         return $this->installmentNumber;
     }
 
-    public function setInstallmentNumber(int $installmentNumber): self
+    public function setInstallmentNumber(int $installmentNumber)
     {
         $this->installmentNumber = $installmentNumber;
         return $this;
     }
 
-    public function getDueDate(): string
+    public function getDueDate()
     {
         return $this->dueDate;
     }
@@ -68,7 +68,7 @@ class Installment extends AbstractModel implements JsonSerializable
     /**
      * Set due date as a string in YYYY-MM-DD format.
      */
-    public function setDueDate(string $dueDate): self
+    public function setDueDate(string $dueDate)
     {
         $this->dueDate = $dueDate;
         return $this;
@@ -79,29 +79,29 @@ class Installment extends AbstractModel implements JsonSerializable
         return $this->loanAmount;
     }
 
-    public function setLoanAmount(float $loanAmount): self
+    public function setLoanAmount(float $loanAmount)
     {
         $this->loanAmount = $loanAmount;
         return $this;
     }
 
-    public function getFeeAmount(): float
+    public function getFeeAmount()
     {
         return $this->feeAmount;
     }
 
-    public function setFeeAmount(float $feeAmount): self
+    public function setFeeAmount(float $feeAmount)
     {
         $this->feeAmount = $feeAmount;
         return $this;
     }
 
-    public function getTotalAmount(): float
+    public function getTotalAmount()
     {
         return $this->totalAmount;
     }
 
-    public function setTotalAmount(float $totalAmount): self
+    public function setTotalAmount(float $totalAmount)
     {
         $this->totalAmount = $totalAmount;
         return $this;

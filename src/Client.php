@@ -189,7 +189,7 @@ class Client
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token,
-            'x-api-version' => $request->getApiVersion() ?? '2024-01-01',
+            'x-api-version' => $request->getApiVersion() ? $request->getApiVersion() : '2024-01-01',
         ]);
         $request->setHeaders($headers);
 

@@ -164,7 +164,7 @@ class PostPaymentAdapter extends AbstractAdapter
         $model->setPurchaseAmount($this->getPurchaseAmount());
 
         $techInformations = $model->getTechnicalInformation();
-        $techInformations->setApiVersion($this->request::getApiVersion());
+        $techInformations->setApiVersion('2026-02-01');
         $techInformations->setWebhookNotificationApiVersion($techInformations->getApiVersion());
         $model->setTechnicalInformation($techInformations);
 
