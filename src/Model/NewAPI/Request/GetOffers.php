@@ -14,7 +14,7 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace YounitedPaySDK\Model\NewAPI;
+namespace YounitedPaySDK\Model\NewAPI\Request;
 
 use InvalidArgumentException;
 use YounitedPaySDK\Model\AbstractModel;

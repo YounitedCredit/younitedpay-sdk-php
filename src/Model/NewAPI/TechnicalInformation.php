@@ -33,9 +33,14 @@ class TechnicalInformation extends AbstractModel implements JsonSerializable
     private $webhookNotificationUrl;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $apiVersion;
+
+    /**
+     * @var string|null
+     */
+    private $webhookNotificationApiVersion;
 
     // GETTERS & SETTERS
 
@@ -95,5 +100,29 @@ class TechnicalInformation extends AbstractModel implements JsonSerializable
         throw new InvalidArgumentException(
             'Api Version must be a string but ' . gettype($apiVersion) . ' is given.'
         );
+    }
+
+    /**
+     * Get the value of webhookNotificationApiVersion
+     *
+     * @return  string|null
+     */
+    public function getWebhookNotificationApiVersion()
+    {
+        return $this->webhookNotificationApiVersion;
+    }
+
+    /**
+     * Set the value of webhookNotificationApiVersion
+     *
+     * @param   string|null  $webhookNotificationApiVersion  
+     *
+     * @return  self
+     */
+    public function setWebhookNotificationApiVersion($webhookNotificationApiVersion)
+    {
+        $this->webhookNotificationApiVersion = $webhookNotificationApiVersion;
+
+        return $this;
     }
 }

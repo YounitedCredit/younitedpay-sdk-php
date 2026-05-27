@@ -1,0 +1,367 @@
+<?php
+
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * PHP version 5.6+
+ *
+ * @category  YounitedpaySDK
+ * @package   Ecommerceyounitedpaysdk
+ * @author    202-ecommerce <tech@202-ecommerce.com>
+ * @copyright 2022 (c) 202-ecommerce
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ * @link      https://api.sandbox-younited-pay.com/
+ */
+
+namespace YounitedPaySDK\Model\NewAPI;
+
+use InvalidArgumentException;
+use JsonSerializable;
+use YounitedPaySDK\Model\AbstractModel;
+use YounitedpaySdk\Model\NewAPI\Installment;
+    
+/**
+ * Offer Item Model Class
+ */
+class PaymentOptionItem extends AbstractModel implements JsonSerializable
+{
+    /**
+     * @var float|string
+     */
+    private $requestedAmount;
+
+    /**
+     * @var float|string
+     */
+    private $annualPercentageRate;
+
+    /**
+     * @var float|string
+     */
+    private $annualDebitRate;
+
+    /**
+     * @var float|string
+     */
+    private $monthlyInstallmentAmount;
+
+    /**
+     * @var float|string
+     */
+    private $creditTotalAmount;
+
+    /**
+     * @var float|string
+     */
+    private $creditAmountToFund;
+
+    /**
+     * @var int
+     */
+    private $maturityInMonths;
+
+    /**
+     * @var float|string
+     */
+    private $interestsTotalAmount;
+
+    /**
+     * @var float
+     */
+    private $downPaymentAmount;
+
+    /**
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @var Installment[]
+     */
+    private $installmentDetails;
+
+    /**
+     * Get requestedAmount
+     *
+     * @return float|string requestedAmount
+     */
+    public function getRequestedAmount()
+    {
+        return $this->requestedAmount;
+    }
+
+    /**
+     * Set requestedAmount
+     *
+     * @param float|string $requestedAmount
+     *
+     * @return self
+     */
+    public function setRequestedAmount($requestedAmount)
+    {
+        if ((float) $requestedAmount > 1) {
+            $this->requestedAmount = $requestedAmount;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Requested Amount must be a decimal value greater than or equal to 1.');
+    }
+
+    /**
+     * Get annualDebitRate
+     *
+     * @return float|string annualDebitRate
+     */
+    public function getAnnualDebitRate()
+    {
+        return $this->annualDebitRate;
+    }
+
+    /**
+     * Set annualDebitRate
+     *
+     * @param float|string $annualDebitRate
+     *
+     * @return self
+     */
+    public function setAnnualDebitRate($annualDebitRate)
+    {
+        $this->annualDebitRate = $annualDebitRate;
+
+        return $this;
+    }
+
+    /**
+     * get AnnualPercentageRate
+     *
+     * @return float|string
+     */
+    public function getAnnualPercentageRate()
+    {
+        return $this->annualPercentageRate;
+    }
+
+    /**
+     * Set annualPercentageRate
+     *
+     * @param float|string $annualPercentageRate
+     *
+     * @return self
+     */
+    public function setAnnualPercentageRate($annualPercentageRate)
+    {
+        $this->annualPercentageRate = $annualPercentageRate;
+
+        return $this;
+    }
+
+    /**
+     * Get creditAmountToFund
+     *
+     * @return float|string creditAmountToFund
+     */
+    public function getCreditAmountToFund()
+    {
+        return $this->creditAmountToFund;
+    }
+
+    /**
+     * Set creditAmountToFund
+     *
+     * @param float|string $creditAmountToFund
+     *
+     * @return self
+     */
+    public function setCreditAmountToFund($creditAmountToFund)
+    {
+        if ((float) $creditAmountToFund > 1) {
+            $this->creditAmountToFund = $creditAmountToFund;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Credit Amount To Fund must be a decimal value greater than or equal to 1.');
+    }
+
+    /**
+     * Get monthlyInstallmentAmount
+     *
+     * @return float|string monthlyInstallmentAmount
+     */
+    public function getMonthlyInstallmentAmount()
+    {
+        return $this->monthlyInstallmentAmount;
+    }
+
+    /**
+     * Set monthlyInstallmentAmount
+     *
+     * @param float|string $monthlyInstallmentAmount
+     *
+     * @return self
+     */
+    public function setMonthlyInstallmentAmount($monthlyInstallmentAmount)
+    {
+        if ((float) $monthlyInstallmentAmount > 1) {
+            $this->monthlyInstallmentAmount = $monthlyInstallmentAmount;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Monthly Installment Amount must be a decimal value greater than or equal to 1.');
+    }
+
+    /**
+     * Get creditTotalAmount
+     *
+     * @return float|string creditTotalAmount
+     */
+    public function getCreditTotalAmount()
+    {
+        return $this->creditTotalAmount;
+    }
+
+    /**
+     * Set creditTotalAmount
+     *
+     * @param float|string $creditTotalAmount
+     *
+     * @return self
+     */
+    public function setCreditTotalAmount($creditTotalAmount)
+    {
+        if ((float) $creditTotalAmount > 1) {
+            $this->creditTotalAmount = $creditTotalAmount;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Credit Total Amount must be a decimal value greater than or equal to 1.');
+    }
+
+    /**
+     * Get maturityInMonths
+     *
+     * @return int maturityInMonths
+     */
+    public function getMaturityInMonths()
+    {
+        return $this->maturityInMonths;
+    }
+
+    /**
+     * Set maturityInMonths
+     *
+     * @param int $maturityInMonths
+     *
+     * @return self
+     */
+    public function setMaturityInMonths($maturityInMonths)
+    {
+        if (is_int($maturityInMonths) === true) {
+            $this->maturityInMonths = $maturityInMonths;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Maturity In Months must be an int but ' . gettype($maturityInMonths) . ' is given.');
+    }
+
+    /**
+     * Get interestsTotalAmount
+     *
+     * @return float|string interestsTotalAmount
+     */
+    public function getInterestsTotalAmount()
+    {
+        return $this->interestsTotalAmount;
+    }
+
+    /**
+     * Set interestsTotalAmount
+     *
+     * @param float|string $interestsTotalAmount
+     *
+     * @return self
+     */
+    public function setInterestsTotalAmount($interestsTotalAmount)
+    {
+        $this->interestsTotalAmount = $interestsTotalAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of downPaymentAmount
+     *
+     * @return float
+     */
+    public function getDownPaymentAmount()
+    {
+        return $this->downPaymentAmount;
+    }
+
+    /**
+     * Set the value of downPaymentAmount
+     *
+     * @param float $downPaymentAmount
+     *
+     * @return self
+     */
+    public function setDownPaymentAmount($downPaymentAmount)
+    {
+        $this->downPaymentAmount = $downPaymentAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of type
+     *
+     * @return  string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set the value of type
+     *
+     * @param   string  $type  
+     *
+     * @return  self
+     */
+    public function setType(string $type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of installmentDetails
+     *
+     * @return  Installment[]
+     */
+    public function getInstallmentDetails()
+    {
+        return $this->installmentDetails;
+    }
+
+    /**
+     * Set the value of installmentDetails
+     *
+     * @param   Installment[]  $installmentDetails  
+     *
+     * @return  self
+     */
+    public function setInstallmentDetails($installmentDetails)
+    {
+        $this->installmentDetails = $installmentDetails;
+
+        return $this;
+    }
+}
