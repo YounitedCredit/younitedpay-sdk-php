@@ -110,7 +110,7 @@ class BasketDescriptionItem extends AbstractModel implements JsonSerializable
      */
     public function getUnitPrice()
     {
-        return (string) number_format($this->unitPrice, 2, '.', '');
+        return (string) number_format((float) $this->unitPrice, 2, '.', '');
     }
 
     /**

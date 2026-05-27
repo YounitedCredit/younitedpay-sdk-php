@@ -46,7 +46,7 @@ class LoanRequest extends AbstractModel implements JsonSerializable
      */
     public function getRequestedAmount()
     {
-        return (string) number_format($this->requestedAmount, 2, '.', '');
+        return (string) number_format((float) $this->requestedAmount, 2, '.', '');
     }
 
     /**

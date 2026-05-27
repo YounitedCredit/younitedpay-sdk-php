@@ -62,7 +62,7 @@ class GetOffers extends AbstractModel
      */
     public function getAmount()
     {
-        return (string) number_format($this->amount, 2, '.', '');
+        return (string) number_format((float) $this->amount, 2, '.', '');
     }
 
     /**

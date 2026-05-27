@@ -18,7 +18,7 @@ namespace YounitedPaySDK\Request\NewAPI;
 
 use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Model\AbstractModel;
-use YounitedPaySDK\Model\NewAPI\GetOffers;
+use YounitedPaySDK\Model\NewAPI\Request\GetOffers;
 use YounitedPaySDK\Response\NewAPI\GetOffersResponse;
 
 /**

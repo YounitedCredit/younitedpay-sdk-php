@@ -49,17 +49,34 @@ class Installment extends AbstractModel implements JsonSerializable
      */
     private $totalAmount;
 
+    /**
+     * Get Insatallment Number
+     *
+     * @return int
+     */
     public function getInstallmentNumber()
     {
         return $this->installmentNumber;
     }
 
+    /**
+     * Set Installment Number
+     *
+     * @param int $installmentNumber
+     *
+     * @return self
+     */
     public function setInstallmentNumber(int $installmentNumber)
     {
         $this->installmentNumber = $installmentNumber;
         return $this;
     }
 
+    /**
+     * Get Due Date
+     *
+     * @return string
+     */
     public function getDueDate()
     {
         return $this->dueDate;
@@ -67,6 +84,10 @@ class Installment extends AbstractModel implements JsonSerializable
 
     /**
      * Set due date as a string in YYYY-MM-DD format.
+     *
+     * @param string $dueDate
+     *
+     * @return self
      */
     public function setDueDate(string $dueDate)
     {
@@ -74,33 +95,69 @@ class Installment extends AbstractModel implements JsonSerializable
         return $this;
     }
 
-    public function getLoanAmount(): float
+    /**
+     * Get Loan Amount
+     *
+     * @return float
+     */
+    public function getLoanAmount()
     {
         return $this->loanAmount;
     }
 
+    /**
+     * Set Loan Amount
+     *
+     * @param float $loanAmount
+     *
+     * @return self
+     */
     public function setLoanAmount(float $loanAmount)
     {
         $this->loanAmount = $loanAmount;
         return $this;
     }
 
+    /**
+     * Get Fee Amount
+     *
+     * @return float
+     */
     public function getFeeAmount()
     {
         return $this->feeAmount;
     }
 
+    /**
+     * Set Fee Amount
+     *
+     * @param float $feeAmount
+     *
+     * @return self
+     */
     public function setFeeAmount(float $feeAmount)
     {
         $this->feeAmount = $feeAmount;
         return $this;
     }
 
+    /**
+     * Get Total Amount
+     *
+     * @return float
+     */
     public function getTotalAmount()
     {
         return $this->totalAmount;
     }
 
+    /**
+     * Set Total Amount
+     *
+     * @param float $totalAmount
+     *
+     * @return self
+     */
     public function setTotalAmount(float $totalAmount)
     {
         $this->totalAmount = $totalAmount;

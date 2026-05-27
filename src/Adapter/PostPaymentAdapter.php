@@ -77,7 +77,7 @@ class PostPaymentAdapter extends AbstractAdapter
     private $purchaseAmount;
 
     /**
-     * @var string|null
+     * @var int|null
      */
     private $installmentCount;
 
@@ -324,7 +324,7 @@ class PostPaymentAdapter extends AbstractAdapter
     /**
      * Get the value of installmentCount
      *
-     * @return  string|null
+     * @return  int|null
      */
     public function getInstallmentCount()
     {
@@ -334,7 +334,7 @@ class PostPaymentAdapter extends AbstractAdapter
     /**
      * Set the value of installmentCount
      *
-     * @param   string|null  $installmentCount
+     * @param   int|null  $installmentCount
      *
      * @return  self
      */
