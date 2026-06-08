@@ -14,7 +14,7 @@
  * @link      https://api.sandbox-younited-pay.com/
  */
 
-namespace YounitedPaySDK\Model\NewAPI;
+namespace YounitedPaySDK\Model\NewAPI\Request;
 
 use InvalidArgumentException;
 use YounitedPaySDK\Model\AbstractModel;
@@ -62,7 +62,7 @@ class GetOffers extends AbstractModel
      */
     public function getAmount()
     {
-        return (string) number_format($this->amount, 2, '.', '');
+        return (string) number_format((float) $this->amount, 2, '.', '');
     }
 
     /**

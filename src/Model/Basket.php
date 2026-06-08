@@ -45,8 +45,7 @@ class Basket extends AbstractModel implements JsonSerializable
      */
     public function getBasketAmount()
     {
-
-        return (string) number_format($this->basketAmount, 2, '.', '');
+        return (string) number_format((float) $this->basketAmount, 2, '.', '');
     }
 
     /**

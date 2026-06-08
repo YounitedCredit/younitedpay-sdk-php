@@ -19,22 +19,22 @@ namespace YounitedPaySDK\Request\NewAPI;
 use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Model\NewAPI\Request\GetOffers;
-use YounitedPaySDK\Response\NewAPI\GetOffersResponse;
+use YounitedPaySDK\Response\NewAPI\GetPaymentOptionsResponse;
 
 /**
- * Get Offers Request Class
+ * Get Payment Options Request Class
  */
-class GetOffersRequest extends AbstractRequest
+class GetPaymentOptionsRequest extends AbstractRequest
 {
     /**
      * @var string
      */
-    protected $apiVersion = '2025-01-01';
+    protected $apiVersion = '2026-02-01';
 
     /**
      * @var string
      */
-    protected $requestTarget = '/personal-loans/offers';
+    protected $requestTarget = '/payments/options';
 
     /**
      * @var string
@@ -42,7 +42,7 @@ class GetOffersRequest extends AbstractRequest
     protected $method = 'GET';
 
     /** @var string */
-    protected $response = GetOffersResponse::class;
+    protected $response = GetPaymentOptionsResponse::class;
 
     /**
      * @inherit
@@ -50,15 +50,16 @@ class GetOffersRequest extends AbstractRequest
     public function setModel(AbstractModel $body)
     {
         if ($body instanceof GetOffers) {
-            $queryParameters[] = 'Amount=' . urlencode($body->getAmount());
+            $queryParameters[] = 'PurchaseAmount=' . urlencode($body->getAmount());
             $queryParameters[] = 'ShopCode=' . urlencode($body->getShopCode());
 
             if (false === empty($body->getMaturityList())) {
-                $queryParameters[] = 'Maturity.List=' . urlencode($body->getMaturityList());
-            } else {
-                $queryParameters[] = 'Maturity.Range.Min=' . (empty($body->getMaturityRangeMin()) ? 24 : $body->getMaturityRangeMin());
-                $queryParameters[] = 'Maturity.Range.Step=' . (empty($body->getMaturityRangeStep()) ? 1 : $body->getMaturityRangeStep());
-                $queryParameters[] = 'Maturity.Range.Max=' . (empty($body->getMaturityRangeMax()) ? 48 : $body->getMaturityRangeMax());
+                $queryParameters[] = 'InstallmentCount.List=' . urlencode($body->getMaturityList());
+            }
+            if (false === empty($body->getMaturityRangeMin()) || false === empty($body->getMaturityRangeStep()) || false === empty($body->getMaturityRangeMax())) {
+                $queryParameters[] = 'InstallmentCount.Range.Min=' . (empty($body->getMaturityRangeMin()) ? 24 : $body->getMaturityRangeMin());
+                $queryParameters[] = 'InstallmentCount.Range.Step=' . (empty($body->getMaturityRangeStep()) ? 1 : $body->getMaturityRangeStep());
+                $queryParameters[] = 'InstallmentCount.Range.Max=' . (empty($body->getMaturityRangeMax()) ? 48 : $body->getMaturityRangeMax());
             }
 
             $queryParameters = implode('&', $queryParameters);

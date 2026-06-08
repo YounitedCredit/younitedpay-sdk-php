@@ -35,11 +35,6 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     // PROPERTIES
 
     /**
-     * @var LoanRequest
-     */
-    private $loanRequest;
-
-    /**
      * @var BasketDescription
      */
     private $basketDescription;
@@ -69,37 +64,22 @@ class CreatePayment extends AbstractModel implements JsonSerializable
      */
     private $customExperience;
 
+    /**
+     * @var string|null
+     */
+    private $paymentType;
+
+    /**
+     * @var string|null
+     */
+    private $purchaseAmount;
+
+    /**
+     * @var int|null
+     */
+    private $installmentCount;
+
     // GETTERS & SETTERS
-
-    /**
-     * Get Loan Request
-     *
-     * @return LoanRequest
-     */
-    public function getLoanRequest()
-    {
-        return $this->loanRequest;
-    }
-
-    /**
-     * Set Loan Request
-     *
-     * @param LoanRequest $loanRequest
-     *
-     * @return self
-     */
-    public function setLoanRequest($loanRequest)
-    {
-        if ($loanRequest instanceof LoanRequest) {
-            $this->loanRequest = $loanRequest;
-
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Loan Request must be an instance of ' . LoanRequest::class . ' but ' . gettype($loanRequest) . ' is given.'
-        );
-    }
 
     /**
      * Get Basket Description
@@ -273,5 +253,77 @@ class CreatePayment extends AbstractModel implements JsonSerializable
         throw new InvalidArgumentException(
             'Custom Experience must be an instance of ' . CustomExperience::class . ' but ' . get_class($customExperience) . ' is given.'
         );
+    }
+
+    /**
+     * Get the value of paymentType
+     *
+     * @return  string|null
+     */
+    public function getPaymentType()
+    {
+        return $this->paymentType;
+    }
+
+    /**
+     * Set the value of paymentType
+     *
+     * @param   string|null  $paymentType
+     *
+     * @return  self
+     */
+    public function setPaymentType($paymentType)
+    {
+        $this->paymentType = $paymentType;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of purchaseAmount
+     *
+     * @return  string|null
+     */
+    public function getPurchaseAmount()
+    {
+        return $this->purchaseAmount;
+    }
+
+    /**
+     * Set the value of purchaseAmount
+     *
+     * @param   string|null  $purchaseAmount
+     *
+     * @return  self
+     */
+    public function setPurchaseAmount($purchaseAmount)
+    {
+        $this->purchaseAmount = $purchaseAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of installmentCount
+     *
+     * @return  int|null
+     */
+    public function getInstallmentCount()
+    {
+        return $this->installmentCount;
+    }
+
+    /**
+     * Set the value of installmentCount
+     *
+     * @param   int|null  $installmentCount
+     *
+     * @return  self
+     */
+    public function setInstallmentCount($installmentCount)
+    {
+        $this->installmentCount = $installmentCount;
+
+        return $this;
     }
 }
