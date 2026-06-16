@@ -34,7 +34,7 @@ jobs:
             - name: Setup PHP
               uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 #v2.37.2
               with:
-                php-version: '7.4'
+                php-version: '8.1'
                 tools: composer:v2 php-cs-fixer phpstan
 
             - name: Checkout
@@ -50,7 +50,7 @@ jobs:
               run: composer update --ignore-platform-reqs
 
             - name: Run PHP-CS-Fixer
-              run: ./vendor/bin/php-cs-fixer fix src --dry-run --diff --using-cache=no
+              run: phpcs -q --report=checkstyle src | cs2pr
 
             - name: Static analysis of PHP code (PHPStan)
-              run: ./vendor/bin/phpstan analyse -l max src
+              run: phpstan analyse src | cs2pr
