@@ -1,17 +1,19 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Cache;
@@ -29,12 +31,12 @@ class RegistryItem
     protected $value;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var null|\DateTimeInterface
      */
     protected $expiration;
 
     /**
-     * @var int|\DateInterval|null
+     * @var null|\DateInterval|int
      */
     protected $time;
 
@@ -73,7 +75,7 @@ class RegistryItem
      */
     public function isHit()
     {
-        return empty($this->value) === false;
+        return false === empty($this->value);
     }
 
     /**
@@ -84,17 +86,19 @@ class RegistryItem
     public function set($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
     /**
-     * @param \DateTimeInterface|null $expiration
+     * @param null|\DateTimeInterface $expiration
      *
      * @return RegistryItem
      */
     public function expiresAt($expiration)
     {
         $this->expiration = $expiration;
+
         return $this;
     }
 
@@ -106,6 +110,7 @@ class RegistryItem
     public function expiresAfter($time)
     {
         $this->time = $time;
+
         return $this;
     }
 
@@ -116,7 +121,7 @@ class RegistryItem
     {
         $datetime = new \DateTime();
 
-        if (is_null($this->expiration) === false) {
+        if ((null === $this->expiration) === false) {
             if ($this->expiration->getTimestamp() < $datetime->getTimestamp()) {
                 return true;
             }
@@ -124,8 +129,8 @@ class RegistryItem
 
         $dateInterval = $datetime->diff($this->creation)->s;
 
-        if (is_null($this->time) === false) {
-            $time = is_int($this->time) ? $this->time : $this->time->s;
+        if ((null === $this->time) === false) {
+            $time = \is_int($this->time) ? $this->time : $this->time->s;
             if ($time < $dateInterval) {
                 return true;
             }
@@ -135,7 +140,7 @@ class RegistryItem
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return null|\DateTimeInterface
      */
     public function getExpiredDate()
     {
@@ -143,7 +148,7 @@ class RegistryItem
     }
 
     /**
-     * @return \DateInterval|int|null
+     * @return null|\DateInterval|int
      */
     public function getExpiredTime()
     {

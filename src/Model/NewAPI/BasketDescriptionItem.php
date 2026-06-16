@@ -1,29 +1,29 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Basket Description Item Model Class
+ * Basket Description Item Model Class.
  */
-class BasketDescriptionItem extends AbstractModel implements JsonSerializable
+class BasketDescriptionItem extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -45,7 +45,7 @@ class BasketDescriptionItem extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Name
+     * Get Name.
      *
      * @return string
      */
@@ -55,7 +55,7 @@ class BasketDescriptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Name
+     * Set Name.
      *
      * @param string $name
      *
@@ -63,18 +63,19 @@ class BasketDescriptionItem extends AbstractModel implements JsonSerializable
      */
     public function setName($name)
     {
-        if (is_string($name) === true) {
+        if (true === \is_string($name)) {
             $this->name = $name;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Name must be a string but ' . gettype($name) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Name must be a string but '.\gettype($name).' is given.'
         );
     }
 
     /**
-     * Get Quantity
+     * Get Quantity.
      *
      * @return int
      */
@@ -85,7 +86,7 @@ class BasketDescriptionItem extends AbstractModel implements JsonSerializable
 
     /**
      * Set Quantity
-     * Value must be greater than or equal to 1
+     * Value must be greater than or equal to 1.
      *
      * @param int $quantity
      *
@@ -93,18 +94,19 @@ class BasketDescriptionItem extends AbstractModel implements JsonSerializable
      */
     public function setQuantity($quantity)
     {
-        if (is_int($quantity) === true) {
+        if (true === \is_int($quantity)) {
             $this->quantity = $quantity;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Quantity must be an int but ' . gettype($quantity) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Quantity must be an int but '.\gettype($quantity).' is given.'
         );
     }
 
     /**
-     * Get Unit Price
+     * Get Unit Price.
      *
      * @return string
      */
@@ -115,7 +117,7 @@ class BasketDescriptionItem extends AbstractModel implements JsonSerializable
 
     /**
      * Set Unit Price
-     * Value must be greater than or equal to 0
+     * Value must be greater than or equal to 0.
      *
      * @param float|string $unitPrice
      *
@@ -125,10 +127,11 @@ class BasketDescriptionItem extends AbstractModel implements JsonSerializable
     {
         if ((float) $unitPrice >= 0) {
             $this->unitPrice = $unitPrice;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
+        throw new \InvalidArgumentException(
             'Unit Price must be a decimal value greater than or equal to 0.'
         );
     }

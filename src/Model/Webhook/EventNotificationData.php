@@ -1,26 +1,27 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\Webhook;
 
-use InvalidArgumentException;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Event Notification Data Model Class
+ * Event Notification Data Model Class.
  */
 class EventNotificationData extends AbstractModel
 {
@@ -37,17 +38,17 @@ class EventNotificationData extends AbstractModel
     private $paymentId;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $status;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $reference;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $merchantReference;
 
@@ -57,12 +58,12 @@ class EventNotificationData extends AbstractModel
     private $paymentType;
 
     /**
-     * @var float|null
+     * @var null|float
      */
     private $amount;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $withdrawnAt;
 
@@ -72,14 +73,14 @@ class EventNotificationData extends AbstractModel
     private $createdAt;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $updatedAt;
 
     // GETTERS & SETTERS
 
     /**
-     * Get Type
+     * Get Type.
      *
      * @return string
      */
@@ -89,7 +90,7 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Type
+     * Set Type.
      *
      * @param string $type
      *
@@ -97,19 +98,19 @@ class EventNotificationData extends AbstractModel
      */
     public function setType($type)
     {
-        if (is_string($type) === true) {
+        if (true === \is_string($type)) {
             $this->type = $type;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Type must be a string but ' . gettype($type) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Type must be a string but '.\gettype($type).' is given.'
         );
     }
 
     /**
-     * Get Payment Id
+     * Get Payment Id.
      *
      * @return string
      */
@@ -119,7 +120,7 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Payment Id
+     * Set Payment Id.
      *
      * @param string $paymentId
      *
@@ -127,21 +128,21 @@ class EventNotificationData extends AbstractModel
      */
     public function setPaymentId($paymentId)
     {
-        if (is_string($paymentId) === true) {
+        if (true === \is_string($paymentId)) {
             $this->paymentId = $paymentId;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Payment Id must be a string but ' . gettype($paymentId) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Payment Id must be a string but '.\gettype($paymentId).' is given.'
         );
     }
 
     /**
-     * Get Status
+     * Get Status.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getStatus()
     {
@@ -149,29 +150,29 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Status
+     * Set Status.
      *
-     * @param string|null $status
+     * @param null|string $status
      *
      * @return self
      */
     public function setStatus($status)
     {
-        if (is_string($status) === true || is_null($status) === true) {
+        if (true === \is_string($status) || (null === $status) === true) {
             $this->status = $status;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Status must be a string or null but ' . gettype($status) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Status must be a string or null but '.\gettype($status).' is given.'
         );
     }
 
     /**
-     * Get Reference
+     * Get Reference.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getReference()
     {
@@ -179,29 +180,29 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Reference
+     * Set Reference.
      *
-     * @param string|null $reference
+     * @param null|string $reference
      *
      * @return self
      */
     public function setReference($reference)
     {
-        if (is_string($reference) === true || is_null($reference) === true) {
+        if (true === \is_string($reference) || (null === $reference) === true) {
             $this->reference = $reference;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Reference must be a string or null but ' . gettype($reference) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Reference must be a string or null but '.\gettype($reference).' is given.'
         );
     }
 
     /**
-     * Get Merchant Reference
+     * Get Merchant Reference.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getMerchantReference()
     {
@@ -209,27 +210,27 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Merchant Reference
+     * Set Merchant Reference.
      *
-     * @param string|null $merchantReference
+     * @param null|string $merchantReference
      *
      * @return self
      */
     public function setMerchantReference($merchantReference)
     {
-        if (is_string($merchantReference) === true || is_null($merchantReference) === true) {
+        if (true === \is_string($merchantReference) || (null === $merchantReference) === true) {
             $this->merchantReference = $merchantReference;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Merchant Reference must be a string or null but ' . gettype($merchantReference) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Merchant Reference must be a string or null but '.\gettype($merchantReference).' is given.'
         );
     }
 
     /**
-     * Get Payment Type
+     * Get Payment Type.
      *
      * @return string
      */
@@ -239,7 +240,7 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Payment Type
+     * Set Payment Type.
      *
      * @param string $paymentType
      *
@@ -247,21 +248,21 @@ class EventNotificationData extends AbstractModel
      */
     public function setPaymentType($paymentType)
     {
-        if (is_string($paymentType) === true) {
+        if (true === \is_string($paymentType)) {
             $this->paymentType = $paymentType;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Payment Type must be a string but ' . gettype($paymentType) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Payment Type must be a string but '.\gettype($paymentType).' is given.'
         );
     }
 
     /**
-     * Get Amount
+     * Get Amount.
      *
-     * @return float|null
+     * @return null|float
      */
     public function getAmount()
     {
@@ -269,32 +270,33 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Amount
+     * Set Amount.
      *
-     * @param float|null|int $amount
+     * @param null|float|int $amount
      *
      * @return self
      */
     public function setAmount($amount)
     {
-        if ((float) $amount >= 0 || is_null($amount)) {
-            if (is_null($amount)) {
+        if ((float) $amount >= 0 || null === $amount) {
+            if (null === $amount) {
                 $this->amount = $amount;
             } else {
                 $this->amount = (float) $amount;
             }
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-        'Amount must be a float, integer or null but ' . gettype($amount) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Amount must be a float, integer or null but '.\gettype($amount).' is given.'
         );
     }
 
     /**
-     * Get Withdrawn At
+     * Get Withdrawn At.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getWithdrawnAt()
     {
@@ -302,27 +304,27 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Withdrawn At
+     * Set Withdrawn At.
      *
-     * @param string|null $withdrawnAt
+     * @param null|string $withdrawnAt
      *
      * @return self
      */
     public function setWithdrawnAt($withdrawnAt)
     {
-        if (is_string($withdrawnAt) === true || is_null($withdrawnAt) === true) {
+        if (true === \is_string($withdrawnAt) || (null === $withdrawnAt) === true) {
             $this->withdrawnAt = $withdrawnAt;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Withdrawn At must be a string or null but ' . gettype($withdrawnAt) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Withdrawn At must be a string or null but '.\gettype($withdrawnAt).' is given.'
         );
     }
 
     /**
-     * Get Created At
+     * Get Created At.
      *
      * @return string
      */
@@ -332,7 +334,7 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Created At
+     * Set Created At.
      *
      * @param string $createdAt
      *
@@ -340,21 +342,21 @@ class EventNotificationData extends AbstractModel
      */
     public function setCreatedAt($createdAt)
     {
-        if (is_string($createdAt) === true) {
+        if (true === \is_string($createdAt)) {
             $this->createdAt = $createdAt;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Created At must be a string but ' . gettype($createdAt) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Created At must be a string but '.\gettype($createdAt).' is given.'
         );
     }
 
     /**
-     * Get Updated At
+     * Get Updated At.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getUpdatedAt()
     {
@@ -362,22 +364,22 @@ class EventNotificationData extends AbstractModel
     }
 
     /**
-     * Set Updated At
+     * Set Updated At.
      *
-     * @param string|null $updatedAt
+     * @param null|string $updatedAt
      *
      * @return self
      */
     public function setUpdatedAt($updatedAt)
     {
-        if (is_string($updatedAt) === true || is_null($updatedAt) === true) {
+        if (true === \is_string($updatedAt) || (null === $updatedAt) === true) {
             $this->updatedAt = $updatedAt;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Updated At must be a string or null but ' . gettype($updatedAt) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Updated At must be a string or null but '.\gettype($updatedAt).' is given.'
         );
     }
 }

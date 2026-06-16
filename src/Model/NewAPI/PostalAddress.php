@@ -1,29 +1,29 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Postal Address Model Class
+ * Postal Address Model Class.
  */
-class PostalAddress extends AbstractModel implements JsonSerializable
+class PostalAddress extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -33,7 +33,7 @@ class PostalAddress extends AbstractModel implements JsonSerializable
     private $addressLine1;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $addressLine2;
 
@@ -55,7 +55,7 @@ class PostalAddress extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Address Line 1
+     * Get Address Line 1.
      *
      * @return string
      */
@@ -66,7 +66,7 @@ class PostalAddress extends AbstractModel implements JsonSerializable
 
     /**
      * Set Address Line 1
-     * Character number must be less than or equal to 38
+     * Character number must be less than or equal to 38.
      *
      * @param string $addressLine1
      *
@@ -74,26 +74,27 @@ class PostalAddress extends AbstractModel implements JsonSerializable
      */
     public function setAddressLine1($addressLine1)
     {
-        if (is_string($addressLine1) === true) {
-            if (strlen($addressLine1) > 38) {
-                throw new InvalidArgumentException(
+        if (true === \is_string($addressLine1)) {
+            if (\strlen($addressLine1) > 38) {
+                throw new \InvalidArgumentException(
                     'Character number of Address Line 1 must be less than or equal to 38.'
                 );
             }
 
             $this->addressLine1 = $addressLine1;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Address Line 1 must be a string but ' . gettype($addressLine1) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Address Line 1 must be a string but '.\gettype($addressLine1).' is given.'
         );
     }
 
     /**
-     * Get Address Line 2
+     * Get Address Line 2.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getAddressLine2()
     {
@@ -104,24 +105,25 @@ class PostalAddress extends AbstractModel implements JsonSerializable
      * Set Address Line 2
      * Use only if AddressLine1 is greater than 38 characters.
      *
-     * @param string|null $addressLine2
+     * @param null|string $addressLine2
      *
      * @return self
      */
     public function setAddressLine2($addressLine2)
     {
-        if (is_string($addressLine2) === true || is_null($addressLine2) === true) {
+        if (true === \is_string($addressLine2) || (null === $addressLine2) === true) {
             $this->addressLine2 = $addressLine2;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Address Line 2 must be a string or null but ' . gettype($addressLine2) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Address Line 2 must be a string or null but '.\gettype($addressLine2).' is given.'
         );
     }
 
     /**
-     * Get City
+     * Get City.
      *
      * @return string
      */
@@ -131,7 +133,7 @@ class PostalAddress extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set City
+     * Set City.
      *
      * @param string $city
      *
@@ -139,18 +141,19 @@ class PostalAddress extends AbstractModel implements JsonSerializable
      */
     public function setCity($city)
     {
-        if (is_string($city) === true) {
+        if (true === \is_string($city)) {
             $this->city = $city;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'City must be a string but ' . gettype($city) . ' is given.'
+        throw new \InvalidArgumentException(
+            'City must be a string but '.\gettype($city).' is given.'
         );
     }
 
     /**
-     * Get Postal Code
+     * Get Postal Code.
      *
      * @return string
      */
@@ -160,7 +163,7 @@ class PostalAddress extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Postal Code
+     * Set Postal Code.
      *
      * @param string $postalCode
      *
@@ -168,18 +171,19 @@ class PostalAddress extends AbstractModel implements JsonSerializable
      */
     public function setPostalCode($postalCode)
     {
-        if (is_string($postalCode) === true) {
+        if (true === \is_string($postalCode)) {
             $this->postalCode = $postalCode;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Postal Code must be a string but ' . gettype($postalCode) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Postal Code must be a string but '.\gettype($postalCode).' is given.'
         );
     }
 
     /**
-     * Get Country Code
+     * Get Country Code.
      *
      * @return string
      */
@@ -189,7 +193,7 @@ class PostalAddress extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Country Code
+     * Set Country Code.
      *
      * @param string $countryCode
      *
@@ -197,13 +201,14 @@ class PostalAddress extends AbstractModel implements JsonSerializable
      */
     public function setCountryCode($countryCode)
     {
-        if (is_string($countryCode) === true) {
+        if (true === \is_string($countryCode)) {
             $this->countryCode = $countryCode;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Country Code must be a string but ' . gettype($countryCode) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Country Code must be a string but '.\gettype($countryCode).' is given.'
         );
     }
 }

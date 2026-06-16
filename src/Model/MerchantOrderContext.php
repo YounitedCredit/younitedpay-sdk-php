@@ -1,28 +1,27 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
-
 /**
- * Merchant Order Context Model Class
+ * Merchant Order Context Model Class.
  */
-class MerchantOrderContext extends AbstractModel implements JsonSerializable
+class MerchantOrderContext extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -32,24 +31,24 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     private $channel;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $shopCode;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $agentEmailAddress;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $merchantReference;
 
     // GETTERS & SETTERS
 
     /**
-     * Get Channel
+     * Get Channel.
      *
      * @return string
      */
@@ -68,20 +67,21 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
      */
     public function setChannel($channel)
     {
-        if (is_string($channel) === true) {
+        if (true === \is_string($channel)) {
             $this->channel = $channel;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Channel must be a string but ' . gettype($channel) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Channel must be a string but '.\gettype($channel).' is given.'
         );
     }
 
     /**
-     * Get Shop Code
+     * Get Shop Code.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getShopCode()
     {
@@ -89,28 +89,29 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Shop Code
+     * Set Shop Code.
      *
-     * @param string|null $shopCode
+     * @param null|string $shopCode
      *
      * @return self
      */
     public function setShopCode($shopCode)
     {
-        if (is_string($shopCode) === true || is_null($shopCode) === true) {
+        if (true === \is_string($shopCode) || (null === $shopCode) === true) {
             $this->shopCode = $shopCode;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Shop Code must be a string or null but ' . gettype($shopCode) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Shop Code must be a string or null but '.\gettype($shopCode).' is given.'
         );
     }
 
     /**
-     * Get Agent Email Address
+     * Get Agent Email Address.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getAgentEmailAddress()
     {
@@ -118,28 +119,29 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Agent Email Address
+     * Set Agent Email Address.
      *
-     * @param string|null $agentEmailAddress
+     * @param null|string $agentEmailAddress
      *
      * @return self
      */
     public function setAgentEmailAddress($agentEmailAddress)
     {
-        if (is_string($agentEmailAddress) === true || is_null($agentEmailAddress) === true) {
+        if (true === \is_string($agentEmailAddress) || (null === $agentEmailAddress) === true) {
             $this->agentEmailAddress = $agentEmailAddress;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Agent Email Address must be a string or null but ' . gettype($agentEmailAddress) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Agent Email Address must be a string or null but '.\gettype($agentEmailAddress).' is given.'
         );
     }
 
     /**
-     * Get Merchant Reference
+     * Get Merchant Reference.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getMerchantReference()
     {
@@ -147,21 +149,22 @@ class MerchantOrderContext extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Merchant Reference
+     * Set Merchant Reference.
      *
-     * @param string|null $merchantReference
+     * @param null|string $merchantReference
      *
      * @return self
      */
     public function setMerchantReference($merchantReference)
     {
-        if (is_string($merchantReference) === true || is_null($merchantReference) === true) {
+        if (true === \is_string($merchantReference) || (null === $merchantReference) === true) {
             $this->merchantReference = $merchantReference;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Merchant Reference must be a string or null but ' . gettype($merchantReference) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Merchant Reference must be a string or null but '.\gettype($merchantReference).' is given.'
         );
     }
 }

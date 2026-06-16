@@ -1,29 +1,27 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model;
 
-use DateTime;
-use InvalidArgumentException;
-use JsonSerializable;
-
 /**
- * Personnel Information Model Class
+ * Personnel Information Model Class.
  */
-class PersonalInformation extends AbstractModel implements JsonSerializable
+class PersonalInformation extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -38,7 +36,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     private $lastName;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $genderCode;
 
@@ -53,7 +51,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     private $cellPhoneNumber;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $birthDate;
 
@@ -65,7 +63,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get First Name
+     * Get First Name.
      *
      * @return string
      */
@@ -75,7 +73,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set First Name
+     * Set First Name.
      *
      * @param string $firstName
      *
@@ -83,18 +81,19 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      */
     public function setFirstName($firstName)
     {
-        if (is_string($firstName) === true) {
+        if (true === \is_string($firstName)) {
             $this->firstName = $firstName;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'First Name must be a string but ' . gettype($firstName) . ' is given.'
+        throw new \InvalidArgumentException(
+            'First Name must be a string but '.\gettype($firstName).' is given.'
         );
     }
 
     /**
-     * Get Last Name
+     * Get Last Name.
      *
      * @return string
      */
@@ -104,7 +103,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Last Name
+     * Set Last Name.
      *
      * @param string $lastName
      *
@@ -112,20 +111,21 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      */
     public function setLastName($lastName)
     {
-        if (is_string($lastName) === true) {
+        if (true === \is_string($lastName)) {
             $this->lastName = $lastName;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Last Name must be a string but ' . gettype($lastName) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Last Name must be a string but '.\gettype($lastName).' is given.'
         );
     }
 
     /**
-     * Get Gender Code
+     * Get Gender Code.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getGenderCode()
     {
@@ -134,26 +134,27 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
 
     /**
      * Set Gender Code
-     * If not null, possible values are : 'MALE' / 'FEMALE'
+     * If not null, possible values are : 'MALE' / 'FEMALE'.
      *
-     * @param string|null $genderCode
+     * @param null|string $genderCode
      *
      * @return self
      */
     public function setGenderCode($genderCode)
     {
-        if (is_string($genderCode) === true || is_null($genderCode) === true) {
+        if (true === \is_string($genderCode) || (null === $genderCode) === true) {
             $this->genderCode = $genderCode;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Gender Code must be a string or null but ' . gettype($genderCode) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Gender Code must be a string or null but '.\gettype($genderCode).' is given.'
         );
     }
 
     /**
-     * Get Email Address
+     * Get Email Address.
      *
      * @return string
      */
@@ -163,7 +164,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Email Address
+     * Set Email Address.
      *
      * @param string $emailAddress
      *
@@ -171,18 +172,19 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      */
     public function setEmailAddress($emailAddress)
     {
-        if (is_string($emailAddress) === true) {
+        if (true === \is_string($emailAddress)) {
             $this->emailAddress = $emailAddress;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Email Address must be a string but ' . gettype($emailAddress) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Email Address must be a string but '.\gettype($emailAddress).' is given.'
         );
     }
 
     /**
-     * Get Cell Phone Number
+     * Get Cell Phone Number.
      *
      * @return string
      */
@@ -193,7 +195,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
 
     /**
      * Set Cell Phone Number
-     * Need to be in international format : for example +33601020304
+     * Need to be in international format : for example +33601020304.
      *
      * @param string $cellPhoneNumber
      *
@@ -201,20 +203,21 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
      */
     public function setCellPhoneNumber($cellPhoneNumber)
     {
-        if (is_string($cellPhoneNumber) === true) {
+        if (true === \is_string($cellPhoneNumber)) {
             $this->cellPhoneNumber = $cellPhoneNumber;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Cell Phone Number must be a string but ' . gettype($cellPhoneNumber) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Cell Phone Number must be a string but '.\gettype($cellPhoneNumber).' is given.'
         );
     }
 
     /**
-     * Get Birth Date
+     * Get Birth Date.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getBirthDate()
     {
@@ -222,37 +225,39 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Birth Date
+     * Set Birth Date.
      *
-     * @param DateTime|string|null $birthDate
+     * @param null|\DateTime|string $birthDate
      *
      * @return self
      */
     public function setBirthDate($birthDate)
     {
-        if ($birthDate instanceof DateTime) {
+        if ($birthDate instanceof \DateTime) {
             $this->birthDate = $birthDate->format('Y-m-d');
+
             return $this;
         }
 
-        if (is_string($birthDate) === true && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthDate)) {
-            throw new InvalidArgumentException(
-                'Birth Date must be a string in the date format Y-m-d - ' . $birthDate
+        if (true === \is_string($birthDate) && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthDate)) {
+            throw new \InvalidArgumentException(
+                'Birth Date must be a string in the date format Y-m-d - '.$birthDate
             );
         }
 
-        if (is_string($birthDate) === true || is_null($birthDate) === true) {
+        if (true === \is_string($birthDate) || (null === $birthDate) === true) {
             $this->birthDate = $birthDate;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Birth Date must be an instance of ' .  DateTime::class . ' or null but ' . get_class($birthDate) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Birth Date must be an instance of '.\DateTime::class.' or null but '.\get_class($birthDate).' is given.'
         );
     }
 
     /**
-     * Get Address
+     * Get Address.
      *
      * @return Address
      */
@@ -262,7 +267,7 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Address
+     * Set Address.
      *
      * @param Address $address
      *
@@ -272,11 +277,12 @@ class PersonalInformation extends AbstractModel implements JsonSerializable
     {
         if ($address instanceof Address) {
             $this->address = $address;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Address must be an instance of ' .  Address::class . ' but ' . get_class($address) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Address must be an instance of '.Address::class.' but '.\get_class($address).' is given.'
         );
     }
 }

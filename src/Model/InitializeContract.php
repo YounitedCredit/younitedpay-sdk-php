@@ -1,28 +1,27 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
-
 /**
- * Initialize Contract Model Class
+ * Initialize Contract Model Class.
  */
-class InitializeContract extends AbstractModel implements JsonSerializable
+class InitializeContract extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -54,7 +53,7 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Requested Maturity
+     * Get Requested Maturity.
      *
      * @return int
      */
@@ -65,7 +64,7 @@ class InitializeContract extends AbstractModel implements JsonSerializable
 
     /**
      * Set Requested Maturity
-     * Value must be greater than or equal to 1
+     * Value must be greater than or equal to 1.
      *
      * @param int $requestedMaturity
      *
@@ -73,19 +72,19 @@ class InitializeContract extends AbstractModel implements JsonSerializable
      */
     public function setRequestedMaturity($requestedMaturity)
     {
-        if (is_int($requestedMaturity) === true) {
+        if (true === \is_int($requestedMaturity)) {
             $this->requestedMaturity = $requestedMaturity;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Requested Maturity must be an int but ' . gettype($requestedMaturity) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Requested Maturity must be an int but '.\gettype($requestedMaturity).' is given.'
         );
     }
 
     /**
-     * Get Personal Information
+     * Get Personal Information.
      *
      * @return PersonalInformation
      */
@@ -95,7 +94,7 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Personal Information
+     * Set Personal Information.
      *
      * @param PersonalInformation $personalInformation
      *
@@ -105,16 +104,17 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     {
         if ($personalInformation instanceof PersonalInformation) {
             $this->personalInformation = $personalInformation;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Personal Information must be an instance of ' . PersonalInformation::class . ' but ' . get_class($personalInformation) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Personal Information must be an instance of '.PersonalInformation::class.' but '.\get_class($personalInformation).' is given.'
         );
     }
 
     /**
-     * Get Basket
+     * Get Basket.
      *
      * @return Basket
      */
@@ -124,7 +124,7 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Basket
+     * Set Basket.
      *
      * @param Basket $basket
      *
@@ -134,16 +134,17 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     {
         if ($basket instanceof Basket) {
             $this->basket = $basket;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Basket must be an instance of ' . Basket::class . ' but ' . get_class($basket) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Basket must be an instance of '.Basket::class.' but '.\get_class($basket).' is given.'
         );
     }
 
     /**
-     * Get Merchant Urls
+     * Get Merchant Urls.
      *
      * @return MerchantUrls
      */
@@ -153,7 +154,7 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Merchant Urls
+     * Set Merchant Urls.
      *
      * @param MerchantUrls $merchantUrls
      *
@@ -163,16 +164,17 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     {
         if ($merchantUrls instanceof MerchantUrls) {
             $this->merchantUrls = $merchantUrls;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Merchant Urls must be an instance of ' . MerchantUrls::class . ' but ' . get_class($merchantUrls) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Merchant Urls must be an instance of '.MerchantUrls::class.' but '.\get_class($merchantUrls).' is given.'
         );
     }
 
     /**
-     * Get Merchant Order Context
+     * Get Merchant Order Context.
      *
      * @return MerchantOrderContext
      */
@@ -182,7 +184,7 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Merchant Order Context
+     * Set Merchant Order Context.
      *
      * @param MerchantOrderContext $merchantOrderContext
      *
@@ -192,11 +194,12 @@ class InitializeContract extends AbstractModel implements JsonSerializable
     {
         if ($merchantOrderContext instanceof MerchantOrderContext) {
             $this->merchantOrderContext = $merchantOrderContext;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Merchant Order Context must be an instance of ' . MerchantOrderContext::class . ' but ' . get_class($merchantOrderContext) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Merchant Order Context must be an instance of '.MerchantOrderContext::class.' but '.\get_class($merchantOrderContext).' is given.'
         );
     }
 }

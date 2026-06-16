@@ -1,32 +1,30 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    Michael Dowling and contributors to guzzlehttp/psr7
- * @author    Tobias Nyholm  and contributors to Nyholm/psr7
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model;
 
-use JsonSerializable;
-use InvalidArgumentException;
-use YounitedPaySDK\Model\NewAPI\MerchantContext;
 use YounitedPaySDK\Model\NewAPI\BasketDescription;
+use YounitedPaySDK\Model\NewAPI\MerchantContext;
 
 /**
- * Contract Model Class
+ * Contract Model Class.
  */
-class Contract extends AbstractModel implements JsonSerializable
+class Contract extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -63,7 +61,7 @@ class Contract extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Reference
+     * Get Reference.
      *
      * @return string
      */
@@ -73,7 +71,7 @@ class Contract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Reference
+     * Set Reference.
      *
      * @param string $reference
      *
@@ -81,18 +79,19 @@ class Contract extends AbstractModel implements JsonSerializable
      */
     public function setReference($reference)
     {
-        if (is_string($reference) === true) {
+        if (true === \is_string($reference)) {
             $this->reference = $reference;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Reference must be a string but ' . gettype($reference) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Reference must be a string but '.\gettype($reference).' is given.'
         );
     }
 
     /**
-     * Get Status
+     * Get Status.
      *
      * @return string
      */
@@ -103,7 +102,7 @@ class Contract extends AbstractModel implements JsonSerializable
 
     /**
      * Set Status
-     * Possible values are : INITIALIZED / GRANTED / CONFIRMED / FINANCED / WITHDRAWN / CANCELED / REJECTED
+     * Possible values are : INITIALIZED / GRANTED / CONFIRMED / FINANCED / WITHDRAWN / CANCELED / REJECTED.
      *
      * @param string $status
      *
@@ -111,18 +110,19 @@ class Contract extends AbstractModel implements JsonSerializable
      */
     public function setStatus($status)
     {
-        if (is_string($status) === true) {
+        if (true === \is_string($status)) {
             $this->status = $status;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Status must be a string but ' . gettype($status) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Status must be a string but '.\gettype($status).' is given.'
         );
     }
 
     /**
-     * Get Application Succeeded
+     * Get Application Succeeded.
      *
      * @return bool
      */
@@ -132,7 +132,7 @@ class Contract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Application Succeeded
+     * Set Application Succeeded.
      *
      * @param bool $applicationSucceeded
      *
@@ -140,18 +140,19 @@ class Contract extends AbstractModel implements JsonSerializable
      */
     public function setApplicationSucceeded($applicationSucceeded)
     {
-        if (is_bool($applicationSucceeded) === true) {
+        if (true === \is_bool($applicationSucceeded)) {
             $this->applicationSucceeded = $applicationSucceeded;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Application Succeeded must be a boolean but ' . gettype($applicationSucceeded) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Application Succeeded must be a boolean but '.\gettype($applicationSucceeded).' is given.'
         );
     }
 
     /**
-     * Get Offer
+     * Get Offer.
      *
      * @return OfferItem
      */
@@ -161,7 +162,7 @@ class Contract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Offer
+     * Set Offer.
      *
      * @param OfferItem $offer
      *
@@ -171,16 +172,17 @@ class Contract extends AbstractModel implements JsonSerializable
     {
         if ($offer instanceof OfferItem) {
             $this->offer = $offer;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Offer must be an instance of ' . OfferItem::class . ' but ' . get_class($offer) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Offer must be an instance of '.OfferItem::class.' but '.\get_class($offer).' is given.'
         );
     }
 
     /**
-     * Get Basket
+     * Get Basket.
      *
      * @return BasketDescription
      */
@@ -190,7 +192,7 @@ class Contract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Basket
+     * Set Basket.
      *
      * @param BasketDescription $basket
      *
@@ -200,16 +202,17 @@ class Contract extends AbstractModel implements JsonSerializable
     {
         if ($basket instanceof BasketDescription) {
             $this->basket = $basket;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Basket must be an instance of ' . BasketDescription::class . ' but ' . get_class($basket) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Basket must be an instance of '.BasketDescription::class.' but '.\get_class($basket).' is given.'
         );
     }
 
     /**
-     * Get Merchant Order Context
+     * Get Merchant Order Context.
      *
      * @return MerchantContext
      */
@@ -219,7 +222,7 @@ class Contract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Merchant Order Context
+     * Set Merchant Order Context.
      *
      * @param MerchantContext $merchantOrderContext
      *
@@ -229,11 +232,12 @@ class Contract extends AbstractModel implements JsonSerializable
     {
         if ($merchantOrderContext instanceof MerchantContext) {
             $this->merchantOrderContext = $merchantOrderContext;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Merchant Order Context must be an instance of ' . MerchantContext::class . ' but ' . get_class($merchantOrderContext) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Merchant Order Context must be an instance of '.MerchantContext::class.' but '.\get_class($merchantOrderContext).' is given.'
         );
     }
 }

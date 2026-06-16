@@ -1,43 +1,43 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Basket Description Model Class
+ * Basket Description Model Class.
  */
-class BasketDescription extends AbstractModel implements JsonSerializable
+class BasketDescription extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
     /**
-     * @var array<BasketDescriptionItem|AbstractModel>
+     * @var array<AbstractModel|BasketDescriptionItem>
      */
     private $items;
 
     // GETTERS & SETTERS
 
     /**
-     * Get Items
+     * Get Items.
      *
-     * @return array<BasketDescriptionItem|AbstractModel>
+     * @return array<AbstractModel|BasketDescriptionItem>
      */
     public function getItems()
     {
@@ -45,9 +45,9 @@ class BasketDescription extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Items
+     * Set Items.
      *
-     * @param array<BasketDescriptionItem|AbstractModel> $items
+     * @param array<AbstractModel|BasketDescriptionItem> $items
      *
      * @return self
      */
@@ -55,13 +55,14 @@ class BasketDescription extends AbstractModel implements JsonSerializable
     {
         foreach ($items as $item) {
             if (($item instanceof BasketDescriptionItem) === false) {
-                throw new InvalidArgumentException(
-                    'Element of Items must be an instance of ' . BasketDescriptionItem::class . ' but ' . get_class($item) . ' is given.'
+                throw new \InvalidArgumentException(
+                    'Element of Items must be an instance of '.BasketDescriptionItem::class.' but '.\get_class($item).' is given.'
                 );
             }
         }
 
         $this->items = $items;
+
         return $this;
     }
 }

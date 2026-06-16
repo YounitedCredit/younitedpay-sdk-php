@@ -1,28 +1,27 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
-
 /**
- * Merchant Urls Model Class
+ * Merchant Urls Model Class.
  */
-class MerchantUrls extends AbstractModel implements JsonSerializable
+class MerchantUrls extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -54,9 +53,9 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get the value of onGrantedWebhookUrl
+     * Get the value of onGrantedWebhookUrl.
      *
-     * @return  string
+     * @return string
      */
     public function getOnGrantedWebhookUrl()
     {
@@ -64,11 +63,11 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set the value of onGrantedWebhookUrl
+     * Set the value of onGrantedWebhookUrl.
      *
-     * @param   string  $onGrantedWebhookUrl
+     * @param string $onGrantedWebhookUrl
      *
-     * @return  self
+     * @return self
      */
     public function setOnGrantedWebhookUrl($onGrantedWebhookUrl)
     {
@@ -78,7 +77,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get webhook url on canceled contract
+     * Get webhook url on canceled contract.
      *
      * @return string
      */
@@ -88,7 +87,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set webhook url on canceled contract
+     * Set webhook url on canceled contract.
      *
      * @param string $onCanceledWebhookUrl
      *
@@ -96,18 +95,19 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      */
     public function setOnCanceledWebhookUrl($onCanceledWebhookUrl)
     {
-        if (is_string($onCanceledWebhookUrl) === true) {
+        if (true === \is_string($onCanceledWebhookUrl)) {
             $this->onCanceledWebhookUrl = $onCanceledWebhookUrl;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'On Canceled Webhook Url must be a string but ' . gettype($onCanceledWebhookUrl) . ' is given.'
+        throw new \InvalidArgumentException(
+            'On Canceled Webhook Url must be a string but '.\gettype($onCanceledWebhookUrl).' is given.'
         );
     }
 
     /**
-     * Get webhook url on withdrawn contract
+     * Get webhook url on withdrawn contract.
      *
      * @return string
      */
@@ -117,7 +117,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set webhook url on withdrawn contract
+     * Set webhook url on withdrawn contract.
      *
      * @param string $onWithdrawnWebhookUrl
      *
@@ -125,18 +125,19 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      */
     public function setOnWithdrawnWebhookUrl($onWithdrawnWebhookUrl)
     {
-        if (is_string($onWithdrawnWebhookUrl) === true) {
+        if (true === \is_string($onWithdrawnWebhookUrl)) {
             $this->onWithdrawnWebhookUrl = $onWithdrawnWebhookUrl;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'On Withdrawn Webhook Url must be a string but ' . gettype($onWithdrawnWebhookUrl) . ' is given.'
+        throw new \InvalidArgumentException(
+            'On Withdrawn Webhook Url must be a string but '.\gettype($onWithdrawnWebhookUrl).' is given.'
         );
     }
 
     /**
-     * Get redirect url on application succeeded
+     * Get redirect url on application succeeded.
      *
      * @return string
      */
@@ -146,7 +147,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set redirect url on application succeeded
+     * Set redirect url on application succeeded.
      *
      * @param string $onApplicationSucceededRedirectUrl
      *
@@ -154,18 +155,19 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      */
     public function setOnApplicationSucceededRedirectUrl($onApplicationSucceededRedirectUrl)
     {
-        if (is_string($onApplicationSucceededRedirectUrl) === true) {
+        if (true === \is_string($onApplicationSucceededRedirectUrl)) {
             $this->onApplicationSucceededRedirectUrl = $onApplicationSucceededRedirectUrl;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'On Application Succeeded Redirect Url must be a string but ' . gettype($onApplicationSucceededRedirectUrl) . ' is given.'
+        throw new \InvalidArgumentException(
+            'On Application Succeeded Redirect Url must be a string but '.\gettype($onApplicationSucceededRedirectUrl).' is given.'
         );
     }
 
     /**
-     * Get redirect url on application failed
+     * Get redirect url on application failed.
      *
      * @return string
      */
@@ -175,7 +177,7 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set redirect url on application succeeded
+     * Set redirect url on application succeeded.
      *
      * @param string $onApplicationFailedRedirectUrl
      *
@@ -183,13 +185,14 @@ class MerchantUrls extends AbstractModel implements JsonSerializable
      */
     public function setOnApplicationFailedRedirectUrl($onApplicationFailedRedirectUrl)
     {
-        if (is_string($onApplicationFailedRedirectUrl) === true) {
+        if (true === \is_string($onApplicationFailedRedirectUrl)) {
             $this->onApplicationFailedRedirectUrl = $onApplicationFailedRedirectUrl;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'On Application Failed Redirect Url must be a string but ' . gettype($onApplicationFailedRedirectUrl) . ' is given.'
+        throw new \InvalidArgumentException(
+            'On Application Failed Redirect Url must be a string but '.\gettype($onApplicationFailedRedirectUrl).' is given.'
         );
     }
 }

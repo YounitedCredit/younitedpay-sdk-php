@@ -1,69 +1,68 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use DateTime;
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Customer Information Model Class
+ * Customer Information Model Class.
  */
-class CustomerInformation extends AbstractModel implements JsonSerializable
+class CustomerInformation extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $firstName;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $lastName;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $emailAddress;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $mobilePhoneNumber;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $birthDate;
 
     /**
-     * @var PostalAddress|null
+     * @var null|PostalAddress
      */
     private $postalAddress;
 
     // GETTERS & SETTERS
 
     /**
-     * Get First Name
+     * Get First Name.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getFirstName()
     {
@@ -71,28 +70,29 @@ class CustomerInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set First Name
+     * Set First Name.
      *
-     * @param string|null $firstName
+     * @param null|string $firstName
      *
      * @return self
      */
     public function setFirstName($firstName)
     {
-        if (is_string($firstName) === true || is_null($firstName) === true) {
+        if (true === \is_string($firstName) || (null === $firstName) === true) {
             $this->firstName = $firstName;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'First Name must be a string or null but ' . gettype($firstName) . ' is given.'
+        throw new \InvalidArgumentException(
+            'First Name must be a string or null but '.\gettype($firstName).' is given.'
         );
     }
 
     /**
-     * Get Last Name
+     * Get Last Name.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getLastName()
     {
@@ -100,28 +100,29 @@ class CustomerInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Last Name
+     * Set Last Name.
      *
-     * @param string|null $lastName
+     * @param null|string $lastName
      *
      * @return self
      */
     public function setLastName($lastName)
     {
-        if (is_string($lastName) === true || is_null($lastName) === true) {
+        if (true === \is_string($lastName) || (null === $lastName) === true) {
             $this->lastName = $lastName;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Last Name must be a string or null but ' . gettype($lastName) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Last Name must be a string or null but '.\gettype($lastName).' is given.'
         );
     }
 
     /**
-     * Get Email Address
+     * Get Email Address.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getEmailAddress()
     {
@@ -129,28 +130,29 @@ class CustomerInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Email Address
+     * Set Email Address.
      *
-     * @param string|null $emailAddress
+     * @param null|string $emailAddress
      *
      * @return self
      */
     public function setEmailAddress($emailAddress)
     {
-        if (is_string($emailAddress) === true || is_null($emailAddress) === true) {
+        if (true === \is_string($emailAddress) || (null === $emailAddress) === true) {
             $this->emailAddress = $emailAddress;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Email Address must be a string or null but ' . gettype($emailAddress) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Email Address must be a string or null but '.\gettype($emailAddress).' is given.'
         );
     }
 
     /**
-     * Get Mobile Phone Number
+     * Get Mobile Phone Number.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getMobilePhoneNumber()
     {
@@ -159,28 +161,29 @@ class CustomerInformation extends AbstractModel implements JsonSerializable
 
     /**
      * Set Mobile Phone Number
-     * Need to be in international format : for example +33601020304
+     * Need to be in international format : for example +33601020304.
      *
-     * @param string|null $mobilePhoneNumber
+     * @param null|string $mobilePhoneNumber
      *
      * @return self
      */
     public function setMobilePhoneNumber($mobilePhoneNumber)
     {
-        if (is_string($mobilePhoneNumber) === true || is_null($mobilePhoneNumber) === true) {
+        if (true === \is_string($mobilePhoneNumber) || (null === $mobilePhoneNumber) === true) {
             $this->mobilePhoneNumber = $mobilePhoneNumber;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Mobile Phone Number must be a string or null but ' . gettype($mobilePhoneNumber) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Mobile Phone Number must be a string or null but '.\gettype($mobilePhoneNumber).' is given.'
         );
     }
 
     /**
-     * Get Birth Date
+     * Get Birth Date.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getBirthDate()
     {
@@ -188,39 +191,41 @@ class CustomerInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Birth Date
+     * Set Birth Date.
      *
-     * @param DateTime|string|null $birthDate
+     * @param null|\DateTime|string $birthDate
      *
      * @return self
      */
     public function setBirthDate($birthDate)
     {
-        if ($birthDate instanceof DateTime) {
+        if ($birthDate instanceof \DateTime) {
             $this->birthDate = $birthDate->format('Y-m-d');
+
             return $this;
         }
 
-        if (is_string($birthDate) === true && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthDate)) {
-            throw new InvalidArgumentException(
-                'Birth Date must be a string in the date format Y-m-d - ' . $birthDate
+        if (true === \is_string($birthDate) && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthDate)) {
+            throw new \InvalidArgumentException(
+                'Birth Date must be a string in the date format Y-m-d - '.$birthDate
             );
         }
 
-        if (is_string($birthDate) === true || is_null($birthDate) === true) {
+        if (true === \is_string($birthDate) || (null === $birthDate) === true) {
             $this->birthDate = $birthDate;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Birth Date must be an instance of ' .  DateTime::class . ' or null but ' . get_class($birthDate) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Birth Date must be an instance of '.\DateTime::class.' or null but '.\get_class($birthDate).' is given.'
         );
     }
 
     /**
-     * Get Postal Address
+     * Get Postal Address.
      *
-     * @return PostalAddress|null
+     * @return null|PostalAddress
      */
     public function getPostalAddress()
     {
@@ -228,7 +233,7 @@ class CustomerInformation extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Postal Address
+     * Set Postal Address.
      *
      * @param PostalAddress $postalAddress
      *
@@ -236,13 +241,14 @@ class CustomerInformation extends AbstractModel implements JsonSerializable
      */
     public function setPostalAddress($postalAddress)
     {
-        if ($postalAddress instanceof PostalAddress || is_null($postalAddress) === true) {
+        if ($postalAddress instanceof PostalAddress || (null === $postalAddress) === true) {
             $this->postalAddress = $postalAddress;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Postal Address must be an instance of ' .  PostalAddress::class . ' or null but ' . get_class($postalAddress) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Postal Address must be an instance of '.PostalAddress::class.' or null but '.\get_class($postalAddress).' is given.'
         );
     }
 }

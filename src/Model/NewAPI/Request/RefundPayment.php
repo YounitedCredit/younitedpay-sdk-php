@@ -1,36 +1,29 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI\Request;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
-use YounitedPaySDK\Model\NewAPI\BasketDescription;
-use YounitedPaySDK\Model\NewAPI\CustomerInformation;
-use YounitedPaySDK\Model\NewAPI\CustomExperience;
-use YounitedPaySDK\Model\NewAPI\LoanRequest;
-use YounitedPaySDK\Model\NewAPI\MerchantContext;
-use YounitedPaySDK\Model\NewAPI\RiskInsights;
-use YounitedPaySDK\Model\NewAPI\TechnicalInformation;
 
 /**
- * Refund Payment Model Class
+ * Refund Payment Model Class.
  */
-class RefundPayment extends AbstractModel implements JsonSerializable
+class RefundPayment extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -52,7 +45,7 @@ class RefundPayment extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Payment Id
+     * Get Payment Id.
      *
      * @return string
      */
@@ -62,7 +55,7 @@ class RefundPayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Payment Id
+     * Set Payment Id.
      *
      * @param string $paymentId
      *
@@ -76,7 +69,7 @@ class RefundPayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get Idempotency Key
+     * Get Idempotency Key.
      *
      * @return string
      */
@@ -86,7 +79,7 @@ class RefundPayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Idempotency Key
+     * Set Idempotency Key.
      *
      * @param string $idempotencyKey
      *
@@ -100,7 +93,7 @@ class RefundPayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get Amount
+     * Get Amount.
      *
      * @return float
      */
@@ -110,7 +103,7 @@ class RefundPayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get Amount
+     * Get Amount.
      *
      * @param float $amount
      *

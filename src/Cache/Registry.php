@@ -1,17 +1,19 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Cache;
@@ -23,7 +25,7 @@ class Registry
     /**
      * @var Registry Instance of this class
      */
-    private static $_instance = null;
+    private static $_instance;
 
     /**
      * @var array<RegistryItem>
@@ -31,14 +33,14 @@ class Registry
     private $keys;
 
     /**
-     * Get instance of this class
+     * Get instance of this class.
      *
      * @return Registry
      */
     public static function getInstance()
     {
-        if (self::$_instance === null) {
-            self::$_instance = new Registry();
+        if (null === self::$_instance) {
+            self::$_instance = new self();
         }
 
         return self::$_instance;
@@ -51,9 +53,10 @@ class Registry
      */
     public function getItem($key)
     {
-        if ($this->hasItem($key) === false) {
+        if (false === $this->hasItem($key)) {
             $this->keys[$key] = new RegistryItem($key);
         }
+
         return $this->keys[$key];
     }
 
@@ -66,7 +69,7 @@ class Registry
     {
         $items = new ArrayCollection();
 
-        if (empty($keys) === true) {
+        if (true === empty($keys)) {
             return $items;
         }
 
@@ -88,7 +91,7 @@ class Registry
             return false;
         }
 
-        return array_key_exists($key, $this->keys);
+        return \array_key_exists($key, $this->keys);
     }
 
     /**
@@ -96,8 +99,9 @@ class Registry
      */
     public function clear()
     {
-        unset($this->keys);
+        $this->keys = null;
         $this->keys = [];
+
         return empty($this->keys);
     }
 
@@ -108,9 +112,10 @@ class Registry
      */
     public function deleteItem($key)
     {
-        if ($this->hasItem($key) === true) {
+        if (true === $this->hasItem($key)) {
             unset($this->keys[$key]);
         }
+
         return !isset($this->keys[$key]);
     }
 
@@ -121,7 +126,7 @@ class Registry
      */
     public function deleteItems($keys)
     {
-        if (empty($keys) === true) {
+        if (true === empty($keys)) {
             return true;
         }
 

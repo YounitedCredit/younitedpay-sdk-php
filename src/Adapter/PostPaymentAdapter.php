@@ -1,33 +1,33 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Adapter;
 
-use Exception;
-use InvalidArgumentException;
-use YounitedPaySDK\Request\AbstractRequest;
-use YounitedPaySDK\Model\NewAPI\RiskInsights;
 use YounitedPaySDK\Model\NewAPI\CustomExperience;
-use YounitedPaySDK\Model\NewAPI\TechnicalInformation;
-use YounitedPaySDK\Request\InitializeContractRequest;
 use YounitedPaySDK\Model\NewAPI\Request\CreatePayment;
+use YounitedPaySDK\Model\NewAPI\RiskInsights;
+use YounitedPaySDK\Model\NewAPI\TechnicalInformation;
+use YounitedPaySDK\Request\AbstractRequest;
+use YounitedPaySDK\Request\InitializeContractRequest;
 use YounitedPaySDK\Request\NewAPI\PostPaymentsRequest;
 
 /**
- * Post Payment Adapter Class
+ * Post Payment Adapter Class.
  */
 class PostPaymentAdapter extends AbstractAdapter
 {
@@ -57,29 +57,199 @@ class PostPaymentAdapter extends AbstractAdapter
     private $technicalInformation;
 
     /**
-     * @var RiskInsights|null
+     * @var null|RiskInsights
      */
     private $riskInsights;
 
     /**
-     * @var CustomExperience|null
+     * @var null|CustomExperience
      */
     private $customExperience;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $type;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $purchaseAmount;
 
     /**
-     * @var int|null
+     * @var null|int
      */
     private $installmentCount;
+
+    /**
+     * @param InitializeContractRequest $request
+     *
+     * @return AbstractRequest
+     *
+     * @throws \Exception
+     */
+    public function convertInitializeContract($request)
+    {
+        if (($request instanceof InitializeContractRequest) === false) {
+            throw new \InvalidArgumentException(
+                'Request be an instance of '.InitializeContractRequest::class.' but '.\get_class($request).' is given.'
+            );
+        }
+
+        return $this->convertRequest($request);
+    }
+
+    /**
+     * Set Shop Code.
+     *
+     * @param string $shopCode
+     *
+     * @return self
+     */
+    public function setShopCode($shopCode)
+    {
+        if (true === \is_string($shopCode)) {
+            $this->shopCode = $shopCode;
+
+            return $this;
+        }
+
+        throw new \InvalidArgumentException(
+            'Shop Code must be a string but '.\gettype($shopCode).' is given.'
+        );
+    }
+
+    /**
+     * Set Technical Information.
+     *
+     * @param TechnicalInformation $technicalInformation
+     *
+     * @return self
+     */
+    public function setTechnicalInformation($technicalInformation)
+    {
+        if ($technicalInformation instanceof TechnicalInformation) {
+            $this->technicalInformation = $technicalInformation;
+
+            return $this;
+        }
+
+        throw new \InvalidArgumentException(
+            'Technical Information must be an instance of '.TechnicalInformation::class.' but '.\get_class($technicalInformation).' is given.'
+        );
+    }
+
+    /**
+     * Set Risk Insights.
+     *
+     * @param RiskInsights $riskInsights
+     *
+     * @return self
+     */
+    public function setRiskInsights($riskInsights)
+    {
+        if ($riskInsights instanceof RiskInsights) {
+            $this->riskInsights = $riskInsights;
+
+            return $this;
+        }
+
+        throw new \InvalidArgumentException(
+            'Risk Insights must be an instance of '.RiskInsights::class.' but '.\get_class($riskInsights).' is given.'
+        );
+    }
+
+    /**
+     * Set Custom Experience.
+     *
+     * @param CustomExperience $customExperience
+     *
+     * @return self
+     */
+    public function setCustomExperience($customExperience)
+    {
+        if ($customExperience instanceof CustomExperience) {
+            $this->customExperience = $customExperience;
+
+            return $this;
+        }
+
+        throw new \InvalidArgumentException(
+            'Custom Experience must be an instance of '.CustomExperience::class.' but '.\get_class($customExperience).' is given.'
+        );
+    }
+
+    /**
+     * Get the value of type.
+     *
+     * @return null|string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set the value of type.
+     *
+     * @param null|string $type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of purchaseAmount.
+     *
+     * @return null|string
+     */
+    public function getPurchaseAmount()
+    {
+        return $this->purchaseAmount;
+    }
+
+    /**
+     * Set the value of purchaseAmount.
+     *
+     * @param null|string $purchaseAmount
+     *
+     * @return self
+     */
+    public function setPurchaseAmount($purchaseAmount)
+    {
+        $this->purchaseAmount = $purchaseAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of installmentCount.
+     *
+     * @return null|int
+     */
+    public function getInstallmentCount()
+    {
+        return $this->installmentCount;
+    }
+
+    /**
+     * Set the value of installmentCount.
+     *
+     * @param null|int $installmentCount
+     *
+     * @return self
+     */
+    public function setInstallmentCount($installmentCount)
+    {
+        $this->installmentCount = $installmentCount;
+
+        return $this;
+    }
 
     /**
      * @return array[]
@@ -140,13 +310,13 @@ class PostPaymentAdapter extends AbstractAdapter
     protected function completeDataModel($model)
     {
         if (empty($this->shopCode)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Shop Code cannot be empty.'
             );
         }
 
         if (empty($this->technicalInformation)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Technical Information cannot be empty.'
             );
         }
@@ -156,7 +326,8 @@ class PostPaymentAdapter extends AbstractAdapter
 
         $model
             ->setMerchantContext($merchantContext)
-            ->setTechnicalInformation($this->technicalInformation);
+            ->setTechnicalInformation($this->technicalInformation)
+        ;
 
         // Convert CreatePayment data for new Payment details
         $model->setPaymentType($this->getType());
@@ -177,171 +348,5 @@ class PostPaymentAdapter extends AbstractAdapter
         }
 
         return $model;
-    }
-
-    /**
-     * @param InitializeContractRequest $request
-     *
-     * @return AbstractRequest
-     *
-     * @throws Exception
-     */
-    public function convertInitializeContract($request)
-    {
-        if (($request instanceof InitializeContractRequest) === false) {
-            throw new InvalidArgumentException(
-                'Request be an instance of ' .  InitializeContractRequest::class . ' but ' . get_class($request) . ' is given.'
-            );
-        }
-
-        return $this->convertRequest($request);
-    }
-
-    /**
-     * Set Shop Code
-     *
-     * @param string $shopCode
-     *
-     * @return self
-     */
-    public function setShopCode($shopCode)
-    {
-        if (is_string($shopCode) === true) {
-            $this->shopCode = $shopCode;
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Shop Code must be a string but ' . gettype($shopCode) . ' is given.'
-        );
-    }
-
-    /**
-     * Set Technical Information
-     *
-     * @param TechnicalInformation $technicalInformation
-     *
-     * @return self
-     */
-    public function setTechnicalInformation($technicalInformation)
-    {
-        if ($technicalInformation instanceof TechnicalInformation) {
-            $this->technicalInformation = $technicalInformation;
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Technical Information must be an instance of ' . TechnicalInformation::class . ' but ' . get_class($technicalInformation) . ' is given.'
-        );
-    }
-
-    /**
-     * Set Risk Insights
-     *
-     * @param RiskInsights $riskInsights
-     *
-     * @return self
-     */
-    public function setRiskInsights($riskInsights)
-    {
-        if ($riskInsights instanceof RiskInsights) {
-            $this->riskInsights = $riskInsights;
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Risk Insights must be an instance of ' . RiskInsights::class . ' but ' . get_class($riskInsights) . ' is given.'
-        );
-    }
-
-    /**
-     * Set Custom Experience
-     *
-     * @param CustomExperience $customExperience
-     *
-     * @return self
-     */
-    public function setCustomExperience($customExperience)
-    {
-        if ($customExperience instanceof CustomExperience) {
-            $this->customExperience = $customExperience;
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Custom Experience must be an instance of ' . CustomExperience::class . ' but ' . get_class($customExperience) . ' is given.'
-        );
-    }
-
-    /**
-     * Get the value of type
-     *
-     * @return  string|null
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set the value of type
-     *
-     * @param   string|null  $type
-     *
-     * @return  self
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of purchaseAmount
-     *
-     * @return  string|null
-     */
-    public function getPurchaseAmount()
-    {
-        return $this->purchaseAmount;
-    }
-
-    /**
-     * Set the value of purchaseAmount
-     *
-     * @param   string|null  $purchaseAmount
-     *
-     * @return  self
-     */
-    public function setPurchaseAmount($purchaseAmount)
-    {
-        $this->purchaseAmount = $purchaseAmount;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of installmentCount
-     *
-     * @return  int|null
-     */
-    public function getInstallmentCount()
-    {
-        return $this->installmentCount;
-    }
-
-    /**
-     * Set the value of installmentCount
-     *
-     * @param   int|null  $installmentCount
-     *
-     * @return  self
-     */
-    public function setInstallmentCount($installmentCount)
-    {
-        $this->installmentCount = $installmentCount;
-
-        return $this;
     }
 }

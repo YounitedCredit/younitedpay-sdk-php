@@ -1,32 +1,34 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Response;
 
-use InvalidArgumentException;
-use YounitedPaySDK\Model\Error;
 use YounitedPaySDK\Model\ArrayCollection;
+use YounitedPaySDK\Model\Error;
 
 /**
- * Default Response
+ * Default Response.
  */
 class DefaultResponse extends AbstractResponse
 {
     /**
-     * Get isntance of a response
+     * Get isntance of a response.
+     *
      * @param string $classname
      *
      * @return DefaultResponse
@@ -42,7 +44,7 @@ class DefaultResponse extends AbstractResponse
     public function getModel()
     {
         $content = (string) $this->stream;
-        if (empty($content) === true) {
+        if (true === empty($content)) {
             return new ArrayCollection();
         }
 
@@ -52,11 +54,11 @@ class DefaultResponse extends AbstractResponse
 
         $output = json_decode($content, true);
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new InvalidArgumentException(
-                'Response: ' . $content . ' -json_decode error: ' . json_last_error_msg()
+            throw new \InvalidArgumentException(
+                'Response: '.$content.' -json_decode error: '.json_last_error_msg()
             );
         }
-        if (empty($output) === true) {
+        if (true === empty($output)) {
             return new ArrayCollection();
         }
 
