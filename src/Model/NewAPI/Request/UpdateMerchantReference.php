@@ -1,31 +1,29 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    Michael Dowling and contributors to guzzlehttp/psr7
- * @author    Tobias Nyholm  and contributors to Nyholm/psr7
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI\Request;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Update Merchant Reference Model Class
+ * Update Merchant Reference Model Class.
  */
-class UpdateMerchantReference extends AbstractModel implements JsonSerializable
+class UpdateMerchantReference extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -42,7 +40,7 @@ class UpdateMerchantReference extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Payment Id
+     * Get Payment Id.
      *
      * @return string
      */
@@ -52,7 +50,7 @@ class UpdateMerchantReference extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Payment Id
+     * Set Payment Id.
      *
      * @param string $paymentId
      *
@@ -60,19 +58,19 @@ class UpdateMerchantReference extends AbstractModel implements JsonSerializable
      */
     public function setPaymentId($paymentId)
     {
-        if (is_string($paymentId) === true) {
+        if (true === \is_string($paymentId)) {
             $this->paymentId = $paymentId;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Payment Id must be a string but ' . gettype($paymentId) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Payment Id must be a string but '.\gettype($paymentId).' is given.'
         );
     }
 
     /**
-     * Get Merchant Reference
+     * Get Merchant Reference.
      *
      * @return string
      */
@@ -82,7 +80,7 @@ class UpdateMerchantReference extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Merchant Reference
+     * Set Merchant Reference.
      *
      * @param string $merchantReference
      *
@@ -90,14 +88,14 @@ class UpdateMerchantReference extends AbstractModel implements JsonSerializable
      */
     public function setMerchantReference($merchantReference)
     {
-        if (is_string($merchantReference) === true) {
+        if (true === \is_string($merchantReference)) {
             $this->merchantReference = $merchantReference;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Merchant Reference must be a string but ' . gettype($merchantReference) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Merchant Reference must be a string but '.\gettype($merchantReference).' is given.'
         );
     }
 }

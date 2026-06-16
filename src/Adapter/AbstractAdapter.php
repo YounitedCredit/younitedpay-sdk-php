@@ -1,28 +1,29 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Adapter;
 
-use Exception;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Stream;
 
 /**
- * Abstract Adapter Class
+ * Abstract Adapter Class.
  */
 abstract class AbstractAdapter
 {
@@ -54,10 +55,9 @@ abstract class AbstractAdapter
     abstract protected function getModelMapping();
 
     /**
-     * @param AbstractRequest $request
-     *
-     * @throws Exception
      * @return AbstractRequest $request
+     *
+     * @throws \Exception
      */
     protected function convertRequest(AbstractRequest $request)
     {
@@ -66,7 +66,8 @@ abstract class AbstractAdapter
         $model = $this->convertModel($modelStream);
 
         $newRequest = (new $this->request())
-            ->setModel($model);
+            ->setModel($model)
+        ;
 
         if ($request->isSandboxEnabled()) {
             $newRequest->enableSandbox();
@@ -78,8 +79,9 @@ abstract class AbstractAdapter
     /**
      * @param null|Stream $modelStream
      *
-     * @throws Exception
      * @return AbstractModel
+     *
+     * @throws \Exception
      */
     private function convertModel($modelStream)
     {
@@ -93,14 +95,15 @@ abstract class AbstractAdapter
     /**
      * @param mixed $oldModel
      *
-     * @throws Exception
      * @return AbstractModel
+     *
+     * @throws \Exception
      */
     private function convertOldModelWithModelMapping($oldModel)
     {
         if (false === class_exists($this->model)) {
-            throw new Exception(
-                'Class "' . $this->model . '" does not exist.'
+            throw new \Exception(
+                'Class "'.$this->model.'" does not exist.'
             );
         }
 
@@ -110,10 +113,10 @@ abstract class AbstractAdapter
         foreach ($modelMapping as $property => $propertyValue) {
             $propertyValueModel = $this->getPropertyValueFromOldModel($oldModel, $propertyValue);
 
-            if ($propertyValueModel !== null) {
-                $setterMethod = 'set' . ucfirst($property);
+            if (null !== $propertyValueModel) {
+                $setterMethod = 'set'.ucfirst($property);
                 if (method_exists($newModel, $setterMethod)) {
-                    $newModel->$setterMethod($propertyValueModel);
+                    $newModel->{$setterMethod}($propertyValueModel);
                 }
             }
         }
@@ -125,21 +128,22 @@ abstract class AbstractAdapter
      * @param mixed $oldModel
      * @param mixed $propertyValue
      *
-     * @throws Exception
      * @return mixed
+     *
+     * @throws \Exception
      */
     private function getPropertyValueFromOldModel($oldModel, $propertyValue)
     {
-        if (false === is_array($propertyValue)) {
+        if (false === \is_array($propertyValue)) {
             return $this->getPropertyValueModelFromPath($oldModel, $propertyValue);
         }
 
         if (isset($propertyValue['className'])) {
-            $className = $this->namespace . $propertyValue['className'];
+            $className = $this->namespace.$propertyValue['className'];
 
             if (false === class_exists($className)) {
-                throw new Exception(
-                    'Class "' . $className . '" does not exist.'
+                throw new \Exception(
+                    'Class "'.$className.'" does not exist.'
                 );
             }
 
@@ -148,10 +152,10 @@ abstract class AbstractAdapter
             foreach ($propertyValue['properties'] as $subProperty => $subPropertyValue) {
                 $subPropertyValueModel = $this->getPropertyValueFromOldModel($oldModel, $subPropertyValue);
 
-                if ($subPropertyValueModel !== null) {
-                    $setterMethod = 'set' . ucfirst($subProperty);
+                if (null !== $subPropertyValueModel) {
+                    $setterMethod = 'set'.ucfirst($subProperty);
                     if (method_exists($model, $setterMethod)) {
-                        $model->$setterMethod($subPropertyValueModel);
+                        $model->{$setterMethod}($subPropertyValueModel);
                     }
                 }
             }
@@ -183,8 +187,9 @@ abstract class AbstractAdapter
      * @param mixed $model
      * @param mixed $propertyPath
      *
-     * @throws Exception
      * @return mixed
+     *
+     * @throws \Exception
      */
     private function getPropertyValueModelFromPath($model, $propertyPath)
     {
@@ -194,7 +199,7 @@ abstract class AbstractAdapter
             $modelValue = $model;
             $subPropertyPath = explode('.', $multiPropertyPathPart);
             foreach ($subPropertyPath as $subPropertyPathPart) {
-                if (is_array($modelValue) && isset($modelValue[$subPropertyPathPart])) {
+                if (\is_array($modelValue) && isset($modelValue[$subPropertyPathPart])) {
                     $modelValue = $modelValue[$subPropertyPathPart];
                 } else {
                     $modelValue = null;
@@ -205,8 +210,9 @@ abstract class AbstractAdapter
                 continue;
             }
 
-            if (false === empty($propertyValueModel) && is_string($propertyValueModel)) {
-                $propertyValueModel .= ' ' . $modelValue;
+            if (false === empty($propertyValueModel) && \is_string($propertyValueModel)) {
+                $propertyValueModel .= ' '.$modelValue;
+
                 continue;
             }
 

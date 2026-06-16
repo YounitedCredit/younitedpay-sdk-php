@@ -1,49 +1,48 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounit
- * edpaysdk
- * @author    Patrick Stearns and contributors to pdeans/http
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Exception;
 
-use RuntimeException;
 use Exception;
 use YounitedPaySDK\Request\AbstractRequest;
 
 /**
- * Request Exception
+ * Request Exception.
  *
  * Failed http request exception class
  */
-class RequestException extends RuntimeException
+class RequestException extends \RuntimeException
 {
     /**
-     * Request object
+     * Request object.
      *
      * @var AbstractRequest
      */
     private $request;
 
     /**
-     * Create request exception object
+     * Create request exception object.
      *
-     * @param string  $message  Exception message
-     * @param AbstractRequest  $request  Request object
-     * @param \Exception|null  $last_exception  Previous exception object
+     * @param string          $message        Exception message
+     * @param AbstractRequest $request        Request object
+     * @param null|\Exception $last_exception Previous exception object
      */
-    public function __construct($message, AbstractRequest $request, Exception $last_exception = null)
+    public function __construct($message, AbstractRequest $request, ?\Exception $last_exception = null)
     {
         $this->request = $request;
 
@@ -51,7 +50,7 @@ class RequestException extends RuntimeException
     }
 
     /**
-     * Get the request object
+     * Get the request object.
      *
      * @return AbstractRequest
      */

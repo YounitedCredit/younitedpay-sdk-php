@@ -1,43 +1,43 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Custom Experience Model Class
+ * Custom Experience Model Class.
  */
-class CustomExperience extends AbstractModel implements JsonSerializable
+class CustomExperience extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $customerRedirectUrl;
 
     // GETTERS & SETTERS
 
     /**
-     * Get Customer Redirect Url
+     * Get Customer Redirect Url.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getCustomerRedirectUrl()
     {
@@ -45,21 +45,22 @@ class CustomExperience extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Customer Redirect Url
+     * Set Customer Redirect Url.
      *
-     * @param string|null $customerRedirectUrl
+     * @param null|string $customerRedirectUrl
      *
      * @return self
      */
     public function setCustomerRedirectUrl($customerRedirectUrl)
     {
-        if (is_string($customerRedirectUrl) === true || is_null($customerRedirectUrl) === true) {
+        if (true === \is_string($customerRedirectUrl) || (null === $customerRedirectUrl) === true) {
             $this->customerRedirectUrl = $customerRedirectUrl;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Customer Redirect Url must be a string or null but ' . gettype($customerRedirectUrl) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Customer Redirect Url must be a string or null but '.\gettype($customerRedirectUrl).' is given.'
         );
     }
 }

@@ -1,65 +1,65 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Error Model Class
+ * Error Model Class.
  */
-class Error extends AbstractModel implements JsonSerializable
+class Error extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $type;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $title;
 
     /**
-     * @var array<mixed>|null
+     * @var null|array<mixed>
      */
     private $errors;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $detail;
 
     /**
-     * Can be either InvalidRequestError, InvalidStateError, ApiError
+     * Can be either InvalidRequestError, InvalidStateError, ApiError.
      *
-     * @var string|null
+     * @var null|string
      */
     private $errorType;
 
     // GETTERS & SETTERS
 
     /**
-     * Get Type
+     * Get Type.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getType()
     {
@@ -67,28 +67,29 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Type
+     * Set Type.
      *
-     * @param string|null $type
+     * @param null|string $type
      *
      * @return self
      */
     public function setType($type)
     {
-        if (is_string($type) === true || is_null($type) === true) {
+        if (true === \is_string($type) || (null === $type) === true) {
             $this->type = $type;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Type must be a string or null but ' . gettype($type) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Type must be a string or null but '.\gettype($type).' is given.'
         );
     }
 
     /**
-     * Get Title
+     * Get Title.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getTitle()
     {
@@ -96,28 +97,29 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Title
+     * Set Title.
      *
-     * @param string|null $title
+     * @param null|string $title
      *
      * @return self
      */
     public function setTitle($title)
     {
-        if (is_string($title) === true || is_null($title) === true) {
+        if (true === \is_string($title) || (null === $title) === true) {
             $this->title = $title;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Title must be a string or null but ' . gettype($title) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Title must be a string or null but '.\gettype($title).' is given.'
         );
     }
 
     /**
-     * Get Errors
+     * Get Errors.
      *
-     * @return array<mixed>|null
+     * @return null|array<mixed>
      */
     public function getErrors()
     {
@@ -125,28 +127,29 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Errors
+     * Set Errors.
      *
-     * @param array<mixed>|null $errors
+     * @param null|array<mixed> $errors
      *
      * @return self
      */
     public function setErrors($errors)
     {
-        if (is_array($errors) === true || is_null($errors) === true) {
+        if (true === \is_array($errors) || (null === $errors) === true) {
             $this->errors = $errors;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Errors must be an array or null but ' . gettype($errors) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Errors must be an array or null but '.\gettype($errors).' is given.'
         );
     }
 
     /**
-     * Get Detail
+     * Get Detail.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getDetail()
     {
@@ -154,28 +157,29 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Detail
+     * Set Detail.
      *
-     * @param string|null $detail
+     * @param null|string $detail
      *
      * @return self
      */
     public function setDetail($detail)
     {
-        if (is_string($detail) === true || is_null($detail) === true) {
+        if (true === \is_string($detail) || (null === $detail) === true) {
             $this->detail = $detail;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Detail must be a string or null but ' . gettype($detail) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Detail must be a string or null but '.\gettype($detail).' is given.'
         );
     }
 
     /**
-     * Get Type
+     * Get Type.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getErrorType()
     {
@@ -183,21 +187,22 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Type
+     * Set Type.
      *
-     * @param string|null $errorType
+     * @param null|string $errorType
      *
      * @return self
      */
     public function setErrorType($errorType)
     {
-        if (is_string($errorType) === true || is_null($errorType) === true) {
+        if (true === \is_string($errorType) || (null === $errorType) === true) {
             $this->errorType = $errorType;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Error Type must be a string or null but ' . gettype($errorType) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Error Type must be a string or null but '.\gettype($errorType).' is given.'
         );
     }
 }

@@ -1,17 +1,19 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Uri\NewAPI;
@@ -19,17 +21,17 @@ namespace YounitedPaySDK\Uri\NewAPI;
 use YounitedPaySDK\Uri\AbstractUri;
 
 /**
- * New Sandbox Uri
+ * New Sandbox Uri.
  */
 class SandboxUri extends AbstractUri
 {
     /**
-     * @var string $host
+     * @var string
      */
     protected $host = 'sandbox-api.younited.com';
 
     /**
-     * @var string Uri host.
+     * @var string uri host
      */
     protected $path = '/pay';
 }

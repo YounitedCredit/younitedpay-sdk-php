@@ -1,40 +1,39 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
-
-class Callback extends AbstractModel implements JsonSerializable
+class Callback extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $contractReference;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $merchantReference;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $merchantOrderId;
 
@@ -51,9 +50,9 @@ class Callback extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Contract Reference
+     * Get Contract Reference.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getContractReference()
     {
@@ -61,28 +60,29 @@ class Callback extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Contract Reference
+     * Set Contract Reference.
      *
-     * @param string|null $contractReference
+     * @param null|string $contractReference
      *
      * @return self
      */
     public function setContractReference($contractReference)
     {
-        if (is_string($contractReference) === true || is_null($contractReference) === true) {
+        if (true === \is_string($contractReference) || (null === $contractReference) === true) {
             $this->contractReference = $contractReference;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Contract Reference must be a string or null but ' . gettype($contractReference) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Contract Reference must be a string or null but '.\gettype($contractReference).' is given.'
         );
     }
 
     /**
-     * Get Merchant Reference
+     * Get Merchant Reference.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getMerchantReference()
     {
@@ -90,28 +90,29 @@ class Callback extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Merchant Reference
+     * Set Merchant Reference.
      *
-     * @param string|null $merchantReference
+     * @param null|string $merchantReference
      *
      * @return self
      */
     public function setMerchantReference($merchantReference)
     {
-        if (is_string($merchantReference) === true || is_null($merchantReference) === true) {
+        if (true === \is_string($merchantReference) || (null === $merchantReference) === true) {
             $this->merchantReference = $merchantReference;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Merchant Reference must be a string or null but ' . gettype($merchantReference) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Merchant Reference must be a string or null but '.\gettype($merchantReference).' is given.'
         );
     }
 
     /**
-     * Get Merchant Order Id
+     * Get Merchant Order Id.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getMerchantOrderId()
     {
@@ -119,26 +120,27 @@ class Callback extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Merchant Order Id
+     * Set Merchant Order Id.
      *
-     * @param string|null $merchantOrderId
+     * @param null|string $merchantOrderId
      *
      * @return self
      */
     public function setMerchantOrderId($merchantOrderId)
     {
-        if (is_string($merchantOrderId) === true || is_null($merchantOrderId) === true) {
+        if (true === \is_string($merchantOrderId) || (null === $merchantOrderId) === true) {
             $this->merchantOrderId = $merchantOrderId;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Merchant Order Id must be a string or null but ' . gettype($merchantOrderId) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Merchant Order Id must be a string or null but '.\gettype($merchantOrderId).' is given.'
         );
     }
 
     /**
-     * Get Event Date
+     * Get Event Date.
      *
      * @return string
      */
@@ -148,7 +150,7 @@ class Callback extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Event Date
+     * Set Event Date.
      *
      * @param string $eventDate
      *
@@ -156,18 +158,19 @@ class Callback extends AbstractModel implements JsonSerializable
      */
     public function setEventDate($eventDate)
     {
-        if (is_string($eventDate) === true) {
+        if (true === \is_string($eventDate)) {
             $this->eventDate = $eventDate;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Event Date must be a string but ' . gettype($eventDate) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Event Date must be a string but '.\gettype($eventDate).' is given.'
         );
     }
 
     /**
-     * Get Triggered For Status
+     * Get Triggered For Status.
      *
      * @return int
      */
@@ -177,7 +180,7 @@ class Callback extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Triggered For Status
+     * Set Triggered For Status.
      *
      * @param int $triggeredForStatus
      *
@@ -185,13 +188,14 @@ class Callback extends AbstractModel implements JsonSerializable
      */
     public function setTriggeredForStatus($triggeredForStatus)
     {
-        if (is_int($triggeredForStatus) === true) {
+        if (true === \is_int($triggeredForStatus)) {
             $this->triggeredForStatus = $triggeredForStatus;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Triggered For Status must be an integer but ' . gettype($triggeredForStatus) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Triggered For Status must be an integer but '.\gettype($triggeredForStatus).' is given.'
         );
     }
 }

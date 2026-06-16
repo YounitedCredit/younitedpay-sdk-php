@@ -1,29 +1,29 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Loan Request Model Class
+ * Loan Request Model Class.
  */
-class LoanRequest extends AbstractModel implements JsonSerializable
+class LoanRequest extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -40,7 +40,7 @@ class LoanRequest extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Requested Amount
+     * Get Requested Amount.
      *
      * @return string
      */
@@ -51,7 +51,7 @@ class LoanRequest extends AbstractModel implements JsonSerializable
 
     /**
      * Set Requested Amount
-     * Value must be greater than or equal to 1
+     * Value must be greater than or equal to 1.
      *
      * @param float|string $requestedAmount
      *
@@ -61,16 +61,17 @@ class LoanRequest extends AbstractModel implements JsonSerializable
     {
         if ((float) $requestedAmount > 1) {
             $this->requestedAmount = $requestedAmount;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
+        throw new \InvalidArgumentException(
             'Requested Amount must be a decimal value greater than or equal to 1.'
         );
     }
 
     /**
-     * Get Requested Maturity In Months
+     * Get Requested Maturity In Months.
      *
      * @return int
      */
@@ -81,7 +82,7 @@ class LoanRequest extends AbstractModel implements JsonSerializable
 
     /**
      * Set Requested Maturity In Months
-     * Value must be greater than or equal to 1
+     * Value must be greater than or equal to 1.
      *
      * @param int $requestedMaturityInMonths
      *
@@ -89,13 +90,14 @@ class LoanRequest extends AbstractModel implements JsonSerializable
      */
     public function setRequestedMaturityInMonths($requestedMaturityInMonths)
     {
-        if (is_int($requestedMaturityInMonths) === true) {
+        if (true === \is_int($requestedMaturityInMonths)) {
             $this->requestedMaturityInMonths = $requestedMaturityInMonths;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Requested Maturity In Months must be an int but ' . gettype($requestedMaturityInMonths) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Requested Maturity In Months must be an int but '.\gettype($requestedMaturityInMonths).' is given.'
         );
     }
 }

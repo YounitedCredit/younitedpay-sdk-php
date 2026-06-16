@@ -1,28 +1,27 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
-
 /**
- * Withdraw Contract Model Class
+ * Withdraw Contract Model Class.
  */
-class WithdrawContract extends AbstractModel implements JsonSerializable
+class WithdrawContract extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -32,14 +31,14 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
     private $contractReference;
 
     /**
-     * @var float|string|null
+     * @var null|float|string
      */
     private $amount;
 
     // GETTERS & SETTERS
 
     /**
-     * Get Contract Reference
+     * Get Contract Reference.
      *
      * @return string
      */
@@ -49,7 +48,7 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Contract Reference
+     * Set Contract Reference.
      *
      * @param string $contractReference
      *
@@ -57,20 +56,21 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
      */
     public function setContractReference($contractReference)
     {
-        if (is_string($contractReference) === true) {
+        if (true === \is_string($contractReference)) {
             $this->contractReference = $contractReference;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Contract Reference must be a string but ' . gettype($contractReference) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Contract Reference must be a string but '.\gettype($contractReference).' is given.'
         );
     }
 
     /**
-     * Get Amount
+     * Get Amount.
      *
-     * @return float|string|null
+     * @return null|float|string
      */
     public function getAmount()
     {
@@ -78,20 +78,21 @@ class WithdrawContract extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Amount
+     * Set Amount.
      *
-     * @param float|string|null $amount
+     * @param null|float|string $amount
      *
      * @return self
      */
     public function setAmount($amount)
     {
-        if (is_null($amount) === true || (float) $amount > 1) {
+        if ((null === $amount) === true || (float) $amount > 1) {
             $this->amount = $amount;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
+        throw new \InvalidArgumentException(
             'Amount must be a decimal value or null.'
         );
     }

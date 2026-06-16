@@ -1,36 +1,35 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI\Request;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Model\NewAPI\BasketDescription;
 use YounitedPaySDK\Model\NewAPI\CustomerInformation;
 use YounitedPaySDK\Model\NewAPI\CustomExperience;
-use YounitedPaySDK\Model\NewAPI\LoanRequest;
 use YounitedPaySDK\Model\NewAPI\MerchantContext;
 use YounitedPaySDK\Model\NewAPI\RiskInsights;
 use YounitedPaySDK\Model\NewAPI\TechnicalInformation;
 
 /**
- * Create Payment Model Class
+ * Create Payment Model Class.
  */
-class CreatePayment extends AbstractModel implements JsonSerializable
+class CreatePayment extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -50,39 +49,39 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     private $technicalInformation;
 
     /**
-     * @var CustomerInformation|null
+     * @var null|CustomerInformation
      */
     private $customerInformation;
 
     /**
-     * @var RiskInsights|null
+     * @var null|RiskInsights
      */
     private $riskInsights;
 
     /**
-     * @var CustomExperience|null
+     * @var null|CustomExperience
      */
     private $customExperience;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $paymentType;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $purchaseAmount;
 
     /**
-     * @var int|null
+     * @var null|int
      */
     private $installmentCount;
 
     // GETTERS & SETTERS
 
     /**
-     * Get Basket Description
+     * Get Basket Description.
      *
      * @return BasketDescription
      */
@@ -92,7 +91,7 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Basket Description
+     * Set Basket Description.
      *
      * @param BasketDescription $basketDescription
      *
@@ -102,16 +101,17 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     {
         if ($basketDescription instanceof BasketDescription) {
             $this->basketDescription = $basketDescription;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Basket Description must be an instance of ' . BasketDescription::class . ' but ' . get_class($basketDescription) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Basket Description must be an instance of '.BasketDescription::class.' but '.\get_class($basketDescription).' is given.'
         );
     }
 
     /**
-     * Get Merchant Context
+     * Get Merchant Context.
      *
      * @return MerchantContext
      */
@@ -121,7 +121,7 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Merchant Context
+     * Set Merchant Context.
      *
      * @param MerchantContext $merchantContext
      *
@@ -131,16 +131,17 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     {
         if ($merchantContext instanceof MerchantContext) {
             $this->merchantContext = $merchantContext;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Merchant Context must be an instance of ' . MerchantContext::class . ' but ' . get_class($merchantContext) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Merchant Context must be an instance of '.MerchantContext::class.' but '.\get_class($merchantContext).' is given.'
         );
     }
 
     /**
-     * Get Technical Information
+     * Get Technical Information.
      *
      * @return TechnicalInformation
      */
@@ -150,7 +151,7 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Technical Information
+     * Set Technical Information.
      *
      * @param TechnicalInformation $technicalInformation
      *
@@ -160,18 +161,19 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     {
         if ($technicalInformation instanceof TechnicalInformation) {
             $this->technicalInformation = $technicalInformation;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Technical Information must be an instance of ' . TechnicalInformation::class . ' but ' . get_class($technicalInformation) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Technical Information must be an instance of '.TechnicalInformation::class.' but '.\get_class($technicalInformation).' is given.'
         );
     }
 
     /**
-     * Get Customer Information
+     * Get Customer Information.
      *
-     * @return CustomerInformation|null
+     * @return null|CustomerInformation
      */
     public function getCustomerInformation()
     {
@@ -179,7 +181,7 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Customer Information
+     * Set Customer Information.
      *
      * @param CustomerInformation $customerInformation
      *
@@ -189,18 +191,19 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     {
         if ($customerInformation instanceof CustomerInformation) {
             $this->customerInformation = $customerInformation;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Customer Information must be an instance of ' . CustomerInformation::class . ' but ' . get_class($customerInformation) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Customer Information must be an instance of '.CustomerInformation::class.' but '.\get_class($customerInformation).' is given.'
         );
     }
 
     /**
-     * Get Risk Insights
+     * Get Risk Insights.
      *
-     * @return RiskInsights|null
+     * @return null|RiskInsights
      */
     public function getRiskInsights()
     {
@@ -208,7 +211,7 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Risk Insights
+     * Set Risk Insights.
      *
      * @param RiskInsights $riskInsights
      *
@@ -218,18 +221,19 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     {
         if ($riskInsights instanceof RiskInsights) {
             $this->riskInsights = $riskInsights;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Risk Insights must be an instance of ' . RiskInsights::class . ' but ' . get_class($riskInsights) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Risk Insights must be an instance of '.RiskInsights::class.' but '.\get_class($riskInsights).' is given.'
         );
     }
 
     /**
-     * Get Custom Experience
+     * Get Custom Experience.
      *
-     * @return CustomExperience|null
+     * @return null|CustomExperience
      */
     public function getCustomExperience()
     {
@@ -237,7 +241,7 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Custom Experience
+     * Set Custom Experience.
      *
      * @param CustomExperience $customExperience
      *
@@ -247,18 +251,19 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     {
         if ($customExperience instanceof CustomExperience) {
             $this->customExperience = $customExperience;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Custom Experience must be an instance of ' . CustomExperience::class . ' but ' . get_class($customExperience) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Custom Experience must be an instance of '.CustomExperience::class.' but '.\get_class($customExperience).' is given.'
         );
     }
 
     /**
-     * Get the value of paymentType
+     * Get the value of paymentType.
      *
-     * @return  string|null
+     * @return null|string
      */
     public function getPaymentType()
     {
@@ -266,11 +271,11 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set the value of paymentType
+     * Set the value of paymentType.
      *
-     * @param   string|null  $paymentType
+     * @param null|string $paymentType
      *
-     * @return  self
+     * @return self
      */
     public function setPaymentType($paymentType)
     {
@@ -280,9 +285,9 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get the value of purchaseAmount
+     * Get the value of purchaseAmount.
      *
-     * @return  string|null
+     * @return null|string
      */
     public function getPurchaseAmount()
     {
@@ -290,11 +295,11 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set the value of purchaseAmount
+     * Set the value of purchaseAmount.
      *
-     * @param   string|null  $purchaseAmount
+     * @param null|string $purchaseAmount
      *
-     * @return  self
+     * @return self
      */
     public function setPurchaseAmount($purchaseAmount)
     {
@@ -304,9 +309,9 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get the value of installmentCount
+     * Get the value of installmentCount.
      *
-     * @return  int|null
+     * @return null|int
      */
     public function getInstallmentCount()
     {
@@ -314,11 +319,11 @@ class CreatePayment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set the value of installmentCount
+     * Set the value of installmentCount.
      *
-     * @param   int|null  $installmentCount
+     * @param null|int $installmentCount
      *
-     * @return  self
+     * @return self
      */
     public function setInstallmentCount($installmentCount)
     {

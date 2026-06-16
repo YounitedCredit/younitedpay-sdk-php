@@ -1,30 +1,30 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedpaySdk\Model\NewAPI\Installment;
-    
+
 /**
- * Offer Item Model Class
+ * Offer Item Model Class.
  */
-class PaymentOptionItem extends AbstractModel implements JsonSerializable
+class PaymentOptionItem extends AbstractModel implements \JsonSerializable
 {
     /**
      * @var float|string
@@ -82,7 +82,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     private $installmentDetails;
 
     /**
-     * Get requestedAmount
+     * Get requestedAmount.
      *
      * @return float|string requestedAmount
      */
@@ -92,7 +92,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set requestedAmount
+     * Set requestedAmount.
      *
      * @param float|string $requestedAmount
      *
@@ -106,11 +106,11 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
             return $this;
         }
 
-        throw new InvalidArgumentException('Requested Amount must be a decimal value greater than or equal to 1.');
+        throw new \InvalidArgumentException('Requested Amount must be a decimal value greater than or equal to 1.');
     }
 
     /**
-     * Get annualDebitRate
+     * Get annualDebitRate.
      *
      * @return float|string annualDebitRate
      */
@@ -120,7 +120,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set annualDebitRate
+     * Set annualDebitRate.
      *
      * @param float|string $annualDebitRate
      *
@@ -134,7 +134,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * get AnnualPercentageRate
+     * get AnnualPercentageRate.
      *
      * @return float|string
      */
@@ -144,7 +144,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set annualPercentageRate
+     * Set annualPercentageRate.
      *
      * @param float|string $annualPercentageRate
      *
@@ -158,7 +158,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get creditAmountToFund
+     * Get creditAmountToFund.
      *
      * @return float|string creditAmountToFund
      */
@@ -168,7 +168,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set creditAmountToFund
+     * Set creditAmountToFund.
      *
      * @param float|string $creditAmountToFund
      *
@@ -182,11 +182,11 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
             return $this;
         }
 
-        throw new InvalidArgumentException('Credit Amount To Fund must be a decimal value greater than or equal to 1.');
+        throw new \InvalidArgumentException('Credit Amount To Fund must be a decimal value greater than or equal to 1.');
     }
 
     /**
-     * Get monthlyInstallmentAmount
+     * Get monthlyInstallmentAmount.
      *
      * @return float|string monthlyInstallmentAmount
      */
@@ -196,7 +196,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set monthlyInstallmentAmount
+     * Set monthlyInstallmentAmount.
      *
      * @param float|string $monthlyInstallmentAmount
      *
@@ -210,11 +210,11 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
             return $this;
         }
 
-        throw new InvalidArgumentException('Monthly Installment Amount must be a decimal value greater than or equal to 1.');
+        throw new \InvalidArgumentException('Monthly Installment Amount must be a decimal value greater than or equal to 1.');
     }
 
     /**
-     * Get creditTotalAmount
+     * Get creditTotalAmount.
      *
      * @return float|string creditTotalAmount
      */
@@ -224,7 +224,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set creditTotalAmount
+     * Set creditTotalAmount.
      *
      * @param float|string $creditTotalAmount
      *
@@ -238,11 +238,11 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
             return $this;
         }
 
-        throw new InvalidArgumentException('Credit Total Amount must be a decimal value greater than or equal to 1.');
+        throw new \InvalidArgumentException('Credit Total Amount must be a decimal value greater than or equal to 1.');
     }
 
     /**
-     * Get maturityInMonths
+     * Get maturityInMonths.
      *
      * @return int maturityInMonths
      */
@@ -252,7 +252,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set maturityInMonths
+     * Set maturityInMonths.
      *
      * @param int $maturityInMonths
      *
@@ -260,17 +260,17 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
      */
     public function setMaturityInMonths($maturityInMonths)
     {
-        if (is_int($maturityInMonths) === true) {
+        if (true === \is_int($maturityInMonths)) {
             $this->maturityInMonths = $maturityInMonths;
 
             return $this;
         }
 
-        throw new InvalidArgumentException('Maturity In Months must be an int but ' . gettype($maturityInMonths) . ' is given.');
+        throw new \InvalidArgumentException('Maturity In Months must be an int but '.\gettype($maturityInMonths).' is given.');
     }
 
     /**
-     * Get interestsTotalAmount
+     * Get interestsTotalAmount.
      *
      * @return float|string interestsTotalAmount
      */
@@ -280,7 +280,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set interestsTotalAmount
+     * Set interestsTotalAmount.
      *
      * @param float|string $interestsTotalAmount
      *
@@ -294,7 +294,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get the value of downPaymentAmount
+     * Get the value of downPaymentAmount.
      *
      * @return float
      */
@@ -304,7 +304,7 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set the value of downPaymentAmount
+     * Set the value of downPaymentAmount.
      *
      * @param float $downPaymentAmount
      *
@@ -318,9 +318,9 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get the value of type
+     * Get the value of type.
      *
-     * @return  string
+     * @return string
      */
     public function getType()
     {
@@ -328,11 +328,9 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set the value of type
+     * Set the value of type.
      *
-     * @param   string  $type  
-     *
-     * @return  self
+     * @return self
      */
     public function setType(string $type)
     {
@@ -342,9 +340,9 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Get the value of installmentDetails
+     * Get the value of installmentDetails.
      *
-     * @return  Installment[]
+     * @return Installment[]
      */
     public function getInstallmentDetails()
     {
@@ -352,11 +350,11 @@ class PaymentOptionItem extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set the value of installmentDetails
+     * Set the value of installmentDetails.
      *
-     * @param   Installment[]  $installmentDetails  
+     * @param Installment[] $installmentDetails
      *
-     * @return  self
+     * @return self
      */
     public function setInstallmentDetails($installmentDetails)
     {

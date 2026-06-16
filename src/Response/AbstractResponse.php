@@ -1,31 +1,32 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Response;
 
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
-use YounitedPaySDK\Request\MessageTrait;
 use YounitedPaySDK\Model\ArrayCollection;
+use YounitedPaySDK\Request\MessageTrait;
 use YounitedPaySDK\Stream;
 
 /**
- * API client
+ * API client.
  */
-abstract class AbstractResponse implements JsonSerializable
+abstract class AbstractResponse implements \JsonSerializable
 {
     use MessageTrait;
 
@@ -33,38 +34,6 @@ abstract class AbstractResponse implements JsonSerializable
      * @var AbstractModel
      */
     protected $body;
-
-    /**
-     * Get body
-     *
-     * @return AbstractModel|ArrayCollection<AbstractModel>
-     */
-    abstract public function getModel();
-
-    /**
-     * Gets the body of the message.
-     *
-     * @return Stream|null Returns the body as a stream.
-     */
-    public function getBody()
-    {
-        return $this->stream;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     *
-     * @return self
-     */
-    public function setBody($body)
-    {
-        $jsonBody = json_decode($body, true);
-        $this->body = $jsonBody;
-
-        return $this;
-    }
 
     /** @var array<int,string> Map of standard HTTP status code/reason phrases */
     private static $PHRASES = [
@@ -82,11 +51,11 @@ abstract class AbstractResponse implements JsonSerializable
     private $statusCode;
 
     /**
-     * @param int $status Status code
-     * @param array<string> $headers Response headers
-     * @param string|resource|Stream|null $body Response body
-     * @param string $version Protocol version
-     * @param string|null $reason Reason phrase (when empty a default will be used based on the status code)
+     * @param int                         $status  Status code
+     * @param array<string>               $headers Response headers
+     * @param null|resource|Stream|string $body    Response body
+     * @param string                      $version Protocol version
+     * @param null|string                 $reason  Reason phrase (when empty a default will be used based on the status code)
      */
     public function __construct($status = 200, array $headers = [], $body = null, $version = '1.1', $reason = null)
     {
@@ -107,6 +76,38 @@ abstract class AbstractResponse implements JsonSerializable
     }
 
     /**
+     * Get body.
+     *
+     * @return AbstractModel|ArrayCollection<AbstractModel>
+     */
+    abstract public function getModel();
+
+    /**
+     * Gets the body of the message.
+     *
+     * @return null|Stream returns the body as a stream
+     */
+    public function getBody()
+    {
+        return $this->stream;
+    }
+
+    /**
+     * Set body.
+     *
+     * @param string $body
+     *
+     * @return self
+     */
+    public function setBody($body)
+    {
+        $jsonBody = json_decode($body, true);
+        $this->body = $jsonBody;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getStatusCode()
@@ -123,7 +124,7 @@ abstract class AbstractResponse implements JsonSerializable
     }
 
     /**
-     * @param int $code Status code
+     * @param int    $code         Status code
      * @param string $reasonPhrase Reason
      *
      * @return self
@@ -137,7 +138,7 @@ abstract class AbstractResponse implements JsonSerializable
 
         $new = clone $this;
         $new->statusCode = $code;
-        if (empty($reasonPhrase) === true && isset(self::$PHRASES[$new->statusCode])) {
+        if (true === empty($reasonPhrase) && isset(self::$PHRASES[$new->statusCode])) {
             $reasonPhrase = self::$PHRASES[$new->statusCode];
         }
         $new->reasonPhrase = $reasonPhrase;
@@ -145,9 +146,6 @@ abstract class AbstractResponse implements JsonSerializable
         return $new;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {

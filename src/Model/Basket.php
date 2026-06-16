@@ -1,28 +1,27 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
-
 /**
- * Basket Model Class
+ * Basket Model Class.
  */
-class Basket extends AbstractModel implements JsonSerializable
+class Basket extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -32,14 +31,14 @@ class Basket extends AbstractModel implements JsonSerializable
     private $basketAmount;
 
     /**
-     * @var array<BasketItem|AbstractModel>
+     * @var array<AbstractModel|BasketItem>
      */
     private $items;
 
     // GETTERS & SETTERS
 
     /**
-     * Get Basket Amount
+     * Get Basket Amount.
      *
      * @return string
      */
@@ -50,7 +49,7 @@ class Basket extends AbstractModel implements JsonSerializable
 
     /**
      * Set Basket Amount
-     * Value must be greater than or equal to 1
+     * Value must be greater than or equal to 1.
      *
      * @param float|string $basketAmount
      *
@@ -60,18 +59,19 @@ class Basket extends AbstractModel implements JsonSerializable
     {
         if ((float) $basketAmount > 1) {
             $this->basketAmount = $basketAmount;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
+        throw new \InvalidArgumentException(
             'Basket Amount must be a decimal value greater than or equal to 1.'
         );
     }
 
     /**
-     * Get Items
+     * Get Items.
      *
-     * @return array<BasketItem|AbstractModel>
+     * @return array<AbstractModel|BasketItem>
      */
     public function getItems()
     {
@@ -79,9 +79,9 @@ class Basket extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Items
+     * Set Items.
      *
-     * @param array<BasketItem|AbstractModel> $items
+     * @param array<AbstractModel|BasketItem> $items
      *
      * @return self
      */
@@ -89,13 +89,14 @@ class Basket extends AbstractModel implements JsonSerializable
     {
         foreach ($items as $item) {
             if (($item instanceof BasketItem) === false) {
-                throw new InvalidArgumentException(
-                    'Element of Items must be an instance of ' . BasketItem::class . ' but ' . get_class($item) . ' is given.'
+                throw new \InvalidArgumentException(
+                    'Element of Items must be an instance of '.BasketItem::class.' but '.\get_class($item).' is given.'
                 );
             }
         }
 
         $this->items = $items;
+
         return $this;
     }
 }

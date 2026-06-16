@@ -1,29 +1,29 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Technical Information Model Class
+ * Technical Information Model Class.
  */
-class WebHookIntegration extends AbstractModel implements JsonSerializable
+class WebHookIntegration extends AbstractModel implements \JsonSerializable
 {
     /**
      * @var string
@@ -31,9 +31,9 @@ class WebHookIntegration extends AbstractModel implements JsonSerializable
     private $webhookUrl;
 
     /**
-     * Get the value of webhookUrl
+     * Get the value of webhookUrl.
      *
-     * @return  string
+     * @return string
      */
     public function getWebhookUrl()
     {
@@ -41,11 +41,9 @@ class WebHookIntegration extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set the value of webhookUrl
+     * Set the value of webhookUrl.
      *
-     * @param   string  $webhookUrl
-     *
-     * @return  self
+     * @return self
      */
     public function setWebhookUrl(string $webhookUrl)
     {

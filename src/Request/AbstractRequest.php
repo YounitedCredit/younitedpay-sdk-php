@@ -1,22 +1,23 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Request;
 
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 use YounitedPaySDK\Stream;
 use YounitedPaySDK\Uri\NewAPI\ProductionUri as NewProductionUri;
@@ -25,22 +26,17 @@ use YounitedPaySDK\Uri\ProductionUri;
 use YounitedPaySDK\Uri\SandboxUri;
 
 /**
- * API client
+ * API client.
  */
-abstract class AbstractRequest implements JsonSerializable
+abstract class AbstractRequest implements \JsonSerializable
 {
     use MessageTrait;
     use RequestTrait;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     protected $apiVersion = '2024-01-01';
-
-    /**
-     * @var AbstractModel
-     */
-    private $body;
 
     /**
      * @var string
@@ -51,23 +47,28 @@ abstract class AbstractRequest implements JsonSerializable
     protected $tenantId = '5fe44fa6-b50a-42d9-a006-199bedeb5bb9';
 
     /**
+     * @var AbstractModel
+     */
+    private $body;
+
+    /**
      * @var bool
      */
     private $isSandbox = false;
 
     /**
      * @param array<string> $headers Request headers
-     * @param string $version protocol version
+     * @param string        $version protocol version
      */
     public function __construct(array $headers = [], $version = '1.1')
     {
-        if ($this->getApiVersion() !== '2024-01-01') {
+        if ('2024-01-01' !== $this->getApiVersion()) {
             $this->uri = new NewProductionUri();
         } else {
             $this->uri = new ProductionUri();
         }
 
-        $this->uri = $this->uri->withPath($this->uri->getPath() . $this->requestTarget);
+        $this->uri = $this->uri->withPath($this->uri->getPath().$this->requestTarget);
 
         $this->setHeaders($headers);
 
@@ -82,7 +83,7 @@ abstract class AbstractRequest implements JsonSerializable
     }
 
     /**
-     * Enable Sandbox
+     * Enable Sandbox.
      *
      * @return self
      */
@@ -91,16 +92,17 @@ abstract class AbstractRequest implements JsonSerializable
         $new = clone $this;
         $new->isSandbox = true;
 
-        if ($this->getApiVersion() !== '2024-01-01') {
+        if ('2024-01-01' !== $this->getApiVersion()) {
             $new->uri = new NewSandboxUri();
         } else {
             $new->uri = new SandboxUri();
         }
 
         $new->uri = $new->uri
-            ->withPath($new->uri->getPath() . $this->requestTarget)
+            ->withPath($new->uri->getPath().$this->requestTarget)
             ->withQuery($this->uri->getQuery())
-            ->withFragment($this->uri->getFragment());
+            ->withFragment($this->uri->getFragment())
+        ;
         $new->tenantId = 'c9536195-ef3b-4703-9c13-924db8e24486';
         $new->updateHostFromUri();
 
@@ -108,7 +110,7 @@ abstract class AbstractRequest implements JsonSerializable
     }
 
     /**
-     * Is Sandbox Enabled
+     * Is Sandbox Enabled.
      *
      * @return bool
      */
@@ -118,9 +120,9 @@ abstract class AbstractRequest implements JsonSerializable
     }
 
     /**
-     * Get Api Version
+     * Get Api Version.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getApiVersion()
     {
@@ -128,7 +130,7 @@ abstract class AbstractRequest implements JsonSerializable
     }
 
     /**
-     * Get Tenant Id
+     * Get Tenant Id.
      *
      * @return string
      */
@@ -138,8 +140,7 @@ abstract class AbstractRequest implements JsonSerializable
     }
 
     /**
-     * Set Body From Model
-     * @param AbstractModel $body
+     * Set Body From Model.
      *
      * @return self
      */
@@ -148,21 +149,22 @@ abstract class AbstractRequest implements JsonSerializable
         $json = json_encode($body->jsonSerialize(), JSON_PRETTY_PRINT);
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new \InvalidArgumentException(
-                'json_encode error: ' . json_last_error_msg()
+                'json_encode error: '.json_last_error_msg()
             );
         }
         $new = clone $this;
 
-        if ($this->getApiVersion() !== '2024-01-01') {
-            $new->uri = $new->isSandbox === false ? new NewProductionUri() : new NewSandboxUri();
+        if ('2024-01-01' !== $this->getApiVersion()) {
+            $new->uri = false === $new->isSandbox ? new NewProductionUri() : new NewSandboxUri();
         } else {
-            $new->uri = $new->isSandbox === false ? new ProductionUri() : new SandboxUri();
+            $new->uri = false === $new->isSandbox ? new ProductionUri() : new SandboxUri();
         }
 
         $new->uri = $new->uri
-            ->withPath($new->uri->getPath() . $this->requestTarget)
+            ->withPath($new->uri->getPath().$this->requestTarget)
             ->withQuery($this->uri->getQuery())
-            ->withFragment($this->uri->getFragment());
+            ->withFragment($this->uri->getFragment())
+        ;
         $new->updateHostFromUri();
         $new->stream = Stream::create((string) $json);
 
@@ -170,7 +172,7 @@ abstract class AbstractRequest implements JsonSerializable
     }
 
     /**
-     * Set Body From Model
+     * Set Body From Model.
      *
      * @return string
      */
@@ -179,9 +181,6 @@ abstract class AbstractRequest implements JsonSerializable
         return $this->response;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {

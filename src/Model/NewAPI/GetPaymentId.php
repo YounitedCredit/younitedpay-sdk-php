@@ -1,31 +1,29 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    Michael Dowling and contributors to guzzlehttp/psr7
- * @author    Tobias Nyholm  and contributors to Nyholm/psr7
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\NewAPI;
 
-use InvalidArgumentException;
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Cancel Contract Model Class
+ * Cancel Contract Model Class.
  */
-class GetPaymentId extends AbstractModel implements JsonSerializable
+class GetPaymentId extends AbstractModel implements \JsonSerializable
 {
     // PROPERTIES
 
@@ -37,7 +35,7 @@ class GetPaymentId extends AbstractModel implements JsonSerializable
     // GETTERS & SETTERS
 
     /**
-     * Get Contract Reference
+     * Get Contract Reference.
      *
      * @return string
      */
@@ -47,7 +45,7 @@ class GetPaymentId extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Contract Reference
+     * Set Contract Reference.
      *
      * @param string $contractReference
      *
@@ -55,13 +53,14 @@ class GetPaymentId extends AbstractModel implements JsonSerializable
      */
     public function setContractReference($contractReference)
     {
-        if (is_string($contractReference) === true) {
+        if (true === \is_string($contractReference)) {
             $this->contractReference = $contractReference;
+
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Contract Reference must be a string but ' . gettype($contractReference) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Contract Reference must be a string but '.\gettype($contractReference).' is given.'
         );
     }
 }

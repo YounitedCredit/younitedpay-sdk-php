@@ -1,26 +1,27 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Model\Webhook;
 
-use InvalidArgumentException;
 use YounitedPaySDK\Model\AbstractModel;
 
 /**
- * Event Notification Model Class
+ * Event Notification Model Class.
  */
 class EventNotification extends AbstractModel
 {
@@ -49,7 +50,7 @@ class EventNotification extends AbstractModel
     // GETTERS & SETTERS
 
     /**
-     * Get Type
+     * Get Type.
      *
      * @return string
      */
@@ -59,7 +60,7 @@ class EventNotification extends AbstractModel
     }
 
     /**
-     * Set Type
+     * Set Type.
      *
      * @param string $type
      *
@@ -67,19 +68,19 @@ class EventNotification extends AbstractModel
      */
     public function setType($type)
     {
-        if (is_string($type) === true) {
+        if (true === \is_string($type)) {
             $this->type = $type;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Type must be a string but ' . gettype($type) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Type must be a string but '.\gettype($type).' is given.'
         );
     }
 
     /**
-     * Get Notification ID
+     * Get Notification ID.
      *
      * @return string
      */
@@ -89,7 +90,7 @@ class EventNotification extends AbstractModel
     }
 
     /**
-     * Set Notification ID
+     * Set Notification ID.
      *
      * @param string $notificationId
      *
@@ -97,19 +98,19 @@ class EventNotification extends AbstractModel
      */
     public function setNotificationId($notificationId)
     {
-        if (is_string($notificationId) === true) {
+        if (true === \is_string($notificationId)) {
             $this->notificationId = $notificationId;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Notification Id must be a string but ' . gettype($notificationId) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Notification Id must be a string but '.\gettype($notificationId).' is given.'
         );
     }
 
     /**
-     * Get Data
+     * Get Data.
      *
      * @return EventNotificationData
      */
@@ -119,7 +120,7 @@ class EventNotification extends AbstractModel
     }
 
     /**
-     * Set Data
+     * Set Data.
      *
      * @param EventNotificationData $data
      *
@@ -133,13 +134,13 @@ class EventNotification extends AbstractModel
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Data must be an instance of ' . EventNotificationData::class . ' but ' . get_class($data) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Data must be an instance of '.EventNotificationData::class.' but '.\get_class($data).' is given.'
         );
     }
 
     /**
-     * Get Created At
+     * Get Created At.
      *
      * @return string
      */
@@ -149,7 +150,7 @@ class EventNotification extends AbstractModel
     }
 
     /**
-     * Set Created At
+     * Set Created At.
      *
      * @param string $createdAt
      *
@@ -157,14 +158,14 @@ class EventNotification extends AbstractModel
      */
     public function setCreatedAt($createdAt)
     {
-        if (is_string($createdAt) === true) {
+        if (true === \is_string($createdAt)) {
             $this->createdAt = $createdAt;
 
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Created At must be a string but ' . gettype($createdAt) . ' is given.'
+        throw new \InvalidArgumentException(
+            'Created At must be a string but '.\gettype($createdAt).' is given.'
         );
     }
 }

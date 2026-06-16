@@ -1,26 +1,26 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounitedpaysdk
- * @author    Michael Dowling and contributors to guzzlehttp/psr7
- * @author    Tobias Nyholm  and contributors to Nyholm/psr7
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedpaySdk\Model\NewAPI;
 
-use JsonSerializable;
 use YounitedPaySDK\Model\AbstractModel;
-class Installment extends AbstractModel implements JsonSerializable
+
+class Installment extends AbstractModel implements \JsonSerializable
 {
     /**
      * @var int
@@ -28,7 +28,7 @@ class Installment extends AbstractModel implements JsonSerializable
     private $installmentNumber;
 
     /**
-     * Due date in YYYY-MM-DD format
+     * Due date in YYYY-MM-DD format.
      *
      * @var string
      */
@@ -50,7 +50,7 @@ class Installment extends AbstractModel implements JsonSerializable
     private $totalAmount;
 
     /**
-     * Get Insatallment Number
+     * Get Insatallment Number.
      *
      * @return int
      */
@@ -60,20 +60,19 @@ class Installment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Installment Number
-     *
-     * @param int $installmentNumber
+     * Set Installment Number.
      *
      * @return self
      */
     public function setInstallmentNumber(int $installmentNumber)
     {
         $this->installmentNumber = $installmentNumber;
+
         return $this;
     }
 
     /**
-     * Get Due Date
+     * Get Due Date.
      *
      * @return string
      */
@@ -85,18 +84,17 @@ class Installment extends AbstractModel implements JsonSerializable
     /**
      * Set due date as a string in YYYY-MM-DD format.
      *
-     * @param string $dueDate
-     *
      * @return self
      */
     public function setDueDate(string $dueDate)
     {
         $this->dueDate = $dueDate;
+
         return $this;
     }
 
     /**
-     * Get Loan Amount
+     * Get Loan Amount.
      *
      * @return float
      */
@@ -106,20 +104,19 @@ class Installment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Loan Amount
-     *
-     * @param float $loanAmount
+     * Set Loan Amount.
      *
      * @return self
      */
     public function setLoanAmount(float $loanAmount)
     {
         $this->loanAmount = $loanAmount;
+
         return $this;
     }
 
     /**
-     * Get Fee Amount
+     * Get Fee Amount.
      *
      * @return float
      */
@@ -129,20 +126,19 @@ class Installment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Fee Amount
-     *
-     * @param float $feeAmount
+     * Set Fee Amount.
      *
      * @return self
      */
     public function setFeeAmount(float $feeAmount)
     {
         $this->feeAmount = $feeAmount;
+
         return $this;
     }
 
     /**
-     * Get Total Amount
+     * Get Total Amount.
      *
      * @return float
      */
@@ -152,15 +148,14 @@ class Installment extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * Set Total Amount
-     *
-     * @param float $totalAmount
+     * Set Total Amount.
      *
      * @return self
      */
     public function setTotalAmount(float $totalAmount)
     {
         $this->totalAmount = $totalAmount;
+
         return $this;
     }
 }

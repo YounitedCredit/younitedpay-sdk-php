@@ -1,43 +1,39 @@
 <?php
 
-/**
- * NOTICE OF LICENSE
+declare(strict_types=1);
+
+/*
+ *     NOTICE OF LICENSE
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * PHP version 5.6+
+ *     This source file is subject to the Open Software License (OSL 3.0)
+ *     PHP version 5.6+
  *
- * @category  YounitedpaySDK
- * @package   Ecommerceyounit
- * edpaysdk
- * @author    Patrick Stearns and contributors to pdeans/http
- * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright 2022 (c) 202-ecommerce
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link      https://api.sandbox-younited-pay.com/
+ *     @category  YounitedpaySDK
+ *     @package   Ecommerceyounitedpaysdk
+ *     @author    202-ecommerce <tech@202-ecommerce.com>
+ *     @copyright 2022 (c) 202-ecommerce
+ *     @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *     @link      https://api.sandbox-younited-pay.com/
  */
 
 namespace YounitedPaySDK\Response;
 
-use InvalidArgumentException;
-
 /**
- * Response Builder
+ * Response Builder.
  *
  * Build a Response object
  */
 class ResponseBuilder
 {
     /**
-     * Response
+     * Response.
      *
      * @var AbstractResponse
      */
     protected $response;
 
     /**
-     * Create a Response Builder
-     *
-     * @param AbstractResponse  $response
+     * Create a Response Builder.
      */
     public function __construct(AbstractResponse $response)
     {
@@ -45,7 +41,7 @@ class ResponseBuilder
     }
 
     /**
-     * Return the response
+     * Return the response.
      *
      * @return AbstractResponse
      */
@@ -55,34 +51,33 @@ class ResponseBuilder
     }
 
     /**
-     * Set the response
+     * Set the response.
      *
-     * @param AbstractResponse  $response  Response object
-     *
-     * @return void
+     * @param AbstractResponse $response Response object
      */
-    public function setResponse(AbstractResponse $response)
+    public function setResponse(AbstractResponse $response): void
     {
         $this->response = $response;
     }
 
     /**
-     * Add response header from header line string
+     * Add response header from header line string.
      *
-     * @param string $header_line  Response header line string
+     * @param string $header_line Response header line string
      *
      * @return self $this
-     * @throws InvalidArgumentException  Invalid header line argument
+     *
+     * @throws \InvalidArgumentException Invalid header line argument
      */
     public function addHeader($header_line)
     {
         $header_parts = explode(':', $header_line, 2);
 
-        if (count($header_parts) !== 2) {
-            throw new InvalidArgumentException("'$header_line' is not a valid HTTP header line");
+        if (2 !== \count($header_parts)) {
+            throw new \InvalidArgumentException("'{$header_line}' is not a valid HTTP header line");
         }
 
-        $header_name  = trim($header_parts[0]);
+        $header_name = trim($header_parts[0]);
         $header_value = trim($header_parts[1]);
 
         if ($this->response->hasHeader($header_name)) {
@@ -95,12 +90,13 @@ class ResponseBuilder
     }
 
     /**
-     * Set response headers from header line array
+     * Set response headers from header line array.
      *
      * @param array<string> $headers Array of header lines
      *
      * @return self $this
-     * @throws InvalidArgumentException  Invalid status code argument value
+     *
+     * @throws \InvalidArgumentException Invalid status code argument value
      */
     public function setHeadersFromArray(array $headers)
     {
@@ -111,7 +107,7 @@ class ResponseBuilder
         foreach ($headers as $header) {
             $header_line = trim($header);
 
-            if ($header_line === '') {
+            if ('' === $header_line) {
                 continue;
             }
 
@@ -122,27 +118,29 @@ class ResponseBuilder
     }
 
     /**
-     * Set reponse status
+     * Set reponse status.
      *
-     * @param string $statusLine  Response status line string
+     * @param string $statusLine Response status line string
      *
      * @return self $this
-     * @throws InvalidArgumentException Invalid status line argument
+     *
+     * @throws \InvalidArgumentException Invalid status line argument
      */
     public function setStatus($statusLine)
     {
         $statusParts = explode(' ', $statusLine, 3);
-        $partsCount  = count($statusParts);
+        $partsCount = \count($statusParts);
 
-        if ($partsCount < 2 || strpos(strtoupper($statusParts[0]), 'HTTP/') !== 0) {
-            throw new InvalidArgumentException("'$statusLine' is not a valid HTTP status line");
+        if ($partsCount < 2 || !str_starts_with(strtoupper($statusParts[0]), 'HTTP/')) {
+            throw new \InvalidArgumentException("'{$statusLine}' is not a valid HTTP status line");
         }
 
         $reasonPhrase = ($partsCount > 2 ? $statusParts[2] : '');
 
         $this->response = $this->response
-            ->withStatus((int)$statusParts[1], $reasonPhrase)
-            ->withProtocolVersion(substr($statusParts[0], 5));
+            ->withStatus((int) $statusParts[1], $reasonPhrase)
+            ->withProtocolVersion(substr($statusParts[0], 5))
+        ;
 
         return $this;
     }
