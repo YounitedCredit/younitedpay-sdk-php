@@ -1,5 +1,7 @@
 name: Unit test
 on: [push]
+permissions:
+  contents: read
 jobs:
     phpunit:
         name: PHPUnit
