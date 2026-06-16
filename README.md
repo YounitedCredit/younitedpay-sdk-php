@@ -303,7 +303,7 @@ $customExperience = (new CustomExperience())
     ->setCustomerRedirectUrl($redirectUrl);
 
 $request = (new CreatePaymentAdapter())
-    ->setShopCode('ONLINE-SHOP-CODE') // New in v3 - shop code needed - see Shop Codes documentation
+    ->setShopCode('ONLINE-SHOP-CODE') // New in v2 - shop code needed - see Shop Codes documentation
     ->setTechnicalInformation($technicalInformation)
     ->setCustomExperience($customExperience)
     ->convertInitializeContract($oldRequest);
@@ -494,11 +494,231 @@ try {
 }
 ```
 
+## BNPL - Split Payment - Added: 2026-02-01
+
+### New endpoint to get offers with Split Payment BNPL (payment options)
+
+[Get new payment options documentation][get-payments-options-doc]
+
+Here is an example with this new request to get 2,3 and 4 split BNPL options and classic loan options (5x to 84x) :
+
+```php
+require 'vendor/autoload.php';
+
+use YounitedPaySDK\Client;
+use YounitedPaySDK\Model\NewAPI\GetOffers;
+use YounitedPaySDK\Request\NewAPI\GetPaymentOptionsRequest;
+
+$clientId = 'your-client-id';
+$clientSecret = 'your-secret-idtoken';
+
+$body = (new GetOffers())
+        ->setShopCode('ONLINE-SHOP-CODE') // New in v2 - shop code needed - see Shop Codes documentation
+        ->setAmount(1499.0);
+
+// First possibility: we want only a list of maturities (no range needed)
+// New with this endpoint : We can combine Range and list for BNPL options (in example below)
+$body->setMaturityList('2,3,4'); // BNPL split payment options
+
+// Other possitiliby: we want a range (eg: from 24 to 84)
+$body->setMaturityRangeStep(2)
+     ->setMaturityRangeMin(5)
+     ->setMaturityRangeMax(84);
+
+$request = (new GetPaymentOptionsRequest())->setModel($body);
+
+// If we want to set sandbox mode (different credentials than production)
+$request = $request->enableSandbox();
+
+$client = new Client();
+try {
+    $response = $client->setCredential($clientId, $clientSecret)->sendRequest($request);
+    echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
+    var_dump($response->getModel());
+    echo '</pre>';
+} catch (Exception $e) {
+    echo ($e->getMessage() . $e->getFile() . ':' . $e->getLine(). $e->getTraceAsString());
+}
+```
+
+### Create a payment
+
+[Create a payment for BNPL / Loan payment documentation][create-payments-bnpl-doc] 
+
+You can easily initialize a contract by creating a request
+
+```php
+require 'vendor/autoload.php';
+
+use YounitedPaySDK\Client;
+use YounitedPaySDK\Adapter\PostPaymentAdapter;
+use YounitedPaySDK\Model\Address;
+use YounitedPaySDK\Model\Basket;
+use YounitedPaySDK\Model\BasketItem;
+use YounitedPaySDK\Model\InitializeContract;
+use YounitedPaySDK\Model\MerchantOrderContext;
+use YounitedPaySDK\Model\MerchantUrls;
+use YounitedPaySDK\Model\NewAPI\CustomExperience;
+use YounitedPaySDK\Model\NewAPI\Request\GetPayment;
+use YounitedPaySDK\Model\NewAPI\TechnicalInformation;
+use YounitedPaySDK\Model\PersonalInformation;
+use YounitedPaySDK\Request\InitializeContractRequest;
+use YounitedPaySDK\Request\NewAPI\PostPaymentsRequest;
+
+$clientId = 'your-client-id';
+$clientSecret = 'your-secret-idtoken';
+
+$datetime = new \DateTime('1970-01-01T00:00:00');
+
+$address = (new Address())
+    ->setStreetNumber('123')
+    ->setStreetName('StreetName') // 32 caracs max
+    ->setAdditionalAddress('') // 32 caracs max
+    ->setCity('Country')
+    ->setPostalCode('12345')
+    ->setCountryCode('FR');
+
+$personalInformation = (new PersonalInformation())
+    ->setFirstName('FirstName')
+    ->setLastName('LastName')
+    ->setGenderCode('MALE')
+    ->setEmailAddress('firstname.lastname@mail.com')
+    ->setCellPhoneNumber('+33611223344') // Send null if format number is not good (not internationnal or empty)
+    ->setBirthDate($datetime) // Warning - must be a valide date see documentation
+    ->setAddress($address);
+     
+$basketItem1 = (new BasketItem())
+    ->setItemName('Item basket 1')
+    ->setQuantity(2)
+    ->setUnitPrice(45.0);
+
+$basketItem2 = (new BasketItem())
+    ->setItemName('Item basket 2')
+    ->setQuantity(1)
+    ->setUnitPrice(33.0);
+
+$basket = (new Basket())
+    ->setBasketAmount(123.0)
+    ->setItems([$basketItem1, $basketItem2]);
+    
+$merchantUrls = (new MerchantUrls())
+    ->setOnApplicationFailedRedirectUrl('on-application-failed-redirect-url.com')
+    ->setOnApplicationSucceededRedirectUrl('on-application-succeeded-redirect-url.com')
+    ->setOnCanceledWebhookUrl('on-canceled-webhook-url.com')
+    ->setOnWithdrawnWebhookUrl('on-withdrawn-webhook-url.com');
+    
+$merchantOrderContext = (new MerchantOrderContext())
+    ->setChannel('test')
+    ->setShopCode('TEST')
+    ->setMerchantReference('MerchantReference')
+    ->setAgentEmailAddress('merchant@mail.com');
+    
+$body = (new InitializeContract())
+    ->setRequestedMaturity(10)
+    ->setPersonalInformation($personalInformation)
+    ->setBasket($basket)
+    ->setMerchantUrls($merchantUrls)
+    ->setMerchantOrderContext($merchantOrderContext);
+
+$oldRequest = (new InitializeContractRequest())->setModel($body);
+
+// Convert "Old" API calls for new API
+// This converter allow you to keep previous code and adapt to your need with new API
+$newWebhookUrl = 'new-webhook-url-for-new-api';
+$newRedirectUrl = 'new-redirect-url-for-new-api';
+// Have new controllers for new URL is recommanded. Only one URL is accepted now for success, cancel and other cases.
+// Concerning webhooks, please note that old webhooks will be sent if a contract was done with "old" API.
+// So you should keep both use cases. Please note too that webhook format has changes (see end documentation on this point)
+
+$technicalInformation = (new TechnicalInformation())
+    ->setWebhookNotificationUrl($webhookUrl)
+    ->setApiVersion('2026-02-01'); // See https://docs.younited.com/pay - API Version list and new Request objects
+
+$customExperience = (new CustomExperience())
+    ->setCustomerRedirectUrl($redirectUrl);
+
+// New informations here, the amount, installment, type of payment comes now here
+$request = (new PostPaymentAdapter())
+    ->setShopCode('ONLINE-SHOP-CODE') // New in v2 - shop code needed - see Shop Codes documentation
+    // New From 2026-02-01 for BNPL
+    ->setType('SplitPayment') // new in BNPL endpoint - PersonalLoan | SplitPayment
+    ->setInstallmentCount('SplitPayment') // new in BNPL endpoint - Maturity 
+    ->setPurchaseAmount('SplitPayment') // new in BNPL endpoint - Maturity 
+    // END new 2026-02-01 for BNPL
+    ->setTechnicalInformation($technicalInformation)
+    ->setCustomExperience($customExperience)
+    ->convertInitializeContract($oldRequest);
+
+// If we want to set sandbox mode (different credentials than production)
+$request = $request->enableSandbox();
+
+$client = new Client();
+try {
+    $response = $client->setCredential($clientId, $clientSecret)->sendRequest($request);
+    echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
+    var_dump($response->getModel());
+    echo '</pre>';
+} catch (Exception $e) {
+    echo ($e->getMessage() . $e->getFile() . ':' . $e->getLine(). $e->getTraceAsString());
+}
+```
+
+### Get payment status
+
+[Get a payment status documentation][get-payment-status-doc]
+
+You can easily load a payment information by creating a request.
+Please not that now we retrieve the paymentId from contract creation and use it for each calls (instead of contract reference)
+
+```php
+require 'vendor/autoload.php';
+
+use YounitedPaySDK\Client;
+use YounitedPaySDK\Model\NewAPI\GetPaymentStatus;
+use YounitedPaySDK\Request\NewAPI\GetPaymentStatusRequest;
+
+$clientId = 'your-client-id';
+$clientSecret = 'your-secret-idtoken';
+
+$getPaymentRequestModel = (new GetPaymentStatus())->setId('payment-id');
+$request = (new GetPaymentStatusRequest())->setModel($getPaymentRequestModel);
+
+// If we want to set sandbox mode (different credentials than production)
+$request = $request->enableSandbox();
+
+$client = new Client();
+try {
+    $response = $client->setCredential($clientId, $clientSecret)->sendRequest($request);
+    echo '<pre>';
+    echo 'Status Code:<br />';
+    var_dump($response->getStatusCode());
+    echo '<br />Reason phrase (for statut code or error):<br />';
+    var_dump($response->getReasonPhrase());
+    echo 'Response:<br />';
+    var_dump($response->getModel());
+    echo '</pre>';
+} catch (Exception $e) {
+    echo ($e->getMessage() . $e->getFile() . ':' . $e->getLine(). $e->getTraceAsString());
+}
+```
+
 ### Get Callback Response to configure Webhook
 
 [WebHook client to secure response documentation][webhook-doc]
 
-You can easily get available maturities by creating a request
+This new class allow to check if request was signed by Younited Pay with the
+secret webhook hash provided. Unknown request should not be trusted, and even if
+you have one response you must call the API to verify the contract status.
 
 ```php
 require 'vendor/autoload.php';
@@ -546,6 +766,9 @@ try {
 [getoffers-doc]: https://docs.younited.com/pay/#tag/personal-loans/GET/personal-loans/offers
 [maturities-doc]: https://docs.younited.com/pay/#tag/personal-loans/GET/personal-loans/offers
 [get-payment-doc]: https://docs.younited.com/pay/#tag/payments/GET/payments/{id}
+[create-payments-bnpl-doc]: https://docs.younited.com/pay/index.html?version=2026-02-01#tag/payments/POST/payments
+[get-payments-options-doc]: https://docs.younited.com/pay/index.html?version=2026-02-01#tag/payments/GET/payments/options
+[get-payment-status-doc]: https://docs.younited.com/pay/index.html?version=2026-02-01#tag/payments/GET/payments/{id}/status
 [create-payment-doc]: https://docs.younited.com/pay/#tag/payments/POST/payments/personal-loan
 [execute-payment-doc]: https://docs.younited.com/pay/#tag/payments/POST/payments/{id}/execute
 [refund-payment-doc]: https://docs.younited.com/pay/#tag/refunds/POST/refunds
