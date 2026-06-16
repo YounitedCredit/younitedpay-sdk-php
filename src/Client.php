@@ -20,6 +20,7 @@ namespace YounitedPaySDK;
 use InvalidArgumentException;
 use RuntimeException;
 use UnexpectedValueException;
+use YounitedpayAddon\Logger\ApiLogger;
 use YounitedPaySDK\Cache\Registry;
 use YounitedPaySDK\Cache\RegistryItem;
 use YounitedPaySDK\Exception\RequestException;
@@ -188,7 +189,7 @@ class Client
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token,
-            'X-Api-Version' => '2025-01-01',
+            'x-api-version' => $request->getApiVersion() ? $request->getApiVersion() : '2024-01-01',
         ]);
         $request->setHeaders($headers);
 

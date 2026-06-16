@@ -18,7 +18,7 @@ namespace YounitedPaySDK\Adapter;
 
 use Exception;
 use InvalidArgumentException;
-use YounitedPaySDK\Model\NewAPI\GetOffers;
+use YounitedPaySDK\Model\NewAPI\Request\GetOffers;
 use YounitedPaySDK\Request\AbstractRequest;
 use YounitedPaySDK\Request\BestPriceRequest;
 use YounitedPaySDK\Request\NewAPI\GetOffersRequest;
